@@ -1,0 +1,24 @@
+/*--------------------------------------------------------< Connect_Right.module.css >*/
+
+li {
+  display: block;
+  /* Ensures each item takes up the full width of its row */
+  margin: 10px 0;
+  /* Adds spacing between rows */
+}
+
+/*--------------------------------------------------------< Connect_Right.module.css >*/
+
+.Connect_Right {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex: 0 0 18%;
+  margin: 0 10px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  background-color: #1e1e1e;
+  overflow: auto;
+}
+
+/*--------------------------------------------------------< Connect_Right.module.css >*/

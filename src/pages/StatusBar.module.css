@@ -1,0 +1,42 @@
+/*--------------------------------------------------------------< MenuBar.module.css >*/
+.LeftSection,
+.CenterSection,
+.RightSection {
+    display: flex;
+    align-items: center;
+}
+
+.CenterSection {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+/*  Component Styles  */
+.StatusBar {
+    height: 40px;
+    width: 100%;
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #333;
+}
+
+.StatusBar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.StatusBar a:hover {
+    background-color: #3a3f47;
+    border-radius: 4px;
+}
+
+.StatusBar a.active {
+    background-color: #3a3f47;
+    font-weight: bold;
+}
+/*--------------------------------------------------------------< MenuBar.module.css >*/

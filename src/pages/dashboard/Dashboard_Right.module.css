@@ -1,0 +1,29 @@
+/*-----------------------------------------------------------------< Name.module.css >*/
+
+.Dashboard_Right {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 100%;
+}
+
+/*---------------------------------------------------------------------------< Split >*/
+
+.Split {
+  height: calc(100% - 50px);
+  width: 100%;
+  flex-direction: row;
+}
+
+/*--------------------------------------------------------------------------< Panels >*/
+
+.TimeSales_Widget {
+  flex: 1;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #1e1e1e;
+}
+
+/*-----------------------------------------------------------------< Name.module.css >*/
