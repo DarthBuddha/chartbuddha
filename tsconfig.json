@@ -23,9 +23,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src",
-    ".dev/temp/Products.tsx",
-    ".dev/temp/ProviderContex.tsx"
+    "src"
   ],
   "references": [
     {

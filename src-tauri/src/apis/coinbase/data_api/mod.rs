@@ -1,17 +1,15 @@
 //! # ChartBuddha library
 //!
-//! - Module: Commands Module
-//! - Description: Tauri Commands module.
+//! - Module: Coinbase Data API Module
+//! - Description: Coinbase date api API endpoints.
 //!
 //! ### Modules
-//! - connect
-//! - dashboard
+//! - get_api_key_permissions
 //!
-//! ##### commands/mod.rs
+//! ##### apis/coinbase/data_api/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
 // Modules
-pub mod connect;
-pub mod dashboard;
+pub mod get_api_key_permissions;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

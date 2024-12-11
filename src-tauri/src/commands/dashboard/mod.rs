@@ -1,17 +1,14 @@
 //! # ChartBuddha library
 //!
-//! - Module: Commands Module
-//! - Description: Tauri Commands module.
-//!
-//! ### Modules
-//! - connect
-//! - dashboard
-//!
-//! ##### commands/mod.rs
+//! - Module: dashboard
+//! - Description: Short description.
+//! ### Sub-Modules
+//! - `module_name`
+//! ##### .template/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
-// Modules
-pub mod connect;
-pub mod dashboard;
+//
+// Sub-Modules
+// pub mod module_name;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

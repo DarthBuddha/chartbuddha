@@ -17,7 +17,7 @@ type ConnectCoinbaseProps = {
   onDelete: () => void; // Callback for when keys are deleted
 };
 /*--------------------------------------< Page >--------------------------------------*/
-const ConnectCoinbase: React.FC<ConnectCoinbaseProps> = ({ onConfigured, onDelete }) => {
+const Coinbase: React.FC<ConnectCoinbaseProps> = ({ onConfigured, onDelete }) => {
   // State for storing API key and secret
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
@@ -122,7 +122,7 @@ const ConnectCoinbase: React.FC<ConnectCoinbaseProps> = ({ onConfigured, onDelet
   );
 };
 
-export default ConnectCoinbase;
+export default Coinbase;
 /*------------------------------------< End-Code >------------------------------------*/
 
 

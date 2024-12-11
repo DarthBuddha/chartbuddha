@@ -1,17 +1,17 @@
 //! # ChartBuddha library
 //!
-//! - Module: Commands Module
-//! - Description: Tauri Commands module.
+//! - Module: Coinbase Accounts API Module
+//! - Description: Coinbase accounts API endpoints.
 //!
 //! ### Modules
-//! - connect
-//! - dashboard
+//! - get_account
+//! - list_accounts
 //!
-//! ##### commands/mod.rs
+//! ##### apis/coinbase/accounts/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
 // Modules
-pub mod connect;
-pub mod dashboard;
+pub mod get_account;
+pub mod list_accounts;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

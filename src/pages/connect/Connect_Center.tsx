@@ -25,6 +25,8 @@ import Styles from "./Connect_Center.module.css";
 /*--------------------------------------< Page >--------------------------------------*/
 const Connect_Center: React.FC = () => {
   const { selectedProvider, setSelectedProvider } = useContext_Connect();
+  // onProviderConfigured: (provider: string) => void;
+  // onProviderDeleted: (provider: string) => void; // Add callback for deletion
 
   if (!selectedProvider) {
     return (
@@ -37,10 +39,13 @@ const Connect_Center: React.FC = () => {
   switch (selectedProvider?.toLowerCase()) {
     case "coinbase":
       return (
-        <Coinbase
-        // onConfigured={() => onProviderConfigured("coinbase")}
-        // onDelete={() => onProviderDeleted("coinbase")} // Pass deletion callback
-        />
+        <div className={Styles.Connect_Center}>
+          <Coinbase
+            onConfigured={() => onProviderConfigured("coinbase")}
+            onDelete={() => onProviderDeleted("coinbase")} // Pass deletion callback
+          />
+        </div>
+
       );
     default:
       return (

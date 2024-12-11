@@ -1,17 +1,15 @@
 //! # ChartBuddha library
 //!
-//! - Module: Commands Module
-//! - Description: Tauri Commands module.
+//! - Module: Coinbase Fees API Module
+//! - Description: Coinbase fees API endpoints.
 //!
 //! ### Modules
-//! - connect
-//! - dashboard
+//! - get_transaction_summary
 //!
-//! ##### commands/mod.rs
+//! ##### apis/coinbase/fees/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
 // Modules
-pub mod connect;
-pub mod dashboard;
+pub mod get_transaction_summary;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

@@ -1,10 +1,13 @@
 //! # ChartBuddha library
-//! - Module: `connect`
-//! - Description: Short description.
+//!
+//! - Module: Connect Module
+//! - Description: Frontend commands for Connect page.
+//!
 //! ### Modules
-//! - `coinbase_test_connection`
-//! - `providers_list`
-//! ##### interface/connect/mod.rs
+//! - coinbase_api_delete
+//! - coinbase_api_save
+//!
+//! ##### commands/connect/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
 //

@@ -1,17 +1,17 @@
 //! # ChartBuddha library
 //!
-//! - Module: Commands Module
-//! - Description: Tauri Commands module.
+//! - Module: Coinbase Payment API Module
+//! - Description: Coinbase payment API endpoints.
 //!
 //! ### Modules
-//! - connect
-//! - dashboard
+//! - get_payment_method
+//! - list_payment_methods
 //!
-//! ##### commands/mod.rs
+//! ##### apis/coinbase/payment/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
 // Modules
-pub mod connect;
-pub mod dashboard;
+pub mod get_payment_method;
+pub mod list_payment_methods;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

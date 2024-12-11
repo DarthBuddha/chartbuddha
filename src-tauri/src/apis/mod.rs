@@ -1,17 +1,17 @@
 //! # ChartBuddha library
 //!
-//! - Module: Commands Module
-//! - Description: Tauri Commands module.
+//! - Module: APIs Module
+//! - Description: Provider APIs.
 //!
 //! ### Modules
-//! - connect
-//! - dashboard
+//! - coinbase
+//! - binance
 //!
-//! ##### commands/mod.rs
+//! ##### .apis/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
+//
 // Modules
-pub mod connect;
-pub mod dashboard;
+pub mod coinbase;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

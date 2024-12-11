@@ -1,5 +1,6 @@
 # Developer
 .dev/*
+.template/*
 
 # Logs
 logs
