@@ -8,13 +8,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 // Modules
 import App from "./Index";
-import { Context_Connect } from "./pages/connect/interface/Context_Connect";
+import { Context_Connect_Interface } from "./pages/connect/interface/Context_Connect_Interface";
 //
 /*--------------------------------------< Page >--------------------------------------*/
 createRoot(document.getElementById("root") as HTMLElement).render(
-  <Context_Connect>
+  <Context_Connect_Interface>
     <StrictMode>
       <App />
     </StrictMode>
-  </Context_Connect>
+  </Context_Connect_Interface>
 );

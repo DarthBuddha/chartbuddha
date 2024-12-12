@@ -8,7 +8,7 @@
 import React from "react";
 // Modules
 import Coinbase from "./providers/Coinbase";
-import { useContext_Connect } from "./interface/Context_Connect";
+import { useContext_Connect } from "./interface/Context_Connect_Interface";
 // CSS
 import Styles from "./Connect_Center.module.css";
 //
@@ -24,7 +24,7 @@ import Styles from "./Connect_Center.module.css";
 // };
 /*--------------------------------------< Page >--------------------------------------*/
 const Connect_Center: React.FC = () => {
-  const { selectedProvider, setSelectedProvider } = useContext_Connect();
+  const { selectedProvider } = useContext_Connect();
   // onProviderConfigured: (provider: string) => void;
   // onProviderDeleted: (provider: string) => void; // Add callback for deletion
 
@@ -40,10 +40,7 @@ const Connect_Center: React.FC = () => {
     case "coinbase":
       return (
         <div className={Styles.Connect_Center}>
-          <Coinbase
-            onConfigured={() => onProviderConfigured("coinbase")}
-            onDelete={() => onProviderDeleted("coinbase")} // Pass deletion callback
-          />
+          <Coinbase />
         </div>
 
       );

@@ -1,12 +1,15 @@
 //! # ChartBuddha library
-//! - Module: `credentials`
+//!
+//! - Module: credentials
 //! - Description: Handles the saving, loading, and deleting of API credentials for the Coinbase provider.
+//!
 //! ### Functions
 //! - `credentials.save`
 //! - `credentials.load`
 //! - `credentials.delete`
 //! - `credentials.is_configured`
-//! ##### provider/coinbase/credentials.rs
+//!
+//! ##### providers/coinbase/credentials.rs
 //
 // Rust
 use std::fs::{File, OpenOptions};

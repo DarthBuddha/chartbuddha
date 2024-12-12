@@ -1,12 +1,14 @@
 //! # ChartBuddha library
-//! - Module: `portfolios`
-//! - Description: Coinbase portfolios API endpoints.
+//!
+//! - Module: Binance API Module
+//! - Description: Binance Api.
+//!
 //! ### Modules
-//! - `module_name`
-//! ##### provider/coinbase/api/portfolios/mod.rs
+//! - module_name
+//!
+//! ##### apis/binance/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
-//
 // Modules
 // pub mod module_name;
 //

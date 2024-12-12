@@ -7,17 +7,19 @@
 import { useState } from "react";
 // Modules
 import { invoke } from "@tauri-apps/api/core";
+import { warn, debug, trace, info, error } from "@tauri-apps/plugin-log";
 // CSS
 import styles from "./Coinbase.module.css";
 //
 /*--------------------------------------< Type >--------------------------------------*/
 // Define the Props type for ConnectCoinbase
-type ConnectCoinbaseProps = {
-  onConfigured: () => void; // Callback for when keys are saved
-  onDelete: () => void; // Callback for when keys are deleted
-};
+type ConnectCoinbaseProps = object;
+// onConfigured: () => void; // Callback for when keys are saved
+// onDelete: () => void; // Callback for when keys are deleted
+// };
 /*--------------------------------------< Page >--------------------------------------*/
-const Coinbase: React.FC<ConnectCoinbaseProps> = ({ onConfigured, onDelete }) => {
+// const Coinbase: React.FC<ConnectCoinbaseProps> = ({ onConfigured, onDelete }) => {
+const Coinbase: React.FC<ConnectCoinbaseProps> = () => {
   // State for storing API key and secret
   const [apiKey, setApiKey] = useState("");
   const [apiSecret, setApiSecret] = useState("");
@@ -32,12 +34,14 @@ const Coinbase: React.FC<ConnectCoinbaseProps> = ({ onConfigured, onDelete }) =>
         apiKey: apiKey,
         apiSecret: apiSecret,
       });
-      console.log("Keys saved successfully:", response);
+      // console.log("Keys saved successfully:", response);
       setActionResult(response); // Display success message
-      onConfigured(); // Notify parent component
-    } catch (error) {
-      console.error("Failed to save keys:", error);
+      // onConfigured(); // Notify parent component
+      info("Keys saved successfully");
+    } catch {
+      // console.error("Failed to save keys:", error);
       setActionResult("Failed to save API keys."); // Display error message
+      info("Failed to save API keys.");
     }
   };
 
@@ -54,7 +58,7 @@ const Coinbase: React.FC<ConnectCoinbaseProps> = ({ onConfigured, onDelete }) =>
       setApiSecret("");
 
       // Notify parent of deletion
-      onDelete();
+      // onDelete();
     } catch (error) {
       console.error("Failed to delete keys:", error);
       setActionResult("Failed to delete API keys.");

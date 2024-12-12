@@ -1,6 +1,8 @@
 //! # ChartBuddha library
-//! - Module: coinbase
-//! - Description: Coinbase provider API.
+//!
+//! - Module: Coinbase Providers module
+//! - Description: Coinbase provider modules.
+//!
 //! ### Modules
 //! - `authenticator`
 //! - `constants`
@@ -9,12 +11,10 @@
 //! - `provider`
 //! - `subscriber`
 //! - `transformer`
-//! ### Sub-Modules
-//! - `api`
-//! ##### provider/coinbase/mod.rs
+//!
+//! ##### providers/coinbase/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
-//
 // Modules
 pub mod authenticator;
 pub mod coinbase_provider;
@@ -23,7 +23,4 @@ pub mod credentials;
 pub mod errors;
 pub mod subscriber;
 pub mod transformer;
-// Sub-Modules
-pub mod api;
-//
 /* ---------------------------------- < End--Code >---------------------------------- */

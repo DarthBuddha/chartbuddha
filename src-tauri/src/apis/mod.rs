@@ -4,14 +4,15 @@
 //! - Description: Provider APIs.
 //!
 //! ### Modules
-//! - coinbase
 //! - binance
+//! - coinbase
 //!
 //! ##### .apis/mod.rs
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
 //
 // Modules
+pub mod binance;
 pub mod coinbase;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

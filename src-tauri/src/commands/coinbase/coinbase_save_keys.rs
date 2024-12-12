@@ -1,13 +1,17 @@
 //! # ChartBuddha library
-//! - Module: `coinbase_test_connection`
+//!
+//! - Module: Save Coinbase Keys
 //! - Description: Test the connection with the Coinbase API Keys and save the keys.
+//!
 //! ### Functions
 //! - `coinbase_test_connection`
 //! - `convert_api_secret`
+//!
 //! ##### interface/connect/coinbase_test_connection.rs
 //
 // Local Dependencies
-use crate::providers::coinbase::api::data_api::get_api_key_permissions::get_api_key_permissions;
+// use crate::apis::coinbase::data_api::get_api_key_permissions::get_api_key_permissions;
+use crate::apis::coinbase::data_api::get_api_key_permissions::get_api_key_permissions;
 use crate::providers::coinbase::authenticator::authenticate_api_request;
 use crate::providers::coinbase::authenticator::Authenticator;
 use crate::providers::coinbase::credentials::CoinbaseCredentials;

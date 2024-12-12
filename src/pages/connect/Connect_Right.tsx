@@ -6,7 +6,7 @@
 // Dependencies
 import React from "react";
 // Modules
-import { useContext_Connect } from "./interface/Context_Connect";
+import { useContext_Connect } from "./interface/Context_Connect_Interface";
 // CSS
 import Styles from "./Connect_Right.module.css";
 //
