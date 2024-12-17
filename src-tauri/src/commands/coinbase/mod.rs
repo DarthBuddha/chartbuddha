@@ -11,7 +11,8 @@
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
 // Modules
-pub mod coinbase_delete_keys;
-pub mod coinbase_save_keys;
+// pub mod coinbase_keys_delete;
+// pub mod coinbase_keys_save;
+pub mod coinbase_keys_test;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

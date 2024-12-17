@@ -1,0 +1,27 @@
+/*--------------------------------------------------------------< Connect.module.css >*/
+
+.Connect_Page_Split {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 80px);
+  background-color: #1e1e1e;
+}
+
+/*--------------------------------------------------------------< Connect.module.css >*/
+
+.ConnectLeftPanel {
+  border: 10px solid #333;
+  overflow: visible;
+}
+
+.ConnectCenterPanel {
+  border: 10px solid #333;
+  overflow: visible;
+}
+
+.ConnectRightPanel {
+  border: 10px solid #333;
+  overflow: visible;
+}
+
+/*--------------------------------------------------------------< Connect.module.css >*/

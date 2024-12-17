@@ -5,22 +5,24 @@
 //! - `authenticate_api_request`
 //! ##### provider/coinbase/authenticator.rs
 //
-// Library Dependencies
-use jsonwebtoken::{encode, EncodingKey, Header};
-use log;
-use rand::{distributions::Alphanumeric, Rng};
-use serde::{Deserialize, Serialize};
+// Rust
 use std::error::Error;
 use std::time::{SystemTime, UNIX_EPOCH};
-// Local Dependencies
-use crate::providers::coinbase::credentials::CoinbaseCredentials;
+// Tauri
+use tauri::{AppHandle, Wry};
+use tauri_plugin_store::StoreExt;
+// Dependencies
+use jsonwebtoken::{encode, EncodingKey, Header};
+use rand::{distributions::Alphanumeric, Rng};
+use serde::{Deserialize, Serialize};
+// Local
 //
 /* ----------------------------------- < Struct > ----------------------------------- */
 /// Struct to represent the Authenticator
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Authenticator {
-    pub api_key: String,
-    pub api_secret: String,
+    // pub api_key: String,
+    // pub api_secret: String,
     pub request_method: String,
     pub request_path: String,
 }
@@ -40,20 +42,38 @@ struct Claims {
 /// Authenticate the API request by generating a JWT token
 #[tauri::command]
 pub async fn authenticate_api_request(
+    app_handle: AppHandle<Wry>,
     authenticator: &Authenticator,
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
-    // Load Credentials
-    let credentials = CoinbaseCredentials::load()?;
-    let api_key = credentials.api_key;
-    let mut api_secret = credentials.api_secret;
+    const PAGE: &str = "authenticator.rs";
+    // Step 1: Load API key and secret from the store
+    log::info!("{} | Step 1: Load API key and secret from the store", PAGE);
+    let store = app_handle.store("providers.json").map_err(|e| e.to_string())?;
+    let api_key: String = store
+        .get("coinbase.api_key")
+        .expect("Failed to get value from store")
+        .as_str()
+        .expect("Failed to convert value to string")
+        .to_string();
+    let api_secret: String = store
+        .get("coinbase.api_secret")
+        .expect("Failed to get value from store")
+        .as_str()
+        .expect("Failed to convert value to string")
+        .to_string();
 
-    // Convert the API Secret to Ensure Proper PEM Format (Replace `\n` with actual newlines)
-    api_secret = api_secret.replace("\\n", "\n");
+    // Convert the API Secret to Ensure Proper PEM Format
+    // (Replace `\n` with actual newlines)
+    let api_secret = api_secret.replace("\\n", "\n");
 
     // Log the API Secret Before Using It
-    log::info!("API Secret after conversion: \n{}", api_secret);
+    log::info!("{} | Step 2: API Key: \n{}", PAGE, api_key);
+
+    // Log the API Secret Before Using It
+    log::info!("{} | Step 3: API Secret after conversion: \n{}", PAGE, api_secret);
 
     // Get the current UNIX time
+    log::info!("{} | Step 4: current UNIX time", PAGE);
     let now = match SystemTime::now().duration_since(UNIX_EPOCH) {
         Ok(duration) => duration.as_secs(),
         Err(e) => {
@@ -63,6 +83,7 @@ pub async fn authenticate_api_request(
     };
 
     // Generate a random nonce
+    log::info!("{} | Step 5: Generate a random nonce", PAGE);
     let nonce: String = rand::thread_rng()
         .sample_iter(&Alphanumeric)
         .take(16)
@@ -70,6 +91,7 @@ pub async fn authenticate_api_request(
         .collect();
 
     // Define claims for JWT
+    log::info!("{} | Step 6: Define claims for JWT", PAGE);
     let uri = format!(
         "{} {}{}",
         &authenticator.request_method, "api.coinbase.com", &authenticator.request_path
@@ -84,10 +106,18 @@ pub async fn authenticate_api_request(
     };
 
     // Define the JWT header with the appropriate algorithm and key ID
+    log::info!(
+        "{} | Step 7: Define the JWT header with the appropriate algorithm and key ID",
+        PAGE
+    );
     let mut header = Header::new(jsonwebtoken::Algorithm::ES256);
     header.kid = Some(api_key.to_string());
 
     // Convert EC private key from PEM format to EncodingKey
+    log::info!(
+        "{} | Step 8: Convert EC private key from PEM format to EncodingKey",
+        PAGE
+    );
     let encoding_key = match EncodingKey::from_ec_pem(api_secret.as_bytes()) {
         Ok(key) => key,
         Err(e) => {
@@ -97,6 +127,7 @@ pub async fn authenticate_api_request(
     };
 
     // Encode JWT token
+    log::info!("{} | Step 9: Encode JWT token", PAGE);
     match encode(&header, &claims, &encoding_key) {
         Ok(token) => Ok(token),
         Err(e) => {

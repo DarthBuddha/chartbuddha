@@ -17,9 +17,9 @@
 /* --------------------------------- < Start-Code > --------------------------------- */
 // Modules
 pub mod authenticator;
-pub mod coinbase_provider;
+// pub mod coinbase_provider;
 pub mod constants;
-pub mod credentials;
+// pub mod credentials;
 pub mod errors;
 pub mod subscriber;
 pub mod transformer;
