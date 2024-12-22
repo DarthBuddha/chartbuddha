@@ -1,0 +1,27 @@
+/* ---------------------------------------------------< Connect_Settings.module.css > */
+
+.Page_Providers_Settings {
+  height: 100%;
+  width: 100%;
+  border: 1px solid;
+}
+
+.Title {
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: #292c34;
+  font-size: 1.25rem;
+  color: white;
+  text-align: center;
+  border: 1px solid;
+}
+
+.Body {
+  height: calc(100% - 30px);
+  /* background-color: #1e1e1e; */
+  /* border: 1px solid; */
+  text-align: center;
+}
+
+/* ---------------------------------------------------< Connect_Settings.module.css > */

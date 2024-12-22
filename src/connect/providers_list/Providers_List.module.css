@@ -1,0 +1,30 @@
+/* -----------------------------------------------------< Providers_List.module.css > */
+
+.Page_Providers_List {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: #1e1e1e;
+  border: 1px solid;
+}
+
+.Title {
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: #292c34;
+  font-size: 1.25rem;
+  color: white;
+  text-align: center;
+  border: 1px solid;
+}
+
+.List {
+  height: calc(100% - 30px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #1e1e1e;
+  border: 1px solid;
+}
+
+/* -----------------------------------------------------< Providers_List.module.css > */

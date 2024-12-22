@@ -10,7 +10,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 // Modules
 // CSS
-import Styles from "./StatusBar.module.css";
+import Styles from "./App.module.css";
 //
 /*--------------------------------------< Page >--------------------------------------*/
 const StatusBar: React.FC = () => {

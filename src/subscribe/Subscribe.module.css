@@ -1,0 +1,22 @@
+/* ----------------------------------------------------------< Subscribe.module.css > */
+
+.Subscribe_Page_Split {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 80px);
+  background-color: #1e1e1e;
+}
+
+/* ----------------------------------------------------------< Subscribe.module.css > */
+
+.Subscribe_Providers {
+  border: 10px solid #333;
+  overflow: visible;
+}
+
+.Subscribe_Settings {
+  border: 10px solid #333;
+  overflow: visible;
+}
+
+/* ----------------------------------------------------------< Subscribe.module.css > */

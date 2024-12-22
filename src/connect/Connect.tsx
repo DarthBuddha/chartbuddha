@@ -1,51 +1,39 @@
 //! # ChartBuddha
+//!
 //! Page: Connect
-//! Description: Connect to various data providers.
-//! ##### pages/connect/Connect.tsx
+//! Description: Connect page.
+//!
+//! ##### connect/Connect.tsx
 //
-// Dependencies
-import React from 'react';
-import Split from "react-split";
-// Modules
+// React
+import React from "react";
+// Tauri
+// Components
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";
-import Connect_Center from "./Connect_Center";
-import Connect_Left from "./Connect_Left";
-import Connect_Right from "./Connect_Right";
-// CSS
+import Connect_Settings from "./providers_settings/Providers_Settings";
+import Providers_List from "./providers_list/Providers_List";
+// CSS Modules
 import AppStyle from "../App.module.css";
 import Style from "./Connect.module.css";
 //
-/*--------------------------------------< Page >--------------------------------------*/
-const Dashboard: React.FC = () => {
+/* --------------------------------------------------------------------------< Page > */
+const Connect: React.FC = () => {
   return (
     <div className={AppStyle.AppContainer}>
       <MenuBar />
-      <Split className={Style.Connect_Page_Split}
-        sizes={[10, 80, 10]}
-        minSize={300}
-        expandToMin={true}
-        gutterSize={10}
-        gutterAlign="center"
-        snapOffset={30}
-        dragInterval={1}
-        direction="horizontal"
-        cursor="col-resize"
-      >
-        <div className={Style.ConnectLeftPanel}>
-          <Connect_Left />
+      <div className={Style.Page_Connect}>
+        <div className={Style.Providers_List}>
+          <Providers_List />
         </div>
-        <div className={Style.ConnectCenterPanel}>
-          <Connect_Center />
+        <div className={Style.Providers_Settings}>
+          <Connect_Settings />
         </div>
-        <div className={Style.ConnectRightPanel}>
-          <Connect_Right />
-        </div>
-      </Split>
+      </div>
       <StatusBar />
     </div>
   );
 };
 //
-export default Dashboard;
-/*------------------------------------< End-Code >------------------------------------*/
+export default Connect;
+/* ----------------------------------------------------------------------< End-Code > */

@@ -3,21 +3,25 @@
 //! Description: Main entry point for the frontend.
 //! ##### App.tsx
 //
-// Dependencies
+// React
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-// Modules
+// Components
 import App from "./Index";
-import { Context_Connect_Interface } from "./connect/interface/Connect_Interface";
-// CSS
-import "./App.module.css";
+// Interfaces
+import { Interface_Connect } from "./connect/interface/Interface_Connect";
+import { Interface_Subscribe } from "./subscribe/interface/Interface_Subscribe";
+// CSS Modules
+import "./Global.module.css";
 //
-/*--------------------------------------< Page >--------------------------------------*/
+/* ---------------------------------------------------------------------------< App > */
 createRoot(document.getElementById("root") as HTMLElement).render(
-  <Context_Connect_Interface>
-    <StrictMode>
-      <App />
-    </StrictMode>
-  </Context_Connect_Interface>
+  <Interface_Subscribe>
+    <Interface_Connect>
+      <StrictMode>
+        <App />
+      </StrictMode>
+    </Interface_Connect>
+  </Interface_Subscribe>
 );
-/*------------------------------------< End-Code >------------------------------------*/
+/* ----------------------------------------------------------------------< End-Code > */

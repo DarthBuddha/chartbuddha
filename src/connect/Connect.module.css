@@ -1,27 +1,29 @@
-/*--------------------------------------------------------------< Connect.module.css >*/
+/* ------------------------------------------------------------< Connect.module.css > */
 
-.Connect_Page_Split {
+.Page_Connect {
+  height: calc(100vh - 80px);
+  width: 100vw;
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 80px);
-  background-color: #1e1e1e;
 }
 
-/*--------------------------------------------------------------< Connect.module.css >*/
+/* ------------------------------------------------------------< Connect.module.css > */
 
-.ConnectLeftPanel {
-  border: 10px solid #333;
+.Providers_List {
+  height: calc(100vh - 100px);
+  width: 220px;
+  min-width: 220px;
+  border: 10px 10px solid #333;
+  padding: 10px 10px;
   overflow: visible;
 }
 
-.ConnectCenterPanel {
-  border: 10px solid #333;
+.Providers_Settings {
+  height: calc(100vh - 100px);
+  width: calc(100vw - 220px);
+  border: 10px 10px solid #333;
+  padding: 10px 10px;
   overflow: visible;
 }
 
-.ConnectRightPanel {
-  border: 10px solid #333;
-  overflow: visible;
-}
-
-/*--------------------------------------------------------------< Connect.module.css >*/
+/* ------------------------------------------------------------< Connect.module.css > */

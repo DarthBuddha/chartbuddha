@@ -12,14 +12,11 @@
 // Tauri
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
-// Local Dependencies
 // Modules
-pub mod apis;
-pub mod commands;
-pub mod providers;
-pub mod settings;
+pub mod binance;
+pub mod coinbase;
 //
-/* ---------------------------------- < Function > ---------------------------------- */
+/* --------------------------------------------------------------------- < Function > */
 /// Main entry point for the ChartBuddha library.
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -30,9 +27,9 @@ pub fn run() {
             // Tauri Store for Date Providers. Holds list of API Keys.
             let store_providers = app.store("providers.json")?;
             app.manage(store_providers);
-            // Tauri Store for Connect page. Holds list of configured providers.
-            // let store_interface_connect = app.store("interface_connect.json")?;
-            // app.manage(store_interface_connect);
+            // Tauri Store for Coinbase Provider. Holds list of products.
+            let store_coinbase_products = app.store("coinbase_products.json")?;
+            app.manage(store_coinbase_products);
             Ok(())
         })
         .plugin(tauri_plugin_log::Builder::new().build())
@@ -54,9 +51,9 @@ pub fn run() {
                 .build(),
         )
         .invoke_handler(tauri::generate_handler![
-            commands::coinbase::coinbase_keys_test::coinbase_keys_test,
+            coinbase::commands::coinbase_keys_test::coinbase_keys_test,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-/* ---------------------------------- < End--Code >---------------------------------- */
+/* --------------------------------------------------------------------- < End-Code > */

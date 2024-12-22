@@ -1,21 +1,18 @@
 //! # ChartBuddha
 //!
-//! Page: Menu Bar
-//! Description: The Main Menu.
+//! Page: MenuBar
+//! Description: Main Nav Menu.
 //!
 //! ##### MenuBar.tsx
 //
 // React
 import React from "react";
 import { NavLink } from "react-router-dom";
-// Tauri
-import { info } from "@tauri-apps/plugin-log";
-// CSS
-import Styles from "./MenuBar.module.css";
+// CSS Module
+import Styles from "./App.module.css";
 //
 /*--------------------------------------< Page >--------------------------------------*/
 const MenuBar: React.FC = () => {
-  info("Menu bar activated");
   return (
     <div className={Styles.MenuBar}>
       <div className={Styles.LeftSection}>
@@ -35,10 +32,10 @@ const MenuBar: React.FC = () => {
         </NavLink>
 
         <NavLink
-          to="/market"
+          to="/subscribe"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          Market
+          Subscribe
         </NavLink>
 
         <NavLink
@@ -49,17 +46,17 @@ const MenuBar: React.FC = () => {
         </NavLink>
 
         <NavLink
+          to="/market"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Market
+        </NavLink>
+
+        <NavLink
           to="/news"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           News
-        </NavLink>
-
-        <NavLink
-          to="/community"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
-          Community
         </NavLink>
       </div>
       <div className={Styles.RightSection}>

@@ -1,20 +1,5 @@
 /*--------------------------------------------------------------< Profile.module.css >*/
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-
-}
-
-p {
-  margin-bottom: 1rem;
-}
-
-h1,
-p {
-  text-align: center;
-}
-
 .AppContainer {
   height: 100vh;
   min-height: 800px;

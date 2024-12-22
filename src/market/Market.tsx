@@ -1,7 +1,7 @@
 //! # ChartBuddha
-//! Page: Market
-//! Description: Market page.
-//! ##### pages/market/Market.tsx
+//! Page: News
+//! Description: News page.
+//! ##### pages/news/News.tsx
 //
 // Dependencies
 import React from "react";
@@ -16,9 +16,9 @@ const Market: React.FC = () => {
   return (
     <div className={Styles.AppContainer}>
       <MenuBar />
-      <h1>Market</h1>
-      <div className={Styles.MarketPage}>
-        <p>Market page</p>
+      <div className={Styles.NewsPage}>
+        <h1>News</h1>
+        <p>News page.</p>
       </div>
       <StatusBar />
     </div>

@@ -1,19 +1,4 @@
-/*-----------------------------------------------------------------< Home.module.css >*/
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-
-}
-
-p {
-  margin-bottom: 1rem;
-}
-
-h1,
-p {
-  text-align: center;
-}
+/*-----------------------------------------------------------------< News.module.css >*/
 
 .AppContainer {
   height: 100vh;
@@ -26,7 +11,7 @@ p {
   background-color: #333;
 }
 
-.MarketPage {
+.NewsPage {
   flex-grow: 1;
   width: 100%;
   padding: var(--panel-padding);
@@ -35,4 +20,4 @@ p {
   overflow: auto;
 }
 
-/*-----------------------------------------------------------------< Home.module.css >*/
+/*-----------------------------------------------------------------< News.module.css >*/

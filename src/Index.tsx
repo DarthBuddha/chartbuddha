@@ -5,18 +5,18 @@
 //!
 //! ##### Index.tsx
 //
-// Dependencies
+// React
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// Modules
-import About from "./about/About";
-import Connect from "./connect/Connect";
+// Pages
 import Home from "./home/Home";
-import Market from "./market/Market";
+import Connect from "./connect/Connect";
+import Subscribe from "./subscribe/Subscribe";
 import Dashboard from "./dashboard/Dashboard";
+import Market from "./market/Market";
 import News from "./news/News";
-import Community from "./community/Community";
 import Profile from "./profile/Profile";
+import About from "./about/About";
 //
 /*--------------------------------------< Page >--------------------------------------*/
 const App: React.FC = () => {
@@ -33,20 +33,20 @@ const App: React.FC = () => {
             element={<Connect />}
           />
           <Route
-            path="/market"
-            element={<Market />}
+            path="/subscribe"
+            element={<Subscribe />}
           />
           <Route
             path="/dashboard"
             element={<Dashboard />}
           />
           <Route
-            path="/news"
-            element={<News />}
+            path="/market"
+            element={<Market />}
           />
           <Route
-            path="/community"
-            element={<Community />}
+            path="/news"
+            element={<News />}
           />
           <Route
             path="/profile"
