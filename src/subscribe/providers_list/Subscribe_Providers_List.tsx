@@ -1,19 +1,19 @@
 //! # ChartBuddha
 //!
-//! Page: Providers List
+//! Page: Providers_List
 //! Description: List of Providers.
 //!
-//! ##### connect/providers_list/Providers_List.tsx
+//! ##### subscribe/providers_list/Providers_List.tsx
 //
 // React
 import React from "react";
 // Components
-import { useProviderContext } from "../interface/Interface_Connect";
+import { useProviderContext } from "../interface/Interface_Subscribe";
 // CSS Modules
-import Style from "./Providers_List.module.css";
+import Style from "./Subscribe_Providers_List.module.css";
 //
 /* ---------------------------------------------------------------------< Component > */
-const Connect_Providers_List: React.FC = () => {
+const Subscribe_Providers_List: React.FC = () => {
   const { selectedProvider, setSelectedProvider } = useProviderContext();
   console.log(selectedProvider);
 
@@ -33,5 +33,6 @@ const Connect_Providers_List: React.FC = () => {
   );
 };
 
-export default Connect_Providers_List;
+export default Subscribe_Providers_List;
 /* ----------------------------------------------------------------------< End-Code > */
+

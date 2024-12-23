@@ -7,15 +7,17 @@
 //! - `ApiKeyPermissionsResponse`
 //! - `ErrorResponse`
 //! - `Detail`
+//!
 //! ### Functions
 //! - `get_api_key_permissions`
 //!
-//! ##### apis/coinbase/data_api/get_api_key_permissions.rs
+//! ##### provider/coinbase/api/data_api/get_api_key_permissions.rs
 //
-// Library Dependencies
-use log;
+// Rust
+// Dependencies
 use reqwest;
 use serde::{Deserialize, Serialize};
+// Local
 //
 /* ----------------------------------- < Struct > ----------------------------------- */
 /// Struct to represent the API key permissions response

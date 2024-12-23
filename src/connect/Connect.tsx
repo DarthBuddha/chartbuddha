@@ -12,7 +12,7 @@ import React from "react";
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";
 import Connect_Settings from "./providers_settings/Providers_Settings";
-import Providers_List from "./providers_list/Providers_List";
+import Connect_Providers_List from "./providers_list/Providers_List";
 // CSS Modules
 import AppStyle from "../App.module.css";
 import Style from "./Connect.module.css";
@@ -24,7 +24,7 @@ const Connect: React.FC = () => {
       <MenuBar />
       <div className={Style.Page_Connect}>
         <div className={Style.Providers_List}>
-          <Providers_List />
+          <Connect_Providers_List />
         </div>
         <div className={Style.Providers_Settings}>
           <Connect_Settings />

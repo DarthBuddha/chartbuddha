@@ -32,11 +32,12 @@ const Coinbase_Api: React.FC = () => {
 
   // Load the API key and secret from the store when the component mounts
   useEffect(() => {
-    info("Loading keys...");
     const loadKeys = async () => {
       try {
         const store = await load("providers.json");
+        info("Loading Api Key...");
         const savedApiKey = await store.get<string>("coinbase.api_key");
+        info("Loading Api Secret...");
         const savedApiSecret = await store.get<string>("coinbase.api_secret");
         if (savedApiKey) setApiKey(savedApiKey);
         if (savedApiSecret) setApiSecret(convertApiSecret(savedApiSecret));
@@ -112,7 +113,7 @@ const Coinbase_Api: React.FC = () => {
   // Function to handle testing the keys (Test Keys button)
   const button_TestKeys = async () => {
     try {
-      const response: string = await invoke("coinbase_keys_test");
+      const response: string = await invoke("connect_coinbase_api");
       info("Response from coinbase_keys_test: " + response);
       setActionResult(response);
     } catch (err) {
@@ -157,9 +158,6 @@ const Coinbase_Api: React.FC = () => {
         </div>
       </div>
       <div className={Style.Bottom_Container}>
-        {/* <div className={Style.Settings_Container}> */}
-
-
         <div className={Style.Input_Container}>
           <label htmlFor="apiKey">API Key</label>
           <input
@@ -193,12 +191,11 @@ const Coinbase_Api: React.FC = () => {
             Delete Keys
           </button>
           <button onClick={button_TestKeys} className={Style.Test_Button}>
-            Test Keys
+            Test API
           </button>
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

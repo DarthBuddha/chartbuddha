@@ -3,18 +3,18 @@
 //! Page: Providers_Settings
 //! Description: Displays settings for the selected provider.
 //!
-//! ##### connect/providers_settings/Providers_Settings.tsx
+//! ##### subscribe/providers_settings/Providers_Settings.tsx
 //
 // React
 import React from "react";
-// Local
-import Coinbase_Api from "../providers/coinbase/Coinbase_Api";
-import { useProviderContext } from "../interface/Interface_Connect";
-// CSS
-import Style from "./Providers_Settings.module.css";
+// Components
+import Coinbase_Subs from "../providers/coinbase/Coinbase_Subs";
+import { useProviderContext } from "../interface/Interface_Subscribe";
+// CSS Modules
+import Style from "./Subscribe_Providers_Settings.module.css";
 //
 /* ---------------------------------------------------------------------< Component > */
-const Connect_Settings: React.FC = () => {
+const Subscribe_Providers_Settings: React.FC = () => {
   const { selectedProvider } = useProviderContext();
 
   if (!selectedProvider) {
@@ -37,7 +37,7 @@ const Connect_Settings: React.FC = () => {
           <div className={Style.Title}>
             Coinbase
           </div>
-          <Coinbase_Api />
+          <Coinbase_Subs />
         </div>
       );
     case "binance":
@@ -65,5 +65,5 @@ const Connect_Settings: React.FC = () => {
   }
 };
 
-export default Connect_Settings;
+export default Subscribe_Providers_Settings;
 /* ----------------------------------------------------------------------< End-Code > */

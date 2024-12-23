@@ -7,42 +7,37 @@
 //
 // React
 import React from "react";
-import Split from "react-split";
+// Tauri
 // Components
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";
-import Subscribe_Providers from "./Subscribe_Providers";
-import Subscribe_Settings from "./Subscribe_Settings";
+import Subscribe_Providers_Settings from "./providers_settings/Subscribe_Providers_Settings";
+import Subscribe_Providers_List from "./providers_list/Subscribe_Providers_List";
+// import Subscriptions_List from "./subscriptions_list/Subscriptions_List";
 // CSS Modules
 import AppStyle from "../App.module.css";
 import Style from "./Subscribe.module.css";
 //
 /* --------------------------------------------------------------------------< Page > */
-const Subscribe: React.FC = () => {
+const Connect: React.FC = () => {
   return (
     <div className={AppStyle.AppContainer}>
       <MenuBar />
-      <Split className={Style.Subscribe_Page_Split}
-        sizes={[10, 90]}
-        minSize={200}
-        expandToMin={true}
-        gutterSize={10}
-        gutterAlign="center"
-        snapOffset={30}
-        dragInterval={1}
-        direction="horizontal"
-        cursor="col-resize"
-      >
-        <div className={Style.Subscribe_Providers}>
-          <Subscribe_Providers />
+      <div className={Style.Page_Subscribe}>
+        <div className={Style.Provider_List}>
+          <Subscribe_Providers_List />
         </div>
-        <div className={Style.Subscribe_Settings}>
-          <Subscribe_Settings />
+        <div className={Style.Providers_Settings}>
+          <Subscribe_Providers_Settings />
         </div>
-      </Split>
+        <div className={Style.Product_List}>
+          <div className={Style.Title}>Products</div>
+        </div>
+      </div>
       <StatusBar />
     </div>
   );
 };
-export default Subscribe;
+//
+export default Connect;
 /* ----------------------------------------------------------------------< End-Code > */

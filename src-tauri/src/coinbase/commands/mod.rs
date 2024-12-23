@@ -11,7 +11,6 @@
 //
 /* --------------------------------- < Start-Code > --------------------------------- */
 // Modules
-pub mod coinbase_keys_test;
-pub mod coinbase_list_products;
+pub mod connect_coinbase_api;
 //
 /* ---------------------------------- < End--Code >---------------------------------- */

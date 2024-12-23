@@ -34,6 +34,7 @@ pub fn run() {
         })
         .plugin(tauri_plugin_log::Builder::new().build())
         .plugin(tauri_plugin_window_state::Builder::new().build())
+        // Tauri Logging Plugin
         .plugin(
             tauri_plugin_log::Builder::new()
                 // .level(log::LevelFilter::Info)
@@ -50,8 +51,10 @@ pub fn run() {
                 })
                 .build(),
         )
+        // Tauri Command Register
         .invoke_handler(tauri::generate_handler![
-            coinbase::commands::coinbase_keys_test::coinbase_keys_test,
+            coinbase::commands::connect_coinbase_api::connect_coinbase_api,
+            // coinbase::commands::coinbase_list_products::coinbase_list_products,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -1,10 +1,8 @@
-/* -----------------------------------------------------< Providers_List.module.css > */
+/* -------------------------------------------------< Providers_Settings.module.css > */
 
-.Page_Providers_List {
+.Page_Providers_Settings {
   height: 100%;
   width: 100%;
-  text-align: center;
-  background-color: #1e1e1e;
   box-shadow: inset 0 0 0 5px black;
 }
 
@@ -19,12 +17,10 @@
   box-shadow: inset 0 0 0 5px black;
 }
 
-.List {
+.Body {
   height: calc(100% - 30px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  background-color: #1e1e1e;
+  text-align: center;
   box-shadow: inset 0 0 0 5px black;
 }
 
-/* -----------------------------------------------------< Providers_List.module.css > */
+/* -------------------------------------------------< Providers_Settings.module.css > */

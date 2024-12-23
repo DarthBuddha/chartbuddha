@@ -1,22 +1,47 @@
 /* ----------------------------------------------------------< Subscribe.module.css > */
 
-.Subscribe_Page_Split {
+.Page_Subscribe {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 80px);
-  background-color: #1e1e1e;
+  box-shadow: inset 0 0 0 5px black;
 }
 
 /* ----------------------------------------------------------< Subscribe.module.css > */
 
-.Subscribe_Providers {
-  border: 10px solid #333;
+.Provider_List {
+  height: 100%;
+  width: 220px;
+  min-width: 220px;
   overflow: visible;
+  box-shadow: inset 0 0 0 5px black;
 }
 
-.Subscribe_Settings {
-  border: 10px solid #333;
+.Providers_Settings {
+  height: 100%;
+  width: calc(100vw - 440px);
   overflow: visible;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Product_List {
+  height: 100%;
+  width: 220px;
+  min-width: 220px;
+  overflow: visible;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Title {
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: #292c34;
+  font-size: 1.25rem;
+  color: white;
+  text-align: center;
+  box-shadow: inset 0 0 0 5px black;
 }
 
 /* ----------------------------------------------------------< Subscribe.module.css > */

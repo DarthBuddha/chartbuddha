@@ -1,29 +1,35 @@
 //! # ChartBuddha library
-//! - Module: `list_products`
+//!
+//! - Module: List Products
 //! - Description: Get a list of the available currency pairs for trading.
+//!
 //! ### Structs
 //! - `ListProductsResponse`
 //! - `Product`
+//!
 //! ### Functions
 //! - `list_products`
+//!
 //! ##### provider/coinbase/api/products/list_products.rs
 //
 // Rust
-// Library Dependencies
+// Dependencies
 use reqwest::Client;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::error::Error;
+// Local
 //
 /* ----------------------------------- < Struct > ----------------------------------- */
 /// Struct to represent the response from the list products endpoint
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ListProductsResponse {
     pub products: Vec<Product>,
     pub num_products: Option<i32>, // Number of products returned, if provided
 }
 /* ----------------------------------- < Struct > ----------------------------------- */
 /// Struct to represent a single product in the list products response
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Product {
     pub product_id: String,
     pub price: String,
@@ -56,33 +62,51 @@ pub struct Product {
 /* ---------------------------------- < Function > ---------------------------------- */
 /// Get a list of the available currency pairs for trading.
 pub async fn list_products(
-    client: &Client,
+    jwt_token: String,
     limit: Option<u32>,
     offset: Option<u32>,
     product_type: Option<&str>,
     product_ids: Option<Vec<&str>>,
     get_all_products: Option<bool>,
-) -> Result<ListProductsResponse, Box<dyn std::error::Error>> {
-    let url = "https://api.coinbase.com/api/v3/brokerage/products";
+) -> Result<ListProductsResponse, Box<dyn Error>> {
+    let base_url = "https://api.coinbase.com/api/v3/brokerage/products";
+    let client = Client::new();
 
-    let mut request = client.get(url).header("Content-Type", "application/json");
+    let mut query_params = vec![];
 
     // Add query parameters
     if let Some(lim) = limit {
-        request = request.query(&[("limit", lim.to_string())]);
+        query_params.push(format!("limit={}", lim));
     }
     if let Some(off) = offset {
-        request = request.query(&[("offset", off.to_string())]);
+        query_params.push(format!("offset={}", off));
     }
     if let Some(p_type) = product_type {
-        request = request.query(&[("product_type", p_type)]);
+        query_params.push(format!("product_type={}", p_type));
     }
     if let Some(p_ids) = product_ids {
-        request = request.query(&[("product_ids", p_ids.join(","))]);
+        query_params.push(format!("product_ids={}", p_ids.join(",")));
     }
     if let Some(all_products) = get_all_products {
-        request = request.query(&[("get_all_products", all_products.to_string())]);
+        if all_products {
+            query_params.push("get_all_products=true".to_string());
+        }
     }
+
+    // Construct the final URL with query parameters
+    let final_url = if query_params.is_empty() {
+        base_url.to_string()
+    } else {
+        format!("{}?{}", base_url, query_params.join("&"))
+    };
+
+    // Log the final request URL
+    log::info!("Final request URL: {}", final_url);
+
+    let request = client
+        .get(&final_url)
+        .header("Content-Type", "application/json")
+        .header("Authorization", format!("Bearer {}", jwt_token));
 
     let response = request.send().await?;
 
