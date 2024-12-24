@@ -3,7 +3,7 @@
 //! Page: Coinbase Product List
 //! Description: Short description of the page.
 //!
-//! ##### subscribe/provider_settings/providers/coinbase/product_list/Coinbase_Product_List.tsx
+//! -------------------------------------------------------------------------------- !//
 //
 // React
 import React, { useState } from "react";
@@ -17,6 +17,8 @@ import Style from "./Coinbase_Product_List.module.css";
 /* ---------------------------------------------------------------------------------- */
 const Coinbase_Product_List: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("spot");
+  //
+
   //
   const renderActiveWidget = () => {
     switch (activeTab) {

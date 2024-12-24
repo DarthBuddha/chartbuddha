@@ -33,11 +33,10 @@ const Coinbase_Api: React.FC = () => {
   // Load the API key and secret from the store when the component mounts
   useEffect(() => {
     const loadKeys = async () => {
+      info("Loading Api Key & Secret...");
       try {
         const store = await load("providers.json");
-        info("Loading Api Key...");
         const savedApiKey = await store.get<string>("coinbase.api_key");
-        info("Loading Api Secret...");
         const savedApiSecret = await store.get<string>("coinbase.api_secret");
         if (savedApiKey) setApiKey(savedApiKey);
         if (savedApiSecret) setApiSecret(convertApiSecret(savedApiSecret));
