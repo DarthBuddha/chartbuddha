@@ -1,24 +1,25 @@
 //! # ChartBuddha
 //!
-//! Page: Providers_List
+//! Page: Connect Providers List
 //! Description: List of Providers.
 //!
-//! ##### subscribe/providers_list/Providers_List.tsx
+//! -------------------------------------------------------------------------------- !//
 //
 // React
 import React from "react";
+// Tauri
 // Components
-import { useProviderContext } from "../interface/Interface_Subscribe";
+import { useProviderContext } from "../interface/Interface_Connect";
 // CSS Modules
-import Style from "./Subscribe_Providers_List.module.css";
+import Style from "./Connect_Provider_List.module.css";
 //
-/* ---------------------------------------------------------------------< Component > */
-const Subscribe_Providers_List: React.FC = () => {
+/* ---------------------------------------------------------------------------------- */
+const Connect_Provider_List: React.FC = () => {
   const { selectedProvider, setSelectedProvider } = useProviderContext();
   console.log(selectedProvider);
 
   return (
-    <div className={Style.Page_Providers_List}>
+    <div className={Style.Page}>
       <div className={Style.Title}>Providers</div>
       <div className={Style.List}>
         <li>
@@ -33,6 +34,5 @@ const Subscribe_Providers_List: React.FC = () => {
   );
 };
 
-export default Subscribe_Providers_List;
-/* ----------------------------------------------------------------------< End-Code > */
-
+export default Connect_Provider_List;
+/* ---------------------------------------------------------------------------------- */

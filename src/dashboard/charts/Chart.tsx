@@ -1,7 +1,9 @@
 //! # ChartBuddha
+//!
 //! Page: Chart
 //! Description: Chart Widget.
-//! ##### dashboard/widgets/Chart.tsx
+//!
+//! -------------------------------------------------------------------------------- !//
 //
 // Dependencies
 import React from "react";

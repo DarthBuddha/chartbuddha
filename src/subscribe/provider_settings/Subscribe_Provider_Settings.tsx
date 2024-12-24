@@ -8,18 +8,18 @@
 // React
 import React from "react";
 // Components
-import Coinbase_Subs from "../providers/coinbase/Coinbase_Subs";
+import Coinbase_Subs from "./providers/coinbase/Coinbase_Subs";
 import { useProviderContext } from "../interface/Interface_Subscribe";
 // CSS Modules
-import Style from "./Subscribe_Providers_Settings.module.css";
+import Style from "./Subscribe_Provider_Settings.module.css";
 //
 /* ---------------------------------------------------------------------< Component > */
-const Subscribe_Providers_Settings: React.FC = () => {
+const Subscribe_Provider_Settings: React.FC = () => {
   const { selectedProvider } = useProviderContext();
 
   if (!selectedProvider) {
     return (
-      <div className={Style.Page_Providers_Settings}>
+      <div className={Style.Page}>
         <div className={Style.Title}>
           Select a Provider
         </div>
@@ -33,16 +33,13 @@ const Subscribe_Providers_Settings: React.FC = () => {
   switch (selectedProvider?.toLowerCase()) {
     case "coinbase":
       return (
-        <div className={Style.Page_Providers_Settings}>
-          <div className={Style.Title}>
-            Coinbase
-          </div>
+        <div className={Style.Page}>
           <Coinbase_Subs />
         </div>
       );
     case "binance":
       return (
-        <div className={Style.Page_Providers_Settings}>
+        <div className={Style.Page}>
           <div className={Style.Title}>
             Binance
           </div>
@@ -53,7 +50,7 @@ const Subscribe_Providers_Settings: React.FC = () => {
       );
     default:
       return (
-        <div className={Style.Page_Providers_Settings}>
+        <div className={Style.Page}>
           <div className={Style.Title}>
             Select a Provider
           </div>
@@ -65,5 +62,5 @@ const Subscribe_Providers_Settings: React.FC = () => {
   }
 };
 
-export default Subscribe_Providers_Settings;
+export default Subscribe_Provider_Settings;
 /* ----------------------------------------------------------------------< End-Code > */

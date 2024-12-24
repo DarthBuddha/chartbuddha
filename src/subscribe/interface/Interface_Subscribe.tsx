@@ -3,14 +3,14 @@
 //! Page: Context_Connect_Interface
 //! Description: Manages the selected provider state.
 //!
-//! ##### subscribe/interface/Subscribe_Interface.tsx
+//! -------------------------------------------------------------------------------- !//
 //
 // React
 import React, { useContext, useState, ReactNode } from "react";
 // Components
 import ProviderContext, { ProviderContext_Type } from "./ProviderContext";
 //
-/* ---------------------------------------------------------------------< Interface > */
+/* ---------------------------------------------------------------------------------- */
 export const Interface_Subscribe: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
 
@@ -20,12 +20,12 @@ export const Interface_Subscribe: React.FC<{ children: ReactNode }> = ({ childre
     </ProviderContext.Provider>
   );
 };
-/* ----------------------------------------------------------------------< Constant > */
+/* ---------------------------------------------------------------------------------- */
 export const useProviderContext = (): ProviderContext_Type => {
   const context = useContext(ProviderContext);
   if (!context) {
-    throw new Error("useProviderContext must be used within a Context_Connect_Interface");
+    throw new Error("useProviderContext must be used within a Context_Subscribe_Interface");
   }
   return context;
 };
-/* ----------------------------------------------------------------------< End-Code > */
+/* ---------------------------------------------------------------------------------- */

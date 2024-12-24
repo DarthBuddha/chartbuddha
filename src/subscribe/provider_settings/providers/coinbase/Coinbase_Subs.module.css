@@ -1,0 +1,26 @@
+/* ---------------------------------------------------------------------------------- */
+
+.Page {
+  height: 100%;
+  width: 100%;
+}
+
+.Split {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  /* width: 100%; */
+  background-color: #292c34;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Coinbase_Product,
+.Coinbase_Product_List {
+  /* height: 100%; */
+  /* width: 100%; */
+  overflow: visible;
+  background-color: #333;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+/* ---------------------------------------------------------------------------------- */

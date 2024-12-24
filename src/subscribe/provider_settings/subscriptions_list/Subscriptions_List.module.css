@@ -1,11 +1,11 @@
-/* -------------------------------------------------< Subscriptions_List.module.css > */
+/* ---------------------------------------------------------------------------------- */
 
 .Component_Subscriptions_List {
   height: 100%;
   width: 100%;
   text-align: center;
   background-color: #1e1e1e;
-  box-shadow: inset 0 0 0 5px black;
+  /* box-shadow: inset 0 0 0 5px black; */
 }
 
 .Title {
@@ -16,7 +16,7 @@
   font-size: 1.25rem;
   color: white;
   text-align: center;
-  box-shadow: inset 0 0 0 5px black;
+  /* box-shadow: inset 0 0 0 5px black; */
 }
 
 .List {
@@ -24,7 +24,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: #1e1e1e;
-  box-shadow: inset 0 0 0 5px black;
+  /* box-shadow: inset 0 0 0 5px black; */
 }
 
-/* -------------------------------------------------< Subscriptions_List.module.css > */
+/* ---------------------------------------------------------------------------------- */

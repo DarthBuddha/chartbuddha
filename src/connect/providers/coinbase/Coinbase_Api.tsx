@@ -3,7 +3,7 @@
 //! Page: Coinbase_Api
 //! Description: Coinbase connect configuration.
 //!
-//! ##### connect/providers/coinbase/Coinbase_Api.tsx
+//! -------------------------------------------------------------------------------- !//
 //
 // React
 import React, { useState, useEffect } from "react";
@@ -11,10 +11,10 @@ import React, { useState, useEffect } from "react";
 import { load } from "@tauri-apps/plugin-store";
 import { info, error } from "@tauri-apps/plugin-log";
 import { invoke } from "@tauri-apps/api/core";
-// CSS
+// CSS Modules
 import Style from "./Coinbase_Api.module.css";
 //
-/*--------------------------------------< Page >--------------------------------------*/
+/* ---------------------------------------------------------------------------------- */
 const Coinbase_Api: React.FC = () => {
   // State for storing API key and secret
   const [apiKey, setApiKey] = useState("");
@@ -200,5 +200,5 @@ const Coinbase_Api: React.FC = () => {
 };
 
 export default Coinbase_Api;
-/*------------------------------------< End-Code >------------------------------------*/
+/* ---------------------------------------------------------------------------------- */
 

@@ -1,7 +1,7 @@
 //! # ChartBuddha
 //! Page: Futures Products
 //! Description: Displays a list of futures products.
-//! ##### dashboard/left/widgets/Futures.tsx
+//! -------------------------------------------------------------------------------- !//
 //
 // Dependencies
 import React from "react";

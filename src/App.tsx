@@ -1,7 +1,9 @@
 //! # ChartBuddha
+//!
 //! Page: App
 //! Description: Main entry point for the frontend.
-//! ##### App.tsx
+//!
+//! -------------------------------------------------------------------------------- !//
 //
 // React
 import { StrictMode } from "react";
@@ -14,7 +16,7 @@ import { Interface_Subscribe } from "./subscribe/interface/Interface_Subscribe";
 // CSS Modules
 import "./Global.module.css";
 //
-/* ---------------------------------------------------------------------------< App > */
+/* ---------------------------------------------------------------------------------- */
 createRoot(document.getElementById("root") as HTMLElement).render(
   <Interface_Subscribe>
     <Interface_Connect>
@@ -24,4 +26,4 @@ createRoot(document.getElementById("root") as HTMLElement).render(
     </Interface_Connect>
   </Interface_Subscribe>
 );
-/* ----------------------------------------------------------------------< End-Code > */
+/* ---------------------------------------------------------------------------------- */

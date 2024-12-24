@@ -1,23 +1,26 @@
 //! # ChartBuddha
+//!
 //! Page: Home
 //! Description: Home page of ChartBuddha.
-//! ##### pages/home/Home.tsx
+//!
+//! -------------------------------------------------------------------------------- !//
 //
-// Dependencies
+// React
 import React from "react";
-// Modules
+// Tauri
+// Components
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";
-// CSS
-import AppStyle from "../App.module.css";
+// CSS Modules
+import Style_App from "../App.module.css";
 import Style from "./Home.module.css";
 //
-/*--------------------------------------< Page >--------------------------------------*/
+/* ---------------------------------------------------------------------------------- */
 const Home: React.FC = () => {
   return (
-    <div className={AppStyle.AppContainer}>
+    <div className={Style_App.App_Window}>
       <MenuBar />
-      <div className={Style.HomePage}>
+      <div className={Style.Page}>
         <h1>Welcome to ChartBuddha</h1>
         <p>This is your home page.</p>
       </div>
@@ -25,6 +28,6 @@ const Home: React.FC = () => {
     </div >
   );
 };
-
+//
 export default Home;
-/*------------------------------------< End-Code >------------------------------------*/
+/* ---------------------------------------------------------------------------------- */

@@ -1,12 +1,14 @@
 //! # ChartBuddha
+//!
 //! Page: Dashboard
 //! Description: Main dashboard page.
+//!
 //! ##### dashboard/Dashboard.tsx
 //
-// Dependencies
+// React
 import React from "react";
 import Split from "react-split";
-// Modules
+// Components
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";
 import Dashboard_Center from "./Dashboard_Center";

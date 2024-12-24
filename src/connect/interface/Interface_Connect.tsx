@@ -1,25 +1,28 @@
 //! # ChartBuddha
-//! Page: Context_Connect_Interface
-//! Description: Manages the selected provider state.
-//! ##### pages/connect/interface/Context_Connect_Interface.tsx
+//!
+//! Page: Interface Connect
+//! Description: Context for the selected provider.
+//!
+//! -------------------------------------------------------------------------------- !//
 //
-// Dependencies
+// React
 import React, { useContext, useState, ReactNode } from "react";
+// Tauri
+// Components
 import ProviderContext, { ProviderContext_Type } from "./ProviderContext";
-// Modules
-// CSS
+// CSS Modules
 //
-/*------------------------------------< Constant >------------------------------------*/
+/* ---------------------------------------------------------------------------------- */
 export const Interface_Connect: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
-
+  //
   return (
     <ProviderContext.Provider value={{ selectedProvider, setSelectedProvider }}>
       {children}
     </ProviderContext.Provider>
   );
 };
-
+/* ---------------------------------------------------------------------------------- */
 export const useProviderContext = (): ProviderContext_Type => {
   const context = useContext(ProviderContext);
   if (!context) {
@@ -27,4 +30,4 @@ export const useProviderContext = (): ProviderContext_Type => {
   }
   return context;
 };
-/*------------------------------------< End-Code >------------------------------------*/
+/* ---------------------------------------------------------------------------------- */

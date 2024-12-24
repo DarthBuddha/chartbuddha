@@ -1,22 +1,23 @@
 //! # ChartBuddha
 //!
-//! Page: Page Name
-//! Description: Short description of the page.
+//! Page: Configured Providers
+//! Description: Context for the selected provider.
 //!
-//! ##### FileName.tsx
+//! -------------------------------------------------------------------------------- !//
 //
-// Dependencies
+// React
 import { createContext } from "react";
-// Modules
-// CSS
+// Tauri
+// Components
+// CSS Modules
 //
-/*------------------------------------< Interface >-----------------------------------*/
+/* ---------------------------------------------------------------------------------- */
 export interface ProviderContext_Type {
   selectedProvider: string | null;
   setSelectedProvider: React.Dispatch<React.SetStateAction<string | null>>;
 }
-/*------------------------------------< Constant >------------------------------------*/
+/* ---------------------------------------------------------------------------------- */
 const ProviderContext = createContext<ProviderContext_Type | null>(null);
-
+//
 export default ProviderContext;
-/*------------------------------------< End-Code >------------------------------------*/
+/* ---------------------------------------------------------------------------------- */

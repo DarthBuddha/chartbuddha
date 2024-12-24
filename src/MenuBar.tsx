@@ -3,19 +3,19 @@
 //! Page: MenuBar
 //! Description: Main Nav Menu.
 //!
-//! ##### MenuBar.tsx
+//! -------------------------------------------------------------------------------- !//
 //
 // React
 import React from "react";
 import { NavLink } from "react-router-dom";
 // CSS Module
-import Styles from "./App.module.css";
+import Style_App from "./App.module.css";
 //
-/*--------------------------------------< Page >--------------------------------------*/
+/* ---------------------------------------------------------------------------------- */
 const MenuBar: React.FC = () => {
   return (
-    <div className={Styles.MenuBar}>
-      <div className={Styles.LeftSection}>
+    <div className={Style_App.MenuBar}>
+      <div className={Style_App.LeftSection}>
         <NavLink
           to="/"
           className={({ isActive }) => (isActive ? "active" : "")}
@@ -23,7 +23,7 @@ const MenuBar: React.FC = () => {
           Home
         </NavLink>
       </div>
-      <div className={Styles.CenterSection}>
+      <div className={Style_App.CenterSection}>
         <NavLink
           to="/connect"
           className={({ isActive }) => (isActive ? "active" : "")}
@@ -59,7 +59,7 @@ const MenuBar: React.FC = () => {
           News
         </NavLink>
       </div>
-      <div className={Styles.RightSection}>
+      <div className={Style_App.RightSection}>
         <NavLink
           to="/profile"
           className={({ isActive }) => (isActive ? "active" : "")}
@@ -72,4 +72,4 @@ const MenuBar: React.FC = () => {
 };
 
 export default MenuBar;
-/*------------------------------------< End-Code >------------------------------------*/
+/* ---------------------------------------------------------------------------------- */

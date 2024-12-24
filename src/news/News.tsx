@@ -1,22 +1,26 @@
 //! # ChartBuddha
+//!
 //! Page: News
 //! Description: News page.
-//! ##### pages/news/News.tsx
+//!
+//! -------------------------------------------------------------------------------- !//
 //
-// Dependencies
+// React
 import React from "react";
-// Modules
+// Tauri
+// Components
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";
-// CSS
-import Styles from "./News.module.css";
+// CSS Modules
+import Style_App from "../App.module.css";
+import Style from "./News.module.css";
 //
-/*--------------------------------------< Page >--------------------------------------*/
+/* ---------------------------------------------------------------------------------- */
 const News: React.FC = () => {
   return (
-    <div className={Styles.AppContainer}>
+    <div className={Style_App.App_Window}>
       <MenuBar />
-      <div className={Styles.NewsPage}>
+      <div className={Style.Page}>
         <h1>News</h1>
         <p>News page.</p>
       </div>
@@ -24,6 +28,6 @@ const News: React.FC = () => {
     </div>
   );
 };
-
+//
 export default News;
-/*------------------------------------< End-Code >------------------------------------*/
+/* ---------------------------------------------------------------------------------- */

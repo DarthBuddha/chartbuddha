@@ -3,7 +3,7 @@
 //! Page: Providers_Settings
 //! Description: Displays settings for the selected provider.
 //!
-//! ##### connect/providers_settings/Providers_Settings.tsx
+//! -------------------------------------------------------------------------------- !//
 //
 // React
 import React from "react";
@@ -11,15 +11,15 @@ import React from "react";
 import Coinbase_Api from "../providers/coinbase/Coinbase_Api";
 import { useProviderContext } from "../interface/Interface_Connect";
 // CSS
-import Style from "./Providers_Settings.module.css";
+import Style from "./Connect_Provider_Settings.module.css";
 //
-/* ---------------------------------------------------------------------< Component > */
-const Connect_Settings: React.FC = () => {
+/* ---------------------------------------------------------------------------------- */
+const Connect_Provider_Settings: React.FC = () => {
   const { selectedProvider } = useProviderContext();
-
+  //
   if (!selectedProvider) {
     return (
-      <div className={Style.Page_Providers_Settings}>
+      <div className={Style.Page_Provider_Settings}>
         <div className={Style.Title}>
           Select a Provider
         </div>
@@ -29,11 +29,11 @@ const Connect_Settings: React.FC = () => {
       </div>
     );
   }
-
+  //
   switch (selectedProvider?.toLowerCase()) {
     case "coinbase":
       return (
-        <div className={Style.Page_Providers_Settings}>
+        <div className={Style.Page}>
           <div className={Style.Title}>
             Coinbase
           </div>
@@ -42,7 +42,7 @@ const Connect_Settings: React.FC = () => {
       );
     case "binance":
       return (
-        <div className={Style.Page_Providers_Settings}>
+        <div className={Style.Page}>
           <div className={Style.Title}>
             Binance
           </div>
@@ -53,7 +53,7 @@ const Connect_Settings: React.FC = () => {
       );
     default:
       return (
-        <div className={Style.Page_Providers_Settings}>
+        <div className={Style.Page}>
           <div className={Style.Title}>
             Select a Provider
           </div>
@@ -64,6 +64,6 @@ const Connect_Settings: React.FC = () => {
       );
   }
 };
-
-export default Connect_Settings;
-/* ----------------------------------------------------------------------< End-Code > */
+//
+export default Connect_Provider_Settings;
+/* ---------------------------------------------------------------------------------- */

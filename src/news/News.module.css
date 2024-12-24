@@ -1,23 +1,13 @@
-/*-----------------------------------------------------------------< News.module.css >*/
+/* ---------------------------------------------------------------------------------- */
 
-.AppContainer {
+.Page {
   height: 100vh;
-  min-height: 800px;
   width: 100vw;
+  min-height: 800px;
   min-width: 1280px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #333;
 }
 
-.NewsPage {
-  flex-grow: 1;
-  width: 100%;
-  padding: var(--panel-padding);
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-}
-
-/*-----------------------------------------------------------------< News.module.css >*/
+/* ---------------------------------------------------------------------------------- */
