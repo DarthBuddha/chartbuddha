@@ -1,4 +1,4 @@
-//! # ChartBuddha library
+//! # ChartBuddha
 //!
 //! - Module: lib
 //! - Description: ChartBuddha Library.
@@ -6,17 +6,15 @@
 //! ### Functions
 //! - `run`
 //!
-//! ##### lib.rs
+/* ---------------------------------------------------------------------------------- */
 //
-// Rust
 // Tauri
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
-// Modules
-pub mod binance;
-pub mod coinbase;
+// Local Modules
+pub mod providers;
 //
-/* --------------------------------------------------------------------- < Function > */
+/* ---------------------------------------------------------------------------------- */
 /// Main entry point for the ChartBuddha library.
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -40,7 +38,7 @@ pub fn run() {
             app.manage(store_coinbase_products);
             Ok(())
         })
-        .plugin(tauri_plugin_log::Builder::new().build())
+        // .plugin(tauri_plugin_log::Builder::new().build())
         // Tauri Window State Setup
         .plugin(tauri_plugin_window_state::Builder::new().build())
         // Tauri Logging Setup
@@ -62,10 +60,10 @@ pub fn run() {
         )
         // Tauri Command Register
         .invoke_handler(tauri::generate_handler![
-            coinbase::commands::connect_coinbase_api::connect_coinbase_api,
+            providers::coinbase::commands::connect_coinbase_api::connect_coinbase_api,
             // coinbase::commands::coinbase_list_products::coinbase_list_products,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-/* --------------------------------------------------------------------- < End-Code > */
+/* ---------------------------------------------------------------------------------- */
