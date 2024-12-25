@@ -4,21 +4,23 @@
 //! Description: Displays a list of Coinbase Spot products.
 //!
 //! -------------------------------------------------------------------------------- !//
-//
 // React
 import React, { useState, useEffect } from "react";
 // Tauri
 import { load } from "@tauri-apps/plugin-store";
 import { info, error } from "@tauri-apps/plugin-log";
 // Components
-import { useProviderContext } from "../../../../../interface/Interface_Subscribe";
+import { useSubscriptionContext } from "../../../../../interface/Interface_Subscribe";
+import { Product_Type } from "../../../../../interface/Product_Type";
 // CSS Modules
 import Style from "./Coinbase_Products.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
 const Coinbase_Spot: React.FC = () => {
-  const { selectedProvider, setSelectedProvider } = useProviderContext();
-  console.log(selectedProvider);
+  const { selectedProduct, setSelectedProduct } = useSubscriptionContext();
+  console.log(selectedProduct);
+  //
+  const [spotProducts, setSpotProducts] = useState<Product_Type[]>([]);
   //
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
@@ -28,34 +30,37 @@ const Coinbase_Spot: React.FC = () => {
     }
   };
   //
-  // Load the API key and secret from the store when the component mounts
+  // Load Coinbase Spot Products
   useEffect(() => {
-    const loadKeys = async () => {
-      info("Loading Api Key...");
+    const loadProducts = async () => {
+      info("Load Coinbase Spot Products...");
       try {
         const store_coinbase_products = await load("coinbase_products.json");
-
-        // const savedApiKey = await store.get<string>("coinbase.api_key");
-
-        // const savedApiSecret = await store.get<string>("coinbase.api_secret");
+        const allProducts = (await store_coinbase_products.get("products")) as { SPOT?: Product_Type[] } || {};
+        const spotProducts = allProducts?.SPOT || [];
+        setSpotProducts(spotProducts);
 
       } catch (err) {
         handleError(err);
       }
     };
-    loadKeys();
+    loadProducts();
   }, []);
+  console.log(spotProducts); // Log the products to verify
   //
   return (
     <div className={Style.Page}>
       <div className={Style.List}>
         <div className={Style.List_Content}>
-          {/* <li>
-            <button onClick={() => setSelectedProvider("coinbase")}>Coinbase</button>
-          </li>
-          <li>
-            <button onClick={() => setSelectedProvider("binance")}>Binance</button>
-          </li> */}
+          {spotProducts.map((product, index) => (
+            <div
+              key={index}
+              className={Style.Product}
+              onClick={() => setSelectedProduct(product)} // Set selected product
+            >
+              {product.display_name}
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -64,3 +69,4 @@ const Coinbase_Spot: React.FC = () => {
 //
 export default Coinbase_Spot;
 /* ---------------------------------------------------------------------------------- */
+

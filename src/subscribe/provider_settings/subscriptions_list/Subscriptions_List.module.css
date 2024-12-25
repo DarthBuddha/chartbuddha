@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------- */
 
-.Component_Subscriptions_List {
+.Page {
   height: 100%;
   width: 100%;
-  text-align: center;
-  background-color: #1e1e1e;
-  /* box-shadow: inset 0 0 0 5px black; */
+  box-shadow: inset 0 0 0 5px black;
 }
+
+/* ---------------------------------------------------------------------------------- */
 
 .Title {
   height: 30px;
@@ -16,15 +16,64 @@
   font-size: 1.25rem;
   color: white;
   text-align: center;
-  /* box-shadow: inset 0 0 0 5px black; */
+  box-shadow: inset 0 0 0 5px black;
 }
 
-.List {
-  height: calc(100% - 30px);
+/* ---------------------------------------------------------------------------------- */
+
+.Subscription_List {
+  height: calc(100% - 90px);
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: #1e1e1e;
-  /* box-shadow: inset 0 0 0 5px black; */
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Subscription {
+  padding: 10px 20px 10px 20px;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Subscription:hover {
+  background-color: #444;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.Button_Container {
+  height: 30px;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Subscribe_Button,
+.UnSubscribe_Button {
+  width: 50%;
+  flex: 1;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Subscribe_Button {
+  background-color: #28a745;
+}
+
+.Subscribe_Button:hover {
+  background-color: #218838;
+}
+
+.UnSubscribe_Button {
+  background-color: #dc3545;
+}
+
+.UnSubscribe_Button:hover {
+  background-color: #c82333;
 }
 
 /* ---------------------------------------------------------------------------------- */

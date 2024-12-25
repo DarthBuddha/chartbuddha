@@ -1,36 +1,36 @@
 /* ---------------------------------------------------------------------------------- */
 
 .Page {
-  height: 100%;
+  height: calc(100vh - 110px);
   width: 100%;
   background-color: #1e1e1e;
   color: white;
-  /* box-shadow: inset 0 0 0 5px black; */
-}
-
-.Product_List {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  overflow-y: scroll;
   box-shadow: inset 0 0 0 5px black;
 }
 
 .List {
   height: 100%;
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   box-shadow: inset 0 0 0 5px black;
 }
 
 .List_Content {
-  height: calc(100% - 5px);
-  width: calc(100% - 8px);
+  height: 100%;
+  width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: #1e1e1e;
-  box-shadow: inset 5px 0 0 0 black;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Product {
+  padding: 10px 20px 10px 20px;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Product:hover {
+  background-color: #444;
 }
 
 /* ---------------------------------------------------------------------------------- */

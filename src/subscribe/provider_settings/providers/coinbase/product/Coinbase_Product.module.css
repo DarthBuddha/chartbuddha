@@ -3,17 +3,22 @@
 .Page {
   height: 100%;
   width: 100%;
+  min-width: 400px;
 }
+
+/* ---------------------------------------------------------------------------------- */
 
 .Selection_Menu {
   height: 30px;
   width: 100%;
+  min-width: 400px;
   display: flex;
   flex-direction: row;
 }
 
 .Selection_Title {
   width: 50%;
+  min-width: 200px;
   background-color: #292c34;
   font-size: 1rem;
   color: white;
@@ -22,109 +27,27 @@
 }
 
 /* ---------------------------------------------------------------------------------- */
-.Product_Menu_Bar {
-  height: 30px;
-  display: flex;
-  flex-direction: row;
-  background-color: #292c34;
-  justify-content: space-between;
-  font-size: 1.25rem;
-  color: white;
-  text-align: center;
-  box-shadow: inset 0 0 0 5px black;
-}
-
-.Product_Spot,
-.Product_Futures,
-.Product_Perps {
-  width: 33%;
-  color: white;
-  box-shadow: inset 0 0 0 5px black;
-}
-
-.Product_Spot a,
-.Product_Futures a,
-.Product_Perps a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 10px;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-.Product_Spot a:hover,
-.Product_Futures a:hover,
-.Product_Perps a:hover {
-  background-color: #3a3f47;
-  border-radius: 4px;
-}
-
-.Product_Spot a.active,
-.Product_Futures a.active,
-.Product_Perps a.active {
-  background-color: #3a3f47;
-  font-weight: bold;
-}
-
-/* ---------------------------------------------------------------------------------- */
-
-.Selected_Product {
-  height: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  background-color: #292c34;
-  box-shadow: inset 0 0 0 5px black;
-}
-
-/* ---------------------------------------------------------------------------------- */
-
 .Settings_Container {
-  height: calc(100% - 150px);
+  height: 100%;
+  width: 100%;
+  min-width: 400px;
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin: 20px;
+  flex-direction: row;
+  box-shadow: inset 0 0 0 5px black;
 }
 
-/* ---------------------------------------------------------------------------------- */
-
-.Button_Container {
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin: 20px;
+.Product_Container {
+  height: 100%;
+  width: 90%;
+  min-width: 200px;
+  box-shadow: inset 0 0 0 5px black;
 }
 
-.Subscribe_Button,
-.UnSubscribe_Button {
-  height: 40px;
-  width: 200px;
-  flex: 1;
-  /* padding: 10px 20px; */
-  /* border-radius: 4px; */
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.Subscribe_Button {
-  background-color: #28a745;
-}
-
-.Subscribe_Button:hover {
-  background-color: #218838;
-}
-
-.UnSubscribe_Button {
-  background-color: #dc3545;
-}
-
-.UnSubscribe_Button:hover {
-  background-color: #c82333;
+.Subscription_Container {
+  height: 100%;
+  width: 10%;
+  min-width: 200px;
+  box-shadow: inset 0 0 0 5px black;
 }
 
 /* ---------------------------------------------------------------------------------- */

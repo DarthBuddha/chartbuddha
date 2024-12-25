@@ -35,24 +35,7 @@ body {
   min-height: 100vh;
 }
 
-button {
-  border: 1px solid transparent;
-  font-size: 0.8em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+/* ---------------------------------------------------------------------------------- */
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -68,6 +51,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* ---------------------------------------------------------------------------------- */
 
 h1 {
   font-size: 3rem;
@@ -97,6 +82,8 @@ p {
   text-align: center;
 }
 
+/* ---------------------------------------------------------------------------------- */
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -109,6 +96,19 @@ li {
 
 li:last-child {
   border-bottom: none;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+:global(.gutter) {
+  /* background-color: #eee !important; */
+  background-repeat: no-repeat !important;
+  background-position: 50% !important;
+}
+
+:global(.gutter.gutter-horizontal) {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+  cursor: col-resize;
 }
 
 /* ---------------------------------------------------------------------------------- */

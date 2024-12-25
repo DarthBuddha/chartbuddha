@@ -58,7 +58,7 @@ const Coinbase_Product_List: React.FC = () => {
           Perps
         </button>
       </div>
-      <div className={Style.List_Container}>{renderActiveWidget()}</div>
+      <div>{renderActiveWidget()}</div>
     </div>
   );
 };

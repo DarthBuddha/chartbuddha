@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: row;
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   background-color: #292c34;
   box-shadow: inset 0 0 0 5px black;
 }
@@ -18,10 +18,21 @@
 .Coinbase_Product,
 .Coinbase_Product_List {
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   overflow: visible;
   background-color: #333;
   box-shadow: inset 0 0 0 5px black;
+}
+
+.Split .gutter {
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.Split .gutter.gutter-horizontal {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
+  cursor: col-resize;
 }
 
 /* ---------------------------------------------------------------------------------- */

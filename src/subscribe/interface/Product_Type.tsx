@@ -1,6 +1,6 @@
 //! # ChartBuddha
 //!
-//! Page: Page Name
+//! Page: Product Type
 //! Description: Short description of the page.
 //!
 //! -------------------------------------------------------------------------------- !//
@@ -9,12 +9,12 @@
 import { createContext } from "react";
 //
 /* ---------------------------------------------------------------------------------- */
-export interface ProviderContext_Type {
-  selectedProvider: string | null;
-  setSelectedProvider: React.Dispatch<React.SetStateAction<string | null>>;
+export interface Product_Type {
+  display_name: string;
+  // Add other properties as needed
 }
 /* ---------------------------------------------------------------------------------- */
-const ProviderContext = createContext<ProviderContext_Type | null>(null);
-
-export default ProviderContext;
+const Product_Context = createContext<Product_Type | null>(null);
+//
+export default Product_Context;
 /* ---------------------------------------------------------------------------------- */

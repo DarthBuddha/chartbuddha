@@ -21,20 +21,29 @@ pub mod coinbase;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        // Tauri Plugin Shell Setup
         .plugin(tauri_plugin_shell::init())
+        // Tauri Store Setup
         .plugin(tauri_plugin_store::Builder::new().build())
         .setup(|app| {
-            // Tauri Store for Date Providers. Holds list of API Keys.
+            // Tauri Store for Providers.
+            // Holds list of API Keys.
             let store_providers = app.store("providers.json")?;
             app.manage(store_providers);
-            // Tauri Store for Coinbase Provider. Holds list of products.
+            // Tauri Store for Subscriptions.
+            // Holds list of subscriptions.
+            let store_subscriptions = app.store("subscriptions.json")?;
+            app.manage(store_subscriptions);
+            // Tauri Store for Coinbase Provider.
+            // Holds list of products.
             let store_coinbase_products = app.store("coinbase_products.json")?;
             app.manage(store_coinbase_products);
             Ok(())
         })
         .plugin(tauri_plugin_log::Builder::new().build())
+        // Tauri Window State Setup
         .plugin(tauri_plugin_window_state::Builder::new().build())
-        // Tauri Logging Plugin
+        // Tauri Logging Setup
         .plugin(
             tauri_plugin_log::Builder::new()
                 // .level(log::LevelFilter::Info)

@@ -8,23 +8,28 @@
 // React
 import React, { useContext, useState, ReactNode } from "react";
 // Components
-import ProviderContext, { ProviderContext_Type } from "./ProviderContext";
+import Subscription_Context, { Subscription_Type } from "./Subscription_Type";
+import { Product_Type } from "./Product_Type";
 //
 /* ---------------------------------------------------------------------------------- */
 export const Interface_Subscribe: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
-
+  const [selectedProduct, setSelectedProduct] = useState<Product_Type | null>(null);
+  //
   return (
-    <ProviderContext.Provider value={{ selectedProvider, setSelectedProvider }}>
+    <Subscription_Context.Provider value={{
+      selectedProvider, setSelectedProvider,
+      selectedProduct, setSelectedProduct
+    }}>
       {children}
-    </ProviderContext.Provider>
+    </Subscription_Context.Provider>
   );
 };
 /* ---------------------------------------------------------------------------------- */
-export const useProviderContext = (): ProviderContext_Type => {
-  const context = useContext(ProviderContext);
+export const useSubscriptionContext = (): Subscription_Type => {
+  const context = useContext(Subscription_Context);
   if (!context) {
-    throw new Error("useProviderContext must be used within a Context_Subscribe_Interface");
+    throw new Error("useSubscriptionContext must be used within a Context_Subscribe_Interface");
   }
   return context;
 };

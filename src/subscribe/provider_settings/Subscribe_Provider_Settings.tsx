@@ -3,20 +3,20 @@
 //! Page: Providers_Settings
 //! Description: Displays settings for the selected provider.
 //!
-//! ##### subscribe/providers_settings/Providers_Settings.tsx
+//! -------------------------------------------------------------------------------- !//
 //
 // React
 import React from "react";
 // Components
 import Coinbase_Subs from "./providers/coinbase/Coinbase_Subs";
-import { useProviderContext } from "../interface/Interface_Subscribe";
+import { useSubscriptionContext } from "../interface/Interface_Subscribe";
 // CSS Modules
 import Style from "./Subscribe_Provider_Settings.module.css";
 //
 /* ---------------------------------------------------------------------< Component > */
 const Subscribe_Provider_Settings: React.FC = () => {
-  const { selectedProvider } = useProviderContext();
-
+  const { selectedProvider } = useSubscriptionContext();
+  //
   if (!selectedProvider) {
     return (
       <div className={Style.Page}>
@@ -29,7 +29,7 @@ const Subscribe_Provider_Settings: React.FC = () => {
       </div>
     );
   }
-
+  //
   switch (selectedProvider?.toLowerCase()) {
     case "coinbase":
       return (
@@ -61,6 +61,6 @@ const Subscribe_Provider_Settings: React.FC = () => {
       );
   }
 };
-
+//
 export default Subscribe_Provider_Settings;
 /* ----------------------------------------------------------------------< End-Code > */
