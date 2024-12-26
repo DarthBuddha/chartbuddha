@@ -1,9 +1,6 @@
-//! # ChartBuddha
+//! # Coinbase_Api
 //!
-//! Page: Coinbase_Api
-//! Description: Coinbase connect configuration.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React, { useState, useEffect } from "react";
@@ -21,7 +18,7 @@ const Coinbase_Api: React.FC = () => {
   const [apiSecret, setApiSecret] = useState("");
   // State for storing the results of Save/Delete actions
   const [actionResult, setActionResult] = useState<string | null>(null);
-
+  //
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
       error(err.message);
@@ -29,13 +26,12 @@ const Coinbase_Api: React.FC = () => {
       error("An unknown error occurred");
     }
   };
-
   // Load the API key and secret from the store when the component mounts
   useEffect(() => {
     const loadKeys = async () => {
       info("Loading Api Key & Secret...");
       try {
-        const store = await load("providers.json");
+        const store = await load(".providers.json");
         const savedApiKey = await store.get<string>("coinbase.api_key");
         const savedApiSecret = await store.get<string>("coinbase.api_secret");
         if (savedApiKey) setApiKey(savedApiKey);
@@ -46,17 +42,14 @@ const Coinbase_Api: React.FC = () => {
     };
     loadKeys();
   }, []);
-
   // Function to convert an EC private key from SEC1 PEM format to PKCS8 PEM format
   const convertApiSecret = (apiSecret: string): string => {
     // Replace escaped newlines (in case of JSON saved with "\\n") with actual newlines
     let formattedSecret = apiSecret.replace(/\\n/g, "\n");
-
     // Convert the headers and footers if needed
     formattedSecret = formattedSecret
       .replace("-----BEGIN EC PRIVATE KEY-----", "-----BEGIN PRIVATE KEY-----")
       .replace("-----END EC PRIVATE KEY-----", "-----END PRIVATE KEY-----");
-
     // Format the key into proper PEM with newlines
     formattedSecret = `-----BEGIN PRIVATE KEY-----\n${formattedSecret
       .replace("-----BEGIN PRIVATE KEY-----", "")
@@ -64,15 +57,13 @@ const Coinbase_Api: React.FC = () => {
       .replace(/\n/g, "") // Remove any existing line breaks to standardize
       .match(/.{1,64}/g) // PEM typically splits the content every 64 characters
       ?.join("\n")}\n-----END PRIVATE KEY-----\n`;
-
     return formattedSecret;
   };
-
   // Function to handle saving the keys (Save Keys button)
   const button_SaveKeys = async () => {
     try {
       info("Saving keys...");
-      const store = await load("providers.json");
+      const store = await load(".providers.json");
       const formattedApiSecret = convertApiSecret(apiSecret);
       await store.set("coinbase.configured", true);
       await store.set("coinbase.api_key", apiKey);
@@ -86,18 +77,16 @@ const Coinbase_Api: React.FC = () => {
       info("Failed to save API keys.");
     }
   };
-
   // Function to handle deleting the keys (Delete Keys button)
   const button_DeleteKeys = async () => {
     try {
       info("Deleting keys...");
-      const store = await load("providers.json");
+      const store = await load(".providers.json");
       await store.set("coinbase.configured", false);
       await store.set("coinbase.api_key", "");
       await store.set("coinbase.api_secret", "");
       await store.save();
       setActionResult("API keys deleted successfully.");
-
       // Clear input fields
       setApiKey("");
       setApiSecret("");
@@ -108,11 +97,10 @@ const Coinbase_Api: React.FC = () => {
       info("Failed to delete API keys.");
     }
   };
-
   // Function to handle testing the keys (Test Keys button)
   const button_TestKeys = async () => {
     try {
-      const response: string = await invoke("connect_coinbase_api");
+      const response: string = await invoke("coinbase_test_api");
       info("Response from coinbase_keys_test: " + response);
       setActionResult(response);
     } catch (err) {
@@ -121,7 +109,7 @@ const Coinbase_Api: React.FC = () => {
       info("Failed to test API keys.");
     }
   };
-
+  //
   return (
     <div className={Style.Page_Coinbase_Api}>
       <div className={Style.Top_Container}>
@@ -184,10 +172,10 @@ const Coinbase_Api: React.FC = () => {
         </div>
         <div className={Style.Button_Container}>
           <button onClick={button_SaveKeys} className={Style.Save_Button}>
-            Save Keys
+            Save Api Keys
           </button>
           <button onClick={button_DeleteKeys} className={Style.Delete_Button}>
-            Delete Keys
+            Delete Api Keys
           </button>
           <button onClick={button_TestKeys} className={Style.Test_Button}>
             Test API
@@ -197,7 +185,7 @@ const Coinbase_Api: React.FC = () => {
     </div>
   );
 };
-
+//
 export default Coinbase_Api;
 /* ---------------------------------------------------------------------------------- */
 

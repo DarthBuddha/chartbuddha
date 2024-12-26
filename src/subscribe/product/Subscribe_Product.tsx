@@ -1,19 +1,16 @@
-//! # ChartBuddha
+//! # Subscribe Product
 //!
-//! Page: Providers_Settings
-//! Description: Displays settings for the selected provider.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React from "react";
 // Components
-import Coinbase_Subs from "./providers/coinbase/Coinbase_Subs";
+import Subscribe_Product_Coinbase from "./coinbase/Subscribe_Product_Coinbase";
 import { useSubscriptionContext } from "../interface/Interface_Subscribe";
 // CSS Modules
-import Style from "./Subscribe_Provider_Settings.module.css";
+import Style from "./Subscribe_Product.module.css";
 //
-/* ---------------------------------------------------------------------< Component > */
+/* ---------------------------------------------------------------------------------- */
 const Subscribe_Provider_Settings: React.FC = () => {
   const { selectedProvider } = useSubscriptionContext();
   //
@@ -34,7 +31,7 @@ const Subscribe_Provider_Settings: React.FC = () => {
     case "coinbase":
       return (
         <div className={Style.Page}>
-          <Coinbase_Subs />
+          <Subscribe_Product_Coinbase />
         </div>
       );
     case "binance":
@@ -63,4 +60,4 @@ const Subscribe_Provider_Settings: React.FC = () => {
 };
 //
 export default Subscribe_Provider_Settings;
-/* ----------------------------------------------------------------------< End-Code > */
+/* ---------------------------------------------------------------------------------- */

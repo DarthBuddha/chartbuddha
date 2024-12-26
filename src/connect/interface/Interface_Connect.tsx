@@ -1,14 +1,10 @@
-//! # ChartBuddha
+//! # Interface Connect
 //!
-//! Page: Interface Connect
-//! Description: Context for the selected provider.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React, { useContext, useState, ReactNode } from "react";
 // Tauri
-// Components
 import ProviderContext, { ProviderContext_Type } from "./ProviderContext";
 // CSS Modules
 //

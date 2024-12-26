@@ -11,10 +11,9 @@
 /* ---------------------------------------------------------------------------------- */
 //
 // Folders
-pub mod apis;
+pub mod api;
 pub mod commands;
 // Files
 pub mod coinbase_authenticator;
-pub mod coinbase_setup;
 //
 /* ---------------------------------------------------------------------------------- */

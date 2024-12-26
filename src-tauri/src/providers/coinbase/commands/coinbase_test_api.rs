@@ -1,12 +1,10 @@
-//! # ChartBuddha library
-//!
-//! - Module: Connect Coinbase API
-//! - Description: Save the keys for the Coinbase API.
+//! # Coinbase Test API
+//! Save the keys for the Coinbase API.
 //!
 //! ### Functions
-//! - `connect_coinbase_api`
+//! - `connect_test_api`
 //!
-//! ##### coinbase/commands/connect_coinbase_api.rs
+/* ---------------------------------------------------------------------------------- */
 //
 // Rust
 use serde::Serialize;
@@ -14,15 +12,13 @@ use std::collections::HashMap;
 // Tauri
 use tauri::{AppHandle, Wry};
 use tauri_plugin_store::StoreExt;
-// Dependencies
-// use serde_json::json;
 // Local
-use crate::coinbase::apis::data_api::get_api_key_permissions::get_api_key_permissions;
-use crate::coinbase::apis::products::list_products::list_products;
-use crate::coinbase::coinbase_authenticator::authenticate_api_request;
-use crate::coinbase::coinbase_authenticator::Authenticator;
+use crate::providers::coinbase::api::data_api::get_api_key_permissions::get_api_key_permissions;
+use crate::providers::coinbase::api::products::list_products::list_products;
+use crate::providers::coinbase::coinbase_authenticator::authenticate_api_request;
+use crate::providers::coinbase::coinbase_authenticator::Authenticator;
 //
-/* ----------------------------------------------------------------------- < Struct > */
+/* ---------------------------------------------------------------------------------- */
 /// Struct to represent the Product Data
 #[derive(Serialize)]
 pub struct CoinbaseProductData {
@@ -32,12 +28,10 @@ pub struct CoinbaseProductData {
     base_currency_id: Option<String>,
     display_name: String,
 }
-/* --------------------------------------------------------------------- < Function > */
+/* ---------------------------------------------------------------------------------- */
 /// Function to test the connection to the Coinbase API
 #[tauri::command]
-pub async fn connect_coinbase_api(
-    app_handle: AppHandle<Wry>,
-) -> Result<String, String> {
+pub async fn coinbase_test_api(app_handle: AppHandle<Wry>) -> Result<String, String> {
     // Step 1: Create an instance of Authenticator
     log::info!("Step 1: Create an instance of Authenticator");
     let authenticator = Authenticator {
@@ -172,4 +166,4 @@ pub async fn connect_coinbase_api(
     // Return combined response
     Ok(combined_response)
 }
-/* --------------------------------------------------------------------- < End-Code > */
+/* ---------------------------------------------------------------------------------- */

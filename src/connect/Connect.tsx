@@ -1,13 +1,9 @@
-//! # ChartBuddha
+//! # Connect Page
 //!
-//! Page: Connect
-//! Description: Connect page.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React from "react";
-// Tauri
 // Components
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";

@@ -1,14 +1,11 @@
-//! # ChartBuddha
+//! # Connect Provider Settings
 //!
-//! Page: Providers_Settings
-//! Description: Displays settings for the selected provider.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React from "react";
 // Local
-import Coinbase_Api from "../providers/coinbase/Coinbase_Api";
+import Coinbase_Api from "./providers/coinbase/Coinbase_Api";
 import { useProviderContext } from "../interface/Interface_Connect";
 // CSS
 import Style from "./Connect_Provider_Settings.module.css";

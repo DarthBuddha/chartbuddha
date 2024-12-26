@@ -10,10 +10,10 @@ import React, { useState, useEffect } from "react";
 import { load } from "@tauri-apps/plugin-store";
 import { info, error } from "@tauri-apps/plugin-log";
 // Components
-import { useSubscriptionContext } from "../../../../../interface/Interface_Subscribe";
-import { Product_Type } from "../../../../../interface/Product_Type";
+import { useSubscriptionContext } from "../../../interface/Interface_Subscribe";
+import { Product_Type } from "../../../interface/Product_Type";
 // CSS Modules
-import Style from "./Coinbase_Products.module.css";
+import Style from "./Subscribe_Product_Coinbase_Product_List.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
 const Coinbase_Spot: React.FC = () => {
@@ -49,7 +49,7 @@ const Coinbase_Spot: React.FC = () => {
   console.log(spotProducts); // Log the products to verify
   //
   return (
-    <div className={Style.Page}>
+    <div className={Style.List_Container}>
       <div className={Style.List}>
         <div className={Style.List_Content}>
           {spotProducts.map((product, index) => (

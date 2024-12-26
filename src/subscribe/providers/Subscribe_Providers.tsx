@@ -1,16 +1,13 @@
-//! # ChartBuddha
+//! # Subscribe Providers
 //!
-//! Page: Providers_List
-//! Description: List of Providers.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React from "react";
 // Components
 import { useSubscriptionContext } from "../interface/Interface_Subscribe";
 // CSS Modules
-import Style from "./Subscribe_Provider_List.module.css";
+import Style from "./Subscribe_Providers.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
 const Subscribe_Provider_List: React.FC = () => {

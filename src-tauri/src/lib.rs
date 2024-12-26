@@ -26,11 +26,11 @@ pub fn run() {
         .setup(|app| {
             // Tauri Store for Providers.
             // Holds list of API Keys.
-            let store_providers = app.store("providers.json")?;
+            let store_providers = app.store(".providers.json")?;
             app.manage(store_providers);
             // Tauri Store for Subscriptions.
             // Holds list of subscriptions.
-            let store_subscriptions = app.store("subscriptions.json")?;
+            let store_subscriptions = app.store(".subscriptions.json")?;
             app.manage(store_subscriptions);
             // Tauri Store for Coinbase Provider.
             // Holds list of products.
@@ -60,7 +60,7 @@ pub fn run() {
         )
         // Tauri Command Register
         .invoke_handler(tauri::generate_handler![
-            providers::coinbase::commands::connect_coinbase_api::connect_coinbase_api,
+            providers::coinbase::commands::coinbase_test_api::coinbase_test_api,
             // coinbase::commands::coinbase_list_products::coinbase_list_products,
         ])
         .run(tauri::generate_context!())

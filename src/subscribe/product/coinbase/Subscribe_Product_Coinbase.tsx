@@ -1,21 +1,18 @@
-//! # ChartBuddha
+//! # Subscribe Product Coinbase
 //!
-//! Page: Subscribe_Coinbase
-//! Description: Coinbase Subscription Settings.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React from "react";
 import Split from "react-split";
 // Components
-import Coinbase_Product from "./product/Coinbase_Product";
-import Coinbase_Product_List from "./product_list/Coinbase_Product_List";
+import Subscribe_Product_Coinbase_Product from "./product/Subscribe_Product_Coinbase_Product";
+import Subscribe_Product_Coinbase_Product_List from "./product_list/Subscribe_Product_Coinbase_Product_List";
 // CSS Modules
-import Style from "./Coinbase_Subs.module.css";
+import Style from "./Subscribe_Product_Coinbase.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
-const Coinbase_Subs: React.FC = () => {
+const Subscribe_Product_Coinbase: React.FC = () => {
   //
   return (
     <div className={Style.Page}>
@@ -32,15 +29,15 @@ const Coinbase_Subs: React.FC = () => {
         cursor="col-resize"
       >
         <div className={Style.Coinbase_Product}>
-          <Coinbase_Product />
+          <Subscribe_Product_Coinbase_Product />
         </div>
         <div className={Style.Coinbase_Product_List}>
-          <Coinbase_Product_List />
+          <Subscribe_Product_Coinbase_Product_List />
         </div>
       </Split>
     </div>
   );
 };
 //
-export default Coinbase_Subs;
+export default Subscribe_Product_Coinbase;
 /* ---------------------------------------------------------------------------------- */

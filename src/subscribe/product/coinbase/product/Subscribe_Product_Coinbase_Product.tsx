@@ -1,9 +1,6 @@
-//! # ChartBuddha
+//! # Subscribe Product Coinbase Product
 //!
-//! Component: Subscriptions List
-//! Description: List of Subscriptions.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React from "react";
@@ -12,12 +9,12 @@ import React from "react";
 import { info, error } from "@tauri-apps/plugin-log";
 // import { invoke } from "@tauri-apps/api/core";
 // Components
-import { useSubscriptionContext } from "../../interface/Interface_Subscribe";
+import { useSubscriptionContext } from "../../../interface/Interface_Subscribe";
 // CSS Modules
-import Style from "./Subscriptions_List.module.css";
+import Style from "./Subscribe_Product_Coinbase_Product.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
-const Subscriptions_List: React.FC = () => {
+const Subscribe_Product_Coinbase_Product: React.FC = () => {
   const { selectedProvider, setSelectedProvider } = useSubscriptionContext();
   console.log(selectedProvider);
   //
@@ -72,12 +69,25 @@ const Subscriptions_List: React.FC = () => {
     }
   };
   //
+  //
   return (
     <div className={Style.Page}>
-      <div className={Style.Title}>Subscriptions</div>
-      <div className={Style.Subscription_List}>
-        Subscriptions
+      <div className={Style.Selection_Menu}>
+        <div className={Style.Selection_Title}>
+          Selected: {selectedProvider ? selectedProvider : "None"}
+        </div>
+        <div className={Style.Selection_Title}>
+          Selected: {selectedProduct ? selectedProduct.display_name : "None"}
+        </div>
       </div>
+
+
+
+
+      <div className={Style.Product_Container}>
+        Left
+      </div>
+
       <div className={Style.Button_Container}>
         <button onClick={Subscribe_Button} className={Style.Subscribe_Button}>
           Subscribe
@@ -90,5 +100,5 @@ const Subscriptions_List: React.FC = () => {
   );
 };
 //
-export default Subscriptions_List;
+export default Subscribe_Product_Coinbase_Product;
 /* ---------------------------------------------------------------------------------- */

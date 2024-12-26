@@ -50,14 +50,18 @@ pub struct ProductResponse {
 /* ---------------------------------------------------------------------------------- */
 /// Get information on a single product by product ID
 pub async fn get_product(
-    client: &Client,
+    jwt_token: String,
     product_id: &str,
     get_tradability_status: Option<bool>,
 ) -> Result<ProductResponse, Box<dyn std::error::Error>> {
     let url =
         format!("https://api.coinbase.com/api/v3/brokerage/products/{}", product_id);
+    let client = Client::new();
 
-    let mut request = client.get(&url).header("Content-Type", "application/json");
+    let mut request = client
+        .get(&url)
+        .header("Content-Type", "application/json")
+        .header("Authorization", format!("Bearer {}", jwt_token));
 
     if let Some(status) = get_tradability_status {
         request = request.query(&[("get_tradability_status", status.to_string())]);

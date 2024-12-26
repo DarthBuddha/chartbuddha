@@ -1,15 +1,9 @@
-//! # ChartBuddha
+//! # Provider Context
 //!
-//! Page: Provider Context
-//! Description: Context for the selected provider.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import { createContext } from "react";
-// Tauri
-// Components
-// CSS Modules
 //
 /* ---------------------------------------------------------------------------------- */
 export interface ProviderContext_Type {

@@ -1,13 +1,9 @@
-//! # ChartBuddha
+//! # Connect Provider List
 //!
-//! Page: Connect Providers List
-//! Description: List of Providers.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React from "react";
-// Tauri
 // Components
 import { useProviderContext } from "../interface/Interface_Connect";
 // CSS Modules
@@ -17,7 +13,7 @@ import Style from "./Connect_Provider_List.module.css";
 const Connect_Provider_List: React.FC = () => {
   const { selectedProvider, setSelectedProvider } = useProviderContext();
   console.log(selectedProvider);
-
+  //
   return (
     <div className={Style.Page}>
       <div className={Style.Title}>Providers</div>
@@ -33,6 +29,6 @@ const Connect_Provider_List: React.FC = () => {
     </div>
   );
 };
-
+//
 export default Connect_Provider_List;
 /* ---------------------------------------------------------------------------------- */

@@ -1,19 +1,19 @@
 //! # ChartBuddha
 //!
-//! Page: CoinbasePerpetual Products
-//! Description: List of perpetual products.
+//! Page: Coinbase Futures Products
+//! Description: Displays a list of futures products.
 //!
 //! -------------------------------------------------------------------------------- !//
 //
 // React
 import React from "react";
 // CSS Modules
-import Style from "./Coinbase_Products.module.css";
+import Style from "./Subscribe_Product_Coinbase_Product_List.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
-const Coinbase_Perpetual: React.FC = () => {
+const Coinbase_Futures: React.FC = () => {
   return (
-    <div className={Style.Page}>
+    <div className={Style.List_Container}>
       <div className={Style.Product_List}>
         <li>BTC-USD</li>
         <li>ETH-USD</li>
@@ -22,6 +22,6 @@ const Coinbase_Perpetual: React.FC = () => {
     </div>
   );
 };
-//
-export default Coinbase_Perpetual;
+
+export default Coinbase_Futures;
 /* ---------------------------------------------------------------------------------- */

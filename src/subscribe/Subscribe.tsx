@@ -1,32 +1,33 @@
-//! # ChartBuddha
+//! # Subscribe
 //!
-//! Page: Subscribe
-//! Description: Subscribe page.
-//!
-//! -------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------- */
 //
 // React
 import React from "react";
 // Components
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";
-import Subscribe_Provider_Settings from "./provider_settings/Subscribe_Provider_Settings";
-import Subscribe_Provider_List from "./provider_list/Subscribe_Provider_List";
+import Subscribe_Provider_Settings from "./product/Subscribe_Product";
+import Subscribe_Provider_List from "./providers/Subscribe_Providers";
+import Subscribe_Subscriptions_List from "./subscriptions/Subscribe_Subscriptions";
 // CSS Modules
 import Style_App from "../App.module.css";
 import Style from "./Subscribe.module.css";
 //
-/* --------------------------------------------------------------------------< Page > */
+/* ---------------------------------------------------------------------------------- */
 const Subscribe: React.FC = () => {
   return (
     <div className={Style_App.App_Window}>
       <MenuBar />
       <div className={Style.Page}>
-        <div className={Style.Provider_List}>
+        <div className={Style.Providers_List}>
           <Subscribe_Provider_List />
         </div>
-        <div className={Style.Provider_Settings}>
+        <div className={Style.Product_Panel}>
           <Subscribe_Provider_Settings />
+        </div>
+        <div className={Style.Subscriptions_List}>
+          <Subscribe_Subscriptions_List />
         </div>
       </div>
       <StatusBar />
@@ -35,4 +36,4 @@ const Subscribe: React.FC = () => {
 };
 //
 export default Subscribe;
-/* ----------------------------------------------------------------------< End-Code > */
+/* ---------------------------------------------------------------------------------- */
