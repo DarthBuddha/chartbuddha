@@ -5,7 +5,7 @@
 // React
 import React from "react";
 // Components
-import Subscribe_Provider_Coinbase from "./coinbase/Subscribe_Provider_Coinbase";
+import Coinbase_Subscribe from "./coinbase/Coinbase_Subscribe";
 import { useSubscriptionContext } from "../interface/Interface_Subscribe";
 // CSS Modules
 import Style from "./Subscribe_Provider.module.css";
@@ -31,7 +31,7 @@ const Subscribe_Provider: React.FC = () => {
     case "coinbase":
       return (
         <div className={Style.Page}>
-          <Subscribe_Provider_Coinbase />
+          <Coinbase_Subscribe />
         </div>
       );
     case "binance":

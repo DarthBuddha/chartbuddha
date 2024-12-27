@@ -5,26 +5,26 @@
 // React
 import React, { useState } from "react";
 // Components
-import Coinbase_Spot from "./spot/Subscribe_Provider_Coinbase_Product_List_Spot";
-import Coinbase_Futures from "./futures/Subscribe_Provider_Coinbase_Product_List_Futures";
-import Coinbase_Perpetual from "./perpetual/Subscribe_Provider_Coinbase_Product_List_Perpetual";
+import Coinbase_Product_List_Spot from "./spot/Coinbase_Product_List_Spot";
+import Coinbase_Product_List_Futures from "./futures/Coinbase_Product_List_Futures";
+import Coinbase_Product_List_Perpetual from "./perpetual/Coinbase_Product_List_Perpetual";
 // CSS Modules
-import Style from "./Subscribe_Provider_Coinbase_Product_List.module.css";
+import Style from "./Coinbase_Product_List.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
-const Subscribe_Product_Coinbase_Product_List: React.FC = () => {
+const Coinbase_Product_List: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("spot");
   //
   const renderActiveWidget = () => {
     switch (activeTab) {
       case "spot":
-        return <Coinbase_Spot />;
+        return <Coinbase_Product_List_Spot />;
       case "futures":
-        return <Coinbase_Futures />;
+        return <Coinbase_Product_List_Futures />;
       case "perpetual":
-        return <Coinbase_Perpetual />;
+        return <Coinbase_Product_List_Perpetual />;
       default:
-        return <Coinbase_Spot />;
+        return <Coinbase_Product_List_Spot />;
     }
   };
   //
@@ -58,5 +58,5 @@ const Subscribe_Product_Coinbase_Product_List: React.FC = () => {
   );
 };
 //
-export default Subscribe_Product_Coinbase_Product_List;
+export default Coinbase_Product_List;
 /* ---------------------------------------------------------------------------------- */

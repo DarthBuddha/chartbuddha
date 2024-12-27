@@ -5,13 +5,13 @@
 // React
 import React from "react";
 // Local
-import Coinbase_Api from "./providers/coinbase/Coinbase_Api";
+import Coinbase_Api from "./coinbase/Coinbase_Api";
 import { useProviderContext } from "../interface/Interface_Connect";
 // CSS
-import Style from "./Connect_Provider_Settings.module.css";
+import Style from "./Connect_Provider.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
-const Connect_Provider_Settings: React.FC = () => {
+const Connect_Provider: React.FC = () => {
   const { selectedProvider } = useProviderContext();
   //
   if (!selectedProvider) {
@@ -62,5 +62,5 @@ const Connect_Provider_Settings: React.FC = () => {
   }
 };
 //
-export default Connect_Provider_Settings;
+export default Connect_Provider;
 /* ---------------------------------------------------------------------------------- */

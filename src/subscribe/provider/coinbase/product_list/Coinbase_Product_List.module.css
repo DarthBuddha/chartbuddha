@@ -66,8 +66,20 @@
   box-shadow: inset 0 0 0 5px black;
 }
 
+.Product div {
+  margin-bottom: 5px;
+}
+
 .Product:hover {
   background-color: #444;
+}
+
+.Positive {
+  color: green;
+}
+
+.Negative {
+  color: red;
 }
 
 /* ---------------------------------------------------------------------------------- */

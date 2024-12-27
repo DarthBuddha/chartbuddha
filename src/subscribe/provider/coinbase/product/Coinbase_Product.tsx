@@ -1,4 +1,4 @@
-//! # Subscribe Product Coinbase Product
+//! # CoinbaseProduct
 //!
 /* ---------------------------------------------------------------------------------- */
 //
@@ -11,14 +11,12 @@ import { info, error } from "@tauri-apps/plugin-log";
 // Components
 import { useSubscriptionContext } from "../../../interface/Interface_Subscribe";
 // CSS Modules
-import Style from "./Subscribe_Product_Coinbase_Product.module.css";
+import Style from "./Coinbase_Product.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
-const Subscribe_Product_Coinbase_Product: React.FC = () => {
-  const { selectedProvider, setSelectedProvider } = useSubscriptionContext();
+const Coinbase_Product: React.FC = () => {
+  const { selectedProvider, setSelectedProvider, selectedProduct, setSelectedProduct } = useSubscriptionContext();
   console.log(selectedProvider);
-  //
-  const { selectedProduct, setSelectedProduct } = useSubscriptionContext();
   console.log(selectedProduct);
   //
   const handleError = (err: unknown) => {
@@ -100,5 +98,5 @@ const Subscribe_Product_Coinbase_Product: React.FC = () => {
   );
 };
 //
-export default Subscribe_Product_Coinbase_Product;
+export default Coinbase_Product;
 /* ---------------------------------------------------------------------------------- */

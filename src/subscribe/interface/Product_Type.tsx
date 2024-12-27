@@ -11,6 +11,11 @@ import { createContext } from "react";
 /* ---------------------------------------------------------------------------------- */
 export interface Product_Type {
   display_name: string;
+  price: string;
+  price_percentage_change_24h: string;
+  status: string;
+  volume_24h: string;
+  volume_percentage_change_24h: string;
   // Add other properties as needed
 }
 /* ---------------------------------------------------------------------------------- */

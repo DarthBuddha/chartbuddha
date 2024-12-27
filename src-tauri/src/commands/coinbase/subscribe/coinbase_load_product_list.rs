@@ -9,7 +9,7 @@
 // Rust
 use std::collections::HashMap;
 // Tauri
-use tauri::{AppHandle, Wry};
+use tauri::{AppHandle, Emitter, Wry};
 use tauri_plugin_store::StoreExt;
 // Local
 use crate::apis::coinbase::coinbase_authenticator::authenticate_api_request;
@@ -66,12 +66,24 @@ pub async fn coinbase_load_product_list(
 
     log::info!("Step 4: Save product list to store");
 
-    // Group products by product_type
+    // Group products by SPOT, FUTURE, and PERPS
     let mut grouped_products: HashMap<String, Vec<_>> = HashMap::new();
     for product in product_list.products.clone() {
         let product_type =
             product.product_type.clone().unwrap_or_else(|| "unknown".to_string());
-        grouped_products.entry(product_type).or_default().push(product);
+        let status = product.status.clone();
+
+        let group = if product_type == "SPOT" {
+            "SPOT"
+        } else if product_type == "FUTURE" && status == "STANDARD" {
+            "PERPS"
+        } else if product_type == "FUTURE" && status.is_empty() {
+            "FUTURE"
+        } else {
+            "unknown"
+        };
+
+        grouped_products.entry(group.to_string()).or_default().push(product);
     }
 
     // Serialize the grouped product list response into JSON
@@ -93,6 +105,10 @@ pub async fn coinbase_load_product_list(
     // Serialize product list response
     let product_list_response = serde_json::to_string_pretty(&grouped_products)
         .map_err(|e| format!("Failed to serialize product list: {}", e))?;
+
+    app_handle
+        .emit("coinbase_products_loaded", "Products loaded successfully")
+        .map_err(|e| format!("Failed to emit event: {}", e))?;
 
     // Return the response
     Ok(product_list_response)

@@ -23,7 +23,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
+    "src",
+    ".temp/Coinbase_Product_List_Spot_Suspense.tsx"
   ],
   "references": [
     {

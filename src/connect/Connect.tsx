@@ -7,7 +7,7 @@ import React from "react";
 // Components
 import MenuBar from "../MenuBar";
 import StatusBar from "../StatusBar";
-import Connect_Provider_Settings from "./provider_settings/Connect_Provider_Settings";
+import Connect_Provider from "./provider/Connect_Provider";
 import Connect_Provider_List from "./provider_list/Connect_Provider_List";
 // CSS Modules
 import Style_App from "../App.module.css";
@@ -22,8 +22,8 @@ const Connect: React.FC = () => {
         <div className={Style.Provider_List}>
           <Connect_Provider_List />
         </div>
-        <div className={Style.Provider_Settings}>
-          <Connect_Provider_Settings />
+        <div className={Style.Provider}>
+          <Connect_Provider />
         </div>
       </div>
       <StatusBar />

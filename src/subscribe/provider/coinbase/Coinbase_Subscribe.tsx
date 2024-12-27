@@ -6,19 +6,19 @@
 import React from "react";
 import Split from "react-split";
 // Components
-import Subscribe_Product_Coinbase_Product from "./product/Subscribe_Product_Coinbase_Product";
-import Subscribe_Product_Coinbase_Product_List from "./product_list/Subscribe_Provider_Coinbase_Product_List";
+import Coinbase_Product from "./product/Coinbase_Product";
+import Coinbase_Product_List from "./product_list/Coinbase_Product_List";
 // CSS Modules
-import Style from "./Subscribe_Provider_Coinbase.module.css";
+import Style from "./Coinbase_Subscribe.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
-const Subscribe_Product_Coinbase: React.FC = () => {
+const Coinbase_Subscribe: React.FC = () => {
   //
   return (
     <div className={Style.Page}>
       <Split className={Style.Split}
         sizes={[90, 10]}
-        minSize={[400, 200]}
+        minSize={[400, 400]}
         // maxSize={400}
         expandToMin={true}
         gutterSize={10}
@@ -29,15 +29,15 @@ const Subscribe_Product_Coinbase: React.FC = () => {
         cursor="col-resize"
       >
         <div className={Style.Coinbase_Product}>
-          <Subscribe_Product_Coinbase_Product />
+          <Coinbase_Product />
         </div>
         <div className={Style.Coinbase_Product_List}>
-          <Subscribe_Product_Coinbase_Product_List />
+          <Coinbase_Product_List />
         </div>
       </Split>
     </div>
   );
 };
 //
-export default Subscribe_Product_Coinbase;
+export default Coinbase_Subscribe;
 /* ---------------------------------------------------------------------------------- */
