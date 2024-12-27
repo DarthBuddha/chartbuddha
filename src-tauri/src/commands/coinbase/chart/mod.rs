@@ -1,19 +1,17 @@
-//! # Coinbase
-//! Coinbase api module.
+//! # Chart
+//! Coinbase Chart Commands.
 //!
 //! ### Folders
-//! - apis
-//! - commands
+//! - folderName
+//!
 //! ### Files
-//! - coinbase_authenticator
-//! - coinbase_setup
+//! - fileName
 //!
 /* ---------------------------------------------------------------------------------- */
 //
 // Folders
-pub mod api;
-pub mod commands;
+// pub mod module_name;
 // Files
-pub mod coinbase_authenticator;
+// pub mod module_name;
 //
 /* ---------------------------------------------------------------------------------- */

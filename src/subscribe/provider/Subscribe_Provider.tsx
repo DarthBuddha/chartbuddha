@@ -5,13 +5,13 @@
 // React
 import React from "react";
 // Components
-import Subscribe_Product_Coinbase from "./coinbase/Subscribe_Product_Coinbase";
+import Subscribe_Provider_Coinbase from "./coinbase/Subscribe_Provider_Coinbase";
 import { useSubscriptionContext } from "../interface/Interface_Subscribe";
 // CSS Modules
-import Style from "./Subscribe_Product.module.css";
+import Style from "./Subscribe_Provider.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
-const Subscribe_Provider_Settings: React.FC = () => {
+const Subscribe_Provider: React.FC = () => {
   const { selectedProvider } = useSubscriptionContext();
   //
   if (!selectedProvider) {
@@ -31,7 +31,7 @@ const Subscribe_Provider_Settings: React.FC = () => {
     case "coinbase":
       return (
         <div className={Style.Page}>
-          <Subscribe_Product_Coinbase />
+          <Subscribe_Provider_Coinbase />
         </div>
       );
     case "binance":
@@ -59,5 +59,5 @@ const Subscribe_Provider_Settings: React.FC = () => {
   }
 };
 //
-export default Subscribe_Provider_Settings;
+export default Subscribe_Provider;
 /* ---------------------------------------------------------------------------------- */

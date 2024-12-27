@@ -7,9 +7,9 @@ import React from "react";
 import Split from "react-split";
 // Components
 import Subscribe_Product_Coinbase_Product from "./product/Subscribe_Product_Coinbase_Product";
-import Subscribe_Product_Coinbase_Product_List from "./product_list/Subscribe_Product_Coinbase_Product_List";
+import Subscribe_Product_Coinbase_Product_List from "./product_list/Subscribe_Provider_Coinbase_Product_List";
 // CSS Modules
-import Style from "./Subscribe_Product_Coinbase.module.css";
+import Style from "./Subscribe_Provider_Coinbase.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
 const Subscribe_Product_Coinbase: React.FC = () => {

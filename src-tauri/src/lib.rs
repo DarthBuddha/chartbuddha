@@ -4,7 +4,7 @@
 //! - Description: ChartBuddha Library.
 //!
 //! ### Functions
-//! - `run`
+//! - run
 //!
 /* ---------------------------------------------------------------------------------- */
 //
@@ -12,7 +12,8 @@
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 // Local Modules
-pub mod providers;
+pub mod apis;
+pub mod commands;
 //
 /* ---------------------------------------------------------------------------------- */
 /// Main entry point for the ChartBuddha library.
@@ -60,8 +61,8 @@ pub fn run() {
         )
         // Tauri Command Register
         .invoke_handler(tauri::generate_handler![
-            providers::coinbase::commands::coinbase_test_api::coinbase_test_api,
-            // coinbase::commands::coinbase_list_products::coinbase_list_products,
+            commands::coinbase::connect::coinbase_test_api::coinbase_test_api,
+            commands::coinbase::subscribe::coinbase_load_product_list::coinbase_load_product_list,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -7,7 +7,7 @@ import React from "react";
 // Components
 import { useSubscriptionContext } from "../interface/Interface_Subscribe";
 // CSS Modules
-import Style from "./Subscribe_Subscriptions.module.css";
+import Style from "./Subscribe_Subscriptions_List.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
 const Subscribe_Subscriptions: React.FC = () => {

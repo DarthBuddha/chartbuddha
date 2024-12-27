@@ -5,11 +5,11 @@
 // React
 import React, { useState } from "react";
 // Components
-import Coinbase_Spot from "./Subscribe_Product_Coinbase_Product_List_Spot";
-import Coinbase_Futures from "./Subscribe_Product_Coinbase_Product_List_Futures";
-import Coinbase_Perpetual from "./Subscribe_Product_Coinbase_Product_List_Perpetual";
+import Coinbase_Spot from "./spot/Subscribe_Provider_Coinbase_Product_List_Spot";
+import Coinbase_Futures from "./futures/Subscribe_Provider_Coinbase_Product_List_Futures";
+import Coinbase_Perpetual from "./perpetual/Subscribe_Provider_Coinbase_Product_List_Perpetual";
 // CSS Modules
-import Style from "./Subscribe_Product_Coinbase_Product_List.module.css";
+import Style from "./Subscribe_Provider_Coinbase_Product_List.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
 const Subscribe_Product_Coinbase_Product_List: React.FC = () => {

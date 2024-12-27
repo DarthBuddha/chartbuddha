@@ -1,5 +1,5 @@
-//! # Providers
-//! Data Providers module.
+//! # APIs
+//! Data Providers APIs.
 //!
 //! ### Folders
 //! - binance

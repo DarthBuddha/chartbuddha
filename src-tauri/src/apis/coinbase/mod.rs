@@ -1,4 +1,4 @@
-//! # APIS
+//! # Coinbase
 //! Coinbase Api module,
 //!
 //! ### Folders
@@ -14,6 +14,9 @@
 //! - products
 //! - public
 //!
+//! ### Files
+//! - coinbase_authenticator
+//!
 /* ---------------------------------------------------------------------------------- */
 //
 // Folders
@@ -28,5 +31,8 @@ pub mod perpetuals;
 pub mod portfolios;
 pub mod products;
 pub mod public;
+//
+// Files
+pub mod coinbase_authenticator;
 //
 /* ---------------------------------------------------------------------------------- */
