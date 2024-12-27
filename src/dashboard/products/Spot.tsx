@@ -4,7 +4,7 @@
 //! ##### dashboard/left/widgets/Spot.tsx
 //
 // Dependencies
-import React, { useState } from "react";
+import React from "react";
 // Modules
 // CSS
 import Styles from "./Spot.module.css";

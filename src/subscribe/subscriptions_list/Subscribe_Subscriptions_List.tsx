@@ -11,10 +11,10 @@ import Style from "./Subscribe_Subscriptions_List.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
 const Subscribe_Subscriptions: React.FC = () => {
-  const { selectedProvider, setSelectedProvider } = useSubscriptionContext();
+  const { selectedProvider } = useSubscriptionContext();
   console.log(selectedProvider);
   //
-  const { selectedProduct, setSelectedProduct } = useSubscriptionContext();
+  const { selectedProduct } = useSubscriptionContext();
   console.log(selectedProduct);
   //
 

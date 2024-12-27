@@ -15,7 +15,7 @@ import Style from "./Coinbase_Product.module.css";
 //
 /* ---------------------------------------------------------------------------------- */
 const Coinbase_Product: React.FC = () => {
-  const { selectedProvider, setSelectedProvider, selectedProduct, setSelectedProduct } = useSubscriptionContext();
+  const { selectedProvider, selectedProduct } = useSubscriptionContext();
   console.log(selectedProvider);
   console.log(selectedProduct);
   //
