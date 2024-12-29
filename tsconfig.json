@@ -20,11 +20,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
+    "paths": {
+      "interface/*": [
+        "interface/*"
+      ]
+    }
   },
   "include": [
-    "src",
-    ".temp/Coinbase_Product_List_Spot_Suspense.tsx"
+    "src"
   ],
   "references": [
     {

@@ -1,7 +1,4 @@
-//! # ChartBuddha
-//!
-//! - Module: lib
-//! - Description: ChartBuddha Library.
+//! # lib
 //!
 //! ### Functions
 //! - run
@@ -16,7 +13,7 @@ pub mod apis;
 pub mod commands;
 //
 /* ---------------------------------------------------------------------------------- */
-/// Main entry point for the ChartBuddha library.
+/// Main entry point for the ChartBuddha library
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -25,16 +22,17 @@ pub fn run() {
         // Tauri Store Setup
         .plugin(tauri_plugin_store::Builder::new().build())
         .setup(|app| {
-            // Tauri Store for Providers.
-            // Holds list of API Keys.
+            // Tauri Store for Providers
+            // Store: Interface
+            let store_interface = app.store(".interface.json")?;
+            app.manage(store_interface);
+            // Store: Providers
             let store_providers = app.store(".providers.json")?;
             app.manage(store_providers);
-            // Tauri Store for Subscriptions.
-            // Holds list of subscriptions.
+            // Store: Subscriptions
             let store_subscriptions = app.store(".subscriptions.json")?;
             app.manage(store_subscriptions);
-            // Tauri Store for Coinbase Provider.
-            // Holds list of products.
+            // Store: Coinbase Products
             let store_coinbase_products = app.store("coinbase_products.json")?;
             app.manage(store_coinbase_products);
             Ok(())
@@ -62,7 +60,7 @@ pub fn run() {
         // Tauri Command Register
         .invoke_handler(tauri::generate_handler![
             commands::coinbase::connect::coinbase_test_api::coinbase_test_api,
-            commands::coinbase::subscribe::coinbase_load_product_list::coinbase_load_product_list,
+            commands::coinbase::subscribe::coinbase_list_products::coinbase_list_products,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

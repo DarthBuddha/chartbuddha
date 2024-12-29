@@ -1,73 +1,94 @@
 /* ---------------------------------------------------------------------------------- */
 
-.App_Window {
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 1.5;
+
+  color: rgba(255, 255, 255);
+  background-color: rgb(51, 51, 51);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.App {
   height: 100vh;
-  min-height: 800px;
   width: 100vw;
-  min-width: 1280px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #333;
   box-shadow: inset 0 0 0 5px black;
 }
 
 /* ---------------------------------------------------------------------------------- */
 
-.LeftSection,
-.CenterSection,
-.RightSection {
-  display: flex;
-  align-items: center;
+:global(.gutter) {
+  /* background-color: #eee !important; */
+  background-repeat: no-repeat !important;
+  background-position: 50% !important;
 }
 
-.CenterSection {
-  flex-grow: 1;
-  justify-content: center;
+:global(.gutter.gutter-horizontal) {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+  cursor: col-resize;
 }
 
 /* ---------------------------------------------------------------------------------- */
 
-.MenuBar {
-  justify-content: space-between;
-  background-color: #292c34;
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+p {
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px 0;
   border-bottom: 1px solid #333;
 }
 
-.StatusBar {
-  background-color: #222;
-  justify-content: center;
-  border-top: 1px solid #333;
-}
-
-.MenuBar,
-.StatusBar {
-  height: 20px;
-  display: flex;
-  align-items: center;
-  padding: 10px 10px;
-  color: white;
-}
-
-.MenuBar a,
-.StatusBar a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 10px;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-.MenuBar a:hover,
-.StatusBar a:hover {
-  background-color: #3a3f47;
-  border-radius: 4px;
-}
-
-.MenuBar a.active,
-.StatusBar a.active {
-  background-color: #3a3f47;
-  font-weight: bold;
+li:last-child {
+  border-bottom: none;
 }
 
 /* ---------------------------------------------------------------------------------- */

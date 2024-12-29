@@ -1,0 +1,46 @@
+/* ---------------------------------------------------------------------------------- */
+
+.Page {
+  height: 100%;
+  width: 100%;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.Title {
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: #292c34;
+  font-size: 1.25rem;
+  color: white;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.List_Subscriptions {
+  height: calc(100% - 90px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #1e1e1e;
+}
+
+.Subscription {
+  padding: 10px 20px 10px 20px;
+}
+
+.Subscription:hover {
+  background-color: #444;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.Page,
+.Title,
+.List_Subscriptions,
+.Subscription {
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+/* ---------------------------------------------------------------------------------- */

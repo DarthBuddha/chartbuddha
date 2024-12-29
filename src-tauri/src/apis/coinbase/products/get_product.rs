@@ -11,12 +11,12 @@
 //
 // Dependencies
 use reqwest::Client;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 //
 /* ---------------------------------------------------------------------------------- */
 /// Struct to represent the response from the product endpoint
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ProductResponse {
     pub product_id: String,
     pub price: String,
