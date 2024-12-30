@@ -3,16 +3,16 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React from "react";
+import React from 'react';
 // Components
-import Bar_MenuBar from "../common/bar_menu/Bar_MenuBar";
-import Bar_StatusBar from "../common/bar_status/Bar_StatusBar";
-import Subscribe_Provider from "./provider/Subscribe_Provider";
-import List_Providers from "../common/list_providers/List_Providers";
-import List_Subscriptions from "../common/list_subscriptions/List_Subscriptions";
+import Bar_MenuBar from 'common/bar_menu/Bar_MenuBar';
+import Bar_StatusBar from 'common/bar_status/Bar_StatusBar';
+import Subscribe_Provider from './provider/Subscribe_Provider';
+import List_Providers from 'common/list_providers/List_Providers';
+import List_Subscriptions from 'common/list_subscriptions/List_Subscriptions';
 // CSS Modules
-import Style_App from "../common/App_Window.module.css";
-import Style from "./Subscribe.module.css";
+import Style_App from 'common/App_Window.module.css';
+import Style from './Subscribe.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //

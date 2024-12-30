@@ -3,14 +3,14 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React from "react";
+import React from 'react';
 // Tauri
 // Components
-import Bar_MenuBar from "../common/bar_menu/Bar_MenuBar";
-import Bar_StatusBar from "../common/bar_status/Bar_StatusBar";
+import Bar_MenuBar from 'common/bar_menu/Bar_MenuBar';
+import Bar_StatusBar from 'common/bar_status/Bar_StatusBar';
 // CSS Modules
-import Style_App from "../common/App_Window.module.css";
-import Style from "./About.module.css";
+import Style_App from 'common/App_Window.module.css';
+import Style from './About.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -26,7 +26,7 @@ const About: React.FC = () => {
     </div>
   );
 };
-//
+
 export default About;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

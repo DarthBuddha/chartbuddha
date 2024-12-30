@@ -3,7 +3,7 @@
 //! ### Functions
 //! - run
 //!
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 // Tauri
 use tauri::Manager;
@@ -12,7 +12,7 @@ use tauri_plugin_store::StoreExt;
 pub mod apis;
 pub mod commands;
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 /// Main entry point for the ChartBuddha library
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -43,17 +43,16 @@ pub fn run() {
         // Tauri Logging Setup
         .plugin(
             tauri_plugin_log::Builder::new()
-                // .level(log::LevelFilter::Info)
-                .clear_targets()
-                .target(tauri_plugin_log::Target::new(
-                    tauri_plugin_log::TargetKind::Stdout,
-                ))
+                .level(log::LevelFilter::Debug)
+                // .clear_targets()
+                // .target(tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Stdout))
                 // TODO - Add stderr target
                 // .target(tauri_plugin_log::Target::new(
                 //     tauri_plugin_log::TargetKind::Stderr,
                 // ))
+                // .format(|out, message, record| out.finish(format_args!("[{}] {}", record.level(), message)))
                 .format(|out, message, record| {
-                    out.finish(format_args!("[{}] {}", record.level(), message))
+                    out.finish(format_args!("[{} {}] {}", record.level(), record.target(), message))
                 })
                 .build(),
         )
@@ -61,8 +60,9 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             commands::coinbase::connect::coinbase_test_api::coinbase_test_api,
             commands::coinbase::subscribe::coinbase_list_products::coinbase_list_products,
+            commands::coinbase::subscribe::coinbase_get_selected_product::coinbase_get_selected_product,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

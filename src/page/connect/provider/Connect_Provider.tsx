@@ -1,62 +1,48 @@
 //! # Connect Provider Settings
 //!
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React from "react";
+import React from 'react';
 // Local
-import Coinbase_Api from "./coinbase/Coinbase_Api";
-import { useInterface_Context } from "../../../interface/Interface_Context";
+import Coinbase_Api from './coinbase/Coinbase_Api';
+import { useInterfaceContext } from 'interface/Interface_Context';
 // CSS
-import Style from "./Connect_Provider.module.css";
+import Style from './Connect_Provider.module.css';
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 const Connect_Provider: React.FC = () => {
-  const { selectedProvider } = useInterface_Context();
+  const { selectedProvider } = useInterfaceContext();
 
   if (!selectedProvider) {
     return (
-      <div className={Style.Page_Provider_Settings}>
-        <div className={Style.Title}>
-          Select a Provider
-        </div>
-        <div className={Style.Body}>
-          Select a provider to configure api settings.
-        </div>
+      <div className={Style.Component}>
+        <div className={Style.Title}>Select a Provider</div>
+        <div className={Style.Main_Container}>Select a provider to configure api settings.</div>
       </div>
     );
   }
 
   switch (selectedProvider?.toLowerCase()) {
-    case "coinbase":
+    case 'coinbase':
       return (
-        <div className={Style.Page}>
-          <div className={Style.Title}>
-            Coinbase
-          </div>
+        <div className={Style.Component}>
+          <div className={Style.Title}>Coinbase</div>
           <Coinbase_Api />
         </div>
       );
-    case "binance":
+    case 'binance':
       return (
-        <div className={Style.Page}>
-          <div className={Style.Title}>
-            Binance
-          </div>
-          <div className={Style.Body}>
-            Binance API is not supported yet.
-          </div>
+        <div className={Style.Component}>
+          <div className={Style.Title}>Binance</div>
+          <div className={Style.Main_Container}>Binance API is not supported yet.</div>
         </div>
       );
     default:
       return (
-        <div className={Style.Page}>
-          <div className={Style.Title}>
-            Select a Provider
-          </div>
-          <div className={Style.Body}>
-            Select a provider to configure api settings.
-          </div>
+        <div className={Style.Component}>
+          <div className={Style.Title}>Select a Provider</div>
+          <div className={Style.Main_Container}>Select a provider to configure api settings.</div>
         </div>
       );
   }
@@ -64,4 +50,4 @@ const Connect_Provider: React.FC = () => {
 
 export default Connect_Provider;
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

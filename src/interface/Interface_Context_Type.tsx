@@ -1,13 +1,13 @@
 //! # Interface Context Type
 //!
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import { createContext } from "react";
+import { createContext } from 'react';
 // Components
-import { Product_Type } from "./type/Product_Type";
+import { Product_Type } from './type/Product_Type';
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 export interface Interface_Context_Type {
   selectedProvider: string | null;
@@ -16,10 +16,10 @@ export interface Interface_Context_Type {
   setSelectedProduct: React.Dispatch<React.SetStateAction<Product_Type | null>>;
 }
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 export const Interface_Context = createContext<Interface_Context_Type | null>(null);
 
 export default Interface_Context;
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

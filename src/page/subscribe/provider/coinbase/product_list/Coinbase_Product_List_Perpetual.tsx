@@ -1,41 +1,41 @@
 //! # Coinbase Product List Perpetual
 //!
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from 'react';
 // Tauri
-import { load } from "@tauri-apps/plugin-store";
-import { listen } from "@tauri-apps/api/event";
-import { info, error } from "@tauri-apps/plugin-log";
+import { load } from '@tauri-apps/plugin-store';
+import { listen } from '@tauri-apps/api/event';
+import { info, error } from '@tauri-apps/plugin-log';
 // Components
-import { Product_Type } from "interface/type/Product_Type";
-import { useInterface_Context } from "interface/Interface_Context";
+import { Product_Type } from 'interface/type/Product_Type';
+import { useInterfaceContext } from 'interface/Interface_Context';
 // CSS Modules
-import Style from "./Coinbase_Product_List.module.css";
+import Style from './Coinbase_Product_List_Perpetual.module.css';
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product_List_Perpetual: React.FC = () => {
-  const { setSelectedProduct } = useInterface_Context();
+  const { setSelectedProduct } = useInterfaceContext();
   const [perpetualProducts, setPerpetualProducts] = useState<Product_Type[]>([]);
-  //
+
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
       error(err.message);
     } else {
-      error("An unknown error occurred");
+      error('An unknown error occurred');
     }
   };
 
   // Function to load products from the Tauri store
   const loadPerpetualProducts = useCallback(async () => {
     try {
-      const store_coinbase_products = await load("coinbase_products.json");
-      const allProducts = (await store_coinbase_products.get("products")) as { PERPS?: Product_Type[] } || {};
+      const store_coinbase_products = await load('coinbase_products.json');
+      const allProducts = ((await store_coinbase_products.get('products')) as { PERPS?: Product_Type[] }) || {};
       const perpetualProducts = allProducts?.PERPS || [];
       setPerpetualProducts(perpetualProducts);
-      info("Perpetual products loaded successfully.");
+      info('Perpetual products loaded successfully.');
     } catch (err) {
       handleError(err);
     }
@@ -46,8 +46,8 @@ const Coinbase_Product_List_Perpetual: React.FC = () => {
     loadPerpetualProducts();
 
     // Listen for `coinbase_products_loaded` event
-    const unlisten = listen("coinbase_products_loaded", async (event) => {
-      info("Event received: " + event.payload);
+    const unlisten = listen('coinbase_products_loaded', async (event) => {
+      info('Event received: ' + event.payload);
       // Reload products when the event is received
       await loadPerpetualProducts();
     });
@@ -58,7 +58,6 @@ const Coinbase_Product_List_Perpetual: React.FC = () => {
     };
   }, [loadPerpetualProducts]);
 
-  //
   return (
     <div className={Style.List_Container}>
       <div className={Style.List}>
@@ -77,7 +76,7 @@ const Coinbase_Product_List_Perpetual: React.FC = () => {
     </div>
   );
 };
-//
+
 export default Coinbase_Product_List_Perpetual;
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

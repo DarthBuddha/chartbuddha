@@ -1,21 +1,23 @@
 //! # CoinbaseProduct
 //!
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React from "react";
+import React, { useEffect } from 'react';
 // Tauri
 // import { load } from "@tauri-apps/plugin-store";
-import { info, error } from "@tauri-apps/plugin-log";
+import { info, error } from '@tauri-apps/plugin-log';
+import { invoke } from '@tauri-apps/api/core';
 // import { invoke } from "@tauri-apps/api/core";
 // Components
-import { useInterface_Context } from "../../../../../interface/Interface_Context";
+import { useInterfaceContext } from 'interface/Interface_Context';
 // CSS Modules
-import Style from "./Coinbase_Product.module.css";
+import Style from './Coinbase_Product.module.css';
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
+//
 const Coinbase_Product: React.FC = () => {
-  const { selectedProvider, selectedProduct } = useInterface_Context();
+  const { selectedProvider, selectedProduct } = useInterfaceContext();
   console.log(selectedProvider);
   console.log(selectedProduct);
   //
@@ -23,14 +25,14 @@ const Coinbase_Product: React.FC = () => {
     if (err instanceof Error) {
       error(err.message);
     } else {
-      error("An unknown error occurred");
+      error('An unknown error occurred');
     }
   };
   //
   // Function to handle saving the keys (Save Keys button)
   const Subscribe_Button = async () => {
     try {
-      info("Saving keys...");
+      info('Saving keys...');
       // const store = await load("providers.json");
       // const formattedApiSecret = convertApiSecret(apiSecret);
       // await store.set("coinbase.configured", true);
@@ -42,13 +44,13 @@ const Coinbase_Product: React.FC = () => {
     } catch (err) {
       handleError(err);
       // setActionResult("Failed to save API keys.");
-      info("Failed to save API keys.");
+      info('Failed to save API keys.');
     }
   };
   // Function to handle deleting the keys (Delete Keys button)
   const UnSubscribe_Button = async () => {
     try {
-      info("Deleting keys...");
+      info('Deleting keys...');
       // const store = await load("providers.json");
       // await store.set("coinbase.configured", false);
       // await store.set("coinbase.api_key", "");
@@ -59,32 +61,34 @@ const Coinbase_Product: React.FC = () => {
       // Clear input fields
       // setApiKey("");
       // setApiSecret("");
-      info("API keys deleted successfully.");
+      info('API keys deleted successfully.');
     } catch (err) {
       handleError(err);
       // setActionResult("Failed to delete API keys.");
-      info("Failed to delete API keys.");
+      info('Failed to delete API keys.');
     }
   };
   //
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        await invoke('coinbase_list_products');
+      } catch (err) {
+        handleError(err);
+      }
+    };
+
+    loadProducts();
+  }, []);
   //
   return (
     <div className={Style.Page}>
       <div className={Style.Selection_Menu}>
-        <div className={Style.Selection_Title}>
-          Selected: {selectedProvider ? selectedProvider : "None"}
-        </div>
-        <div className={Style.Selection_Title}>
-          Selected: {selectedProduct ? selectedProduct.display_name : "None"}
-        </div>
+        <div className={Style.Selection_Title}>Selected: {selectedProvider ? selectedProvider : 'None'}</div>
+        <div className={Style.Selection_Title}>Selected: {selectedProduct ? selectedProduct.display_name : 'None'}</div>
       </div>
 
-
-
-
-      <div className={Style.Product_Container}>
-        Left
-      </div>
+      <div className={Style.Product_Container}>Left</div>
 
       <div className={Style.Button_Container}>
         <button onClick={Subscribe_Button} className={Style.Subscribe_Button}>
@@ -99,4 +103,4 @@ const Coinbase_Product: React.FC = () => {
 };
 //
 export default Coinbase_Product;
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

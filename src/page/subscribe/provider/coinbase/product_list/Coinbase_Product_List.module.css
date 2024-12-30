@@ -1,92 +1,39 @@
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
-.Page {
+.Component {
   height: 100%;
   width: 100%;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 .NavMenu {
   height: 30px;
   display: flex;
   flex-direction: row;
-  background-color: #292c34;
+  background-color: rgb(41, 44, 52);
   font-size: 1rem;
-  color: white;
+  color: rgb(255, 255, 255);
   text-align: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
 .NavButton {
   flex: 1;
   background: none;
-  color: white;
+  color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
   text-align: center;
-}
-
-.NavButton:hover {
-  background-color: #444;
-}
-
-.Active {
-  background-color: #1e88e5;
-}
-
-/* ---------------------------------------------------------------------------------- */
-
-.List_Container {
-  height: calc(100vh - 110px);
-  width: 100%;
-  background-color: #1e1e1e;
-  color: white;
-}
-
-.List {
-  height: 100%;
-  display: flex;
-}
-
-.List_Content {
-  height: 100%;
-  width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  background-color: #1e1e1e;
-}
-
-.Product {
-  padding: 10px 20px 10px 20px;
-}
-
-.Product div {
-  margin-bottom: 5px;
-}
-
-.Product:hover {
-  background-color: #444;
-}
-
-.Positive {
-  color: green;
-}
-
-.Negative {
-  color: red;
-}
-
-/* ---------------------------------------------------------------------------------- */
-
-.Page,
-.NavMenu,
-.NavButton,
-.Active,
-.List_Container,
-.List,
-.List_Content,
-.Product,
-.Positive,
-.Negative {
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-/* ---------------------------------------------------------------------------------- */
+.NavButton:hover {
+  background-color: rgb(68, 68, 68);
+}
+
+.Active {
+  background-color: rgb(30, 136, 229);
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */

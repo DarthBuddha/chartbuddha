@@ -1,41 +1,41 @@
 //! # Coinbase Product List Futures
 //!
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from 'react';
 // Tauri
-import { load } from "@tauri-apps/plugin-store";
-import { listen } from "@tauri-apps/api/event";
-import { info, error } from "@tauri-apps/plugin-log";
+import { load } from '@tauri-apps/plugin-store';
+import { listen } from '@tauri-apps/api/event';
+import { info, error } from '@tauri-apps/plugin-log';
 // Components
-import { Product_Type } from "interface/type/Product_Type";
-import { useInterface_Context } from "interface/Interface_Context";
+import { Product_Type } from 'interface/type/Product_Type';
+import { useInterfaceContext } from 'interface/Interface_Context';
 // CSS Modules
-import Style from "./Coinbase_Product_List.module.css";
+import Style from './Coinbase_Product_List_Futures.module.css';
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product_List_Futures: React.FC = () => {
-  const { setSelectedProduct } = useInterface_Context();
+  const { setSelectedProduct } = useInterfaceContext();
   const [futuresProducts, setFuturesProducts] = useState<Product_Type[]>([]);
-  //
+
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
       error(err.message);
     } else {
-      error("An unknown error occurred");
+      error('An unknown error occurred');
     }
   };
 
   // Function to load products from the Tauri store
   const loadFuturesProducts = useCallback(async () => {
     try {
-      const store_coinbase_products = await load("coinbase_products.json");
-      const allProducts = (await store_coinbase_products.get("products")) as { FUTURE?: Product_Type[] } || {};
+      const store_coinbase_products = await load('coinbase_products.json');
+      const allProducts = ((await store_coinbase_products.get('products')) as { FUTURE?: Product_Type[] }) || {};
       const futuresProducts = allProducts?.FUTURE || [];
       setFuturesProducts(futuresProducts);
-      info("Spot products loaded successfully.");
+      info('Spot products loaded successfully.');
     } catch (err) {
       handleError(err);
     }
@@ -46,8 +46,8 @@ const Coinbase_Product_List_Futures: React.FC = () => {
     loadFuturesProducts();
 
     // Listen for `coinbase_products_loaded` event
-    const unlisten = listen("coinbase_products_loaded", async (event) => {
-      info("Event received: " + event.payload);
+    const unlisten = listen('coinbase_products_loaded', async (event) => {
+      info('Event received: ' + event.payload);
       // Reload products when the event is received
       await loadFuturesProducts();
     });
@@ -58,7 +58,6 @@ const Coinbase_Product_List_Futures: React.FC = () => {
     };
   }, [loadFuturesProducts]);
 
-  //
   return (
     <div className={Style.List_Container}>
       <div className={Style.List}>
@@ -77,7 +76,7 @@ const Coinbase_Product_List_Futures: React.FC = () => {
     </div>
   );
 };
-//
+
 export default Coinbase_Product_List_Futures;
 //
-/* ---------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

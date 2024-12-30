@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   color: white;
-  background-color: #292c34;
+  background-color: rgb(41, 44, 52);
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
@@ -17,34 +17,18 @@
 }
 
 .Menu_Container a:hover {
-  background-color: #3a3f47;
+  background-color: rgb(89, 93, 101);
   border-radius: 4px;
 }
 
 .Menu_Container a.active {
-  background-color: #3a3f47;
+  background-color: rgb(156, 159, 163);
   font-weight: bold;
 }
 
-.Nav_Button_Home,
-.Nav_Button_Profile {
+.Nav_Button {
   height: 40px;
   width: 200px;
-  cursor: pointer;
-  color: rgb(255, 255, 255);
-  transition: background-color 0.3s;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-.Nav_Button_Menu {
-  height: 40px;
-  width: 150px;
   cursor: pointer;
   color: rgb(255, 255, 255);
   transition: background-color 0.3s;
