@@ -10,7 +10,7 @@
   flex-direction: row;
   height: 100%;
   /* width: 100%; */
-  background-color: #292c34;
+  background-color: rgb(41, 44, 52);
 }
 
 .Coinbase_Product,
@@ -18,7 +18,7 @@
   height: 100%;
   /* width: 100%; */
   overflow: visible;
-  background-color: #333;
+  background-color: rgb(51, 51, 51);
 }
 
 .Split .gutter {
@@ -28,7 +28,7 @@
 }
 
 .Split .gutter.gutter-horizontal {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
   cursor: col-resize;
 }
 

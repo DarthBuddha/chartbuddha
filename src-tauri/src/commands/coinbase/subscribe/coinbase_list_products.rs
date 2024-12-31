@@ -88,16 +88,16 @@ pub async fn coinbase_list_products(app_handle: AppHandle<Wry>) -> Result<String
   }
 
   // Serialize product list response
-  let product_list_response = serde_json
+  let list_product_response = serde_json
     ::to_string_pretty(&grouped_products)
     .map_err(|e| format!("Failed to serialize product list: {}", e))?;
 
   app_handle
-    .emit("coinbase_products_loaded", "Products loaded successfully")
+    .emit("coinbase_list_products_loaded", "Products loaded successfully")
     .map_err(|e| format!("Failed to emit event: {}", e))?;
 
   // Return the response
-  Ok(product_list_response)
+  Ok(list_product_response)
 }
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

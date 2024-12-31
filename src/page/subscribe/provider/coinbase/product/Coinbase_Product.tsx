@@ -3,12 +3,10 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // Tauri
-// import { load } from "@tauri-apps/plugin-store";
-import { info, error } from '@tauri-apps/plugin-log';
-import { invoke } from '@tauri-apps/api/core';
-// import { invoke } from "@tauri-apps/api/core";
+import { getStore, Store } from '@tauri-apps/plugin-store';
+import { debug, error, info } from '@tauri-apps/plugin-log';
 // Components
 import { useInterfaceContext } from 'interface/Interface_Context';
 // CSS Modules
@@ -17,70 +15,60 @@ import Style from './Coinbase_Product.module.css';
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product: React.FC = () => {
-  const { selectedProvider, selectedProduct } = useInterfaceContext();
-  console.log(selectedProvider);
-  console.log(selectedProduct);
-  //
+  const { selectedProvider, selectedProduct, unsubscribeFromProduct } = useInterfaceContext();
+  const [storeSubscriptions, setStoreSubscriptions] = useState<Store | null>(null);
+
+  useEffect(() => {
+    const initializeStore = async () => {
+      const store = await getStore('.subscriptions.json');
+      setStoreSubscriptions(store);
+    };
+    initializeStore();
+  }, []);
+
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
-      error(err.message);
+      error(`Error: ${err.message}\nStack: ${err.stack}`);
     } else {
-      error('An unknown error occurred');
+      error(`An unknown error occurred: ${JSON.stringify(err)}`);
     }
   };
-  //
-  // Function to handle saving the keys (Save Keys button)
+
   const Subscribe_Button = async () => {
     try {
-      info('Saving keys...');
-      // const store = await load("providers.json");
-      // const formattedApiSecret = convertApiSecret(apiSecret);
-      // await store.set("coinbase.configured", true);
-      // await store.set("coinbase.api_key", apiKey);
-      // await store.set("coinbase.api_secret", formattedApiSecret);
-      // await store.save();
-      // setActionResult("API keys saved successfully.");
-      // info("API keys saved successfully.");
+      info('Subscribing...');
+
+      if (selectedProduct) {
+        if (!storeSubscriptions) {
+          throw new Error('storeSubscriptions is null');
+        }
+        const existingSubscriptions = await storeSubscriptions.get('subscriptions');
+        const newSubscription = { id: 'coinbase', product_id: selectedProduct.product_id };
+        const updatedSubscriptions = Array.isArray(existingSubscriptions)
+          ? [...existingSubscriptions, newSubscription]
+          : [newSubscription];
+
+        await storeSubscriptions.set('subscriptions', updatedSubscriptions);
+        await storeSubscriptions.save();
+        debug('Saved selected product ID to the store');
+      }
+
+      info('Subscribed successfully');
     } catch (err) {
       handleError(err);
-      // setActionResult("Failed to save API keys.");
-      info('Failed to save API keys.');
     }
   };
-  // Function to handle deleting the keys (Delete Keys button)
+
   const UnSubscribe_Button = async () => {
     try {
-      info('Deleting keys...');
-      // const store = await load("providers.json");
-      // await store.set("coinbase.configured", false);
-      // await store.set("coinbase.api_key", "");
-      // await store.set("coinbase.api_secret", "");
-      // await store.save();
-      // setActionResult("API keys deleted successfully.");
-
-      // Clear input fields
-      // setApiKey("");
-      // setApiSecret("");
-      info('API keys deleted successfully.');
+      info('Unsubscribing...');
+      await unsubscribeFromProduct(selectedProduct);
+      info('Unsubscribed successfully');
     } catch (err) {
       handleError(err);
-      // setActionResult("Failed to delete API keys.");
-      info('Failed to delete API keys.');
     }
   };
-  //
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        await invoke('coinbase_list_products');
-      } catch (err) {
-        handleError(err);
-      }
-    };
 
-    loadProducts();
-  }, []);
-  //
   return (
     <div className={Style.Page}>
       <div className={Style.Selection_Menu}>
@@ -88,13 +76,37 @@ const Coinbase_Product: React.FC = () => {
         <div className={Style.Selection_Title}>Selected: {selectedProduct ? selectedProduct.display_name : 'None'}</div>
       </div>
 
-      <div className={Style.Product_Container}>Left</div>
+      <div className={Style.Product_Container}>
+        {selectedProduct && (
+          <div>
+            <div>Product ID: {selectedProduct.product_id}</div>
+            <div>Price: {selectedProduct.price}</div>
+            <div>Price Change (24h): {selectedProduct.price_percentage_change_24h}%</div>
+            <div>Volume (24h): {selectedProduct.volume_24h}</div>
+            <div>Volume Change (24h): {selectedProduct.volume_percentage_change_24h}%</div>
+            <div>Base Increment: {selectedProduct.base_increment}</div>
+            <div>Quote Increment: {selectedProduct.quote_increment}</div>
+            <div>Quote Min Size: {selectedProduct.quote_min_size}</div>
+            <div>Quote Max Size: {selectedProduct.quote_max_size}</div>
+            <div>Base Min Size: {selectedProduct.base_min_size}</div>
+            <div>Base Max Size: {selectedProduct.base_max_size}</div>
+            <div>Base Name: {selectedProduct.base_name}</div>
+            <div>Quote Name: {selectedProduct.quote_name}</div>
+            <div>Status: {selectedProduct.status}</div>
+            <div>Cancel Only: {selectedProduct.cancel_only ? 'Yes' : 'No'}</div>
+            <div>Limit Only: {selectedProduct.limit_only ? 'Yes' : 'No'}</div>
+            <div>Post Only: {selectedProduct.post_only ? 'Yes' : 'No'}</div>
+            <div>Trading Disabled: {selectedProduct.trading_disabled ? 'Yes' : 'No'}</div>
+            <div>Auction Mode: {selectedProduct.auction_mode ? 'Yes' : 'No'}</div>
+          </div>
+        )}
+      </div>
 
       <div className={Style.Button_Container}>
-        <button onClick={Subscribe_Button} className={Style.Subscribe_Button}>
+        <button className={Style.Subscribe_Button} onClick={Subscribe_Button}>
           Subscribe
         </button>
-        <button onClick={UnSubscribe_Button} className={Style.UnSubscribe_Button}>
+        <button className={Style.UnSubscribe_Button} onClick={UnSubscribe_Button}>
           UnSubscribe
         </button>
       </div>
@@ -103,4 +115,3 @@ const Coinbase_Product: React.FC = () => {
 };
 //
 export default Coinbase_Product;
-/* ------------------------------------------------------------------------------------------------------------------ */
