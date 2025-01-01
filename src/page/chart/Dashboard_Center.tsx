@@ -4,11 +4,11 @@
 //! ##### pages/connect/panel/right.tsx
 //
 // Dependencies
-import React from "react";
-import Split from "react-split";
+import React from 'react';
+import Split from 'react-split';
 // Modules
 // CSS
-import Styles from "./Dashboard_Center.module.css";
+import Styles from './Dashboard_Center.module.css';
 //
 /*--------------------------------------< Page >--------------------------------------*/
 const Dashboard_Center: React.FC = () => {
@@ -44,7 +44,7 @@ const Dashboard_Center: React.FC = () => {
           {/* <Volume /> */}
         </div>
       </Split>
-    </div >
+    </div>
   );
 };
 

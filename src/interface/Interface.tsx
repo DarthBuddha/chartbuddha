@@ -4,13 +4,13 @@
 //
 // React
 import React, { ReactNode } from 'react';
-// Components
-import { InterfaceProvider } from '../../.temp/Interface_Provider';
+// Interface
+import { Interface_Provider } from 'interface/Interface_Provider';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 export const Interface: React.FC<{ children: ReactNode }> = ({ children }) => {
-  return <InterfaceProvider>{children}</InterfaceProvider>;
+  return <Interface_Provider>{children}</Interface_Provider>;
 };
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

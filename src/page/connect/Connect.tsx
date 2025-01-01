@@ -4,11 +4,12 @@
 //
 // React
 import React from 'react';
-// Components
-import Bar_MenuBar from 'common/bar_menu/Bar_MenuBar';
-import Bar_StatusBar from 'common/bar_status/Bar_StatusBar';
+// Common
+import Menu_Bar from 'common/bar/menu/Menu_Bar';
+import Status_Bar from 'common/bar/status/Status_Bar';
+import List_Providers from 'common/list/providers/Providers_List';
+// Interface
 import Connect_Provider from './provider/Connect_Provider';
-import List_Providers from 'common/list_providers/List_Providers';
 // CSS Modules
 import Style from './Connect.module.css';
 //
@@ -17,7 +18,7 @@ import Style from './Connect.module.css';
 const Connect: React.FC = () => {
   return (
     <div className={Style.Page}>
-      <Bar_MenuBar />
+      <Menu_Bar />
       <div className={Style.Main_Container}>
         <div className={Style.List_Container}>
           <List_Providers />
@@ -26,7 +27,7 @@ const Connect: React.FC = () => {
           <Connect_Provider />
         </div>
       </div>
-      <Bar_StatusBar />
+      <Status_Bar />
     </div>
   );
 };

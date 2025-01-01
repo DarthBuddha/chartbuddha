@@ -4,10 +4,9 @@
 //
 // React
 import React from 'react';
-// Tauri
-// Components
-import Bar_MenuBar from '../../common/bar_menu/Bar_MenuBar';
-import Bar_StatusBar from '../../common/bar_status/Bar_StatusBar';
+// Common
+import Menu_Bar from 'common/bar/menu/Menu_Bar';
+import Status_Bar from 'common/bar/status/Status_Bar';
 // CSS Modules
 import Style from './Home.module.css';
 //
@@ -16,12 +15,12 @@ import Style from './Home.module.css';
 const Home: React.FC = () => {
   return (
     <div className={Style.Page}>
-      <Bar_MenuBar />
+      <Menu_Bar />
       <div className={Style.Main_Container}>
         <h1>Welcome to ChartBuddha</h1>
         <p>This is your home page.</p>
       </div>
-      <Bar_StatusBar />
+      <Status_Bar />
     </div>
   );
 };

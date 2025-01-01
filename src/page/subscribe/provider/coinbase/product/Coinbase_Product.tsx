@@ -7,15 +7,15 @@ import React, { useEffect, useState } from 'react';
 // Tauri
 import { getStore, Store } from '@tauri-apps/plugin-store';
 import { debug, error, info } from '@tauri-apps/plugin-log';
-// Components
-import { useInterfaceContext } from 'interface/Interface_Context';
+// Interface
+import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
 // CSS Modules
 import Style from './Coinbase_Product.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product: React.FC = () => {
-  const { selectedProvider, selectedProduct, unsubscribeFromProduct } = useInterfaceContext();
+  const { selectedProvider, selectedProduct } = useInterface_ProviderContext();
   const [storeSubscriptions, setStoreSubscriptions] = useState<Store | null>(null);
 
   useEffect(() => {
@@ -62,7 +62,21 @@ const Coinbase_Product: React.FC = () => {
   const UnSubscribe_Button = async () => {
     try {
       info('Unsubscribing...');
-      await unsubscribeFromProduct(selectedProduct);
+
+      if (selectedProduct) {
+        if (!storeSubscriptions) {
+          throw new Error('storeSubscriptions is null');
+        }
+        const existingSubscriptions = await storeSubscriptions.get('subscriptions');
+        const updatedSubscriptions = Array.isArray(existingSubscriptions)
+          ? existingSubscriptions.filter((sub) => sub.product_id !== selectedProduct.product_id)
+          : [];
+
+        await storeSubscriptions.set('subscriptions', updatedSubscriptions);
+        await storeSubscriptions.save();
+        debug('Removed selected product ID from the store');
+      }
+
       info('Unsubscribed successfully');
     } catch (err) {
       handleError(err);

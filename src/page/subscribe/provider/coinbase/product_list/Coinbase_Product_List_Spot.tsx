@@ -5,13 +5,13 @@
 // React
 import React, { useEffect, useState, useCallback } from 'react';
 // Tauri
-import { load } from '@tauri-apps/plugin-store';
+import { getStore } from '@tauri-apps/plugin-store';
 import { listen } from '@tauri-apps/api/event';
 import { debug, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
-// Components
+// Interface
 import { Product_Type } from 'interface/type/Product_Type';
-import { useInterfaceContext } from 'interface/Interface_Context';
+import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
 // CSS Modules
 import Style from './Coinbase_Product_List_Spot.module.css';
 //
@@ -19,7 +19,7 @@ import Style from './Coinbase_Product_List_Spot.module.css';
 //
 const store_interface = await (async () => {
   try {
-    return await load('.interface.json', { autoSave: false });
+    return await getStore('.interface.json');
   } catch (err) {
     error('Failed to load interface store: ' + String(err));
     throw err;
@@ -28,7 +28,7 @@ const store_interface = await (async () => {
 
 const Coinbase_Product_List_Spot: React.FC = () => {
   // Get selected product from the context
-  const { setSelectedProduct, fetchProductData } = useInterfaceContext();
+  const { setSelectedProduct, fetchProductData } = useInterface_ProviderContext();
 
   // State to store the products
   const [spotProducts, setSpotProducts] = useState<Product_Type[]>([]);
@@ -45,7 +45,10 @@ const Coinbase_Product_List_Spot: React.FC = () => {
   // Function to load products from the Tauri store
   const loadSpotProducts = useCallback(async () => {
     try {
-      const store_coinbase_products = await load('coinbase_products.json');
+      const store_coinbase_products = await getStore('coinbase_products.json');
+      if (!store_coinbase_products) {
+        throw new Error('Failed to load coinbase products store');
+      }
       const allProducts = ((await store_coinbase_products.get('products')) as { SPOT?: Product_Type[] }) || {};
       const spotProducts = allProducts?.SPOT || [];
       setSpotProducts(spotProducts);
@@ -98,12 +101,16 @@ const Coinbase_Product_List_Spot: React.FC = () => {
 
   const handleProductClick = async (product: Product_Type) => {
     setSelectedProduct(product);
-    await store_interface.set('selectedProduct', { value: product });
+    if (store_interface) {
+      await store_interface.set('selectedProduct', { value: product });
+    } else {
+      error('store_interface is null');
+    }
     debug('Selected product: ' + JSON.stringify(product)); // Add logging here
 
     // Invoke the command to get the selected product data
     try {
-      const productData = await invoke('coinbase_get_selected_product', { productId: product.product_id });
+      const productData = await invoke('coinbase_get_selected_product', { product_Id: product.product_id });
       debug('Fetched product data from API: ' + String(productData)); // Add logging here
 
       // Log the raw response for debugging
@@ -124,8 +131,16 @@ const Coinbase_Product_List_Spot: React.FC = () => {
       }
 
       // Save the fetched product data to the store
-      await store_interface.set('selectedProduct', { value: parsedProductData });
-      await store_interface.save();
+      if (store_interface) {
+        await store_interface.set('selectedProduct', { value: parsedProductData });
+      } else {
+        error('store_interface is null');
+      }
+      if (store_interface) {
+        await store_interface.save();
+      } else {
+        error('store_interface is null');
+      }
 
       // Fetch the latest product data
       fetchProductData();
@@ -146,12 +161,12 @@ const Coinbase_Product_List_Spot: React.FC = () => {
               </div>
               <div className={Style.Product_Price}>
                 <div>
-                  Price: <span className={getStyleForValue(product.price)}>{product.price}</span>
+                  Price: <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
                 </div>
                 <div>
                   Change (24h):{' '}
-                  <span className={getStyleForValue(product.price_percentage_change_24h)}>
-                    {formatPercentage(product.price_percentage_change_24h)}%
+                  <span className={getStyleForValue(product.price_percentage_change_24h ?? '')}>
+                    {formatPercentage(product.price_percentage_change_24h ?? '0')}%
                   </span>
                 </div>
               </div>
@@ -159,8 +174,8 @@ const Coinbase_Product_List_Spot: React.FC = () => {
                 <div>Volume (24h): {product.volume_24h}</div>
                 <div>
                   Change (24h):{' '}
-                  <span className={getStyleForValue(product.volume_percentage_change_24h)}>
-                    {formatPercentage(product.volume_percentage_change_24h)}%
+                  <span className={getStyleForValue(product.volume_percentage_change_24h ?? '')}>
+                    {formatPercentage(product.volume_percentage_change_24h ?? '0')}%
                   </span>
                 </div>
               </div>

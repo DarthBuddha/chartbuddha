@@ -4,12 +4,13 @@
 //
 // React
 import React from 'react';
+// Common
+import Menu_Bar from 'common/bar/menu/Menu_Bar';
+import Status_Bar from 'common/bar/status/Status_Bar';
+import List_Providers from 'common/list/providers/Providers_List';
+import List_Subscriptions from 'common/list/subscriptions/Subscriptions_List';
 // Components
-import Bar_MenuBar from 'common/bar_menu/Bar_MenuBar';
-import Bar_StatusBar from 'common/bar_status/Bar_StatusBar';
 import Subscribe_Provider from './provider/Subscribe_Provider';
-import List_Providers from 'common/list_providers/List_Providers';
-import List_Subscriptions from 'common/list_subscriptions/List_Subscriptions';
 // CSS Modules
 import Style_App from 'common/App_Window.module.css';
 import Style from './Subscribe.module.css';
@@ -19,7 +20,7 @@ import Style from './Subscribe.module.css';
 const Subscribe: React.FC = () => {
   return (
     <div className={Style_App.App_Window}>
-      <Bar_MenuBar />
+      <Menu_Bar />
       <div className={Style.Page}>
         <div className={Style.List_Providers}>
           <List_Providers />
@@ -31,7 +32,7 @@ const Subscribe: React.FC = () => {
           <List_Subscriptions />
         </div>
       </div>
-      <Bar_StatusBar />
+      <Status_Bar />
     </div>
   );
 };

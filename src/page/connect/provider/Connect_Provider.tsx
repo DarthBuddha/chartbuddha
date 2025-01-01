@@ -4,15 +4,16 @@
 //
 // React
 import React from 'react';
-// Local
+// Interface
+import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+// Components
 import Coinbase_Api from './coinbase/Coinbase_Api';
-import { useInterfaceContext } from 'interface/Interface_Context';
-// CSS
+// CSS Modules
 import Style from './Connect_Provider.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 const Connect_Provider: React.FC = () => {
-  const { selectedProvider } = useInterfaceContext();
+  const { selectedProvider } = useInterface_ProviderContext();
 
   if (!selectedProvider) {
     return (

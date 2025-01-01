@@ -1,27 +1,32 @@
-//! # List Providers
+//! # Providers List
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import React from 'react';
 // Tauri
-import { load } from '@tauri-apps/plugin-store';
+import { getStore, Store } from '@tauri-apps/plugin-store';
 import { info } from '@tauri-apps/plugin-log';
-// Components
-import { useInterfaceContext } from 'interface/Interface_Context';
+// Interface
+import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
 // CSS Modules
-import Style from './List_Providers.module.css';
+import Style from './Providers_List.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const store_interface = await load('.interface.json', { autoSave: false });
-
-const List_Providers: React.FC = () => {
-  const { setSelectedProvider } = useInterfaceContext();
-
+let store_interface: Store | null = null;
+getStore('.interface.json').then((store) => {
+  store_interface = store;
+});
+//
+const Providers_List: React.FC = () => {
+  const { setSelectedProvider } = useInterface_ProviderContext();
+  // Removed incorrect usage of provider
   const handleProviderClick = async (provider: string) => {
     setSelectedProvider(provider);
-    await store_interface.set('selectedProvider', { value: provider });
+    if (store_interface) {
+      await store_interface.set('selectedProvider', { value: provider });
+    }
     info(provider);
   };
 
@@ -41,6 +46,6 @@ const List_Providers: React.FC = () => {
   );
 };
 
-export default List_Providers;
+export default Providers_List;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

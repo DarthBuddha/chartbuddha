@@ -4,16 +4,17 @@
 //
 // React
 import React from 'react';
+// Interface
+import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
 // Components
 import Coinbase_Subscribe from './coinbase/Coinbase_Subscribe';
-import { useInterfaceContext } from 'interface/Interface_Context';
 // CSS Modules
 import Style from './Subscribe_Provider.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Subscribe_Provider: React.FC = () => {
-  const { selectedProvider } = useInterfaceContext();
+  const { selectedProvider } = useInterface_ProviderContext();
 
   if (!selectedProvider) {
     return (

@@ -1,20 +1,20 @@
-//! # Bar - StatusBar
+//! # Status Bar
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-// Components
-import { useInterfaceContext } from 'interface/Interface_Context';
+// Interface
+import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
 // CSS Module
-import Style from './Bar_StatusBar.module.css';
+import Style from './Status_Bar.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Bar_StatusBar: React.FC = () => {
-  const { selectedProvider, setSelectedProvider } = useInterfaceContext();
-  const { selectedProduct, setSelectedProduct } = useInterfaceContext();
+const Status_Bar: React.FC = () => {
+  const { selectedProvider, setSelectedProvider } = useInterface_ProviderContext();
+  const { selectedProduct, setSelectedProduct } = useInterface_ProviderContext();
   console.log(selectedProvider);
   console.log(selectedProduct);
 
@@ -38,6 +38,6 @@ const Bar_StatusBar: React.FC = () => {
   );
 };
 
-export default Bar_StatusBar;
+export default Status_Bar;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -15,7 +15,7 @@ import Style from './Coinbase_Subscribe.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const POLLING_INTERVAL = 5000; // 5 seconds
+const POLLING_INTERVAL = 3000; // 5 seconds
 //
 const Coinbase_Subscribe: React.FC = () => {
   //
@@ -29,9 +29,7 @@ const Coinbase_Subscribe: React.FC = () => {
     };
 
     const intervalId = setInterval(() => {
-      // if (document.hasFocus()) {
       loadProducts();
-      // }
     }, POLLING_INTERVAL);
 
     return () => {
@@ -45,7 +43,7 @@ const Coinbase_Subscribe: React.FC = () => {
         className={Style.Split}
         sizes={[90, 10]}
         minSize={[400, 160]}
-        maxSize={[Infinity, 650]} // Set max size only for the right panel
+        maxSize={[Infinity, 650]}
         expandToMin={true}
         gutterSize={10}
         gutterAlign="center"

@@ -5,8 +5,9 @@
 // React
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-// Components
+// Index
 import Index from './page/Index';
+// Interface
 import { Interface } from 'interface/Interface';
 // CSS Module
 import Style from './App.module.css';

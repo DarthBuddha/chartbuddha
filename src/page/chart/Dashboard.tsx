@@ -4,9 +4,10 @@
 // React
 import React from 'react';
 import Split from 'react-split';
+// Common
+import Menu_Bar from 'common/bar/menu/Menu_Bar';
+import Status_Bar from 'common/bar/status/Status_Bar';
 // Components
-import Bar_MenuBar from '../../common/bar_menu/Bar_MenuBar';
-import Bar_StatusBar from '../../common/bar_status/Bar_StatusBar';
 import Dashboard_Center from './Dashboard_Center';
 import Dashboard_Left from './Dashboard_Left';
 import Dashboard_Right from './Dashboard_Right';
@@ -18,7 +19,7 @@ import Styles from './Dashboard.module.css';
 const Dashboard: React.FC = () => {
   return (
     <div className={Styles.Dashboard_Page}>
-      <Bar_MenuBar />
+      <Menu_Bar />
       <Split
         className={Styles.Split}
         sizes={[10, 80, 10]}
@@ -41,7 +42,7 @@ const Dashboard: React.FC = () => {
           <Dashboard_Right />
         </div>
       </Split>
-      <Bar_StatusBar />
+      <Status_Bar />
     </div>
   );
 };

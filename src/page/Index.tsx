@@ -5,16 +5,18 @@
 // React
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// Pages
+// Home
 import Home from './home/Home';
-import Profile from './profile/Profile';
-import About from './about/About';
-//
+// Main Menu
 import Connect from './connect/Connect';
 import Subscribe from './subscribe/Subscribe';
 import Chart from './chart/Dashboard';
 import Analyze from './analyze/Analyze';
 import News from './news/News';
+// Profile
+import Profile from './profile/Profile';
+// About
+import About from './about/About';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
