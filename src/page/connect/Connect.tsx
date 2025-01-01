@@ -5,11 +5,11 @@
 // React
 import React from 'react';
 // Common
-import Menu_Bar from 'common/bar/menu/Menu_Bar';
-import Status_Bar from 'common/bar/status/Status_Bar';
+import Menu_Bar from 'common/bar/Menu_Bar';
+import Status_Bar from 'common/bar/Status_Bar';
 import List_Providers from 'common/list/providers/Providers_List';
 // Interface
-import Connect_Provider from './provider/Connect_Provider';
+import Connect_Provider from './Connect_Provider';
 // CSS Modules
 import Style from './Connect.module.css';
 //

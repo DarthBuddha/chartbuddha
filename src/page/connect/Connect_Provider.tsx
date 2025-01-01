@@ -5,9 +5,9 @@
 // React
 import React from 'react';
 // Interface
-import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+import { useInterface_ProviderContext } from 'interface/provider/Interface_ProviderContext';
 // Components
-import Coinbase_Api from './coinbase/Coinbase_Api';
+import Coinbase_Api from '../../data/coinbase/Coinbase_Api';
 // CSS Modules
 import Style from './Connect_Provider.module.css';
 //

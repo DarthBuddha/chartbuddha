@@ -1,16 +1,16 @@
-//! # Subscribe
+//! # Subscribe Page
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import React from 'react';
 // Common
-import Menu_Bar from 'common/bar/menu/Menu_Bar';
-import Status_Bar from 'common/bar/status/Status_Bar';
+import Menu_Bar from 'common/bar/Menu_Bar';
+import Status_Bar from 'common/bar/Status_Bar';
 import List_Providers from 'common/list/providers/Providers_List';
 import List_Subscriptions from 'common/list/subscriptions/Subscriptions_List';
 // Components
-import Subscribe_Provider from './provider/Subscribe_Provider';
+import Subscribe_Provider from './Subscribe_Panel';
 // CSS Modules
 import Style_App from 'common/App_Window.module.css';
 import Style from './Subscribe.module.css';

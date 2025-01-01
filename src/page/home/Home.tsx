@@ -5,8 +5,8 @@
 // React
 import React from 'react';
 // Common
-import Menu_Bar from 'common/bar/menu/Menu_Bar';
-import Status_Bar from 'common/bar/status/Status_Bar';
+import Menu_Bar from 'common/bar/Menu_Bar';
+import Status_Bar from 'common/bar/Status_Bar';
 // CSS Modules
 import Style from './Home.module.css';
 //

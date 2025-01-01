@@ -1,19 +1,19 @@
-//! # Subscribe Product
+//! # Subscribe Product Panel
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import React from 'react';
 // Interface
-import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+import { useInterface_ProviderContext } from 'interface/provider/Interface_ProviderContext';
 // Components
-import Coinbase_Subscribe from './coinbase/Coinbase_Subscribe';
+import Coinbase_Subscribe from 'data/coinbase/Coinbase_Subscribe';
 // CSS Modules
-import Style from './Subscribe_Provider.module.css';
+import Style from './Subscribe_Panel.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Subscribe_Provider: React.FC = () => {
+const Subscribe_Product_Panel: React.FC = () => {
   const { selectedProvider } = useInterface_ProviderContext();
 
   if (!selectedProvider) {
@@ -49,6 +49,6 @@ const Subscribe_Provider: React.FC = () => {
   }
 };
 
-export default Subscribe_Provider;
+export default Subscribe_Product_Panel;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

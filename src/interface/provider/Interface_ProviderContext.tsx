@@ -14,7 +14,7 @@ export const Interface_ProviderContext = createContext<Provider_Type | null>(nul
 export const useInterface_ProviderContext = () => {
   const context = useContext(Interface_ProviderContext);
   if (!context) {
-    throw new Error('useInterfaceContext must be used within an InterfaceProvider');
+    throw new Error('useInterface_ProviderContext must be used within an Interface_Provider');
   }
   return context;
 };

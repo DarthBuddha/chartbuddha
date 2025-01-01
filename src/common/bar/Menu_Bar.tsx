@@ -6,39 +6,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // Tauri
-import { getStore, Store } from '@tauri-apps/plugin-store';
+import { info } from '@tauri-apps/plugin-log';
 // Interface
-import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+import { useInterface_ProviderContext } from 'interface/provider/Interface_ProviderContext';
 // CSS Module
 import Style from './Menu_Bar.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-let store_interface: Store | null = null;
-getStore('.interface.json').then((store) => {
-  store_interface = store;
-});
-//
 const Menu_Bar: React.FC = () => {
-  const { selectedProvider, setSelectedProvider } = useInterface_ProviderContext();
-  const { selectedProduct, setSelectedProduct } = useInterface_ProviderContext();
-  console.log(selectedProvider);
-  console.log(selectedProduct);
-
-  React.useEffect(() => {
-    const initializeStore = async () => {
-      if (!store_interface) {
-        throw new Error('Failed to load store interface');
-      }
-
-      await store_interface.set('selectedProvider', { value: null });
-      await store_interface.set('selectedProduct', { value: null });
-      setSelectedProvider(null);
-      setSelectedProduct(null);
-    };
-
-    initializeStore();
-  }, [setSelectedProvider, setSelectedProduct]);
+  // const { selectedProvider, setSelectedProvider } = useInterface_ProviderContext();
+  // const { selectedProduct, setSelectedProduct } = useInterface_ProviderContext();
+  // info(selectedProvider);
+  // info(selectedProduct);
 
   return (
     <div className={Style.Menu_Container}>

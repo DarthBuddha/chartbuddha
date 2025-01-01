@@ -5,8 +5,8 @@
 import React from 'react';
 import Split from 'react-split';
 // Common
-import Menu_Bar from 'common/bar/menu/Menu_Bar';
-import Status_Bar from 'common/bar/status/Status_Bar';
+import Menu_Bar from 'common/bar/Menu_Bar';
+import Status_Bar from 'common/bar/Status_Bar';
 // Components
 import Dashboard_Center from './Dashboard_Center';
 import Dashboard_Left from './Dashboard_Left';

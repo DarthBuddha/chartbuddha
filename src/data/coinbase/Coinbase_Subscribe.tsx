@@ -3,40 +3,19 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React, { useEffect } from 'react';
+import React from 'react';
 import Split from 'react-split';
 // Tauri
-import { invoke } from '@tauri-apps/api/core';
+// import { invoke } from '@tauri-apps/api/core';
 // Components
-import Coinbase_Product from './product/Coinbase_Product';
-import Coinbase_Product_List from './product_list/Coinbase_Product_List';
+import Coinbase_Product from './Coinbase_Product';
+import Coinbase_Product_List from './Coinbase_Product_List';
 // CSS Modules
 import Style from './Coinbase_Subscribe.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const POLLING_INTERVAL = 3000; // 5 seconds
-//
 const Coinbase_Subscribe: React.FC = () => {
-  //
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        await invoke('coinbase_list_products');
-      } catch (err) {
-        console.error('Failed to load products:', err);
-      }
-    };
-
-    const intervalId = setInterval(() => {
-      loadProducts();
-    }, POLLING_INTERVAL);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
-  //
   return (
     <div className={Style.Page}>
       <Split

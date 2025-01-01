@@ -1,4 +1,4 @@
-//! # Interface Context Type
+//! # Interface Provider
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -10,7 +10,11 @@ import { invoke } from '@tauri-apps/api/core';
 import { info, error } from '@tauri-apps/plugin-log';
 // Interface
 import { Interface_ProviderContext } from './Interface_ProviderContext';
-import { Product_Type } from './type/Product_Type';
+import { Product_Type } from '../type/Product_Type';
+//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//
+const POLLING_INTERVAL = 3000; // 3 seconds
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -30,7 +34,7 @@ export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ ch
   const fetchProductData = useCallback(async () => {
     if (!selectedProduct) {
       setProductData(null); // Ensure productData is cleared if no product is selected
-      info('No selected product.');
+      // info('No selected product.');
       return;
     }
     try {
@@ -59,9 +63,8 @@ export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ ch
   useEffect(() => {
     fetchProductData();
 
-    const POLLING_INTERVAL = 3000; // 3 seconds
     const intervalId = setInterval(() => {
-      info('Polling for product data...');
+      // info('Polling for product data...');
       fetchProductData();
     }, POLLING_INTERVAL);
 

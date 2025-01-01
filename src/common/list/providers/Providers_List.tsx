@@ -8,7 +8,7 @@ import React from 'react';
 import { getStore, Store } from '@tauri-apps/plugin-store';
 import { info } from '@tauri-apps/plugin-log';
 // Interface
-import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+import { useInterface_ProviderContext } from 'interface/provider/Interface_ProviderContext';
 // CSS Modules
 import Style from './Providers_List.module.css';
 //
