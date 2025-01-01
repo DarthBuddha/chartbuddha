@@ -8,6 +8,8 @@
 // Tauri
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
+// Dependencies
+use serde_json::json;
 // Local Modules
 pub mod apis;
 pub mod commands;
@@ -26,7 +28,8 @@ pub fn run() {
       // Tauri Store for Providers
       // Store: Interface
       let store_interface = app.store(".interface.json")?;
-      app.manage(store_interface);
+      app.manage(store_interface.clone());
+      store_interface.set("target", json!({"selectedPage":"Home"}));
       // Store: Providers
       let store_providers = app.store(".providers.json")?;
       app.manage(store_providers);

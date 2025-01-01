@@ -6,21 +6,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // Interface
-import { useInterface_ProviderContext } from 'interface/provider/Interface_ProviderContext';
+import { useInterface_PageContext } from 'interface/Interface_PageContext';
 // CSS Module
-import Style from './Status_Bar.module.css';
+import Style from './Bar.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Status_Bar: React.FC = () => {
-  const { selectedProvider, setSelectedProvider } = useInterface_ProviderContext();
-  const { selectedProduct, setSelectedProduct } = useInterface_ProviderContext();
-  console.log(selectedProvider);
-  console.log(selectedProduct);
+  const { setSelectedPage } = useInterface_PageContext();
 
-  const handleHomeClick = () => {
-    setSelectedProvider(null);
-    setSelectedProduct(null);
+  const handleNavLinkClick = (page: string) => {
+    setSelectedPage(page);
   };
 
   return (
@@ -28,10 +24,12 @@ const Status_Bar: React.FC = () => {
       <div className={Style.LeftSection}></div>
       <div className={Style.CenterSection}></div>
       <div className={Style.RightSection}>
-        <NavLink to="/About" className={({ isActive }) => (isActive ? 'active' : '')}>
-          <div className={Style.Nav_Button} onClick={handleHomeClick}>
-            About
-          </div>
+        <NavLink
+          to="/about"
+          className={({ isActive }) => (isActive ? 'active' : '')}
+          onClick={() => handleNavLinkClick('About')}
+        >
+          <div className={Style.Nav_Button_About}>About</div>
         </NavLink>
       </div>
     </div>

@@ -7,15 +7,15 @@ import { createContext } from 'react';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export interface Window_Type {
+export interface Page_Type {
   selectedPage: string | null;
   setSelectedPage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Window_Context = createContext<Window_Type | null>(null);
+const Page_Context = createContext<Page_Type | null>(null);
 
-export default Window_Context;
+export default Page_Context;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

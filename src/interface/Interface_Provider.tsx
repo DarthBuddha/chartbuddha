@@ -10,7 +10,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { info, error } from '@tauri-apps/plugin-log';
 // Interface
 import { Interface_ProviderContext } from './Interface_ProviderContext';
-import { Product_Type } from '../type/Product_Type';
+import { Product_Type } from './type/Product_Type';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //

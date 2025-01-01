@@ -26,6 +26,7 @@
   font-weight: bold;
 }
 
+.Nav_Button_About,
 .Nav_Button_Home,
 .Nav_Button_Profile {
   height: 40px;
@@ -38,7 +39,6 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
