@@ -9,8 +9,8 @@ import { createRoot } from 'react-dom/client';
 import Index from './page/Index';
 // Interface
 // import { Interface } from 'interface/Interface';
-import { Interface_Provider } from 'interface/Interface_Provider';
-import { Interface_Page } from 'interface/Interface_Page';
+import { Interface_Broker } from 'interface/broker/Interface_Broker';
+import { Interface_Page } from 'interface/page/Interface_Page';
 // CSS Module
 import Style from './App.module.css';
 //
@@ -19,11 +19,11 @@ import Style from './App.module.css';
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <Interface_Page>
-      <Interface_Provider>
+      <Interface_Broker>
         <div className={Style.App}>
           <Index />
         </div>
-      </Interface_Provider>
+      </Interface_Broker>
     </Interface_Page>
   </StrictMode>,
 );

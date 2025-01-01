@@ -1,20 +1,20 @@
-//! # Interface Provider Context
-//!
+//! Context - Broker
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import { createContext, useContext } from 'react';
 // Interface
-import { Provider_Type } from 'interface/type/Provider_Type';
+import { Type_Broker } from './broker/Type_Broker';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export const Interface_ProviderContext = createContext<Provider_Type | null>(null);
+export const Context_Broker = createContext<Type_Broker | null>(null);
 
-export const useInterface_ProviderContext = () => {
-  const context = useContext(Interface_ProviderContext);
+export const useContext_Broker = () => {
+  const context = useContext(Context_Broker);
   if (!context) {
-    throw new Error('useInterface_ProviderContext must be used within an Interface_Provider');
+    throw new Error('useInterface_BrokerContext must be used within an Interface_Broker');
   }
   return context;
 };

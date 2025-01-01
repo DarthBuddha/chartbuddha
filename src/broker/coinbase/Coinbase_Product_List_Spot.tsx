@@ -10,8 +10,8 @@ import { listen } from '@tauri-apps/api/event';
 import { debug, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { Product_Type } from 'interface/type/Product_Type';
-import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+import { Type_BrokerProduct } from 'interface/broker/Type_BrokerProduct';
+import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
 import Style from './Coinbase_Product_List_Spot.module.css';
 //
@@ -28,10 +28,10 @@ const store_interface = await (async () => {
 
 const Coinbase_Product_List_Spot: React.FC = () => {
   // Get selected product from the context
-  const { setSelectedProduct, fetchProductData } = useInterface_ProviderContext();
+  const { setSelectedProduct, fetchProductData } = useContext_Broker();
 
   // State to store the products
-  const [spotProducts, setSpotProducts] = useState<Product_Type[]>([]);
+  const [spotProducts, setSpotProducts] = useState<Type_BrokerProduct[]>([]);
 
   // Function to handle errors
   const handleError = (err: unknown) => {
@@ -49,7 +49,7 @@ const Coinbase_Product_List_Spot: React.FC = () => {
       if (!store_coinbase_products) {
         throw new Error('Failed to load coinbase products store');
       }
-      const allProducts = ((await store_coinbase_products.get('products')) as { SPOT?: Product_Type[] }) || {};
+      const allProducts = ((await store_coinbase_products.get('products')) as { SPOT?: Type_BrokerProduct[] }) || {};
       const spotProducts = allProducts?.SPOT || [];
       setSpotProducts(spotProducts);
       // info('Spot products loaded successfully.');
@@ -99,7 +99,7 @@ const Coinbase_Product_List_Spot: React.FC = () => {
     return parseFloat(value).toFixed(2);
   };
 
-  const handleProductClick = async (product: Product_Type) => {
+  const handleProductClick = async (product: Type_BrokerProduct) => {
     setSelectedProduct(product);
     if (store_interface) {
       await store_interface.set('selectedProduct', { value: product });

@@ -5,17 +5,17 @@
 // React
 import React from 'react';
 // Interface
-import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+import { useContext_Broker } from 'interface/Context_Broker';
 // Components
-import Coinbase_Api from '../../data/coinbase/Coinbase_Api';
+import Coinbase_Api from '../../broker/coinbase/Coinbase_Api';
 // CSS Modules
 import Style from './Connect_Provider.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 const Connect_Provider: React.FC = () => {
-  const { selectedProvider } = useInterface_ProviderContext();
+  const { selectedBroker } = useContext_Broker();
 
-  if (!selectedProvider) {
+  if (!selectedBroker) {
     return (
       <div className={Style.Component}>
         <div className={Style.Title}>Select a Provider</div>
@@ -24,7 +24,7 @@ const Connect_Provider: React.FC = () => {
     );
   }
 
-  switch (selectedProvider?.toLowerCase()) {
+  switch (selectedBroker?.toLowerCase()) {
     case 'coinbase':
       return (
         <div className={Style.Component}>

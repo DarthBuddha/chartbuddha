@@ -7,7 +7,7 @@ import React from 'react';
 // Common
 import Menu_Bar from 'common/bar/Menu_Bar';
 import Status_Bar from 'common/bar/Status_Bar';
-import List_Providers from 'common/list/providers/Providers_List';
+import List_Providers from 'common/list/Providers_List';
 // Interface
 import Connect_Provider from './Connect_Provider';
 // CSS Modules

@@ -1,5 +1,5 @@
-//! # Interface Window
-//!
+//! Interface - Page
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
@@ -9,7 +9,7 @@ import { getStore, Store } from '@tauri-apps/plugin-store';
 // import { invoke } from '@tauri-apps/api/core';
 import { info } from '@tauri-apps/plugin-log';
 // Interface
-import { Interface_PageContext } from './Interface_PageContext';
+import { Context_Page } from '../Context_Page';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -21,6 +21,7 @@ getStore('.interface.json').then((store) => {
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 export const Interface_Page: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Selected Page
   const [selectedPage, setSelectedPage] = useState<string | null>(null);
   if (selectedPage) {
     info(selectedPage);
@@ -28,21 +29,24 @@ export const Interface_Page: React.FC<{ children: React.ReactNode }> = ({ childr
 
   useEffect(() => {
     if (store_interface && selectedPage !== null) {
-      store_interface.set('target', { selectedPage: selectedPage }).then(() => {
-        store_interface?.save();
+      store_interface.get('target').then((target) => {
+        const updatedTarget = { ...(typeof target === 'object' && target !== null ? target : {}), selectedPage };
+        store_interface?.set('target', updatedTarget).then(() => {
+          store_interface?.save();
+        });
       });
     }
   }, [selectedPage]);
 
   return (
-    <Interface_PageContext.Provider
+    <Context_Page.Provider
       value={{
         selectedPage,
         setSelectedPage,
       }}
     >
       {children}
-    </Interface_PageContext.Provider>
+    </Context_Page.Provider>
   );
 };
 //

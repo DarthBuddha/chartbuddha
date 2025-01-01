@@ -1,5 +1,5 @@
-//! # Window Type
-//!
+//! Type - Page
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
@@ -7,15 +7,15 @@ import { createContext } from 'react';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export interface Page_Type {
+export interface Type_Page {
   selectedPage: string | null;
   setSelectedPage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Page_Context = createContext<Page_Type | null>(null);
+const Context_Page = createContext<Type_Page | null>(null);
 
-export default Page_Context;
+export default Context_Page;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

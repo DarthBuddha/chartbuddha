@@ -1,18 +1,18 @@
-//! # Interface Windows Context
+//! # Interface Page Context
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import { createContext, useContext } from 'react';
 // Interface
-import { Page_Type } from 'interface/type/Page_Type';
+import { Type_Page } from './page/Page_Type';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export const Interface_PageContext = createContext<Page_Type | null>(null);
+export const Context_Page = createContext<Type_Page | null>(null);
 
-export const useInterface_PageContext = () => {
-  const context = useContext(Interface_PageContext);
+export const useContext_Page = () => {
+  const context = useContext(Context_Page);
   if (!context) {
     throw new Error('useInterface_PageContext must be used within an Interface_Page');
   }

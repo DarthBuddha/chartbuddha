@@ -6,17 +6,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // Interface
-import { useInterface_PageContext } from 'interface/Interface_PageContext';
+import { useContext_Page } from 'interface/Context_Page';
+import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Module
 import Style from './Bar.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Status_Bar: React.FC = () => {
-  const { setSelectedPage } = useInterface_PageContext();
+  const { setSelectedPage } = useContext_Page();
+  const { setSelectedBroker } = useContext_Broker();
 
   const handleNavLinkClick = (page: string) => {
     setSelectedPage(page);
+    setSelectedBroker(null);
   };
 
   return (

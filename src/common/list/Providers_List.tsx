@@ -5,36 +5,24 @@
 // React
 import React from 'react';
 // Tauri
-import { getStore, Store } from '@tauri-apps/plugin-store';
-import { info } from '@tauri-apps/plugin-log';
+// import { info } from '@tauri-apps/plugin-log';
 // Interface
-import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
-import Style from './Providers_List.module.css';
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
-//
-let store_interface: Store | null = null;
-getStore('.interface.json').then((store) => {
-  store_interface = store;
-});
+import Style from './List.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Providers_List: React.FC = () => {
-  const { setSelectedProvider } = useInterface_ProviderContext();
-  // Removed incorrect usage of provider
+  const { setSelectedBroker } = useContext_Broker();
+
   const handleProviderClick = async (provider: string) => {
-    setSelectedProvider(provider);
-    if (store_interface) {
-      await store_interface.set('selectedProvider', { value: provider });
-    }
-    info(provider);
+    setSelectedBroker(provider);
   };
 
   return (
-    <div className={Style.List_Providers}>
-      <div className={Style.Title}>Providers</div>
+    <div className={Style.List_Container}>
+      <div className={Style.Title_Bar}>Providers</div>
       <div className={Style.List}>
         <div className={Style.Row} onClick={() => handleProviderClick('coinbase')}>
           Coinbase

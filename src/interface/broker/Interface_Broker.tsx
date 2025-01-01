@@ -1,28 +1,42 @@
-//! # Interface Provider
-//!
+//! Interface - Broker
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import React, { useState, useEffect, useCallback } from 'react';
 // Tauri
-import { getStore } from '@tauri-apps/plugin-store';
+import { getStore, Store } from '@tauri-apps/plugin-store';
 import { invoke } from '@tauri-apps/api/core';
 import { info, error } from '@tauri-apps/plugin-log';
 // Interface
-import { Interface_ProviderContext } from './Interface_ProviderContext';
-import { Product_Type } from './type/Product_Type';
+import { Context_Broker } from '../Context_Broker';
+import { Type_BrokerProduct } from './Type_BrokerProduct';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
+//
+let store_interface: Store | null = null;
+getStore('.interface.json').then((store) => {
+  store_interface = store;
+});
 //
 const POLLING_INTERVAL = 3000; // 3 seconds
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
-  const [selectedProduct, setSelectedProduct] = useState<Product_Type | null>(null);
-  const [productData, setProductData] = useState<Product_Type | null>(null);
+export const Interface_Broker: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Selected Provider
+  const [selectedBroker, setSelectedBroker] = useState<string | null>(null);
+  if (selectedBroker) {
+    info(selectedBroker);
+  }
 
+  // Selected Product
+  const [selectedProduct, setSelectedProduct] = useState<Type_BrokerProduct | null>(null);
+
+  // Product Data
+  const [productData, setProductData] = useState<Type_BrokerProduct | null>(null);
+
+  // Error Handler
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
       error(err.message);
@@ -31,6 +45,7 @@ export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
   };
 
+  // Fetch Product Data
   const fetchProductData = useCallback(async () => {
     if (!selectedProduct) {
       setProductData(null); // Ensure productData is cleared if no product is selected
@@ -60,6 +75,21 @@ export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
   }, [selectedProduct]);
 
+  ///
+
+  useEffect(() => {
+    if (store_interface && selectedBroker !== null) {
+      store_interface.get('target').then((target) => {
+        const updatedTarget = { ...(typeof target === 'object' && target !== null ? target : {}), selectedBroker };
+        store_interface?.set('target', updatedTarget).then(() => {
+          store_interface?.save();
+        });
+      });
+    }
+  }, [selectedBroker]);
+
+  ///
+
   useEffect(() => {
     fetchProductData();
 
@@ -78,7 +108,7 @@ export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ ch
     fetchProductData();
   }, [selectedProduct, fetchProductData]);
 
-  const subscribeToProduct = async (product: Product_Type | null) => {
+  const subscribeToProduct = async (product: Type_BrokerProduct | null) => {
     if (!product) return;
     try {
       await invoke('coinbase_subscribe_to_product', { product_id: product.product_id });
@@ -88,7 +118,7 @@ export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
   };
 
-  const unsubscribeFromProduct = async (product: Product_Type | null) => {
+  const unsubscribeFromProduct = async (product: Type_BrokerProduct | null) => {
     if (!product) return;
     try {
       await invoke('coinbase_unsubscribe_from_product', { product_id: product.product_id });
@@ -99,10 +129,10 @@ export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ ch
   };
 
   return (
-    <Interface_ProviderContext.Provider
+    <Context_Broker.Provider
       value={{
-        selectedProvider,
-        setSelectedProvider,
+        selectedBroker,
+        setSelectedBroker,
         selectedProduct,
         setSelectedProduct,
         productData,
@@ -112,6 +142,6 @@ export const Interface_Provider: React.FC<{ children: React.ReactNode }> = ({ ch
       }}
     >
       {children}
-    </Interface_ProviderContext.Provider>
+    </Context_Broker.Provider>
   );
 };

@@ -7,8 +7,8 @@ import React from 'react';
 // Common
 import Menu_Bar from 'common/bar/Menu_Bar';
 import Status_Bar from 'common/bar/Status_Bar';
-import List_Providers from 'common/list/providers/Providers_List';
-import List_Subscriptions from 'common/list/subscriptions/Subscriptions_List';
+import List_Providers from 'common/list/Providers_List';
+import List_Subscriptions from 'common/list/Subscriptions_List';
 // Components
 import Subscribe_Provider from './Subscribe_Panel';
 // CSS Modules

@@ -9,9 +9,9 @@ import { getStore, Store } from '@tauri-apps/plugin-store';
 import { invoke } from '@tauri-apps/api/core';
 import { error } from '@tauri-apps/plugin-log';
 // Interface
-import { useInterface_ProviderContext } from 'interface/Interface_ProviderContext';
+import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
-import Style from './Subscriptions_List.module.css';
+import Style from './List.module.css';
 
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -24,7 +24,7 @@ getStore('.subscriptions.json').then((store) => {
 // const store = await getStore('.subscriptions.json');
 //
 const Subscriptions_List: React.FC = () => {
-  const { setSelectedProvider, setSelectedProduct } = useInterface_ProviderContext();
+  const { setSelectedBroker, setSelectedProduct } = useContext_Broker();
   const [subscriptions, setSubscriptions] = useState<{ id: string; product_id: string }[]>([]);
   const [storeSubscriptions, setStoreSubscriptions] = useState<{
     get: (key: string) => Promise<{ id: string; product_id: string }[] | undefined>;
@@ -48,7 +48,7 @@ const Subscriptions_List: React.FC = () => {
   }, [storeSubscriptions]);
 
   const handleSubscriptionClick = async (subscription: { id: string; product_id: string }) => {
-    setSelectedProvider(subscription.id);
+    setSelectedBroker(subscription.id);
     try {
       const productData = await invoke('coinbase_get_selected_product', { productId: subscription.product_id });
       const parsedProductData = JSON.parse(productData as string);
@@ -59,11 +59,11 @@ const Subscriptions_List: React.FC = () => {
   };
 
   return (
-    <div className={Style.Component}>
-      <div className={Style.Title}>Subscriptions</div>
-      <div className={Style.Subscriptions_List}>
+    <div className={Style.List_Container}>
+      <div className={Style.Title_Bar}>Subscriptions</div>
+      <div className={Style.List}>
         {subscriptions.map((sub) => (
-          <div key={sub.product_id} className={Style.Subscription} onClick={() => handleSubscriptionClick(sub)}>
+          <div key={sub.product_id} className={Style.Row} onClick={() => handleSubscriptionClick(sub)}>
             <div>{sub.id}</div>
             <div>{sub.product_id}</div>
           </div>

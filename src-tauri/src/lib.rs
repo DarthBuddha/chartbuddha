@@ -30,6 +30,7 @@ pub fn run() {
       let store_interface = app.store(".interface.json")?;
       app.manage(store_interface.clone());
       store_interface.set("target", json!({"selectedPage":"Home"}));
+      store_interface.set("target", json!({"selectedBroker":""}));
       // Store: Providers
       let store_providers = app.store(".providers.json")?;
       app.manage(store_providers);

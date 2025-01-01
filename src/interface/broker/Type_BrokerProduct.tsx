@@ -1,5 +1,5 @@
-//! # Product Type
-//!
+//! Type - BrokerProduct
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
@@ -7,7 +7,7 @@ import { createContext } from 'react';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export interface Product_Type {
+export interface Type_BrokerProduct {
   product_id: string;
   price?: string;
   price_percentage_change_24h?: string;
@@ -39,8 +39,8 @@ export interface Product_Type {
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Product_Context = createContext<Product_Type | null>(null);
+const Context_BrokerProduct = createContext<Type_BrokerProduct | null>(null);
 
-export default Product_Context;
+export default Context_BrokerProduct;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
