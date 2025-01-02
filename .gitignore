@@ -1,6 +1,6 @@
 # Developer
 .dev/*
-.env
+*.env
 
 # Logs
 logs
