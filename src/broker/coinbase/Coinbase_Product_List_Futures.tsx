@@ -9,7 +9,7 @@ import { load } from '@tauri-apps/plugin-store';
 import { listen } from '@tauri-apps/api/event';
 import { info, error } from '@tauri-apps/plugin-log';
 // Interface
-import { Type_BrokerProduct } from 'interface/broker/Type_BrokerProduct';
+import { Type_BrokerProductData } from 'interface/Type_BrokerProductData';
 import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
 import Style from './Coinbase_Product_List_Futures.module.css';
@@ -17,8 +17,8 @@ import Style from './Coinbase_Product_List_Futures.module.css';
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product_List_Futures: React.FC = () => {
-  const { setSelectedProduct } = useContext_Broker();
-  const [futuresProducts, setFuturesProducts] = useState<Type_BrokerProduct[]>([]);
+  const { setSelected_BrokerProductData } = useContext_Broker();
+  const [futuresProducts, setFuturesProducts] = useState<Type_BrokerProductData[]>([]);
 
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
@@ -32,7 +32,8 @@ const Coinbase_Product_List_Futures: React.FC = () => {
   const loadFuturesProducts = useCallback(async () => {
     try {
       const store_coinbase_products = await load('coinbase_products.json');
-      const allProducts = ((await store_coinbase_products.get('products')) as { FUTURE?: Type_BrokerProduct[] }) || {};
+      const allProducts =
+        ((await store_coinbase_products.get('products')) as { FUTURE?: Type_BrokerProductData[] }) || {};
       const futuresProducts = allProducts?.FUTURE || [];
       setFuturesProducts(futuresProducts);
       info('Spot products loaded successfully.');
@@ -66,7 +67,7 @@ const Coinbase_Product_List_Futures: React.FC = () => {
             <div
               key={index}
               className={Style.Product}
-              onClick={() => setSelectedProduct(product)} // Set selected product
+              onClick={() => setSelected_BrokerProductData(product)} // Set selected product
             >
               {product.display_name}
             </div>

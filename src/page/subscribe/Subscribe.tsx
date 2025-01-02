@@ -1,5 +1,5 @@
-//! # Subscribe Page
-//!
+//! # Subscribe
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
@@ -10,7 +10,7 @@ import Status_Bar from 'common/bar/Status_Bar';
 import List_Providers from 'common/list/Providers_List';
 import List_Subscriptions from 'common/list/Subscriptions_List';
 // Components
-import Subscribe_Provider from './Subscribe_Panel';
+import Subscribe_Page from './Subscribe_Page';
 // CSS Modules
 import Style_App from 'common/App_Window.module.css';
 import Style from './Subscribe.module.css';
@@ -26,7 +26,7 @@ const Subscribe: React.FC = () => {
           <List_Providers />
         </div>
         <div className={Style.Product_Panel}>
-          <Subscribe_Provider />
+          <Subscribe_Page />
         </div>
         <div className={Style.List_Subscriptions}>
           <List_Subscriptions />

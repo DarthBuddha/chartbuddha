@@ -1,4 +1,4 @@
-//! # Status Bar
+//! Status Bar
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -6,7 +6,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // Interface
-import { useContext_Page } from 'interface/Context_Page';
+import { useContext_Window } from 'interface/Context_Window';
 import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Module
 import Style from './Bar.module.css';
@@ -14,12 +14,14 @@ import Style from './Bar.module.css';
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Status_Bar: React.FC = () => {
-  const { setSelectedPage } = useContext_Page();
-  const { setSelectedBroker } = useContext_Broker();
+  const { setSelected_Page } = useContext_Window();
+  const { setSelected_Broker } = useContext_Broker();
+  const { setSelected_BrokerProduct } = useContext_Broker();
 
   const handleNavLinkClick = (page: string) => {
-    setSelectedPage(page);
-    setSelectedBroker(null);
+    setSelected_Page(page);
+    setSelected_Broker('Select Broker');
+    setSelected_BrokerProduct('Select Product');
   };
 
   return (

@@ -15,7 +15,7 @@ import Style from './Coinbase_Product.module.css';
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product: React.FC = () => {
-  const { selectedBroker, selectedProduct } = useContext_Broker();
+  const { selected_Broker, selected_BrokerProduct, selected_BrokerProductData } = useContext_Broker();
   const [storeSubscriptions, setStoreSubscriptions] = useState<Store | null>(null);
 
   useEffect(() => {
@@ -38,12 +38,15 @@ const Coinbase_Product: React.FC = () => {
     try {
       info('Subscribing...');
 
-      if (selectedProduct) {
+      if (selected_BrokerProduct) {
         if (!storeSubscriptions) {
           throw new Error('storeSubscriptions is null');
         }
         const existingSubscriptions = await storeSubscriptions.get('subscriptions');
-        const newSubscription = { id: 'coinbase', product_id: selectedProduct.product_id };
+        if (!selected_BrokerProductData) {
+          throw new Error('selected_BrokerProductData is null');
+        }
+        const newSubscription = { id: 'coinbase', product_id: selected_BrokerProductData.product_id };
         const updatedSubscriptions = Array.isArray(existingSubscriptions)
           ? [...existingSubscriptions, newSubscription]
           : [newSubscription];
@@ -63,13 +66,15 @@ const Coinbase_Product: React.FC = () => {
     try {
       info('Unsubscribing...');
 
-      if (selectedProduct) {
+      if (selected_BrokerProduct) {
         if (!storeSubscriptions) {
           throw new Error('storeSubscriptions is null');
         }
         const existingSubscriptions = await storeSubscriptions.get('subscriptions');
         const updatedSubscriptions = Array.isArray(existingSubscriptions)
-          ? existingSubscriptions.filter((sub) => sub.product_id !== selectedProduct.product_id)
+          ? existingSubscriptions.filter(
+              (sub) => selected_BrokerProductData && sub.product_id !== selected_BrokerProductData.product_id,
+            )
           : [];
 
         await storeSubscriptions.set('subscriptions', updatedSubscriptions);
@@ -86,32 +91,39 @@ const Coinbase_Product: React.FC = () => {
   return (
     <div className={Style.Page}>
       <div className={Style.Selection_Menu}>
-        <div className={Style.Selection_Title}>Selected: {selectedBroker ? selectedBroker : 'None'}</div>
-        <div className={Style.Selection_Title}>Selected: {selectedProduct ? selectedProduct.display_name : 'None'}</div>
+        <div className={Style.Selection_Title}>Selected: {selected_Broker ? selected_Broker : 'None'}</div>
+        <div className={Style.Selection_Title}>
+          Selected:{' '}
+          {selected_BrokerProduct && selected_BrokerProductData ? selected_BrokerProductData.display_name : 'None'}
+        </div>
       </div>
 
       <div className={Style.Product_Container}>
-        {selectedProduct && (
+        {selected_BrokerProduct && (
           <div>
-            <div>Product ID: {selectedProduct.product_id}</div>
-            <div>Price: {selectedProduct.price}</div>
-            <div>Price Change (24h): {selectedProduct.price_percentage_change_24h}%</div>
-            <div>Volume (24h): {selectedProduct.volume_24h}</div>
-            <div>Volume Change (24h): {selectedProduct.volume_percentage_change_24h}%</div>
-            <div>Base Increment: {selectedProduct.base_increment}</div>
-            <div>Quote Increment: {selectedProduct.quote_increment}</div>
-            <div>Quote Min Size: {selectedProduct.quote_min_size}</div>
-            <div>Quote Max Size: {selectedProduct.quote_max_size}</div>
-            <div>Base Min Size: {selectedProduct.base_min_size}</div>
-            <div>Base Max Size: {selectedProduct.base_max_size}</div>
-            <div>Base Name: {selectedProduct.base_name}</div>
-            <div>Quote Name: {selectedProduct.quote_name}</div>
-            <div>Status: {selectedProduct.status}</div>
-            <div>Cancel Only: {selectedProduct.cancel_only ? 'Yes' : 'No'}</div>
-            <div>Limit Only: {selectedProduct.limit_only ? 'Yes' : 'No'}</div>
-            <div>Post Only: {selectedProduct.post_only ? 'Yes' : 'No'}</div>
-            <div>Trading Disabled: {selectedProduct.trading_disabled ? 'Yes' : 'No'}</div>
-            <div>Auction Mode: {selectedProduct.auction_mode ? 'Yes' : 'No'}</div>
+            {selected_BrokerProductData && (
+              <>
+                <div>Product ID: {selected_BrokerProductData.product_id}</div>
+                <div>Price: {selected_BrokerProductData.price}</div>
+                <div>Price Change (24h): {selected_BrokerProductData.price_percentage_change_24h}%</div>
+                <div>Volume (24h): {selected_BrokerProductData.volume_24h}</div>
+                <div>Volume Change (24h): {selected_BrokerProductData.volume_percentage_change_24h}%</div>
+                <div>Base Increment: {selected_BrokerProductData.base_increment}</div>
+                <div>Quote Increment: {selected_BrokerProductData.quote_increment}</div>
+                <div>Quote Min Size: {selected_BrokerProductData.quote_min_size}</div>
+                <div>Quote Max Size: {selected_BrokerProductData.quote_max_size}</div>
+                <div>Base Min Size: {selected_BrokerProductData.base_min_size}</div>
+                <div>Base Max Size: {selected_BrokerProductData.base_max_size}</div>
+                <div>Base Name: {selected_BrokerProductData.base_name}</div>
+                <div>Quote Name: {selected_BrokerProductData.quote_name}</div>
+                <div>Status: {selected_BrokerProductData.status}</div>
+                <div>Cancel Only: {selected_BrokerProductData.cancel_only ? 'Yes' : 'No'}</div>
+                <div>Limit Only: {selected_BrokerProductData.limit_only ? 'Yes' : 'No'}</div>
+                <div>Post Only: {selected_BrokerProductData.post_only ? 'Yes' : 'No'}</div>
+                <div>Trading Disabled: {selected_BrokerProductData.trading_disabled ? 'Yes' : 'No'}</div>
+                <div>Auction Mode: {selected_BrokerProductData.auction_mode ? 'Yes' : 'No'}</div>
+              </>
+            )}
           </div>
         )}
       </div>

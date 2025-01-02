@@ -25,21 +25,37 @@ pub fn run() {
     // Tauri Store Setup
     .plugin(tauri_plugin_store::Builder::new().build())
     .setup(|app| {
-      // Tauri Store for Providers
-      // Store: Interface
-      let store_interface = app.store(".interface.json")?;
-      app.manage(store_interface.clone());
-      store_interface.set("target", json!({"selectedPage":"Home"}));
-      store_interface.set("target", json!({"selectedBroker":""}));
-      // Store: Providers
-      let store_providers = app.store(".providers.json")?;
-      app.manage(store_providers);
-      // Store: Subscriptions
+      // Tauri Store: Interface
+      let store_window = app.store(".window.json")?;
+      app.manage(store_window.clone());
+      store_window.set("window", json!({
+          "selected_Page": "Home"
+        }));
+
+      // Tauri Store: Broker
+      let store_broker = app.store(".broker.json")?;
+      app.manage(store_broker.clone());
+      store_broker.set(
+        "broker",
+        json!({
+        "selected_Broker": "Select Broker",
+        "selected_BrokerProduct": "Select Product"
+      })
+      );
+
+      // Tauri Store: keys
+      let store_keys = app.store(".keys.json")?;
+      app.manage(store_keys);
+
+      // Tauri Store: Subscriptions
       let store_subscriptions = app.store(".subscriptions.json")?;
       app.manage(store_subscriptions);
+
       // Store: Coinbase Products
-      let store_coinbase_products = app.store("coinbase_products.json")?;
-      app.manage(store_coinbase_products);
+      // let store_coinbase_products = app.store("coinbase_products.json")?;
+      // app.manage(store_coinbase_products);
+
+      //
       Ok(())
     })
     // .plugin(tauri_plugin_log::Builder::new().build())

@@ -14,23 +14,22 @@ import Style from './List.module.css';
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Providers_List: React.FC = () => {
-  const { setSelectedBroker } = useContext_Broker();
+  const { setSelected_Broker } = useContext_Broker() || {};
 
-  const handleProviderClick = async (provider: string) => {
-    setSelectedBroker(provider);
+  const handleNavLinkClick = (broker: string) => {
+    setSelected_Broker(broker);
   };
 
   return (
     <div className={Style.List_Container}>
       <div className={Style.Title_Bar}>Providers</div>
       <div className={Style.List}>
-        <div className={Style.Row} onClick={() => handleProviderClick('coinbase')}>
+        <div className={Style.Row} onClick={() => handleNavLinkClick('coinbase')}>
           Coinbase
         </div>
-        <div className={Style.Row} onClick={() => handleProviderClick('binance')}>
+        <div className={Style.Row} onClick={() => handleNavLinkClick('binance')}>
           Binance
         </div>
-        {/* <p>Selected: {selectedProvider}</p> */}
       </div>
     </div>
   );

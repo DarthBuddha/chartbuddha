@@ -10,7 +10,7 @@ import { listen } from '@tauri-apps/api/event';
 import { debug, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { Type_BrokerProduct } from 'interface/broker/Type_BrokerProduct';
+import { Type_BrokerProductData } from 'interface/Type_BrokerProductData';
 import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
 import Style from './Coinbase_Product_List_Spot.module.css';
@@ -19,19 +19,23 @@ import Style from './Coinbase_Product_List_Spot.module.css';
 //
 const store_interface = await (async () => {
   try {
-    return await getStore('.interface.json');
+    return await getStore('.broker.json');
   } catch (err) {
     error('Failed to load interface store: ' + String(err));
     throw err;
   }
 })();
-
+//
+const POLLING_INTERVAL = 1000; // 1 second
+//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//
 const Coinbase_Product_List_Spot: React.FC = () => {
   // Get selected product from the context
-  const { setSelectedProduct, fetchProductData } = useContext_Broker();
+  const { setSelected_BrokerProductData, fetch_BrokerProductData } = useContext_Broker();
 
   // State to store the products
-  const [spotProducts, setSpotProducts] = useState<Type_BrokerProduct[]>([]);
+  const [spotProducts, setSpotProducts] = useState<Type_BrokerProductData[]>([]);
 
   // Function to handle errors
   const handleError = (err: unknown) => {
@@ -49,7 +53,8 @@ const Coinbase_Product_List_Spot: React.FC = () => {
       if (!store_coinbase_products) {
         throw new Error('Failed to load coinbase products store');
       }
-      const allProducts = ((await store_coinbase_products.get('products')) as { SPOT?: Type_BrokerProduct[] }) || {};
+      const allProducts =
+        ((await store_coinbase_products.get('products')) as { SPOT?: Type_BrokerProductData[] }) || {};
       const spotProducts = allProducts?.SPOT || [];
       setSpotProducts(spotProducts);
       // info('Spot products loaded successfully.');
@@ -74,8 +79,6 @@ const Coinbase_Product_List_Spot: React.FC = () => {
     };
   }, [loadSpotProducts]);
 
-  const POLLING_INTERVAL = 1000; // 1 second
-
   useEffect(() => {
     // Initial load of products
     loadSpotProducts();
@@ -99,8 +102,8 @@ const Coinbase_Product_List_Spot: React.FC = () => {
     return parseFloat(value).toFixed(2);
   };
 
-  const handleProductClick = async (product: Type_BrokerProduct) => {
-    setSelectedProduct(product);
+  const handleProductClick = async (product: Type_BrokerProductData) => {
+    setSelected_BrokerProductData(product);
     if (store_interface) {
       await store_interface.set('selectedProduct', { value: product });
     } else {
@@ -143,7 +146,7 @@ const Coinbase_Product_List_Spot: React.FC = () => {
       }
 
       // Fetch the latest product data
-      fetchProductData();
+      fetch_BrokerProductData();
     } catch (err) {
       handleError(err);
     }

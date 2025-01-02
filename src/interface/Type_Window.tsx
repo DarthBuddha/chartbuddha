@@ -1,4 +1,4 @@
-//! Type - Page
+//! Type - Window
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -7,15 +7,15 @@ import { createContext } from 'react';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export interface Type_Page {
-  selectedPage: string | null;
-  setSelectedPage: React.Dispatch<React.SetStateAction<string | null>>;
+export interface Type_Window {
+  selected_Page: string | null;
+  setSelected_Page: React.Dispatch<React.SetStateAction<string | null>>;
 }
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Context_Page = createContext<Type_Page | null>(null);
+const Context_Window = createContext<Type_Window | null>(null);
 
-export default Context_Page;
+export default Context_Window;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

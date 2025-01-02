@@ -1,5 +1,5 @@
-//! # Subscribe Product Panel
-//!
+//! # Subscribe Page
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
@@ -9,14 +9,14 @@ import { useContext_Broker } from 'interface/Context_Broker';
 // Components
 import Coinbase_Subscribe from 'broker/coinbase/Coinbase_Subscribe';
 // CSS Modules
-import Style from './Subscribe_Panel.module.css';
+import Style from './Subscribe_Page.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Subscribe_Product_Panel: React.FC = () => {
-  const { selectedBroker } = useContext_Broker();
+const Subscribe_Page: React.FC = () => {
+  const { selected_Broker } = useContext_Broker();
 
-  if (!selectedBroker) {
+  if (!selected_Broker) {
     return (
       <div className={Style.Page}>
         <div className={Style.Title}>Select a Provider</div>
@@ -25,7 +25,7 @@ const Subscribe_Product_Panel: React.FC = () => {
     );
   }
 
-  switch (selectedBroker?.toLowerCase()) {
+  switch (selected_Broker?.toLowerCase()) {
     case 'coinbase':
       return (
         <div className={Style.Page}>
@@ -49,6 +49,6 @@ const Subscribe_Product_Panel: React.FC = () => {
   }
 };
 
-export default Subscribe_Product_Panel;
+export default Subscribe_Page;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

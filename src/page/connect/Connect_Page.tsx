@@ -9,13 +9,13 @@ import { useContext_Broker } from 'interface/Context_Broker';
 // Components
 import Coinbase_Api from '../../broker/coinbase/Coinbase_Api';
 // CSS Modules
-import Style from './Connect_Provider.module.css';
+import Style from './Connect_Page.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
-const Connect_Provider: React.FC = () => {
-  const { selectedBroker } = useContext_Broker();
+const Connect_Page: React.FC = () => {
+  const { selected_Broker } = useContext_Broker();
 
-  if (!selectedBroker) {
+  if (!selected_Broker) {
     return (
       <div className={Style.Component}>
         <div className={Style.Title}>Select a Provider</div>
@@ -24,7 +24,7 @@ const Connect_Provider: React.FC = () => {
     );
   }
 
-  switch (selectedBroker?.toLowerCase()) {
+  switch (selected_Broker?.toLowerCase()) {
     case 'coinbase':
       return (
         <div className={Style.Component}>
@@ -49,6 +49,6 @@ const Connect_Provider: React.FC = () => {
   }
 };
 
-export default Connect_Provider;
+export default Connect_Page;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
