@@ -4,17 +4,25 @@
 //
 // React
 import React, { useState } from 'react';
+// Interface
+import { useContext_Broker } from 'interface/Context_Broker';
 // Components
 import Coinbase_ProductList_Spot from './Coinbase_ProductList_Spot';
 import Coinbase_ProductList_Futures from './Coinbase_ProductList_Futures';
-import Coinbase_ProductList_Perpetual from './Coinbase_ProductList_Perpetual';
+import Coinbase_ProductList_Perps from './Coinbase_ProductList_Perps';
 // CSS Modules
-import Style from './Coinbase_Product_List.module.css';
+import Style from './Coinbase_ProductList.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product_List: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('spot');
+  const { setSelected_BrokerProductType } = useContext_Broker();
+
+  // Handle Broker Click
+  const handleClick = (productType: string) => {
+    setSelected_BrokerProductType(productType);
+  };
 
   const renderActiveWidget = () => {
     switch (activeTab) {
@@ -23,7 +31,7 @@ const Coinbase_Product_List: React.FC = () => {
       case 'futures':
         return <Coinbase_ProductList_Futures />;
       case 'perpetual':
-        return <Coinbase_ProductList_Perpetual />;
+        return <Coinbase_ProductList_Perps />;
       default:
         return <Coinbase_ProductList_Spot />;
     }
@@ -34,19 +42,28 @@ const Coinbase_Product_List: React.FC = () => {
       <div className={Style.NavMenu}>
         <button
           className={`${Style.NavButton} ${activeTab === 'spot' ? Style.Active : ''}`}
-          onClick={() => setActiveTab('spot')}
+          onClick={() => {
+            setActiveTab('spot');
+            handleClick('spot');
+          }}
         >
           Spot
         </button>
         <button
           className={`${Style.NavButton} ${activeTab === 'futures' ? Style.Active : ''}`}
-          onClick={() => setActiveTab('futures')}
+          onClick={() => {
+            setActiveTab('futures');
+            handleClick('futures');
+          }}
         >
           Futures
         </button>
         <button
           className={`${Style.NavButton} ${activeTab === 'perpetual' ? Style.Active : ''}`}
-          onClick={() => setActiveTab('perpetual')}
+          onClick={() => {
+            setActiveTab('perps');
+            handleClick('perps');
+          }}
         >
           Perps
         </button>

@@ -16,8 +16,25 @@ import { Type_BrokerProductData } from './Type_BrokerProductData';
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const store = await getStore('.broker.json');
-//
-// const POLLING_INTERVAL = 3000; // 3 seconds
+
+// Queue to manage useEffect executions
+const effectQueue: (() => void)[] = [];
+let isProcessingQueue = false;
+
+const processQueue = () => {
+  if (isProcessingQueue || effectQueue.length === 0) return;
+  isProcessingQueue = true;
+  const effect = effectQueue.shift();
+  if (effect) {
+    effect();
+  }
+  isProcessingQueue = false;
+  if (effectQueue.length > 0) {
+    processQueue();
+  }
+};
+
+const POLLING_INTERVAL = 3000; // 3 seconds
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -30,12 +47,15 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
   // Save selected Broker to store
   useEffect(() => {
     if (store && selected_Broker !== null) {
-      store.get('broker').then((target) => {
-        const updatedTarget = { ...(typeof target === 'object' && target !== null ? target : {}), selected_Broker };
-        store?.set('broker', updatedTarget).then(() => {
-          store?.save();
+      effectQueue.push(() => {
+        store.get('broker').then((target) => {
+          const updatedTarget = { ...(typeof target === 'object' && target !== null ? target : {}), selected_Broker };
+          store?.set('broker', updatedTarget).then(() => {
+            store?.save().then(() => processQueue());
+          });
         });
       });
+      processQueue();
     }
   }, [selected_Broker]);
 
@@ -47,15 +67,18 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
   // Save selected BrokerProduct to store
   useEffect(() => {
     if (store && selected_BrokerProduct !== null) {
-      store.get('broker').then((target) => {
-        const updatedTarget = {
-          ...(typeof target === 'object' && target !== null ? target : {}),
-          selected_BrokerProduct,
-        };
-        store?.set('broker', updatedTarget).then(() => {
-          store?.save();
+      effectQueue.push(() => {
+        store.get('broker').then((target) => {
+          const updatedTarget = {
+            ...(typeof target === 'object' && target !== null ? target : {}),
+            selected_BrokerProduct,
+          };
+          store?.set('broker', updatedTarget).then(() => {
+            store?.save().then(() => processQueue());
+          });
         });
       });
+      processQueue();
     }
   }, [selected_BrokerProduct]);
 
@@ -67,15 +90,18 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
   // Save selected BrokerProductType to store
   useEffect(() => {
     if (store && selected_BrokerProductType !== null) {
-      store.get('broker').then((target) => {
-        const updatedTarget = {
-          ...(typeof target === 'object' && target !== null ? target : {}),
-          selected_BrokerProductType,
-        };
-        store?.set('broker', updatedTarget).then(() => {
-          store?.save();
+      effectQueue.push(() => {
+        store.get('broker').then((target) => {
+          const updatedTarget = {
+            ...(typeof target === 'object' && target !== null ? target : {}),
+            selected_BrokerProductType,
+          };
+          store?.set('broker', updatedTarget).then(() => {
+            store?.save().then(() => processQueue());
+          });
         });
       });
+      processQueue();
     }
   }, [selected_BrokerProductType]);
 
@@ -86,7 +112,7 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
   const fetch_BrokerProductData = useCallback(async () => {
     if (!selected_BrokerProduct) {
       setSelected_BrokerProductData(null); // Ensure productData is cleared if no product is selected
-      // info('No selected product.');
+      info('No selected product.');
       return;
     }
     try {
@@ -114,47 +140,54 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
     }
   }, [selected_BrokerProduct, selected_BrokerProductData]);
 
+  // Fetch Product Data when conditions are met
+  useEffect(() => {
+    if (selected_Broker === 'coinbase' && selected_BrokerProductType === 'spot') {
+      fetch_BrokerProductData();
+    }
+  }, [selected_Broker, selected_BrokerProductType, fetch_BrokerProductData]);
+
   //
 
   ///
 
-  // useEffect(() => {
-  //   fetchProductData();
+  useEffect(() => {
+    fetch_BrokerProductData();
 
-  //   const intervalId = setInterval(() => {
-  //     // info('Polling for product data...');
-  //     fetchProductData();
-  //   }, POLLING_INTERVAL);
+    const intervalId = setInterval(() => {
+      info('Polling for product data...');
+      fetch_BrokerProductData();
+    }, POLLING_INTERVAL);
 
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [fetchProductData]);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [fetch_BrokerProductData]);
 
-  // useEffect(() => {
-  //   info(`Selected product changed: ${JSON.stringify(selectedProduct)}`);
-  //   fetchProductData();
-  // }, [selectedProduct, fetchProductData]);
+  useEffect(() => {
+    info(`Selected product changed: ${JSON.stringify(selected_BrokerProduct)}`);
+    fetch_BrokerProductData();
+  }, [selected_BrokerProduct, fetch_BrokerProductData]);
 
-  // const subscribeToProduct = async (product: Type_BrokerProduct | null) => {
-  //   if (!product) return;
-  //   try {
-  //     await invoke('coinbase_subscribe_to_product', { product_id: product.product_id });
-  //     info(`Subscribed to product: ${JSON.stringify(product)}`);
-  //   } catch (err) {
-  //     error(String(err));
-  //   }
-  // };
+  const subscribe_BrokerProductData = async (product: Type_BrokerProductData | null) => {
+    if (!product) return;
+    try {
+      await invoke('coinbase_subscribe_to_product', { product_id: product.product_id });
+      info(`Subscribed to product: ${JSON.stringify(product)}`);
+    } catch (err) {
+      error(String(err));
+    }
+  };
 
-  // const unsubscribeFromProduct = async (product: Type_BrokerProduct | null) => {
-  //   if (!product) return;
-  //   try {
-  //     await invoke('coinbase_unsubscribe_from_product', { product_id: product.product_id });
-  //     info(`Unsubscribed from product: ${JSON.stringify(product)}`);
-  //   } catch (err) {
-  //     error(String(err));
-  //   }
-  // };
+  const unsubscribe_BrokerProductData = async (product: Type_BrokerProductData | null) => {
+    if (!product) return;
+    try {
+      await invoke('coinbase_unsubscribe_from_product', { product_id: product.product_id });
+      info(`Unsubscribed from product: ${JSON.stringify(product)}`);
+    } catch (err) {
+      error(String(err));
+    }
+  };
 
   //
 
@@ -174,8 +207,8 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
         selected_BrokerProductData,
         setSelected_BrokerProductData,
         fetch_BrokerProductData,
-        // subscribeToProduct,
-        // unsubscribeFromProduct,
+        subscribe_BrokerProductData,
+        unsubscribe_BrokerProductData,
       }}
     >
       {children}

@@ -23,9 +23,9 @@ const Menu_Bar: React.FC = () => {
 
   const handleNavLinkClick = (page: string) => {
     setSelected_Page(page);
-    setSelected_Broker('Select Broker');
-    setSelected_BrokerProduct('Select Broker Product');
-    setSelected_BrokerProductType('Select Broker Product Type');
+    setSelected_Broker('none');
+    setSelected_BrokerProduct('none');
+    setSelected_BrokerProductType('none');
   };
 
   return (
@@ -34,7 +34,7 @@ const Menu_Bar: React.FC = () => {
         <NavLink
           to="/"
           className={({ isActive }) => (isActive ? 'active' : '')}
-          onClick={() => handleNavLinkClick('Home')}
+          onClick={() => handleNavLinkClick('home')}
         >
           <div className={Style.Nav_Button_Profile}>Home</div>
         </NavLink>
@@ -43,7 +43,7 @@ const Menu_Bar: React.FC = () => {
         <NavLink
           to="/connect"
           className={({ isActive }) => (isActive ? 'active' : '')}
-          onClick={() => handleNavLinkClick('Connect')}
+          onClick={() => handleNavLinkClick('connect')}
         >
           <div className={Style.Nav_Button_Menu}>Connect</div>
         </NavLink>
@@ -51,7 +51,7 @@ const Menu_Bar: React.FC = () => {
         <NavLink
           to="/subscribe"
           className={({ isActive }) => (isActive ? 'active' : '')}
-          onClick={() => handleNavLinkClick('Subscribe')}
+          onClick={() => handleNavLinkClick('subscribe')}
         >
           <div className={Style.Nav_Button_Menu}>Subscribe</div>
         </NavLink>
@@ -59,7 +59,7 @@ const Menu_Bar: React.FC = () => {
         <NavLink
           to="/chart"
           className={({ isActive }) => (isActive ? 'active' : '')}
-          onClick={() => handleNavLinkClick('Chart')}
+          onClick={() => handleNavLinkClick('chart')}
         >
           <div className={Style.Nav_Button_Menu}>Chart</div>
         </NavLink>
@@ -67,7 +67,7 @@ const Menu_Bar: React.FC = () => {
         <NavLink
           to="/analyze"
           className={({ isActive }) => (isActive ? 'active' : '')}
-          onClick={() => handleNavLinkClick('Analyze')}
+          onClick={() => handleNavLinkClick('analyze')}
         >
           <div className={Style.Nav_Button_Menu}>Analyze</div>
         </NavLink>
@@ -75,7 +75,7 @@ const Menu_Bar: React.FC = () => {
         <NavLink
           to="/news"
           className={({ isActive }) => (isActive ? 'active' : '')}
-          onClick={() => handleNavLinkClick('News')}
+          onClick={() => handleNavLinkClick('news')}
         >
           <div className={Style.Nav_Button_Menu}>News</div>
         </NavLink>
@@ -84,7 +84,7 @@ const Menu_Bar: React.FC = () => {
         <NavLink
           to="/profile"
           className={({ isActive }) => (isActive ? 'active' : '')}
-          onClick={() => handleNavLinkClick('Profile')}
+          onClick={() => handleNavLinkClick('profile')}
         >
           <div className={Style.Nav_Button_Profile}>Profile</div>
         </NavLink>

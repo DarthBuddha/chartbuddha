@@ -3,76 +3,71 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 // Tauri
-import { load } from '@tauri-apps/plugin-store';
-import { listen } from '@tauri-apps/api/event';
-import { info, error } from '@tauri-apps/plugin-log';
+// import { load } from '@tauri-apps/plugin-store';
+// import { listen } from '@tauri-apps/api/event';
+// import { info, error } from '@tauri-apps/plugin-log';
 // Interface
 import { Type_BrokerProductData } from 'interface/Type_BrokerProductData';
-import { useContext_Broker } from 'interface/Context_Broker';
+// import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
-import Style from './Coinbase_Product_List_Futures.module.css';
+import Style from './Coinbase_ProductList_Futures.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_ProductList_Futures: React.FC = () => {
-  const { setSelected_BrokerProductData } = useContext_Broker();
-  const [futuresProducts, setFuturesProducts] = useState<Type_BrokerProductData[]>([]);
+  // Set the selected broker product type to FUTURES
+  // const { setSelected_BrokerProductType } = useContext_Broker();
 
-  const handleError = (err: unknown) => {
-    if (err instanceof Error) {
-      error(err.message);
-    } else {
-      error('An unknown error occurred');
-    }
+  const handleProductClick = () => {
+    setSpotProducts([]);
   };
 
-  // Function to load products from the Tauri store
-  const loadFuturesProducts = useCallback(async () => {
-    try {
-      const store_coinbase_products = await load('coinbase_products.json');
-      const allProducts =
-        ((await store_coinbase_products.get('products')) as { FUTURE?: Type_BrokerProductData[] }) || {};
-      const futuresProducts = allProducts?.FUTURE || [];
-      setFuturesProducts(futuresProducts);
-      info('Spot products loaded successfully.');
-    } catch (err) {
-      handleError(err);
-    }
-  }, []);
+  const getStyleForValue = (value: string) => {
+    return parseFloat(value) >= 0 ? Style.Positive : Style.Negative;
+  };
 
-  useEffect(() => {
-    // Initial load of products
-    loadFuturesProducts();
+  const formatPercentage = (value: string) => {
+    return parseFloat(value).toFixed(2);
+  };
 
-    // Listen for `coinbase_products_loaded` event
-    const unlisten = listen('coinbase_products_loaded', async (event) => {
-      info('Event received: ' + event.payload);
-      // Reload products when the event is received
-      await loadFuturesProducts();
-    });
-
-    // Cleanup the listener when the component unmounts
-    return () => {
-      unlisten.then((f) => f());
-    };
-  }, [loadFuturesProducts]);
+  // State to store the products
+  const [spotProducts, setSpotProducts] = useState<Type_BrokerProductData[]>([]);
 
   return (
-    <div className={Style.List_Container}>
-      <div className={Style.List}>
-        <div className={Style.List_Content}>
-          {futuresProducts.map((product, index) => (
-            <div
-              key={index}
-              className={Style.Product}
-              onClick={() => setSelected_BrokerProductData(product)} // Set selected product
-            >
-              {product.display_name}
+    <div className={Style.Component}>
+      <div className={Style.Product_List}>
+        {spotProducts.map((product, index) => (
+          <div key={index} className={Style.Product} onClick={() => handleProductClick(product)}>
+            <div className={Style.Product_Details_Container}>
+              <div className={Style.Product_Name}>
+                <div>{product.display_name}</div>
+                <div>Status: {product.status}</div>
+              </div>
+              <div className={Style.Product_Price}>
+                <div>
+                  Price: <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
+                </div>
+                <div>
+                  Change (24h):{' '}
+                  <span className={getStyleForValue(product.price_percentage_change_24h ?? '')}>
+                    {formatPercentage(product.price_percentage_change_24h ?? '0')}%
+                  </span>
+                </div>
+              </div>
+              <div className={Style.Product_Volume}>
+                <div>Volume (24h): {product.volume_24h}</div>
+                <div>
+                  Change (24h):{' '}
+                  <span className={getStyleForValue(product.volume_percentage_change_24h ?? '')}>
+                    {formatPercentage(product.volume_percentage_change_24h ?? '0')}%
+                  </span>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -38,9 +38,9 @@ pub fn run() {
       store_broker.set(
         "broker",
         json!({
-        "selected_Broker": "Select Broker",
-        "selected_BrokerProduct": "Select Broker Product",
-        "selected_BrokerProductType": "Select Broker Product Type"
+        "selected_Broker": "none",
+        "selected_BrokerProduct": "none",
+        "selected_BrokerProductType": "none"
       })
       );
 

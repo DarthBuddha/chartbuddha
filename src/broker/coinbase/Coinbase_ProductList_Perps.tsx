@@ -1,40 +1,34 @@
-//! Coinbase ProductList Spot
+//! Coinbase ProductList Perpetual
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 // Tauri
-// import { getStore } from '@tauri-apps/plugin-store';
+// import { load } from '@tauri-apps/plugin-store';
 // import { listen } from '@tauri-apps/api/event';
-// import { debug, error } from '@tauri-apps/plugin-log';
-// import { invoke } from '@tauri-apps/api/core';
+// import { info, error } from '@tauri-apps/plugin-log';
 // Interface
 import { Type_BrokerProductData } from 'interface/Type_BrokerProductData';
-import { useContext_Broker } from 'interface/Context_Broker';
+// import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
-import Style from './Coinbase_ProductList_Spot.module.css';
+import Style from './Coinbase_ProductList_Perps.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Coinbase_ProductList_Spot: React.FC = () => {
-  // Set the selected broker product type to SPOT
-  const { setSelected_BrokerProductType, setSelected_BrokerProductData } = useContext_Broker();
-  useEffect(() => {
-    setSelected_BrokerProductType('spot');
-  }, [setSelected_BrokerProductType]);
+const Coinbase_ProductList_Perpetual: React.FC = () => {
+  // Set the selected broker product type to FUTURES
+  // const { setSelected_BrokerProductType } = useContext_Broker();
 
-  // Get Style for Value
+  const handleProductClick = () => {
+    setSpotProducts([]);
+  };
+
   const getStyleForValue = (value: string) => {
     return parseFloat(value) >= 0 ? Style.Positive : Style.Negative;
   };
   const formatPercentage = (value: string) => {
     return parseFloat(value).toFixed(2);
-  };
-
-  // Handle Product Click
-  const handleProductClick = (product: Type_BrokerProductData) => {
-    setSelected_BrokerProductData(product);
   };
 
   // State to store the products
@@ -78,6 +72,6 @@ const Coinbase_ProductList_Spot: React.FC = () => {
   );
 };
 
-export default Coinbase_ProductList_Spot;
+export default Coinbase_ProductList_Perpetual;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

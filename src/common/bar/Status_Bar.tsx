@@ -21,9 +21,9 @@ const Status_Bar: React.FC = () => {
 
   const handleNavLinkClick = (page: string) => {
     setSelected_Page(page);
-    setSelected_Broker('Select Broker');
-    setSelected_BrokerProduct('Select Broker Product');
-    setSelected_BrokerProductType('Select Broker Product Type');
+    setSelected_Broker('none');
+    setSelected_BrokerProduct('none');
+    setSelected_BrokerProductType('none');
   };
 
   return (

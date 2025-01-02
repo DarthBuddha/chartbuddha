@@ -23,8 +23,8 @@ export interface Type_Broker {
   selected_BrokerProductData: Type_BrokerProductData | null;
   setSelected_BrokerProductData: React.Dispatch<React.SetStateAction<Type_BrokerProductData | null>>;
   fetch_BrokerProductData: () => void;
-  // subscribeToProduct: (product: Type_BrokerProduct | null) => Promise<void>;
-  // unsubscribeFromProduct: (product: Type_BrokerProduct | null) => Promise<void>;
+  subscribe_BrokerProductData: (product: Type_BrokerProductData | null) => Promise<void>;
+  unsubscribe_BrokerProductData: (product: Type_BrokerProductData | null) => Promise<void>;
 }
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
