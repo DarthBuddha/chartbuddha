@@ -45,7 +45,7 @@ pub async fn authenticate_api_request(
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
   // const PAGE: &str = "authenticator.rs";
   // Step 1: Load API key and secret from the store
-  let store = app_handle.store(".providers.json").map_err(|e| e.to_string())?;
+  let store = app_handle.store(".keys.json").map_err(|e| e.to_string())?;
   let api_key: String = store
     .get("coinbase.api_key")
     .expect("Failed to get value from store")

@@ -1,5 +1,5 @@
-//! # Coinbase Product List Futures
-//!
+//! Coinbase Product List Perpetual
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
@@ -12,13 +12,13 @@ import { info, error } from '@tauri-apps/plugin-log';
 import { Type_BrokerProductData } from 'interface/Type_BrokerProductData';
 import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
-import Style from './Coinbase_Product_List_Futures.module.css';
+import Style from './Coinbase_Product_List_Perpetual.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Coinbase_Product_List_Futures: React.FC = () => {
+const Coinbase_ProductList_Perpetual: React.FC = () => {
   const { setSelected_BrokerProductData } = useContext_Broker();
-  const [futuresProducts, setFuturesProducts] = useState<Type_BrokerProductData[]>([]);
+  const [perpetualProducts, setPerpetualProducts] = useState<Type_BrokerProductData[]>([]);
 
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
@@ -29,14 +29,14 @@ const Coinbase_Product_List_Futures: React.FC = () => {
   };
 
   // Function to load products from the Tauri store
-  const loadFuturesProducts = useCallback(async () => {
+  const loadPerpetualProducts = useCallback(async () => {
     try {
       const store_coinbase_products = await load('coinbase_products.json');
       const allProducts =
-        ((await store_coinbase_products.get('products')) as { FUTURE?: Type_BrokerProductData[] }) || {};
-      const futuresProducts = allProducts?.FUTURE || [];
-      setFuturesProducts(futuresProducts);
-      info('Spot products loaded successfully.');
+        ((await store_coinbase_products.get('products')) as { PERPS?: Type_BrokerProductData[] }) || {};
+      const perpetualProducts = allProducts?.PERPS || [];
+      setPerpetualProducts(perpetualProducts);
+      info('Perpetual products loaded successfully.');
     } catch (err) {
       handleError(err);
     }
@@ -44,26 +44,26 @@ const Coinbase_Product_List_Futures: React.FC = () => {
 
   useEffect(() => {
     // Initial load of products
-    loadFuturesProducts();
+    loadPerpetualProducts();
 
     // Listen for `coinbase_products_loaded` event
     const unlisten = listen('coinbase_products_loaded', async (event) => {
       info('Event received: ' + event.payload);
       // Reload products when the event is received
-      await loadFuturesProducts();
+      await loadPerpetualProducts();
     });
 
     // Cleanup the listener when the component unmounts
     return () => {
       unlisten.then((f) => f());
     };
-  }, [loadFuturesProducts]);
+  }, [loadPerpetualProducts]);
 
   return (
     <div className={Style.List_Container}>
       <div className={Style.List}>
         <div className={Style.List_Content}>
-          {futuresProducts.map((product, index) => (
+          {perpetualProducts.map((product, index) => (
             <div
               key={index}
               className={Style.Product}
@@ -78,6 +78,6 @@ const Coinbase_Product_List_Futures: React.FC = () => {
   );
 };
 
-export default Coinbase_Product_List_Futures;
+export default Coinbase_ProductList_Perpetual;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

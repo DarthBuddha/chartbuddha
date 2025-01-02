@@ -1,13 +1,13 @@
 //! # Subscribe Product Coinbase Product List
-//!
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import React, { useState } from 'react';
 // Components
-import Coinbase_Product_List_Spot from './Coinbase_Product_List_Spot';
-import Coinbase_Product_List_Futures from './Coinbase_Product_List_Futures';
-import Coinbase_Product_List_Perpetual from './Coinbase_Product_List_Perpetual';
+import Coinbase_ProductList_Spot from './Coinbase_ProductList_Spot';
+import Coinbase_ProductList_Futures from './Coinbase_ProductList_Futures';
+import Coinbase_ProductList_Perpetual from './Coinbase_ProductList_Perpetual';
 // CSS Modules
 import Style from './Coinbase_Product_List.module.css';
 //
@@ -19,13 +19,13 @@ const Coinbase_Product_List: React.FC = () => {
   const renderActiveWidget = () => {
     switch (activeTab) {
       case 'spot':
-        return <Coinbase_Product_List_Spot />;
+        return <Coinbase_ProductList_Spot />;
       case 'futures':
-        return <Coinbase_Product_List_Futures />;
+        return <Coinbase_ProductList_Futures />;
       case 'perpetual':
-        return <Coinbase_Product_List_Perpetual />;
+        return <Coinbase_ProductList_Perpetual />;
       default:
-        return <Coinbase_Product_List_Spot />;
+        return <Coinbase_ProductList_Spot />;
     }
   };
 

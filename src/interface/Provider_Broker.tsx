@@ -39,7 +39,7 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
     }
   }, [selected_Broker]);
 
-  // Selected Broker Product
+  // Selected BrokerProduct
   const [selected_BrokerProduct, setSelected_BrokerProduct] = useState<string | null>(null);
   if (selected_BrokerProduct) {
     info(selected_BrokerProduct);
@@ -59,7 +59,27 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
     }
   }, [selected_BrokerProduct]);
 
-  // Selected Broker Product Data
+  // Selected BrokerProductType
+  const [selected_BrokerProductType, setSelected_BrokerProductType] = useState<string | null>(null);
+  if (selected_BrokerProductType) {
+    info(selected_BrokerProductType);
+  }
+  // Save selected BrokerProductType to store
+  useEffect(() => {
+    if (store && selected_BrokerProductType !== null) {
+      store.get('broker').then((target) => {
+        const updatedTarget = {
+          ...(typeof target === 'object' && target !== null ? target : {}),
+          selected_BrokerProductType,
+        };
+        store?.set('broker', updatedTarget).then(() => {
+          store?.save();
+        });
+      });
+    }
+  }, [selected_BrokerProductType]);
+
+  // Selected BrokerProductData
   const [selected_BrokerProductData, setSelected_BrokerProductData] = useState<Type_BrokerProductData | null>(null);
 
   // Fetch Product Data
@@ -147,6 +167,9 @@ export const Provider_Broker: React.FC<{ children: React.ReactNode }> = ({ child
         // Broker Product
         selected_BrokerProduct,
         setSelected_BrokerProduct,
+        // Broker Product Type
+        selected_BrokerProductType,
+        setSelected_BrokerProductType,
         // Broker Product Data
         selected_BrokerProductData,
         setSelected_BrokerProductData,

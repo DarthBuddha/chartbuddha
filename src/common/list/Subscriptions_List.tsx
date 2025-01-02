@@ -1,4 +1,4 @@
-//! # Subscriptions List
+//! Subscriptions List
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -12,7 +12,6 @@ import { error } from '@tauri-apps/plugin-log';
 import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
 import Style from './List.module.css';
-
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -20,11 +19,13 @@ let store_subscriptions: Store | null = null;
 getStore('.subscriptions.json').then((store) => {
   store_subscriptions = store;
 });
-
+//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//
 // const store = await getStore('.subscriptions.json');
 //
 const Subscriptions_List: React.FC = () => {
-  const { setSelectedBroker, setSelectedProduct } = useContext_Broker();
+  const { setSelected_Broker, setSelected_BrokerProduct } = useContext_Broker();
   const [subscriptions, setSubscriptions] = useState<{ id: string; product_id: string }[]>([]);
   const [storeSubscriptions, setStoreSubscriptions] = useState<{
     get: (key: string) => Promise<{ id: string; product_id: string }[] | undefined>;
@@ -48,11 +49,11 @@ const Subscriptions_List: React.FC = () => {
   }, [storeSubscriptions]);
 
   const handleSubscriptionClick = async (subscription: { id: string; product_id: string }) => {
-    setSelectedBroker(subscription.id);
+    setSelected_Broker(subscription.id);
     try {
       const productData = await invoke('coinbase_get_selected_product', { productId: subscription.product_id });
       const parsedProductData = JSON.parse(productData as string);
-      setSelectedProduct(parsedProductData);
+      setSelected_BrokerProduct(parsedProductData);
     } catch (err) {
       error('Failed to fetch product data: ' + String(err));
     }

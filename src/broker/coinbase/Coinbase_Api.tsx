@@ -1,17 +1,29 @@
-//! # Coinbase_Api
-//!
+//! Coinbase Api
+//
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import React, { useState, useEffect } from 'react';
 // Tauri
-import { load } from '@tauri-apps/plugin-store';
+import { getStore } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // CSS Modules
 import Style from './Coinbase_Api.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
+//
+const store = await (async () => {
+  try {
+    return await getStore('.keys.json');
+  } catch (err) {
+    error('Failed to load broker store: ' + String(err));
+    throw err;
+  }
+})();
+//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//
 const Coinbase_Api: React.FC = () => {
   // State for storing API key and secret
   const [apiKey, setApiKey] = useState('');
@@ -31,11 +43,14 @@ const Coinbase_Api: React.FC = () => {
     const loadKeys = async () => {
       info('Loading Api Key & Secret...');
       try {
-        const store = await load('.providers.json');
-        const savedApiKey = await store.get<string>('coinbase.api_key');
-        const savedApiSecret = await store.get<string>('coinbase.api_secret');
-        if (savedApiKey) setApiKey(savedApiKey);
-        if (savedApiSecret) setApiSecret(convertApiSecret(savedApiSecret));
+        if (store) {
+          const savedApiKey = await store.get<string>('coinbase.api_key');
+          const savedApiSecret = await store.get<string>('coinbase.api_secret');
+          if (savedApiKey) setApiKey(savedApiKey);
+          if (savedApiSecret) setApiSecret(convertApiSecret(savedApiSecret));
+        } else {
+          throw new Error('Store is not initialized');
+        }
       } catch (err) {
         handleError(err);
       }
@@ -63,12 +78,15 @@ const Coinbase_Api: React.FC = () => {
   const button_SaveKeys = async () => {
     try {
       info('Saving keys...');
-      const store = await load('.providers.json');
       const formattedApiSecret = convertApiSecret(apiSecret);
-      await store.set('coinbase.configured', true);
-      await store.set('coinbase.api_key', apiKey);
-      await store.set('coinbase.api_secret', formattedApiSecret);
-      await store.save();
+      if (store) {
+        await store.set('coinbase.configured', true);
+        await store.set('coinbase.api_key', apiKey);
+        await store.set('coinbase.api_secret', formattedApiSecret);
+        await store.save();
+      } else {
+        throw new Error('Store is not initialized');
+      }
       setActionResult('API keys saved successfully.');
       info('API keys saved successfully.');
     } catch (err) {
@@ -81,11 +99,14 @@ const Coinbase_Api: React.FC = () => {
   const button_DeleteKeys = async () => {
     try {
       info('Deleting keys...');
-      const store = await load('.providers.json');
-      await store.set('coinbase.configured', false);
-      await store.set('coinbase.api_key', '');
-      await store.set('coinbase.api_secret', '');
-      await store.save();
+      if (store) {
+        await store.set('coinbase.configured', false);
+        await store.set('coinbase.api_key', '');
+        await store.set('coinbase.api_secret', '');
+        await store.save();
+      } else {
+        throw new Error('Store is not initialized');
+      }
       setActionResult('API keys deleted successfully.');
       // Clear input fields
       setApiKey('');
@@ -182,4 +203,5 @@ const Coinbase_Api: React.FC = () => {
 };
 
 export default Coinbase_Api;
+//
 /* ------------------------------------------------------------------------------------------------------------------ */

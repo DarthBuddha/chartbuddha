@@ -1,4 +1,4 @@
-//! # Providers List
+//! # List - Broker
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -13,21 +13,25 @@ import Style from './List.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Providers_List: React.FC = () => {
-  const { setSelected_Broker } = useContext_Broker() || {};
+const List_Broker: React.FC = () => {
+  const { setSelected_Broker } = useContext_Broker();
+  const { setSelected_BrokerProduct } = useContext_Broker();
+  const { setSelected_BrokerProductType } = useContext_Broker();
 
-  const handleNavLinkClick = (broker: string) => {
+  const handleBrokerClick = (broker: string) => {
     setSelected_Broker(broker);
+    setSelected_BrokerProduct('Select Broker Product');
+    setSelected_BrokerProductType('Select Broker Product Type');
   };
 
   return (
     <div className={Style.List_Container}>
-      <div className={Style.Title_Bar}>Providers</div>
+      <div className={Style.Title_Bar}>Brokers</div>
       <div className={Style.List}>
-        <div className={Style.Row} onClick={() => handleNavLinkClick('coinbase')}>
+        <div className={Style.Row} onClick={() => handleBrokerClick('coinbase')}>
           Coinbase
         </div>
-        <div className={Style.Row} onClick={() => handleNavLinkClick('binance')}>
+        <div className={Style.Row} onClick={() => handleBrokerClick('binance')}>
           Binance
         </div>
       </div>
@@ -35,6 +39,6 @@ const Providers_List: React.FC = () => {
   );
 };
 
-export default Providers_List;
+export default List_Broker;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

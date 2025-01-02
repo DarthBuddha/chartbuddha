@@ -16,7 +16,10 @@ export interface Type_Broker {
   // Broker Product
   selected_BrokerProduct: string | null;
   setSelected_BrokerProduct: React.Dispatch<React.SetStateAction<string | null>>;
-  // Product Data
+  // Broker Product Type
+  selected_BrokerProductType: string | null;
+  setSelected_BrokerProductType: React.Dispatch<React.SetStateAction<string | null>>;
+  // Broker Product Data
   selected_BrokerProductData: Type_BrokerProductData | null;
   setSelected_BrokerProductData: React.Dispatch<React.SetStateAction<Type_BrokerProductData | null>>;
   fetch_BrokerProductData: () => void;

@@ -17,11 +17,13 @@ const Status_Bar: React.FC = () => {
   const { setSelected_Page } = useContext_Window();
   const { setSelected_Broker } = useContext_Broker();
   const { setSelected_BrokerProduct } = useContext_Broker();
+  const { setSelected_BrokerProductType } = useContext_Broker();
 
   const handleNavLinkClick = (page: string) => {
     setSelected_Page(page);
     setSelected_Broker('Select Broker');
-    setSelected_BrokerProduct('Select Product');
+    setSelected_BrokerProduct('Select Broker Product');
+    setSelected_BrokerProductType('Select Broker Product Type');
   };
 
   return (

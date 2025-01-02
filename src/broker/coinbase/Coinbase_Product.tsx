@@ -1,4 +1,4 @@
-//! # CoinbaseProduct
+//! CoinbaseProduct
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -91,10 +91,12 @@ const Coinbase_Product: React.FC = () => {
   return (
     <div className={Style.Page}>
       <div className={Style.Selection_Menu}>
-        <div className={Style.Selection_Title}>Selected: {selected_Broker ? selected_Broker : 'None'}</div>
+        <div className={Style.Selection_Title}>Selected: {selected_Broker ? selected_Broker : 'Select Broker'}</div>
         <div className={Style.Selection_Title}>
           Selected:{' '}
-          {selected_BrokerProduct && selected_BrokerProductData ? selected_BrokerProductData.display_name : 'None'}
+          {selected_BrokerProduct && selected_BrokerProductData
+            ? selected_BrokerProductData.display_name
+            : 'Select Product'}
         </div>
       </div>
 

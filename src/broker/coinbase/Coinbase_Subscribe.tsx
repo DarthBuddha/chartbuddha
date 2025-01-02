@@ -1,4 +1,4 @@
-//! # Subscribe Product Coinbase
+//! Subscribe Product Coinbase
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -9,7 +9,7 @@ import Split from 'react-split';
 // import { invoke } from '@tauri-apps/api/core';
 // Components
 import Coinbase_Product from './Coinbase_Product';
-import Coinbase_Product_List from './Coinbase_Product_List';
+import Coinbase_Product_List from './Coinbase_ProductList';
 // CSS Modules
 import Style from './Coinbase_Subscribe.module.css';
 //

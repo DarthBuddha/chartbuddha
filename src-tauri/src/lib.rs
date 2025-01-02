@@ -39,7 +39,8 @@ pub fn run() {
         "broker",
         json!({
         "selected_Broker": "Select Broker",
-        "selected_BrokerProduct": "Select Product"
+        "selected_BrokerProduct": "Select Broker Product",
+        "selected_BrokerProductType": "Select Broker Product Type"
       })
       );
 
