@@ -1,16 +1,18 @@
 //! # Coinbase Commands
 //! Frontend commands for Coinbase.
 //!
-//! ### Folders
-//! - chart
-//! - connect
-//! - subscribe
+//! ### Files
+//! - coinbase_test_api
+//! - coinbase_subscribe
+//! - coinbase_unsubscribe
 //!
 /* ---------------------------------------------------------------------------------- */
 //
-// Folders
-pub mod chart;
-pub mod connect;
-pub mod subscribe;
+// Files
+pub mod coinbase_test_api;
+pub mod coinbase_get_selected_product;
+pub mod coinbase_list_products;
+pub mod coinbase_subscribe;
+pub mod coinbase_unsubscribe;
 //
 /* ---------------------------------------------------------------------------------- */

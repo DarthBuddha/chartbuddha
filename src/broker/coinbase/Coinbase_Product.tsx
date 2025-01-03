@@ -8,14 +8,14 @@ import React, { useEffect, useState } from 'react';
 import { getStore, Store } from '@tauri-apps/plugin-store';
 import { debug, error, info } from '@tauri-apps/plugin-log';
 // Interface
-import { useContext_Broker } from 'interface/Context_Broker';
+// import { useContext_Broker } from 'interface/Broker_Context';
 // CSS Modules
 import Style from './Coinbase_Product.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product: React.FC = () => {
-  const { selected_Broker, selected_BrokerProduct, selected_BrokerProductData } = useContext_Broker();
+  // const { selected_Broker, selected_BrokerProduct, selected_BrokerProductData } = useContext_Broker();
   const [storeSubscriptions, setStoreSubscriptions] = useState<Store | null>(null);
 
   useEffect(() => {
@@ -34,73 +34,72 @@ const Coinbase_Product: React.FC = () => {
     }
   };
 
-  const Subscribe_Button = async () => {
-    try {
-      info('Subscribing...');
+  // const Subscribe_Button = async () => {
+  //   try {
+  //     info('Subscribing...');
 
-      if (selected_BrokerProduct) {
-        if (!storeSubscriptions) {
-          throw new Error('storeSubscriptions is null');
-        }
-        const existingSubscriptions = await storeSubscriptions.get('subscriptions');
-        if (!selected_BrokerProductData) {
-          throw new Error('selected_BrokerProductData is null');
-        }
-        const newSubscription = { id: 'coinbase', product_id: selected_BrokerProductData.product_id };
-        const updatedSubscriptions = Array.isArray(existingSubscriptions)
-          ? [...existingSubscriptions, newSubscription]
-          : [newSubscription];
+  //     if (selected_BrokerProduct) {
+  //       if (!storeSubscriptions) {
+  //         throw new Error('storeSubscriptions is null');
+  //       }
+  //       const existingSubscriptions = await storeSubscriptions.get('subscriptions');
+  //       if (!selected_BrokerProductData) {
+  //         throw new Error('selected_BrokerProductData is null');
+  //       }
+  //       const newSubscription = { id: 'coinbase', product_id: selected_BrokerProductData.product_id };
+  //       const updatedSubscriptions = Array.isArray(existingSubscriptions)
+  //         ? [...existingSubscriptions, newSubscription]
+  //         : [newSubscription];
 
-        await storeSubscriptions.set('subscriptions', updatedSubscriptions);
-        await storeSubscriptions.save();
-        debug('Saved selected product ID to the store');
-      }
+  //       await storeSubscriptions.set('subscriptions', updatedSubscriptions);
+  //       await storeSubscriptions.save();
+  //       debug('Saved selected product ID to the store');
+  //     }
 
-      info('Subscribed successfully');
-    } catch (err) {
-      handleError(err);
-    }
-  };
+  //     info('Subscribed successfully');
+  //   } catch (err) {
+  //     handleError(err);
+  //   }
+  // };
 
-  const UnSubscribe_Button = async () => {
-    try {
-      info('Unsubscribing...');
+  // const UnSubscribe_Button = async () => {
+  //   try {
+  //     info('Unsubscribing...');
 
-      if (selected_BrokerProduct) {
-        if (!storeSubscriptions) {
-          throw new Error('storeSubscriptions is null');
-        }
-        const existingSubscriptions = await storeSubscriptions.get('subscriptions');
-        const updatedSubscriptions = Array.isArray(existingSubscriptions)
-          ? existingSubscriptions.filter(
-              (sub) => selected_BrokerProductData && sub.product_id !== selected_BrokerProductData.product_id,
-            )
-          : [];
+  //     if (selected_BrokerProduct) {
+  //       if (!storeSubscriptions) {
+  //         throw new Error('storeSubscriptions is null');
+  //       }
+  //       const existingSubscriptions = await storeSubscriptions.get('subscriptions');
+  //       const updatedSubscriptions = Array.isArray(existingSubscriptions)
+  //         ? existingSubscriptions.filter(
+  //             (sub) => selected_BrokerProductData && sub.product_id !== selected_BrokerProductData.product_id,
+  //           )
+  //         : [];
 
-        await storeSubscriptions.set('subscriptions', updatedSubscriptions);
-        await storeSubscriptions.save();
-        debug('Removed selected product ID from the store');
-      }
+  //       await storeSubscriptions.set('subscriptions', updatedSubscriptions);
+  //       await storeSubscriptions.save();
+  //       debug('Removed selected product ID from the store');
+  //     }
 
-      info('Unsubscribed successfully');
-    } catch (err) {
-      handleError(err);
-    }
-  };
+  //     info('Unsubscribed successfully');
+  //   } catch (err) {
+  //     handleError(err);
+  //   }
+  // };
 
   return (
     <div className={Style.Page}>
-      <div className={Style.Selection_Menu}>
+      {/* <div className={Style.Selection_Menu}>
         <div className={Style.Selection_Title}>Selected: {selected_Broker ? selected_Broker : 'Select Broker'}</div>
         <div className={Style.Selection_Title}>
           Selected:{' '}
           {selected_BrokerProduct && selected_BrokerProductData
             ? selected_BrokerProductData.display_name
             : 'Select Product'}
-        </div>
-      </div>
-
-      <div className={Style.Product_Container}>
+        </div> */}
+      {/* </div> */}
+      {/* <div className={Style.Product_Container}>
         {selected_BrokerProduct && (
           <div>
             {selected_BrokerProductData && (
@@ -128,16 +127,16 @@ const Coinbase_Product: React.FC = () => {
             )}
           </div>
         )}
-      </div>
-
-      <div className={Style.Button_Container}>
+      </div> */}
+      {/* <div className={Style.Button_Container}>
         <button className={Style.Subscribe_Button} onClick={Subscribe_Button}>
           Subscribe
         </button>
         <button className={Style.UnSubscribe_Button} onClick={UnSubscribe_Button}>
           UnSubscribe
         </button>
-      </div>
+      </div> */}
+      //{' '}
     </div>
   );
 };

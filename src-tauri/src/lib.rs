@@ -9,7 +9,7 @@
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 // Dependencies
-use serde_json::json;
+// use serde_json::json;
 // Local Modules
 pub mod apis;
 pub mod commands;
@@ -26,23 +26,23 @@ pub fn run() {
     .plugin(tauri_plugin_store::Builder::new().build())
     .setup(|app| {
       // Tauri Store: Interface
-      let store_window = app.store(".window.json")?;
-      app.manage(store_window.clone());
-      store_window.set("window", json!({
-          "selected_Page": "Home"
-        }));
+      let store_interface = app.store(".interface.json")?;
+      app.manage(store_interface);
+      // store_interface.set("window", json!({
+      //     "selected_Page": "Home"
+      //   }));
 
       // Tauri Store: Broker
-      let store_broker = app.store(".broker.json")?;
-      app.manage(store_broker.clone());
-      store_broker.set(
-        "broker",
-        json!({
-        "selected_Broker": "none",
-        "selected_BrokerProduct": "none",
-        "selected_BrokerProductType": "none"
-      })
-      );
+      // let store_broker = app.store(".broker.json")?;
+      // app.manage(store_broker.clone());
+      // store_broker.set(
+      //   "broker",
+      //   json!({
+      //   "selected_Broker": "none",
+      //   "selected_BrokerProduct": "none",
+      //   "selected_BrokerProductType": "none"
+      // })
+      // );
 
       // Tauri Store: keys
       let store_keys = app.store(".keys.json")?;
@@ -68,25 +68,19 @@ pub fn run() {
         ::new()
         .level(log::LevelFilter::Debug)
         // .clear_targets()
-        // .target(tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Stdout))
-        // TODO - Add stderr target
-        // .target(tauri_plugin_log::Target::new(
-        //     tauri_plugin_log::TargetKind::Stderr,
-        // ))
-        // .format(|out, message, record| out.finish(format_args!("[{}] {}", record.level(), message)))
         .format(|out, message, record| {
           let target = record.target();
           let shortened_target = if let Some(pos) = target.find("src/") { &target[pos..] } else { target };
-          out.finish(format_args!("[{} {}] {}", record.level(), shortened_target, message))
+          out.finish(format_args!("[{}] {}\n[{}]\n", record.level(), message, shortened_target))
         })
         .build()
     )
     // Tauri Command Register
     .invoke_handler(
       tauri::generate_handler![
-        commands::coinbase::connect::coinbase_test_api::coinbase_test_api,
-        commands::coinbase::subscribe::coinbase_list_products::coinbase_list_products,
-        commands::coinbase::subscribe::coinbase_get_selected_product::coinbase_get_selected_product
+        commands::coinbase::coinbase_test_api::coinbase_test_api,
+        commands::coinbase::coinbase_list_products::coinbase_list_products,
+        commands::coinbase::coinbase_get_selected_product::coinbase_get_selected_product
       ]
     )
     .run(tauri::generate_context!())

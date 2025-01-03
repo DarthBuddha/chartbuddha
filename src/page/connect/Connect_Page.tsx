@@ -1,19 +1,20 @@
-//! # Connect Provider Settings
-//!
+//! ---------------------------------------------------------------------------------------------------------------- !//
+//! - Connect Page
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // React
 import React from 'react';
 // Interface
-import { useContext_Broker } from 'interface/Context_Broker';
+import { useContext_Interface } from 'interface/Context_Interface';
 // Components
 import Coinbase_Api from '../../broker/coinbase/Coinbase_Api';
 // CSS Modules
 import Style from './Connect_Page.module.css';
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 const Connect_Page: React.FC = () => {
-  const { selected_Broker } = useContext_Broker();
+  const { selected_Broker } = useContext_Interface();
 
   if (!selected_Broker) {
     return (

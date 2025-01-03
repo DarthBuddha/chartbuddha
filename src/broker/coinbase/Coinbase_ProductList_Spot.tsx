@@ -10,8 +10,8 @@ import React, { useEffect, useState } from 'react';
 // import { debug, error } from '@tauri-apps/plugin-log';
 // import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { Type_BrokerProductData } from 'interface/Type_BrokerProductData';
-import { useContext_Broker } from 'interface/Context_Broker';
+import { Type_BrokerProductData } from 'interface/old/BrokerProductData_Type';
+// import { useContext_Broker } from 'interface/Broker_Context';
 // CSS Modules
 import Style from './Coinbase_ProductList_Spot.module.css';
 //
@@ -19,10 +19,10 @@ import Style from './Coinbase_ProductList_Spot.module.css';
 //
 const Coinbase_ProductList_Spot: React.FC = () => {
   // Set the selected broker product type to SPOT
-  const { setSelected_BrokerProductType, setSelected_BrokerProductData } = useContext_Broker();
-  useEffect(() => {
-    setSelected_BrokerProductType('spot');
-  }, [setSelected_BrokerProductType]);
+  // const { setSelected_BrokerProductType, setSelected_BrokerProductData } = useContext_Broker();
+  // useEffect(() => {
+  //   setSelected_BrokerProductType('spot');
+  // }, [setSelected_BrokerProductType]);
 
   // Get Style for Value
   const getStyleForValue = (value: string) => {
@@ -34,7 +34,7 @@ const Coinbase_ProductList_Spot: React.FC = () => {
 
   // Handle Product Click
   const handleProductClick = (product: Type_BrokerProductData) => {
-    setSelected_BrokerProductData(product);
+    // setSelected_BrokerProductData(product);
   };
 
   // State to store the products

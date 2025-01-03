@@ -1,32 +1,23 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Profile
+//! - Context Interface
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
-import React from 'react';
-// Common
-import Menu_Bar from 'common/bar/Menu_Bar';
-import Status_Bar from 'common/bar/Status_Bar';
-// CSS Modules
-import Style_App from 'common/App_Window.module.css';
-import Style from './Profile.module.css';
+import { createContext, useContext } from 'react';
+// Interface
+import { Type_Interface } from './type/Type_Interface';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Profile: React.FC = () => {
-  return (
-    <div className={Style_App.App_Window}>
-      <Menu_Bar />
-      <div className={Style.Page}>
-        <h1>Profile</h1>
-        <p>User Profile page.</p>
-      </div>
-      <Status_Bar />
-    </div>
-  );
-};
+export const Context_Interface = createContext<Type_Interface | null>(null);
 
-export default Profile;
+export const useContext_Interface = () => {
+  const context = useContext(Context_Interface);
+  if (!context) {
+    throw new Error('useContext_Interface must be used within an Context_Interface');
+  }
+  return context;
+};
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
