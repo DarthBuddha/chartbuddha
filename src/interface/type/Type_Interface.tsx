@@ -11,25 +11,27 @@ import { Type_BrokerProductData } from './Type_BrokerProductData';
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 export interface Type_Interface {
-  // Broker
-  selected_Broker: string | null;
-  setFocus_Broker: React.Dispatch<React.SetStateAction<string | null>>;
-  // Broker Product
-  selected_BrokerProduct: string | null;
-  setFocus_BrokerProduct: React.Dispatch<React.SetStateAction<string | null>>;
-  // Broker Product Data
-  selected_BrokerProductData: Type_BrokerProductData | null;
-  setFocus_BrokerProductData: React.Dispatch<React.SetStateAction<Type_BrokerProductData | null>>;
-  // fetch_BrokerProductData: () => void;
-  // subscribe_BrokerProductData: (product: Type_BrokerProductData | null) => Promise<void>;
-  // unsubscribe_BrokerProductData: (product: Type_BrokerProductData | null) => Promise<void>;
-
   // Page
   selected_Page: string | null;
   setFocus_Page: React.Dispatch<React.SetStateAction<string | null>>;
-  // Product Type
-  selected_PageProductType: string | null;
-  setFocus_PageProductType: React.Dispatch<React.SetStateAction<string | null>>;
+
+  // Connect Page
+  selected_DataApi: string | null;
+  setFocus_DataApi: React.Dispatch<React.SetStateAction<string | null>>;
+
+  // Subscribe Page
+  selected_Broker: string | null;
+  setFocus_Broker: React.Dispatch<React.SetStateAction<string | null>>;
+  selected_ProductType: string | null;
+  setFocus_ProductType: React.Dispatch<React.SetStateAction<string | null>>;
+  selected_ProductName: string | null;
+  setFocus_ProductName: React.Dispatch<React.SetStateAction<string | null>>;
+  selected_ProductData: Type_BrokerProductData | null;
+  setFocus_ProductData: React.Dispatch<React.SetStateAction<Type_BrokerProductData | null>>;
+
+  // fetch_BrokerProductData: () => void;
+  // subscribe_BrokerProductData: (product: Type_BrokerProductData | null) => Promise<void>;
+  // unsubscribe_BrokerProductData: (product: Type_BrokerProductData | null) => Promise<void>;
 }
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

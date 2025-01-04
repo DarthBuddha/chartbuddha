@@ -1,18 +1,17 @@
-//! Subscribe Product Coinbase
-//!
+//! ---------------------------------------------------------------------------------------------------------------- !//
+//! - Subscribe Product Coinbase
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // React
 import React from 'react';
 import Split from 'react-split';
-// Tauri
-// import { invoke } from '@tauri-apps/api/core';
 // Components
 import Coinbase_Product from './Coinbase_Product';
 import Coinbase_Product_List from './Coinbase_ProductList';
 // CSS Modules
 import Style from './Coinbase_Subscribe.module.css';
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Subscribe: React.FC = () => {

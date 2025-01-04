@@ -1,0 +1,40 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.List_Container {
+  height: 100%;
+  width: 100%;
+  background-color: #1e1e1e;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Title_Bar {
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: #292c34;
+  font-size: 1.25rem;
+  color: white;
+  text-align: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.List {
+  height: calc(100% - 30px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #1e1e1e;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Row {
+  text-align: left;
+  padding: 10px 20px;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Row:hover {
+  background-color: rgb(89, 93, 101);
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */

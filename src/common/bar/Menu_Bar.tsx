@@ -7,7 +7,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // Tauri
-// import { info } from '@tauri-apps/plugin-log';
+import { info } from '@tauri-apps/plugin-log';
 // Interface
 import { useContext_Interface } from 'interface/Context_Interface';
 // CSS Module
@@ -16,10 +16,16 @@ import Style from './Bar.module.css';
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Menu_Bar: React.FC = () => {
-  const { setFocus_Page } = useContext_Interface();
+  const { selected_Page, setFocus_Page } = useContext_Interface();
+  const { setFocus_DataApi } = useContext_Interface();
 
   const handleNavLinkClick = (page: string) => {
+    if (selected_Page == 'connect' && page != 'connect') {
+      setFocus_DataApi(null);
+      info('\nData api: null');
+    }
     setFocus_Page(page);
+    info(`\nPage: ${page}`);
   };
 
   return (

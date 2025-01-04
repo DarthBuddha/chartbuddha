@@ -1,38 +1,35 @@
-//! Subscribe
-//
+//! ---------------------------------------------------------------------------------------------------------------- !//
+//! - Subscribe
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // React
 import React from 'react';
 // Common
 import Menu_Bar from 'common/bar/Menu_Bar';
 import Status_Bar from 'common/bar/Status_Bar';
-import List_Providers from 'common/list/List_Broker';
-import List_Subscriptions from 'common/list/Subscriptions_List';
 // Components
-import Subscribe_Page from './Subscribe_Page';
+import Subscribe_Data from './Subscribe_Data';
+import Subscribe_DataApi_List from 'page/subscribe/Subscribe_DataApi_List';
+import Subscribe_DataSub_List from 'page/subscribe/Subscribe_DataSub_List';
 // CSS Modules
-import Style_App from 'common/App_Window.module.css';
 import Style from './Subscribe.module.css';
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
-//
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Subscribe: React.FC = () => {
   return (
-    <div className={Style_App.App_Window}>
+    <div className={Style.Page}>
       <Menu_Bar />
-      <div className={Style.Page}>
+      <div className={Style.Main_Container}>
         <div className={Style.List_Providers}>
-          <List_Providers />
+          <Subscribe_DataApi_List />
         </div>
         <div className={Style.Product_Panel}>
-          <Subscribe_Page />
+          <Subscribe_Data />
         </div>
         <div className={Style.List_Subscriptions}>
-          <List_Subscriptions />
+          <Subscribe_DataSub_List />
         </div>
       </div>
       <Status_Bar />

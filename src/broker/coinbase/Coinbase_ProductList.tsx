@@ -1,27 +1,31 @@
-//! # Subscribe Product Coinbase Product List
-//
+//! ---------------------------------------------------------------------------------------------------------------- !//
+//! - Coinbase ProductList
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // React
 import React, { useState } from 'react';
+// Tauri
+import { info } from '@tauri-apps/plugin-log';
 // Interface
-// import { useContext_Broker } from 'interface/Broker_Context';
+import { useContext_Interface } from 'interface/Context_Interface';
 // Components
 import Coinbase_ProductList_Spot from './Coinbase_ProductList_Spot';
 import Coinbase_ProductList_Futures from './Coinbase_ProductList_Futures';
 import Coinbase_ProductList_Perps from './Coinbase_ProductList_Perps';
 // CSS Modules
 import Style from './Coinbase_ProductList.module.css';
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_Product_List: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('spot');
-  // const { setSelected_BrokerProductType } = useContext_Broker();
+  const { setFocus_ProductType } = useContext_Interface();
 
   // Handle Broker Click
   const handleClick = (productType: string) => {
-    // setSelected_BrokerProductType(productType);
+    setFocus_ProductType(productType);
+    info(`\nBroker Product Type: ${productType}`);
   };
 
   const renderActiveWidget = () => {

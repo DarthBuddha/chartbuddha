@@ -1,5 +1,5 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! Coinbase Api
+//! - Coinbase Connect
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -10,7 +10,7 @@ import { getStore } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // CSS Modules
-import Style from './Coinbase_Api.module.css';
+import Style from './Coinbase_Connect.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -25,7 +25,7 @@ const store = await (async () => {
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Coinbase_Api: React.FC = () => {
+const Coinbase_Connect: React.FC = () => {
   // State for storing API key and secret
   const [apiKey, setApiKey] = useState('');
   const [apiSecret, setApiSecret] = useState('');
@@ -203,6 +203,6 @@ const Coinbase_Api: React.FC = () => {
   );
 };
 
-export default Coinbase_Api;
+export default Coinbase_Connect;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -1,7 +1,8 @@
+//! ---------------------------------------------------------------------------------------------------------------- !//
 //! Coinbase ProductList Spot
-//
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // React
 import React, { useEffect, useState } from 'react';
 // Tauri
@@ -10,11 +11,11 @@ import React, { useEffect, useState } from 'react';
 // import { debug, error } from '@tauri-apps/plugin-log';
 // import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { Type_BrokerProductData } from 'interface/old/BrokerProductData_Type';
+import { Type_BrokerProductData } from 'interface/type/Type_BrokerProductData';
 // import { useContext_Broker } from 'interface/Broker_Context';
 // CSS Modules
 import Style from './Coinbase_ProductList_Spot.module.css';
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_ProductList_Spot: React.FC = () => {

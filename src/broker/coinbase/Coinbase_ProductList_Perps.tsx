@@ -1,7 +1,8 @@
+//! ---------------------------------------------------------------------------------------------------------------- !//
 //! Coinbase ProductList Perpetual
-//
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // React
 import React, { useState } from 'react';
 // Tauri
@@ -9,11 +10,11 @@ import React, { useState } from 'react';
 // import { listen } from '@tauri-apps/api/event';
 // import { info, error } from '@tauri-apps/plugin-log';
 // Interface
-import { Type_BrokerProductData } from 'interface/old/BrokerProductData_Type';
+import { Type_BrokerProductData } from 'interface/type/Type_BrokerProductData';
 // import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
 import Style from './Coinbase_ProductList_Perps.module.css';
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 const Coinbase_ProductList_Perpetual: React.FC = () => {

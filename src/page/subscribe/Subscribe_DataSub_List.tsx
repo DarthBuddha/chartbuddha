@@ -1,18 +1,19 @@
-//! Subscriptions List
-//!
+//! ---------------------------------------------------------------------------------------------------------------- !//
+//! - Subscribe DataSub List
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // React
 import React, { useState, useEffect } from 'react';
 // Tauri
 import { getStore, Store } from '@tauri-apps/plugin-store';
-import { invoke } from '@tauri-apps/api/core';
-import { error } from '@tauri-apps/plugin-log';
+// import { invoke } from '@tauri-apps/api/core';
+// import { error } from '@tauri-apps/plugin-log';
 // Interface
 // import { useContext_Broker } from 'interface/Broker_Context';
 // CSS Modules
-import Style from './List.module.css';
-//
+import Style from './Subscribe_DataSub_List.module.css';
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 let store_subscriptions: Store | null = null;
@@ -24,7 +25,7 @@ getStore('.subscriptions.json').then((store) => {
 //
 // const store = await getStore('.subscriptions.json');
 //
-const Subscriptions_List: React.FC = () => {
+const Subscribe_DataSub_List: React.FC = () => {
   // const { setSelected_Broker, setSelected_BrokerProduct } = useContext_Broker();
   const [subscriptions, setSubscriptions] = useState<{ id: string; product_id: string }[]>([]);
   const [storeSubscriptions, setStoreSubscriptions] = useState<{
@@ -74,6 +75,6 @@ const Subscriptions_List: React.FC = () => {
   );
 };
 
-export default Subscriptions_List;
+export default Subscribe_DataSub_List;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

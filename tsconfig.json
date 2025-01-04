@@ -17,6 +17,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "forceConsistentCasingInFileNames": true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -24,11 +25,14 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "paths": {
-      "interface/*": [
-        "interface/*"
+      "broker/*": [
+        "broker/*"
       ],
       "common/*": [
         "common/*"
+      ],
+      "interface/*": [
+        "interface/*"
       ]
     }
   },
