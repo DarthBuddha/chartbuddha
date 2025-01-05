@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 // import { listen } from '@tauri-apps/api/event';
 // import { info, error } from '@tauri-apps/plugin-log';
 // Interface
-import { Type_BrokerProductData } from 'interface/type/Type_BrokerProductData';
+import { Type_BrokerProductData } from 'interface/Type_ProductData';
 // import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
 import Style from './Coinbase_ProductList_Futures.module.css';

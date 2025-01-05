@@ -1,5 +1,5 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Connect Data API
+//! - Connect Data
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -8,15 +8,15 @@ import React from 'react';
 // Interface
 import { useContext_Interface } from 'interface/Context_Interface';
 // Components
-import Coinbase_Connect from 'broker/coinbase/Coinbase_Connect';
+import Coinbase_Connect from 'page/connect/coinbase/Coinbase_Connect';
 // CSS Modules
-import Style from './Connect_DataApi.module.css';
+import Style from './Connect_Data.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-const Connect_DataApi: React.FC = () => {
-  const { selected_DataApi } = useContext_Interface();
+const Connect_Data: React.FC = () => {
+  const { selected_Api } = useContext_Interface();
 
-  if (!selected_DataApi) {
+  if (!selected_Api) {
     return (
       <div className={Style.Component}>
         <div className={Style.Title}>Select a Provider</div>
@@ -25,11 +25,11 @@ const Connect_DataApi: React.FC = () => {
     );
   }
 
-  switch (selected_DataApi) {
+  switch (selected_Api) {
     case 'coinbase':
       return (
         <div className={Style.Component}>
-          <div className={Style.Title}>Coinbase</div>
+          {/* <div className={Style.Title}>Coinbase</div> */}
           <Coinbase_Connect />
         </div>
       );
@@ -50,6 +50,6 @@ const Connect_DataApi: React.FC = () => {
   }
 };
 
-export default Connect_DataApi;
+export default Connect_Data;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

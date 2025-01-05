@@ -1,23 +1,25 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Context Interface
+//! - Type ApiPermissions
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
-import { createContext, useContext } from 'react';
-// Interface
-import { Type_Interface } from './Type_Interface';
+import { createContext } from 'react';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export const Context_Interface = createContext<Type_Interface | null>(null);
+export interface Type_ApiPermissions {
+  can_view: boolean;
+  can_trade: boolean;
+  can_transfer: boolean;
+  portfolio_uuid: string;
+  portfolio_type: string;
+}
+//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//
+const Context_ProductData = createContext<Type_ApiPermissions | null>(null);
 
-export const useContext_Interface = () => {
-  const context = useContext(Context_Interface);
-  if (!context) {
-    throw new Error('useContext_Interface must be used within an Context_Interface');
-  }
-  return context;
-};
+export default Context_ProductData;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -18,14 +18,24 @@ import Style from './Bar.module.css';
 const Menu_Bar: React.FC = () => {
   const { selected_Page, setFocus_Page } = useContext_Interface();
   const { setFocus_DataApi } = useContext_Interface();
+  const { setFocus_ApiPermissions } = useContext_Interface();
+  const { setFocus_Broker } = useContext_Interface();
+  const { setFocus_ProductType } = useContext_Interface();
+  const { setFocus_ProductName } = useContext_Interface();
 
   const handleNavLinkClick = (page: string) => {
     if (selected_Page == 'connect' && page != 'connect') {
       setFocus_DataApi(null);
-      info('\nData api: null');
+      setFocus_ApiPermissions(null);
+      info(`Reset Values\nData Api: null\nApi Permissions: null`);
+    } else if (selected_Page == 'subscribe' && page != 'subscribe') {
+      setFocus_Broker(null);
+      setFocus_ProductType(null);
+      setFocus_ProductName(null);
+      info(`Reset Values\nBroker: null\nProduct Type: null\nProduct Name: null`);
     }
     setFocus_Page(page);
-    info(`\nPage: ${page}`);
+    info(`Selected Page: ${page}`);
   };
 
   return (

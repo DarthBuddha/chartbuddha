@@ -1,5 +1,5 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Subscribe DataSub List
+//! - Subscribe Sub List
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -12,7 +12,7 @@ import { getStore, Store } from '@tauri-apps/plugin-store';
 // Interface
 // import { useContext_Broker } from 'interface/Broker_Context';
 // CSS Modules
-import Style from './Subscribe_DataSub_List.module.css';
+import Style from './Subscribe_Sub_List.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -25,7 +25,7 @@ getStore('.subscriptions.json').then((store) => {
 //
 // const store = await getStore('.subscriptions.json');
 //
-const Subscribe_DataSub_List: React.FC = () => {
+const Subscribe_Sub_List: React.FC = () => {
   // const { setSelected_Broker, setSelected_BrokerProduct } = useContext_Broker();
   const [subscriptions, setSubscriptions] = useState<{ id: string; product_id: string }[]>([]);
   const [storeSubscriptions, setStoreSubscriptions] = useState<{
@@ -75,6 +75,6 @@ const Subscribe_DataSub_List: React.FC = () => {
   );
 };
 
-export default Subscribe_DataSub_List;
+export default Subscribe_Sub_List;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

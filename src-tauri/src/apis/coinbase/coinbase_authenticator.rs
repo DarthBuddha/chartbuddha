@@ -43,24 +43,27 @@ pub async fn authenticate_api_request(
   app_handle: AppHandle<Wry>,
   authenticator: &Authenticator
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
-  // const PAGE: &str = "authenticator.rs";
   // Step 1: Load API key and secret from the store
-  let store = app_handle.store(".keys.json").map_err(|e| e.to_string())?;
-  let api_key: String = store
-    .get("coinbase.api_key")
-    .expect("Failed to get value from store")
+  let store = app_handle.store(".keys.json")?;
+
+  let coinbase: serde_json::Value = store.get("coinbase").expect("Failed to get value from store");
+
+  let api_key: String = coinbase
+    .get("api_key")
+    .expect("Failed to get api_key from coinbase object")
     .as_str()
-    .expect("Failed to convert value to string")
+    .expect("Failed to convert api_key to string")
     .to_string();
-  let api_secret: String = store
-    .get("coinbase.api_secret")
-    .expect("Failed to get value from store")
+
+  let api_secret: String = coinbase
+    .get("api_secret")
+    .expect("Failed to get api_secret from coinbase object")
     .as_str()
-    .expect("Failed to convert value to string")
+    .expect("Failed to convert api_secret to string")
     .to_string();
 
   // Convert the API Secret to Ensure Proper PEM Format
-  let api_secret = api_secret.replace("\\n", "\n");
+  let api_secret = api_secret.to_string().replace("\\n", "\n");
 
   // Get the current UNIX time
   let now = match SystemTime::now().duration_since(UNIX_EPOCH) {

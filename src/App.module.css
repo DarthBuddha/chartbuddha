@@ -64,13 +64,12 @@ h3 {
 }
 
 p {
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 h1,
 h2,
-h3,
-p {
+h3 {
   text-align: center;
 }
 

@@ -1,5 +1,5 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Type Broker Product Data
+//! - Type Product Data
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -8,7 +8,7 @@ import { createContext } from 'react';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-export interface Type_BrokerProductData {
+export interface Type_ProductData {
   product_id: string;
   price?: string;
   price_percentage_change_24h?: string;
@@ -40,8 +40,8 @@ export interface Type_BrokerProductData {
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Context_BrokerProductData = createContext<Type_BrokerProductData | null>(null);
+const Context_ProductData = createContext<Type_ProductData | null>(null);
 
-export default Context_BrokerProductData;
+export default Context_ProductData;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

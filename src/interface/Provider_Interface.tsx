@@ -7,32 +7,35 @@
 import React, { useState } from 'react';
 // Interface
 import { Context_Interface } from './Context_Interface';
-import { Type_BrokerProductData } from './type/Type_BrokerProductData';
+import { Type_ProductData } from './Type_ProductData';
+import { Type_ApiPermissions } from './Type_ApiPermissions';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 export const Provider_Interface: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Page
+  // Global
   const [selected_Page, setFocus_Page] = useState<string | null>(null);
-  // Connect Page
-  const [selected_DataApi, setFocus_DataApi] = useState<string | null>(null);
-  // Broker
+  // Page: Connect
+  const [selected_Api, setFocus_Api] = useState<string | null>(null);
+  const [selected_ApiPermissions, setFocus_ApiPermissions] = useState<Type_ApiPermissions | null>(null);
+  // Page: Subscribe
   const [selected_Broker, setFocus_Broker] = useState<string | null>(null);
-  // Product
   const [selected_ProductType, setFocus_ProductType] = useState<string | null>(null);
   const [selected_ProductName, setFocus_ProductName] = useState<string | null>(null);
-  const [selected_ProductData, setFocus_ProductData] = useState<Type_BrokerProductData | null>(null);
+  const [selected_ProductData, setFocus_ProductData] = useState<Type_ProductData | null>(null);
 
   return (
     <Context_Interface.Provider
       value={{
-        // Variables - Global
+        // Global
         selected_Page,
         setFocus_Page,
-        // Variables - Connect Page
-        selected_DataApi,
-        setFocus_DataApi,
-        // Variables - Subscribe Page
+        // Page: Connect
+        selected_Api,
+        setFocus_Api,
+        selected_ApiPermissions,
+        setFocus_ApiPermissions,
+        // Page: Subscribe
         selected_Broker,
         setFocus_Broker,
         selected_ProductType,

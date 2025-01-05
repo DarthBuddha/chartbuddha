@@ -9,8 +9,8 @@ import React from 'react';
 import Menu_Bar from 'common/bar/Menu_Bar';
 import Status_Bar from 'common/bar/Status_Bar';
 // Components
-import Connect_DataApi from './Connect_DataApi';
-import Connect_DataApi_List from './Connect_DataApi_List';
+import Connect_Data from './Connect_Data';
+import Connect_Api_List from './Connect_Api_List';
 // CSS Modules
 import Style from './Connect.module.css';
 
@@ -22,10 +22,10 @@ const Connect: React.FC = () => {
       <Menu_Bar />
       <div className={Style.Main_Container}>
         <div className={Style.List_Container}>
-          <Connect_DataApi_List />
+          <Connect_Api_List />
         </div>
         <div className={Style.Provider_Container}>
-          <Connect_DataApi />
+          <Connect_Data />
         </div>
       </div>
       <Status_Bar />

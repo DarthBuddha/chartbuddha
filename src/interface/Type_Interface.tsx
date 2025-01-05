@@ -6,7 +6,8 @@
 // React
 import { createContext } from 'react';
 // Interface
-import { Type_BrokerProductData } from './Type_BrokerProductData';
+import { Type_ProductData } from './Type_ProductData';
+import { Type_ApiPermissions } from './Type_ApiPermissions';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
@@ -16,8 +17,10 @@ export interface Type_Interface {
   setFocus_Page: React.Dispatch<React.SetStateAction<string | null>>;
 
   // Connect Page
-  selected_DataApi: string | null;
-  setFocus_DataApi: React.Dispatch<React.SetStateAction<string | null>>;
+  selected_Api: string | null;
+  setFocus_Api: React.Dispatch<React.SetStateAction<string | null>>;
+  selected_ApiPermissions: Type_ApiPermissions | null;
+  setFocus_ApiPermissions: React.Dispatch<React.SetStateAction<Type_ApiPermissions | null>>;
 
   // Subscribe Page
   selected_Broker: string | null;
@@ -26,8 +29,8 @@ export interface Type_Interface {
   setFocus_ProductType: React.Dispatch<React.SetStateAction<string | null>>;
   selected_ProductName: string | null;
   setFocus_ProductName: React.Dispatch<React.SetStateAction<string | null>>;
-  selected_ProductData: Type_BrokerProductData | null;
-  setFocus_ProductData: React.Dispatch<React.SetStateAction<Type_BrokerProductData | null>>;
+  selected_ProductData: Type_ProductData | null;
+  setFocus_ProductData: React.Dispatch<React.SetStateAction<Type_ProductData | null>>;
 
   // fetch_BrokerProductData: () => void;
   // subscribe_BrokerProductData: (product: Type_BrokerProductData | null) => Promise<void>;

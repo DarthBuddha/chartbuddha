@@ -71,7 +71,7 @@ pub fn run() {
         .format(|out, message, record| {
           let target = record.target();
           let shortened_target = if let Some(pos) = target.find("src/") { &target[pos..] } else { target };
-          out.finish(format_args!("[{}] {}\n[{}]\n", record.level(), message, shortened_target))
+          out.finish(format_args!("[{}]\n{}\n[{}]\n", record.level(), message, shortened_target))
         })
         .build()
     )
