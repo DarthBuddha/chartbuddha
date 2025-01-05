@@ -1,42 +1,31 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Subscribe
+//! - Profile
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
 // Common
-import Menu_Bar from 'common/bar/Menu_Bar';
-import Status_Bar from 'common/bar/Status_Bar';
-// Components
-import Subscribe_Data from './Subscribe_Data';
-import Subscribe_Api_List from 'page/subscribe/Subscribe_Api_List';
-import Subscribe_Sub_List from 'page/subscribe/Subscribe_Sub_List';
+import Menu_Bar from 'common/MenuBar';
+import Status_Bar from 'common/StatusBar';
 // CSS Modules
-import Style from './Subscribe.module.css';
+import Style from './Profile.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Subscribe: React.FC = () => {
+const Profile: React.FC = () => {
   return (
     <div className={Style.Page}>
       <Menu_Bar />
       <div className={Style.Main_Container}>
-        <div className={Style.List_Providers}>
-          <Subscribe_Api_List />
-        </div>
-        <div className={Style.Product_Panel}>
-          <Subscribe_Data />
-        </div>
-        <div className={Style.List_Subscriptions}>
-          <Subscribe_Sub_List />
-        </div>
+        <h1>Profile</h1>
+        <p>User Profile page.</p>
       </div>
       <Status_Bar />
     </div>
   );
 };
 
-export default Subscribe;
+export default Profile;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

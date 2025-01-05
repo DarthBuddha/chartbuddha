@@ -1,31 +1,30 @@
-//! # Analyze
+//! # About Page
 //!
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 // React
 import React from 'react';
 // Common
-import Menu_Bar from 'common/bar/Menu_Bar';
-import Status_Bar from 'common/bar/Status_Bar';
+import Menu_Bar from 'common/MenuBar';
+import Status_Bar from 'common/StatusBar';
 // CSS Modules
-import Style_App from 'common/App_Window.module.css';
-import Style from './Analyze.module.css';
+import Style from './About.module.css';
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Analyze: React.FC = () => {
+const About: React.FC = () => {
   return (
-    <div className={Style_App.App_Window}>
+    <div className={Style.Page}>
       <Menu_Bar />
-      <div className={Style.Page}>
-        <h1>Analyze</h1>
-        <p>Analyze page.</p>
+      <h1>About</h1>
+      <div className={Style.Main_Container}>
+        <p>About page.</p>
       </div>
       <Status_Bar />
     </div>
   );
 };
 
-export default Analyze;
+export default About;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

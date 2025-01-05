@@ -1,38 +1,37 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Connect
+//! - ChartBuddha
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
-// Common
-import Menu_Bar from 'common/bar/Menu_Bar';
-import Status_Bar from 'common/bar/Status_Bar';
 // Components
-import Connect_Data from './Connect_Data';
-import Connect_Api_List from './Connect_Api_List';
+import MenuBar from 'common/MenuBar';
+import Index from 'common/Index';
+import StatusBar from 'common/StatusBar';
 // CSS Modules
-import Style from './Connect.module.css';
+import Style from './ChartBuddha.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Connect: React.FC = () => {
+const ChartBuddha: React.FC = () => {
   return (
-    <div className={Style.Page}>
-      <Menu_Bar />
-      <div className={Style.Main_Container}>
-        <div className={Style.List_Container}>
-          <Connect_Api_List />
-        </div>
-        <div className={Style.Provider_Container}>
-          <Connect_Data />
-        </div>
+    <div className={Style.ChartBuddha}>
+      <div className={Style.MenuBar_Container}>
+        <MenuBar />
       </div>
-      <Status_Bar />
+
+      <div className={Style.Page_Container}>
+        <Index />
+      </div>
+
+      <div className={Style.StatusBar_Container}>
+        <StatusBar />
+      </div>
     </div>
   );
 };
 
-export default Connect;
+export default ChartBuddha;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

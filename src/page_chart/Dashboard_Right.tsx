@@ -4,12 +4,12 @@
 //! ##### dashboard/trades/TradesPanel.tsx
 //
 // Dependencies
-import React from "react";
-import Split from "react-split";
+import React from 'react';
+import Split from 'react-split';
 // Modules
-import TimeSales from "./trades/TimeSales";
+import TimeSales from './trades/TimeSales';
 // CSS
-import Styles from "./Dashboard_Right.module.css";
+import Styles from './Dashboard_Right.module.css';
 //
 /*--------------------------------------< Page >--------------------------------------*/
 const Dashboard_Right: React.FC = () => {
@@ -35,7 +35,7 @@ const Dashboard_Right: React.FC = () => {
           <TimeSales title="All Trades" filter={null} />
         </div>
       </Split>
-    </div >
+    </div>
   );
 };
 

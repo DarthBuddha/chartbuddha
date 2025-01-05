@@ -6,28 +6,23 @@
 // React
 import React from 'react';
 // Tauri
-import { info } from '@tauri-apps/plugin-log';
+import { load } from '@tauri-apps/plugin-store';
+// import { info } from '@tauri-apps/plugin-log';
 // Interface
-import { useContext_Interface } from 'interface/Context_Interface';
+// import { useContext_Interface } from 'interface/Context_Interface';
 // CSS Modules
 import Style from './Connect_Api_List.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
+const store = await load('.interface.json');
+//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//
 const Connect_Api_List: React.FC = () => {
-  const { selected_Api, setFocus_Api } = useContext_Interface();
-  const { setFocus_ApiPermissions } = useContext_Interface();
-
   // Handle Data Api Click
-  const handleClick = (api: string) => {
-    if (selected_Api != api) {
-      setFocus_Api(api);
-      info(`Api: ${api}`);
-    } else {
-      setFocus_Api(null);
-      setFocus_ApiPermissions(null);
-      info(`Reset Values\nApi: null\nApi Permissions: null`);
-    }
+  const handleClick = async (api: string) => {
+    await store.set('connect', { api: api });
   };
 
   return (

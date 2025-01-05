@@ -7,20 +7,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 // Index
-import Index from './page/Index';
+import ChartBuddha from './ChartBuddha';
 // Interface
 import { Provider_Interface } from 'interface/Provider_Interface';
-// CSS Module
-import Style from './App.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <Provider_Interface>
-      <div className={Style.App}>
-        <Index />
-      </div>
+      <ChartBuddha />
     </Provider_Interface>
   </StrictMode>,
 );

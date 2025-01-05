@@ -1,17 +1,18 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 .Page {
-  flex-grow: 1;
-  width: 100%;
-  padding: var(--panel-padding);
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  flex: 1;
+  overflow: hidden;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-.Page {
+.Main_Container {
+  height: 100%;
+  width: 100%;
+  text-align: center;
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 

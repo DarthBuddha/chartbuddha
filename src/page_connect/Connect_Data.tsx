@@ -5,18 +5,25 @@
 
 // React
 import React from 'react';
+// Tauri
+import { load } from '@tauri-apps/plugin-store';
 // Interface
-import { useContext_Interface } from 'interface/Context_Interface';
+// import { useContext_Interface } from 'interface/Context_Interface';
 // Components
-import Coinbase_Connect from 'page/connect/coinbase/Coinbase_Connect';
+import Coinbase_Connect from 'page_connect/coinbase/Coinbase_Connect';
 // CSS Modules
 import Style from './Connect_Data.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
+//
+const store = await load('.interface.json');
+const selected = await store.get<{ api: string }>('connect');
+//
+/* ------------------------------------------------------------------------------------------------------------------ */
 const Connect_Data: React.FC = () => {
-  const { selected_Api } = useContext_Interface();
+  // const { selected_Api } = useContext_Interface();
 
-  if (!selected_Api) {
+  if (!selected) {
     return (
       <div className={Style.Component}>
         <div className={Style.Title}>Select a Provider</div>
@@ -25,7 +32,7 @@ const Connect_Data: React.FC = () => {
     );
   }
 
-  switch (selected_Api) {
+  switch (selected.api) {
     case 'coinbase':
       return (
         <div className={Style.Component}>

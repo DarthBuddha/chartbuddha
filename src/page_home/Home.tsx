@@ -1,32 +1,31 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Profile
+//! - Home
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
 // Common
-import Menu_Bar from 'common/bar/Menu_Bar';
-import Status_Bar from 'common/bar/Status_Bar';
+import Menu_Bar from 'common/MenuBar';
+import Status_Bar from 'common/StatusBar';
 // CSS Modules
-import Style_App from 'common/App_Window.module.css';
-import Style from './Profile.module.css';
+import Style from './Home.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Profile: React.FC = () => {
+const Home: React.FC = () => {
   return (
-    <div className={Style_App.App_Window}>
+    <div className={Style.Page}>
       <Menu_Bar />
-      <div className={Style.Page}>
-        <h1>Profile</h1>
-        <p>User Profile page.</p>
+      <div className={Style.Main_Container}>
+        <h1>Welcome to ChartBuddha</h1>
+        <p>This is your home page.</p>
       </div>
       <Status_Bar />
     </div>
   );
 };
 
-export default Profile;
+export default Home;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
