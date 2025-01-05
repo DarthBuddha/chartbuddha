@@ -9,7 +9,7 @@ import { createRoot } from 'react-dom/client';
 // Index
 import ChartBuddha from './ChartBuddha';
 // Interface
-import { Provider_Interface } from 'interface/Provider_Interface';
+import { Provider_Interface } from 'interface/old/Provider_Interface';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //

@@ -1,38 +1,36 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Connect
-//! ---------------------------------------------------------------------------------------------------------------- !//
-/* ------------------------------------------------------------------------------------------------------------------ */
+// ------------------------------------------------------------------------------------------------------------------ //
+//! - Connect.tsx
+// ------------------------------------------------------------------------------------------------------------------ //
 
 // React
 import React from 'react';
-// Common
-import Menu_Bar from 'MenuBar';
-import Status_Bar from 'StatusBar';
+// Hooks
+import { usePageConnect } from 'interface/usePageConnect';
 // Components
 import Connect_Data from './Connect_Data';
-import Connect_Api_List from './Connect_Api_List';
+import Connect_ApiList from './Connect_ApiList';
 // CSS Modules
 import Style from './Connect.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 const Connect: React.FC = () => {
+  const { dataApi, setDataApi } = usePageConnect();
+
   return (
-    <div className={Style.Page}>
-      <Menu_Bar />
+    <div className={Style.Connect}>
       <div className={Style.Main_Container}>
         <div className={Style.List_Container}>
-          <Connect_Api_List />
+          <Connect_ApiList setDataApi={setDataApi} />
         </div>
         <div className={Style.Provider_Container}>
-          <Connect_Data />
+          <Connect_Data dataApi={dataApi} />
         </div>
       </div>
-      <Status_Bar />
     </div>
   );
 };
 
 export default Connect;
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */

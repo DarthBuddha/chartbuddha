@@ -1,35 +1,31 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
-//! - MenuBar
-//! ---------------------------------------------------------------------------------------------------------------- !//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! - MenuBar.tsx
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
 // Tauri
 import { load } from '@tauri-apps/plugin-store';
-// import { info } from '@tauri-apps/plugin-log';
-// Interface
-// import { useContext_Interface } from 'interface/Context_Interface';
 // CSS Module
-import Style from './Bar.module.css';
+import Style from './MenuBar.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
-const store = await load('.interface.json');
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
 
-interface MenuBarProps {
+interface MenuBar_Props {
   setPage: (page: string) => void;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
-const MenuBar: React.FC<MenuBarProps> = ({ setPage }) => {
+
+const store = await load('.interface.json');
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+const MenuBar: React.FC<MenuBar_Props> = ({ setPage }) => {
   // Handle Click
-  const handleClick = async (page: string) => {
-    await store.set('interface', { page: page });
-    setPage(page);
+  const handleClick = async (selectedPage: string) => {
+    await store.set('interface', { selectedPage: selectedPage });
+    setPage(selectedPage);
   };
 
   return (
@@ -48,8 +44,8 @@ const MenuBar: React.FC<MenuBarProps> = ({ setPage }) => {
           Subscribe
         </div>
 
-        <div className={Style.Button} onClick={() => handleClick('chart')}>
-          Chart
+        <div className={Style.Button} onClick={() => handleClick('dashboard')}>
+          Dashboard
         </div>
 
         <div className={Style.Button} onClick={() => handleClick('analyze')}>
@@ -70,5 +66,5 @@ const MenuBar: React.FC<MenuBarProps> = ({ setPage }) => {
 };
 
 export default MenuBar;
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */

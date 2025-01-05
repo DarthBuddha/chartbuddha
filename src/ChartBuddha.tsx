@@ -1,6 +1,5 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
-//! - ChartBuddha
-//! ---------------------------------------------------------------------------------------------------------------- !//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! - ChartBuddha.tsx
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
@@ -12,12 +11,12 @@ import MenuBar from 'MenuBar';
 import StatusBar from 'StatusBar';
 // Components
 import Analyze from './analyze/Analyze';
-import Chart from './page_chart/Chart';
-import Connect from './page_connect/Connect';
+import Dashboard from './dashboard/Dashboard';
+import Connect from './connect/Connect';
 import Home from './home/Home';
 import News from './news/News';
 import Profile from './profile/Profile';
-import Subscribe from './page_subscribe/Subscribe';
+import Subscribe from './subscribe/Subscribe';
 // CSS Modules
 import Style from './ChartBuddha.module.css';
 
@@ -39,8 +38,8 @@ const ChartBuddha: React.FC = () => {
     switch (selectedPage) {
       case 'analyze':
         return <Analyze />;
-      case 'chart':
-        return <Chart />;
+      case 'dashboard':
+        return <Dashboard />;
       case 'connect':
         return <Connect />;
       case 'home':

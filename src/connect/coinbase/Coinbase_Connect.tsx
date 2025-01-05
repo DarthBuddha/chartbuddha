@@ -1,6 +1,5 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Coinbase Connect
-//! ---------------------------------------------------------------------------------------------------------------- !//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! - Coinbase_Connect.tsx
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
@@ -10,8 +9,8 @@ import { getStore } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { useContext_Interface } from 'interface/Context_Interface';
-import { Type_ApiPermissions } from 'interface/Type_ApiPermissions';
+import { useContext_Interface } from 'interface/old/Context_Interface';
+import { Type_ApiPermissions } from 'interface/old/Type_ApiPermissions';
 // CSS Modules
 import Style from './Coinbase_Connect.module.css';
 
@@ -19,6 +18,8 @@ import Style from './Coinbase_Connect.module.css';
 //
 const store = await getStore('.keys.json');
 //
+/* ------------------------------------------------------------------------------------------------------------------ */
+
 const handleError = (err: unknown) => {
   if (err instanceof Error) {
     error(err.message);

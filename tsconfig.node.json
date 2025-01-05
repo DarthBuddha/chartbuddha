@@ -3,6 +3,8 @@
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true

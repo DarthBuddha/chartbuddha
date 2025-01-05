@@ -1,25 +1,23 @@
-//! # Chart
-//!
+//! ---------------------------------------------------------------------------------------------------------------- !//
+//! - Dashboard
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
+
 // React
 import React from 'react';
 import Split from 'react-split';
-// Common
-import Menu_Bar from 'MenuBar';
-import Status_Bar from 'StatusBar';
 // Components
 import Dashboard_Center from './Dashboard_Center';
 import Dashboard_Left from './Dashboard_Left';
 import Dashboard_Right from './Dashboard_Right';
 // CSS Modules
 import Styles from './Dashboard.module.css';
-//
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Chart: React.FC = () => {
+const Dashboard: React.FC = () => {
   return (
-    <div className={Styles.Dashboard_Page}>
-      <Menu_Bar />
+    <div className={Styles.Dashboard}>
       <Split
         className={Styles.Split}
         sizes={[10, 80, 10]}
@@ -42,11 +40,10 @@ const Chart: React.FC = () => {
           <Dashboard_Right />
         </div>
       </Split>
-      <Status_Bar />
     </div>
   );
 };
 
-export default Chart;
+export default Dashboard;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -9,7 +9,7 @@
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 // Dependencies
-// use serde_json::json;
+use serde_json::json;
 // Local Modules
 pub mod apis;
 pub mod commands;
@@ -20,29 +20,21 @@ pub mod commands;
 pub fn run() {
   tauri::Builder
     ::default()
+
     // Tauri Plugin Shell Setup
     .plugin(tauri_plugin_shell::init())
+
     // Tauri Store Setup
     .plugin(tauri_plugin_store::Builder::new().build())
-    .setup(|app| {
-      // Tauri Store: Interface
-      let store_interface = app.store(".interface.json")?;
-      app.manage(store_interface);
-      // store_interface.set("window", json!({
-      //     "selected_Page": "Home"
-      //   }));
 
-      // Tauri Store: Broker
-      // let store_broker = app.store(".broker.json")?;
-      // app.manage(store_broker.clone());
-      // store_broker.set(
-      //   "broker",
-      //   json!({
-      //   "selected_Broker": "none",
-      //   "selected_BrokerProduct": "none",
-      //   "selected_BrokerProductType": "none"
-      // })
-      // );
+    // Tauri Store: Interface
+    .setup(|app| {
+      let store_interface = app.store(".interface.json")?;
+      app.manage(store_interface.clone());
+      // Set the initial interface state
+      store_interface.set("interface", json!({
+        "selectedPage": "home"
+      }));
 
       // Tauri Store: keys
       let store_keys = app.store(".keys.json")?;
@@ -52,11 +44,6 @@ pub fn run() {
       let store_subscriptions = app.store(".subscriptions.json")?;
       app.manage(store_subscriptions);
 
-      // Store: Coinbase Products
-      // let store_coinbase_products = app.store("coinbase_products.json")?;
-      // app.manage(store_coinbase_products);
-
-      //
       Ok(())
     })
     // .plugin(tauri_plugin_log::Builder::new().build())

@@ -1,0 +1,57 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*! StatusBar.module.css !*/
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.MenuBar,
+.StatusBar {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(41, 44, 52);
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.Container_Left,
+.Container_Center,
+.Container_Right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Container_Center {
+  flex-grow: 1;
+  justify-content: center;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.Button {
+  height: 100%;
+  width: 200px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Button:hover {
+  background-color: rgb(89, 93, 101);
+  font-weight: bold;
+}
+
+.active {
+  background-color: rgb(156, 159, 163);
+  font-weight: bold;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */

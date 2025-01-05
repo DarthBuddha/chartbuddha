@@ -1,13 +1,9 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Profile
-//! ---------------------------------------------------------------------------------------------------------------- !//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! - Profile.tsx
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
-// Common
-import Menu_Bar from 'MenuBar';
-import Status_Bar from 'StatusBar';
 // CSS Modules
 import Style from './Profile.module.css';
 
@@ -15,13 +11,11 @@ import Style from './Profile.module.css';
 //
 const Profile: React.FC = () => {
   return (
-    <div className={Style.Page}>
-      <Menu_Bar />
+    <div className={Style.Profile}>
       <div className={Style.Main_Container}>
         <h1>Profile</h1>
         <p>User Profile page.</p>
       </div>
-      <Status_Bar />
     </div>
   );
 };

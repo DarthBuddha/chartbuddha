@@ -1,28 +1,31 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Connect API List
-//! ---------------------------------------------------------------------------------------------------------------- !//
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! - Connect_APIList.tsx
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
 // Tauri
 import { load } from '@tauri-apps/plugin-store';
-// import { info } from '@tauri-apps/plugin-log';
-// Interface
-// import { useContext_Interface } from 'interface/Context_Interface';
 // CSS Modules
-import Style from './Connect_Api_List.module.css';
+import Style from './Connect_ApiList.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
-const store = await load('.interface.json');
-//
+
+interface Connect_ApiList_Props {
+  setDataApi: (dataApi: string) => void;
+}
+
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
-const Connect_Api_List: React.FC = () => {
+
+const store = await load('.interface.json');
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+const Connect_ApiList: React.FC<Connect_ApiList_Props> = ({ setDataApi }) => {
   // Handle Data Api Click
-  const handleClick = async (api: string) => {
-    await store.set('connect', { api: api });
+  const handleClick = async (dataApi: string) => {
+    await store.set('pageConnect', { dataApi });
+    setDataApi(dataApi);
   };
 
   return (
@@ -40,6 +43,6 @@ const Connect_Api_List: React.FC = () => {
   );
 };
 
-export default Connect_Api_List;
-//
+export default Connect_ApiList;
+
 /* ------------------------------------------------------------------------------------------------------------------ */
