@@ -18,11 +18,18 @@ import Style from './Bar.module.css';
 const store = await load('.interface.json');
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
+
+interface MenuBarProps {
+  setPage: (page: string) => void;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
 //
-const MenuBar: React.FC = () => {
+const MenuBar: React.FC<MenuBarProps> = ({ setPage }) => {
   // Handle Click
   const handleClick = async (page: string) => {
-    await store.set('interface', { selected_Page: page });
+    await store.set('interface', { page: page });
+    setPage(page);
   };
 
   return (

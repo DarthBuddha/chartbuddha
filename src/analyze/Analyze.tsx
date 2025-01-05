@@ -5,8 +5,8 @@
 // React
 import React from 'react';
 // Common
-import Menu_Bar from 'common/MenuBar';
-import Status_Bar from 'common/StatusBar';
+import Menu_Bar from 'MenuBar';
+import Status_Bar from 'StatusBar';
 // CSS Modules
 import Style from './Analyze.module.css';
 //

@@ -1,38 +1,25 @@
 //! ---------------------------------------------------------------------------------------------------------------- !//
-//! - Connect
+//! - StatusBar
 //! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
-// Common
-import Menu_Bar from 'common/MenuBar';
-import Status_Bar from 'common/StatusBar';
-// Components
-import Connect_Data from './Connect_Data';
-import Connect_Api_List from './Connect_Api_List';
-// CSS Modules
-import Style from './Connect.module.css';
+// CSS Module
+import Style from './Bar.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const Connect: React.FC = () => {
+const StatusBar: React.FC = () => {
   return (
-    <div className={Style.Page}>
-      <Menu_Bar />
-      <div className={Style.Main_Container}>
-        <div className={Style.List_Container}>
-          <Connect_Api_List />
-        </div>
-        <div className={Style.Provider_Container}>
-          <Connect_Data />
-        </div>
-      </div>
-      <Status_Bar />
+    <div className={Style.StatusBar}>
+      <div className={Style.Container_Left}></div>
+      <div className={Style.Container_Center}></div>
+      <div className={Style.Container_Right}></div>
     </div>
   );
 };
 
-export default Connect;
+export default StatusBar;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */

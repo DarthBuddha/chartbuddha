@@ -10,7 +10,7 @@ import { load } from '@tauri-apps/plugin-store';
 // Interface
 // import { useContext_Interface } from 'interface/Context_Interface';
 // Components
-import Coinbase_Connect from 'page_connect/coinbase/Coinbase_Connect';
+import Coinbase_Connect from 'connect/coinbase/Coinbase_Connect';
 // CSS Modules
 import Style from './Connect_Data.module.css';
 

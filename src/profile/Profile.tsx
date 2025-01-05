@@ -1,30 +1,31 @@
-//! # About Page
-//!
+//! ---------------------------------------------------------------------------------------------------------------- !//
+//! - Profile
+//! ---------------------------------------------------------------------------------------------------------------- !//
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // React
 import React from 'react';
 // Common
-import Menu_Bar from 'common/MenuBar';
-import Status_Bar from 'common/StatusBar';
+import Menu_Bar from 'MenuBar';
+import Status_Bar from 'StatusBar';
 // CSS Modules
-import Style from './About.module.css';
-//
+import Style from './Profile.module.css';
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 //
-const About: React.FC = () => {
+const Profile: React.FC = () => {
   return (
     <div className={Style.Page}>
       <Menu_Bar />
-      <h1>About</h1>
       <div className={Style.Main_Container}>
-        <p>About page.</p>
+        <h1>Profile</h1>
+        <p>User Profile page.</p>
       </div>
       <Status_Bar />
     </div>
   );
 };
 
-export default About;
+export default Profile;
 //
 /* ------------------------------------------------------------------------------------------------------------------ */
