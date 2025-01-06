@@ -1,9 +1,9 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! # Module: get_public_product_book.rs
 //!
 //! Get a list of bids/asks for a single product.
 //! The amount of detail shown can be customized with the limit parameter.
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! ### Struct
 //! - PriceLevel
 //! - PriceBook
@@ -13,7 +13,7 @@
 //!
 //! ### Functions
 //! - get_public_product_book
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::error::Error;
@@ -21,7 +21,7 @@ use std::error::Error;
 use reqwest::Client;
 use serde::{ Deserialize, Serialize };
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// PriceLevel struct for the Coinbase API
 #[derive(Debug, Serialize, Deserialize)]
@@ -65,11 +65,14 @@ pub struct Detail {
   pub value: Vec<u8>,
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Get a list of bids/asks for a single product.
-pub async fn get_public_product_book(product_id: &str) -> Result<OrderBookResponse, Box<dyn Error>> {
-  let url = format!("https://api.coinbase.com/api/v3/brokerage/market/product_book?product_id={}", product_id);
+pub async fn get_public_product_book(
+  product_id: &str
+) -> Result<OrderBookResponse, Box<dyn Error>> {
+  let url =
+    format!("https://api.coinbase.com/api/v3/brokerage/market/product_book?product_id={}", product_id);
   let client = Client::new();
 
   let response = client.get(&url).header("Content-Type", "application/json").send().await?;
@@ -83,4 +86,4 @@ pub async fn get_public_product_book(product_id: &str) -> Result<OrderBookRespon
   }
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

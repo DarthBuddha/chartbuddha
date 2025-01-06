@@ -1,11 +1,12 @@
-//! # Coinbase Test API
-//! Save the keys for the Coinbase API.
+/* ---------------------------------------------------------------------------------------------- */
+//! # Module: coinbase_test_api.rs
 //!
+//! Save the keys for the Coinbase API.
+/* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
 //! - connect_test_api
-//!
-/* ---------------------------------------------------------------------------------- */
-//
+/* ---------------------------------------------------------------------------------------------- */
+
 // Rust
 use serde::Serialize;
 // Tauri
@@ -14,8 +15,9 @@ use tauri::{ AppHandle, Wry };
 use crate::coinbase::coinbase_authenticator::authenticate_api_request;
 use crate::coinbase::coinbase_authenticator::Authenticator;
 use crate::coinbase::api::get_api_key_permissions::get_api_key_permissions;
-//
-/* ---------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------------------- */
+
 /// Struct to represent the Product Data
 #[derive(Serialize)]
 pub struct CoinbaseProductData {
@@ -25,7 +27,9 @@ pub struct CoinbaseProductData {
   base_currency_id: Option<String>,
   display_name: String,
 }
-/* ---------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------------------- */
+
 /// Function to test the connection to the Coinbase API
 #[tauri::command]
 pub async fn coinbase_test_api(app_handle: AppHandle<Wry>) -> Result<String, String> {
@@ -70,4 +74,5 @@ pub async fn coinbase_test_api(app_handle: AppHandle<Wry>) -> Result<String, Str
   // Return combined response
   Ok(api_permissions_response)
 }
-/* ---------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------------------- */

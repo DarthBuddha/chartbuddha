@@ -1,7 +1,6 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------------------- */
 //! - Provider Interface
-//! ---------------------------------------------------------------------------------------------------------------- !//
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useState } from 'react';
@@ -10,14 +9,16 @@ import { Context_Interface } from './Context_Interface';
 import { Type_ProductData } from './Type_ProductData';
 import { Type_ApiPermissions } from './Type_ApiPermissions';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-//
+/* ---------------------------------------------------------------------------------------------- */
+
 export const Provider_Interface: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Global
   const [selected_Page, setFocus_Page] = useState<string | null>(null);
   // Page: Connect
   const [selected_Api, setFocus_Api] = useState<string | null>(null);
-  const [selected_ApiPermissions, setFocus_ApiPermissions] = useState<Type_ApiPermissions | null>(null);
+  const [selected_ApiPermissions, setFocus_ApiPermissions] = useState<Type_ApiPermissions | null>(
+    null,
+  );
   // Page: Subscribe
   const [selected_Broker, setFocus_Broker] = useState<string | null>(null);
   const [selected_ProductType, setFocus_ProductType] = useState<string | null>(null);
@@ -50,5 +51,5 @@ export const Provider_Interface: React.FC<{ children: React.ReactNode }> = ({ ch
     </Context_Interface.Provider>
   );
 };
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
+
+/* ---------------------------------------------------------------------------------------------- */

@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # defaults_interface.rs
+//! # Module: defaults_settings.rs
 //!
-//! Tauri Store Defaults for the Interface.
+//! Tauri Store Defaults for the Settings.
 /* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
-//! - defaults_interface
+//! - defaults_settings
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
@@ -12,24 +12,27 @@ use serde_json::json;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn defaults_interface() -> std::collections::HashMap<String, serde_json::Value> {
+pub fn defaults_settings() -> std::collections::HashMap<String, serde_json::Value> {
   let mut defaults = std::collections::HashMap::new();
 
-  defaults.insert("interface".to_string(), json!({
-      "selectedPage": "home"
-    }));
-
-  defaults.insert("pageConnect".to_string(), json!({
-      "selectedApi": null
+  defaults.insert("app".to_string(), json!({
+      "initRun": false,
+      "version": null
     }));
 
   defaults.insert(
-    "pageSubscribe".to_string(),
+    "configuredApi".to_string(),
     json!({
-      "selectedApi": null,
-      "selectedProductName": null,
-      "selectedProductType": null,
-      "selectedContractType": null
+      "binance": null,
+      "coinbase": null
+    })
+  );
+
+  defaults.insert(
+    "profile".to_string(),
+    json!({
+      "userName": null,
+      "userPassword": null
     })
   );
 

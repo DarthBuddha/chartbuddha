@@ -1,10 +1,11 @@
-//! Coinbase Authenticator
+/* ---------------------------------------------------------------------------------------------- */
+//! Module: coinbase_authenticator.rs
+//!
 //! Authenticator for the Coinbase provider.
-//!
+/* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
-//! - `authenticate_api_request`
-//!
-/* ------------------------------------------------------------------------------------------------------------------ */
+//! - authenticate_api_request
+/* ---------------------------------------------------------------------------------------------- */
 //
 // Rust
 use std::error::Error;
@@ -17,14 +18,14 @@ use jsonwebtoken::{ encode, EncodingKey, Header };
 use rand::{ distributions::Alphanumeric, Rng };
 use serde::{ Deserialize, Serialize };
 //
-/* ------------------------------------------------------------------------------------------------------------------ */
+
 /// Struct to represent the Authenticator
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Authenticator {
   pub request_method: String,
   pub request_path: String,
 }
-/* ------------------------------------------------------------------------------------------------------------------ */
+
 /// Claims for JWT token
 #[derive(Debug, Serialize)]
 struct Claims {
@@ -35,8 +36,9 @@ struct Claims {
   uri: String,
   nonce: String,
 }
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
+
+/* ---------------------------------------------------------------------------------------------- */
+
 /// Authenticate the API request by generating a JWT token
 #[tauri::command]
 pub async fn authenticate_api_request(
@@ -75,10 +77,20 @@ pub async fn authenticate_api_request(
   };
 
   // Generate a random nonce
-  let nonce: String = rand::thread_rng().sample_iter(&Alphanumeric).take(16).map(char::from).collect();
+  let nonce: String = rand
+    ::thread_rng()
+    .sample_iter(&Alphanumeric)
+    .take(16)
+    .map(char::from)
+    .collect();
 
   // Define claims for JWT
-  let uri = format!("{} {}{}", &authenticator.request_method, "api.coinbase.com", &authenticator.request_path);
+  let uri = format!(
+    "{} {}{}",
+    &authenticator.request_method,
+    "api.coinbase.com",
+    &authenticator.request_path
+  );
   let claims = Claims {
     iss: "cdp".to_string(),
     sub: api_key.clone(),
@@ -110,5 +122,5 @@ pub async fn authenticate_api_request(
     }
   }
 }
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
+
+/* ---------------------------------------------------------------------------------------------- */

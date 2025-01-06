@@ -1,7 +1,7 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
+//! -------------------------------------------------------------------------------------------- !//
 //! Coinbase ProductList Spot
-//! ---------------------------------------------------------------------------------------------------------------- !//
-/* ------------------------------------------------------------------------------------------------------------------ */
+//! -------------------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useEffect, useState } from 'react';
@@ -11,12 +11,12 @@ import React, { useEffect, useState } from 'react';
 // import { debug, error } from '@tauri-apps/plugin-log';
 // import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { Type_BrokerProductData } from 'interface/old/Type_ProductData';
+import { Type_ProductData } from 'interface/context/Type_ProductData';
 // import { useContext_Broker } from 'interface/Broker_Context';
 // CSS Modules
 import Style from './Coinbase_ProductList_Spot.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //
 const Coinbase_ProductList_Spot: React.FC = () => {
   // Set the selected broker product type to SPOT
@@ -34,12 +34,12 @@ const Coinbase_ProductList_Spot: React.FC = () => {
   };
 
   // Handle Product Click
-  const handleProductClick = (product: Type_BrokerProductData) => {
+  const handleProductClick = (product: Type_ProductData) => {
     // setSelected_BrokerProductData(product);
   };
 
   // State to store the products
-  const [spotProducts, setSpotProducts] = useState<Type_BrokerProductData[]>([]);
+  const [spotProducts, setSpotProducts] = useState<Type_ProductData[]>([]);
 
   return (
     <div className={Style.Component}>
@@ -53,7 +53,8 @@ const Coinbase_ProductList_Spot: React.FC = () => {
               </div>
               <div className={Style.Product_Price}>
                 <div>
-                  Price: <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
+                  Price:{' '}
+                  <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
                 </div>
                 <div>
                   Change (24h):{' '}
@@ -81,4 +82,4 @@ const Coinbase_ProductList_Spot: React.FC = () => {
 
 export default Coinbase_ProductList_Spot;
 //
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

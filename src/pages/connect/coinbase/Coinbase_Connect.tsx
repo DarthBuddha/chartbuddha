@@ -1,6 +1,6 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! - Coinbase_Connect.tsx
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useState, useEffect } from 'react';
@@ -9,16 +9,16 @@ import { getStore } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { useContext_Interface } from 'interface/old/Context_Interface';
-import { Type_ApiPermissions } from 'interface/old/Type_ApiPermissions';
+import { useContext_Interface } from 'interface/context/Context_Interface';
+import { Type_ApiPermissions } from 'interface/context/Type_ApiPermissions';
 // CSS Modules
 import Style from './Coinbase_Connect.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //
 const store = await getStore('.keys.json');
 //
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 const handleError = (err: unknown) => {
   if (err instanceof Error) {
@@ -45,7 +45,7 @@ const convertApiSecret = (apiSecret: string): string => {
   return formattedSecret;
 };
 //
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //
 const Coinbase_Connect: React.FC = () => {
   // Load the API key and secret from the store when the component mounts
@@ -84,7 +84,11 @@ const Coinbase_Connect: React.FC = () => {
 
     if (store) {
       info('Save Keys...');
-      await store.set('coinbase', { apiConfigured: true, apiKey: selected_ApiKey, apiSecret: formattedApiSecret });
+      await store.set('coinbase', {
+        apiConfigured: true,
+        apiKey: selected_ApiKey,
+        apiSecret: formattedApiSecret,
+      });
     } else {
       throw new Error('Store is not initialized');
     }
@@ -149,8 +153,8 @@ const Coinbase_Connect: React.FC = () => {
           <div className={Style.Title}>API Settings</div>
           <div className={Style.Settings_Box}>
             <div className={Style.Settings_Text}>
-              Coinbase requires your API key and secret to connect. You can generate these from the Coinbase Pro
-              website. Make sure to keep your secret key secure.
+              Coinbase requires your API key and secret to connect. You can generate these from the
+              Coinbase Pro website. Make sure to keep your secret key secure.
             </div>
           </div>
         </div>
@@ -163,16 +167,20 @@ const Coinbase_Connect: React.FC = () => {
                 Can View: {selected_ApiPermissions ? String(selected_ApiPermissions.can_view) : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Can Trade: {selected_ApiPermissions ? String(selected_ApiPermissions.can_trade) : ''}
+                Can Trade:{' '}
+                {selected_ApiPermissions ? String(selected_ApiPermissions.can_trade) : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Can Transfer: {selected_ApiPermissions ? String(selected_ApiPermissions.can_transfer) : ''}
+                Can Transfer:{' '}
+                {selected_ApiPermissions ? String(selected_ApiPermissions.can_transfer) : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Portfolio uuid: {selected_ApiPermissions ? selected_ApiPermissions.portfolio_uuid : ''}
+                Portfolio uuid:{' '}
+                {selected_ApiPermissions ? selected_ApiPermissions.portfolio_uuid : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Portfolio Type: {selected_ApiPermissions ? selected_ApiPermissions.portfolio_type : ''}
+                Portfolio Type:{' '}
+                {selected_ApiPermissions ? selected_ApiPermissions.portfolio_type : ''}
               </div>
               <div className={Style.Permission_Text}>Configure Api Permissions on Coinbase</div>
             </div>
@@ -227,4 +235,4 @@ const Coinbase_Connect: React.FC = () => {
 
 export default Coinbase_Connect;
 //
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

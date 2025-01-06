@@ -1,11 +1,11 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! # lib.rs
 //!
 //! Main entry point for the ChartBuddha library
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
 //! - run
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::time::Duration;
@@ -20,7 +20,7 @@ pub mod interface;
 use interface::defaults_interface::defaults_interface;
 use interface::defaults_keys::defaults_keys;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Main entry point for the ChartBuddha library
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -44,8 +44,15 @@ pub fn run() {
         .defaults(defaults_interface())
         .build()?;
       app.manage(store_interface.clone());
-      // Reset the store
-      store_interface.reset();
+      store_interface.save()?;
+
+      let store_settings = tauri_plugin_store::StoreBuilder
+        ::new(app, ".settings.json")
+        .auto_save(Duration::from_millis(100))
+        .defaults(defaults_interface())
+        .build()?;
+      app.manage(store_settings.clone());
+      store_settings.save()?;
 
       // Tauri Store Keys Setup
       let store_keys = tauri_plugin_store::StoreBuilder
@@ -67,7 +74,11 @@ pub fn run() {
         // .clear_targets()
         .format(|out, message, record| {
           let target = record.target();
-          let shortened_target = if let Some(pos) = target.find("src/") { &target[pos..] } else { target };
+          let shortened_target = if let Some(pos) = target.find("src/") {
+            &target[pos..]
+          } else {
+            target
+          };
           out.finish(format_args!("[{}]\n{}\n[{}]\n", record.level(), message, shortened_target))
         })
         .build()
@@ -84,4 +95,4 @@ pub fn run() {
     .expect("error while running tauri application");
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

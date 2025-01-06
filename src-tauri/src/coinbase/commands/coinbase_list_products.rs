@@ -1,10 +1,12 @@
-//! # Coinbase List Products
+/* ---------------------------------------------------------------------------------------------- */
+//! # Module: coinbase_list_products.rs
 //!
+//!
+/* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
 //! - coinbase_load_product_list
-//!
-/* ------------------------------------------------------------------------------------------------------------------ */
-//
+/* ---------------------------------------------------------------------------------------------- */
+
 // Rust
 use std::collections::HashMap;
 // Tauri
@@ -14,8 +16,9 @@ use tauri_plugin_store::StoreExt;
 use crate::coinbase::coinbase_authenticator::authenticate_api_request;
 use crate::coinbase::coinbase_authenticator::Authenticator;
 use crate::coinbase::api::list_products::list_products;
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
+
+/* ---------------------------------------------------------------------------------------------- */
+
 /// Function to test the connection to the Coinbase API
 #[tauri::command]
 pub async fn coinbase_list_products(app_handle: AppHandle<Wry>) -> Result<String, String> {
@@ -77,7 +80,9 @@ pub async fn coinbase_list_products(app_handle: AppHandle<Wry>) -> Result<String
     .map_err(|e| format!("Failed to serialize product data: {}", e))?;
 
   // Save to Tauri store
-  let coinbase_product_store = app_handle.store("coinbase_products.json").map_err(|e| e.to_string())?;
+  let coinbase_product_store = app_handle
+    .store("coinbase_products.json")
+    .map_err(|e| e.to_string())?;
 
   coinbase_product_store.set("products", serialized_data);
 
@@ -99,5 +104,5 @@ pub async fn coinbase_list_products(app_handle: AppHandle<Wry>) -> Result<String
   // Return the response
   Ok(list_product_response)
 }
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
+
+/* ---------------------------------------------------------------------------------------------- */

@@ -1,8 +1,8 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! # Module: get_public_market_trades.rs
 //!
 //! Get snapshot information by product ID about the last trades (ticks) and best bid/ask.
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! ### Structs
 //! - Trade
 //! - MarketTradesResponse
@@ -11,7 +11,7 @@
 //!
 //! ### Functions
 //! - get_public_market_trades
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::error::Error;
@@ -19,7 +19,7 @@ use std::error::Error;
 use reqwest::Client;
 use serde::{ Deserialize, Serialize };
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Struct to represent a single trade entry in the market trades response
 #[derive(Debug, Serialize, Deserialize)]
@@ -57,11 +57,18 @@ pub struct Detail {
   pub value: Vec<u8>,
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Get snapshot information by product ID about the last trades (ticks) and best bid/ask.
-pub async fn get_public_market_trades(product_id: &str, limit: u32) -> Result<MarketTradesResponse, Box<dyn Error>> {
-  let url = format!("https://api.coinbase.com/api/v3/brokerage/market/products/{}/ticker?limit={}", product_id, limit);
+pub async fn get_public_market_trades(
+  product_id: &str,
+  limit: u32
+) -> Result<MarketTradesResponse, Box<dyn Error>> {
+  let url = format!(
+    "https://api.coinbase.com/api/v3/brokerage/market/products/{}/ticker?limit={}",
+    product_id,
+    limit
+  );
   let client = Client::new();
 
   let response = client.get(&url).header("Content-Type", "application/json").send().await?;
@@ -75,4 +82,4 @@ pub async fn get_public_market_trades(product_id: &str, limit: u32) -> Result<Ma
   }
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

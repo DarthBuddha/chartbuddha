@@ -1,7 +1,7 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
+//! -------------------------------------------------------------------------------------------- !//
 //! - Coinbase Product
-//! ---------------------------------------------------------------------------------------------------------------- !//
-/* ------------------------------------------------------------------------------------------------------------------ */
+//! -------------------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react';
@@ -10,11 +10,11 @@ import React from 'react';
 // import { getStore, Store } from '@tauri-apps/plugin-store';
 // import { debug, error, info } from '@tauri-apps/plugin-log';
 // Interface
-import { useContext_Interface } from 'interface/old/Context_Interface';
+import { useContext_Interface } from 'interface/context/Context_Interface';
 // CSS Modules
 import Style from './Coinbase_Product.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //
 const Coinbase_Product: React.FC = () => {
   const { selected_Broker, selected_ProductName, selected_ProductData } = useContext_Interface();
@@ -87,10 +87,14 @@ const Coinbase_Product: React.FC = () => {
   return (
     <div className={Style.Page}>
       <div className={Style.Selection_Menu}>
-        <div className={Style.Selection_Title}>Selected: {selected_Broker ? selected_Broker : 'Select Broker'}</div>
+        <div className={Style.Selection_Title}>
+          Selected: {selected_Broker ? selected_Broker : 'Select Broker'}
+        </div>
         <div className={Style.Selection_Title}>
           Selected:{' '}
-          {selected_ProductName && selected_ProductData ? selected_ProductData.display_name : 'Select Product'}
+          {selected_ProductName && selected_ProductData
+            ? selected_ProductData.display_name
+            : 'Select Product'}
         </div>
       </div>
       <div className={Style.Product_Container}>

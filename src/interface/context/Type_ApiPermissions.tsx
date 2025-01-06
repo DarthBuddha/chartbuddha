@@ -1,25 +1,22 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Analyze.tsx
+//! - Type ApiPermissions
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-// CSS Modules
-import Style from './Analyze.module.css';
+import { createContext } from 'react';
 
 /* ---------------------------------------------------------------------------------------------- */
-//
-const Analyze: React.FC = () => {
-  return (
-    <div className={Style.Analyze}>
-      <div className={Style.Main_Container}>
-        <h1>Analyze</h1>
-        <p>Analyze page.</p>
-      </div>
-    </div>
-  );
-};
 
-export default Analyze;
-//
+export interface Type_ApiPermissions {
+  can_view: boolean;
+  can_trade: boolean;
+  can_transfer: boolean;
+  portfolio_uuid: string;
+  portfolio_type: string;
+}
+
+const Context_ProductData = createContext<Type_ApiPermissions | null>(null);
+
+export default Context_ProductData;
+
 /* ---------------------------------------------------------------------------------------------- */

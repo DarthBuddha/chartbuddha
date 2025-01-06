@@ -1,23 +1,22 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - App
+//! - Context Interface
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-// Index
-import ChartBuddha from './pages/ChartBuddha';
+import { createContext, useContext } from 'react';
 // Interface
-import { Provider_Interface } from 'interface/context/Provider_Interface';
+import { Type_Interface } from './Type_Interface';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <Provider_Interface>
-      <ChartBuddha />
-    </Provider_Interface>
-  </StrictMode>,
-);
+export const Context_Interface = createContext<Type_Interface | null>(null);
+
+export const useContext_Interface = () => {
+  const context = useContext(Context_Interface);
+  if (!context) {
+    throw new Error('useContext_Interface must be used within an Context_Interface');
+  }
+  return context;
+};
 
 /* ---------------------------------------------------------------------------------------------- */

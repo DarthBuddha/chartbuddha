@@ -1,10 +1,12 @@
-//! # Coinbase Get Selected Product
+/* ---------------------------------------------------------------------------------------------- */
+//! # Module: coinbase_get_selected_product.rs
 //!
+//!
+/* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
 //! - coinbase_get_selected_product
-//!
-/* ------------------------------------------------------------------------------------------------------------------ */
-//
+/* ---------------------------------------------------------------------------------------------- */
+
 // Rust
 // use std::collections::HashMap;
 // Tauri
@@ -14,12 +16,15 @@ use tauri_plugin_store::StoreExt;
 use crate::coinbase::coinbase_authenticator::authenticate_api_request;
 use crate::coinbase::coinbase_authenticator::Authenticator;
 use crate::coinbase::api::get_product::get_product;
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
-//
+
+/* ---------------------------------------------------------------------------------------------- */
+
 /// Function to test the connection to the Coinbase API
 #[tauri::command]
-pub async fn coinbase_get_selected_product(app_handle: AppHandle<Wry>, product_id: String) -> Result<String, String> {
+pub async fn coinbase_get_selected_product(
+  app_handle: AppHandle<Wry>,
+  product_id: String
+) -> Result<String, String> {
   // Step 1: Create an instance of Authenticator
   let authenticator = Authenticator {
     request_method: "GET".to_string(),
@@ -48,7 +53,9 @@ pub async fn coinbase_get_selected_product(app_handle: AppHandle<Wry>, product_i
   };
 
   // Serialize the product response into JSON
-  let serialized_data = serde_json::to_value(&product).map_err(|e| format!("Failed to serialize product data: {}", e))?;
+  let serialized_data = serde_json
+    ::to_value(&product)
+    .map_err(|e| format!("Failed to serialize product data: {}", e))?;
 
   // Save to Tauri store
   let store_interface = app_handle.store(".interface.json").map_err(|e| e.to_string())?;
@@ -70,5 +77,5 @@ pub async fn coinbase_get_selected_product(app_handle: AppHandle<Wry>, product_i
   // Return product response
   Ok(product_response)
 }
-//
-/* ------------------------------------------------------------------------------------------------------------------ */
+
+/* ---------------------------------------------------------------------------------------------- */

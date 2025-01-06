@@ -1,7 +1,7 @@
-//! ---------------------------------------------------------------------------------------------------------------- !//
+//! -------------------------------------------------------------------------------------------- !//
 //! Coinbase ProductList Perpetual
-//! ---------------------------------------------------------------------------------------------------------------- !//
-/* ------------------------------------------------------------------------------------------------------------------ */
+//! -------------------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useState } from 'react';
@@ -10,12 +10,12 @@ import React, { useState } from 'react';
 // import { listen } from '@tauri-apps/api/event';
 // import { info, error } from '@tauri-apps/plugin-log';
 // Interface
-import { Type_BrokerProductData } from 'interface/old/Type_ProductData';
+import { Type_ProductData } from 'interface/context/Type_ProductData';
 // import { useContext_Broker } from 'interface/Context_Broker';
 // CSS Modules
 import Style from './Coinbase_ProductList_Perps.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //
 const Coinbase_ProductList_Perpetual: React.FC = () => {
   // Set the selected broker product type to FUTURES
@@ -33,7 +33,7 @@ const Coinbase_ProductList_Perpetual: React.FC = () => {
   };
 
   // State to store the products
-  const [spotProducts, setSpotProducts] = useState<Type_BrokerProductData[]>([]);
+  const [spotProducts, setSpotProducts] = useState<Type_ProductData[]>([]);
 
   return (
     <div className={Style.Component}>
@@ -47,7 +47,8 @@ const Coinbase_ProductList_Perpetual: React.FC = () => {
               </div>
               <div className={Style.Product_Price}>
                 <div>
-                  Price: <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
+                  Price:{' '}
+                  <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
                 </div>
                 <div>
                   Change (24h):{' '}
@@ -75,4 +76,4 @@ const Coinbase_ProductList_Perpetual: React.FC = () => {
 
 export default Coinbase_ProductList_Perpetual;
 //
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
