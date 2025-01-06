@@ -1,23 +1,21 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! - App
+//! # defaults_interface.rs
+//!
+//! ### Functions
+//! - defaults_interface
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// React
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-// Index
-import ChartBuddha from './pages/ChartBuddha';
-// Interface
-import { Provider_Interface } from 'interface/old/Provider_Interface';
+// Dependencies
+use serde_json::json;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <Provider_Interface>
-      <ChartBuddha />
-    </Provider_Interface>
-  </StrictMode>,
-);
+pub fn defaults_interface() -> std::collections::HashMap<String, serde_json::Value> {
+  let mut defaults = std::collections::HashMap::new();
+  defaults.insert("interface".to_string(), json!({
+    "selectedPage": "home"
+  }));
+  defaults
+}
 
 /* ------------------------------------------------------------------------------------------------------------------ */

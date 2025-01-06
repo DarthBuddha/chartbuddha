@@ -1,23 +1,17 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! - App
+//! # mod: Coinbase
+//!
+//! This module contains the API for Coinbase.
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! ### Modules
+//! - binance
+//! - coinbase
+//! - coinbase_authenticator
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// React
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-// Index
-import ChartBuddha from './pages/ChartBuddha';
-// Interface
-import { Provider_Interface } from 'interface/old/Provider_Interface';
-
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <Provider_Interface>
-      <ChartBuddha />
-    </Provider_Interface>
-  </StrictMode>,
-);
+// Modules
+pub mod api;
+pub mod commands;
+pub mod coinbase_authenticator;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -1,20 +1,27 @@
-//! # lib
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! # lib.rs
 //!
+//! Main entry point for the ChartBuddha library
+/* ------------------------------------------------------------------------------------------------------------------ */
 //! ### Functions
 //! - run
-//!
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
+// Rust
+use std::time::Duration;
 // Tauri
 use tauri::Manager;
-use tauri_plugin_store::StoreExt;
 // Dependencies
-use serde_json::json;
-// Local Modules
-pub mod apis;
-pub mod commands;
-//
+// use serde_json::json;
+// Library Modules
+pub mod coinbase;
+pub mod interface;
+// Store: Defaults
+use interface::defaults_interface::defaults_interface;
+use interface::defaults_keys::defaults_keys;
+
 /* ------------------------------------------------------------------------------------------------------------------ */
+
 /// Main entry point for the ChartBuddha library
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -24,31 +31,34 @@ pub fn run() {
     // Tauri Plugin Shell Setup
     .plugin(tauri_plugin_shell::init())
 
+    // Tauri Window State Setup
+    .plugin(tauri_plugin_window_state::Builder::new().build())
+
     // Tauri Store Setup
-    .plugin(tauri_plugin_store::Builder::new().build())
-
-    // Tauri Store: Interface
+    .plugin(tauri_plugin_store::Builder::default().build())
     .setup(|app| {
-      let store_interface = app.store(".interface.json")?;
+      // Tauri Store Interface Setup
+      let store_interface = tauri_plugin_store::StoreBuilder
+        ::new(app, ".interface.json")
+        .auto_save(Duration::from_millis(100))
+        .defaults(defaults_interface())
+        .build()?;
       app.manage(store_interface.clone());
-      // Set the initial interface state
-      store_interface.set("interface", json!({
-        "selectedPage": "home"
-      }));
+      // Reset the store
+      store_interface.reset();
 
-      // Tauri Store: keys
-      let store_keys = app.store(".keys.json")?;
-      app.manage(store_keys);
-
-      // Tauri Store: Subscriptions
-      let store_subscriptions = app.store(".subscriptions.json")?;
-      app.manage(store_subscriptions);
+      // Tauri Store Keys Setup
+      let store_keys = tauri_plugin_store::StoreBuilder
+        ::new(app, ".keys.json")
+        .auto_save(Duration::from_millis(100))
+        .defaults(defaults_keys())
+        .build()?;
+      app.manage(store_keys.clone());
+      store_keys.save()?;
 
       Ok(())
     })
-    // .plugin(tauri_plugin_log::Builder::new().build())
-    // Tauri Window State Setup
-    .plugin(tauri_plugin_window_state::Builder::new().build())
+
     // Tauri Logging Setup
     .plugin(
       tauri_plugin_log::Builder
@@ -65,12 +75,13 @@ pub fn run() {
     // Tauri Command Register
     .invoke_handler(
       tauri::generate_handler![
-        commands::coinbase::coinbase_test_api::coinbase_test_api,
-        commands::coinbase::coinbase_list_products::coinbase_list_products,
-        commands::coinbase::coinbase_get_selected_product::coinbase_get_selected_product
+        coinbase::commands::coinbase_test_api::coinbase_test_api,
+        coinbase::commands::coinbase_list_products::coinbase_list_products,
+        coinbase::commands::coinbase_get_selected_product::coinbase_get_selected_product
       ]
     )
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
+
 /* ------------------------------------------------------------------------------------------------------------------ */

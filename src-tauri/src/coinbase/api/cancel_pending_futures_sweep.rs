@@ -1,23 +1,17 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! - App
+//! # Module Name
+//!
+//! Short description.
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! ### Functions
+//! - rust_function
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// React
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-// Index
-import ChartBuddha from './pages/ChartBuddha';
-// Interface
-import { Provider_Interface } from 'interface/old/Provider_Interface';
+// Rust
+// Tauri
+// Dependencies
+// Local Modules
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <Provider_Interface>
-      <ChartBuddha />
-    </Provider_Interface>
-  </StrictMode>,
-);
 
 /* ------------------------------------------------------------------------------------------------------------------ */
