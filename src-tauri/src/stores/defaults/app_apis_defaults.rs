@@ -1,38 +1,45 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: defaults_settings.rs
+//! # app_apis_defaults.rs
 //!
-//! Tauri Store Defaults for the Settings.
+//! Defaults for app_apis store.
 /* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
-//! - defaults_settings
+//! - app_apis_defaults
 /* ---------------------------------------------------------------------------------------------- */
 
+// Rust
+use std::collections::HashMap;
 // Dependencies
 use serde_json::json;
+use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn defaults_settings() -> std::collections::HashMap<String, serde_json::Value> {
-  let mut defaults = std::collections::HashMap::new();
+pub fn app_apis_defaults() -> HashMap<String, Value> {
+  let mut defaults = HashMap::new();
 
-  defaults.insert("app".to_string(), json!({
-      "initRun": false,
-      "version": null
-    }));
-
+  // Binance
   defaults.insert(
-    "configuredApi".to_string(),
+    "binance".to_string(),
     json!({
-      "binance": null,
-      "coinbase": null
+      "ApiConfigured": false,
+      "ApiKey": null,
+      "ApiSecrets": null
     })
   );
 
+  // Coinbase
   defaults.insert(
-    "profile".to_string(),
+    "coinbase".to_string(),
     json!({
-      "userName": null,
-      "userPassword": null
+      "ApiConfigured": false,
+      "ApiKey": null,
+      "ApiSecrets": null,
+      "PermCanView": null,
+      "PermCanTrade": null,
+      "PermCanTransfer": null,
+      "PermPortfolioUuid": null,
+      "PermPortfolioTyp": null
     })
   );
 

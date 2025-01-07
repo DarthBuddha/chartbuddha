@@ -17,14 +17,20 @@ interface MenuBar_Props {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const store = await load('.interface.json');
+const store = await load('page_interface.json');
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const MenuBar: React.FC<MenuBar_Props> = ({ setPage }) => {
   // Handle Click
   const handleClick = async (page: string) => {
-    await store.set('interface', { page: page });
+    const resetPages = ['home', 'connect', 'subscribe', 'dashboard', 'analyze', 'news', 'profile'];
+
+    if (resetPages.includes(page)) {
+      await store.reset();
+    }
+
+    await store.set('page_interface', { page });
     setPage(page);
   };
 

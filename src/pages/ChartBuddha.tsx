@@ -7,7 +7,7 @@ import React from 'react';
 // Tauri
 import { load } from '@tauri-apps/plugin-store';
 // Interface
-import { useSelectedPage } from 'interface/hooks/useSelectedPage';
+import { useSelectedPage } from 'interface/hooks/page_interface/useSelectedPage';
 // Common
 import MenuBar from './MenuBar';
 import StatusBar from './StatusBar';
@@ -24,8 +24,8 @@ import Style from './ChartBuddha.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 //
-const store = await load('.interface.json');
-const selected = await store.get<{ page: string }>('interface');
+const store = await load('page_interface.json');
+const selected = await store.get<{ page: string }>('page_interface');
 //
 /* ---------------------------------------------------------------------------------------------- */
 //
@@ -33,7 +33,7 @@ const ChartBuddha: React.FC = () => {
   const { page, setSelectedPage } = useSelectedPage();
 
   if (!selected) {
-    return <h1>ERROR</h1>;
+    return <h1>ERROR - ChartBuddha - ERROR</h1>;
   }
 
   const renderPage = () => {

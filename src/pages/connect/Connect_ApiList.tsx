@@ -17,15 +17,15 @@ interface Connect_ApiList_Props {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const store = await load('.interface.json');
+const store = await load('page_connect.json');
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const Connect_ApiList: React.FC<Connect_ApiList_Props> = ({ setDataApi }) => {
   // Handle Data Api Click
-  const handleClick = async (dataApi: string) => {
-    await store.set('pageConnect', { dataApi });
-    setDataApi(dataApi);
+  const handleClick = async (data_api: string) => {
+    await store.set('page_connect', { data_api });
+    setDataApi(data_api);
   };
 
   return (

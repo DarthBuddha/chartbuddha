@@ -7,18 +7,13 @@
 //! - run
 /* ---------------------------------------------------------------------------------------------- */
 
-// Rust
-use std::time::Duration;
 // Tauri
 use tauri::Manager;
-// Dependencies
-// use serde_json::json;
 // Library Modules
 pub mod coinbase;
-pub mod interface;
-// Store: Defaults
-use interface::defaults_interface::defaults_interface;
-use interface::defaults_keys::defaults_keys;
+pub mod stores;
+// Crates
+use crate::stores::initialize_stores::initialize_stores;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -37,32 +32,9 @@ pub fn run() {
     // Tauri Store Setup
     .plugin(tauri_plugin_store::Builder::default().build())
     .setup(|app| {
-      // Tauri Store Interface Setup
-      let store_interface = tauri_plugin_store::StoreBuilder
-        ::new(app, ".interface.json")
-        .auto_save(Duration::from_millis(100))
-        .defaults(defaults_interface())
-        .build()?;
-      app.manage(store_interface.clone());
-      store_interface.save()?;
-
-      let store_settings = tauri_plugin_store::StoreBuilder
-        ::new(app, ".settings.json")
-        .auto_save(Duration::from_millis(100))
-        .defaults(defaults_interface())
-        .build()?;
-      app.manage(store_settings.clone());
-      store_settings.save()?;
-
-      // Tauri Store Keys Setup
-      let store_keys = tauri_plugin_store::StoreBuilder
-        ::new(app, ".keys.json")
-        .auto_save(Duration::from_millis(100))
-        .defaults(defaults_keys())
-        .build()?;
-      app.manage(store_keys.clone());
-      store_keys.save()?;
-
+      if let Err(e) = initialize_stores(app.app_handle().clone()) {
+        eprintln!("Error during startup: {:?}", e);
+      }
       Ok(())
     })
 
@@ -83,6 +55,7 @@ pub fn run() {
         })
         .build()
     )
+
     // Tauri Command Register
     .invoke_handler(
       tauri::generate_handler![
@@ -91,6 +64,8 @@ pub fn run() {
         coinbase::commands::coinbase_get_selected_product::coinbase_get_selected_product
       ]
     )
+
+    // Run ChartBuddha Application
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }

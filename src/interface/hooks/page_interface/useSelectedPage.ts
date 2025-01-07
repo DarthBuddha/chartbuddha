@@ -10,15 +10,15 @@ import { accessTauriStore } from 'interface/hooks/accessTauriStore';
 /* ---------------------------------------------------------------------------------------------- */
 
 export const useSelectedPage = () => {
-  const { getKey, onKeyChange } = accessTauriStore('.interface.json');
+  const { getKey, onKeyChange } = accessTauriStore('page_interface.json');
   const [page, setSelectedPage] = useState<string>('');
 
   useEffect(() => {
     const init = async () => {
-      const selected = await getKey<{ page: string }>('interface');
+      const selected = await getKey<{ page: string }>('page_interface');
       if (selected) setSelectedPage(selected.page);
 
-      const unlisten = await onKeyChange<{ page: string }>('interface', (newValue) => {
+      const unlisten = await onKeyChange<{ page: string }>('page_interface', (newValue) => {
         if (newValue) setSelectedPage(newValue.page);
       });
 
