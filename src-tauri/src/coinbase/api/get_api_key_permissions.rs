@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! # Module: get_api_key_permissions.rs
+//! # get_api_key_permissions.rs
 //!
 //! Get information about your CDP API key permissions.
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -10,13 +10,13 @@
 //!
 //! ### Functions
 //! - get_api_key_permissions
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
 use reqwest;
 use serde::{ Deserialize, Serialize };
 
-/* ---------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Struct to represent the API key permissions response
 #[derive(Debug, Serialize, Deserialize)]
@@ -28,7 +28,7 @@ pub struct ApiKeyPermissionsResponse {
   pub portfolio_type: String, // The type of portfolio
 }
 
-/* ---------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Struct for unexpected error responses
 #[derive(Debug, Serialize, Deserialize)]
@@ -39,7 +39,7 @@ pub struct ErrorResponse {
   pub details: Vec<Detail>,
 }
 
-/* ---------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Struct for error details
 #[derive(Debug, Serialize, Deserialize)]
@@ -48,10 +48,12 @@ pub struct Detail {
   pub value: Vec<u8>,
 }
 
-/* ---------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Get information about your CDP API key permissions.
-pub async fn get_api_key_permissions(jwt_token: String) -> Result<ApiKeyPermissionsResponse, String> {
+pub async fn get_api_key_permissions(
+  jwt_token: String
+) -> Result<ApiKeyPermissionsResponse, String> {
   let url = "https://api.coinbase.com/api/v3/brokerage/key_permissions";
   let client = reqwest::Client::new();
   //
@@ -73,7 +75,9 @@ pub async fn get_api_key_permissions(jwt_token: String) -> Result<ApiKeyPermissi
         }
       } else {
         let status = resp.status();
-        let error_body = resp.text().await.unwrap_or_else(|_| "Unable to read error body".to_string());
+        let error_body = resp
+          .text().await
+          .unwrap_or_else(|_| "Unable to read error body".to_string());
         log::error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
         Err(format!("Failed with status code: {:?}", status))
       }
@@ -85,4 +89,4 @@ pub async fn get_api_key_permissions(jwt_token: String) -> Result<ApiKeyPermissi
   }
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

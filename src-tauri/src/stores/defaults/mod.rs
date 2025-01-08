@@ -16,9 +16,9 @@
 pub mod app_apis_defaults;
 pub mod app_settings_defaults;
 // Page Modules
-pub mod page_interface_defaults;
-pub mod page_connect_defaults;
-pub mod page_dashboard_defaults;
-pub mod page_subscribe_defaults;
+pub mod interface_defaults;
+pub mod nav_connect_defaults;
+pub mod nav_dashboard_defaults;
+pub mod nav_subscribe_defaults;
 
 /* ---------------------------------------------------------------------------------------------- */

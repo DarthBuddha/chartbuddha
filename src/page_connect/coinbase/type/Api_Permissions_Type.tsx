@@ -1,20 +1,22 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Mod: Commands
-//!
-//! Tauri Commands for the ChartBuddha library.
-/* ---------------------------------------------------------------------------------------------- */
-//! ### Modules
-//! - coinbase_api_save
-//! - coinbase_connect_save
-//! - coinbase_test_api
-//! - coinbase_subscribe
-//! - coinbase_unsubscribe
+//! - Type ApiPermissions
 /* ---------------------------------------------------------------------------------------------- */
 
-// Modules
-pub mod coinbase_connect_api_save;
-pub mod coinbase_test_api;
-pub mod coinbase_get_selected_product;
-pub mod coinbase_list_products;
+// React
+import { createContext } from 'react';
+
+/* ---------------------------------------------------------------------------------------------- */
+
+export interface Api_Permissions_Type {
+  perm_can_view: boolean;
+  perm_can_trade: boolean;
+  perm_can_transfer: boolean;
+  perm_portfolio_uuid: string;
+  perm_portfolio_type: string;
+}
+
+const Context_ApiPermissions = createContext<Api_Permissions_Type | null>(null);
+
+export default Context_ApiPermissions;
 
 /* ---------------------------------------------------------------------------------------------- */

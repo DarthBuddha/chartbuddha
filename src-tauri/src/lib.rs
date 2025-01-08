@@ -59,7 +59,7 @@ pub fn run() {
     // Tauri Command Register
     .invoke_handler(
       tauri::generate_handler![
-        coinbase::commands::coinbase_test_api::coinbase_test_api,
+        coinbase::commands::coinbase_connect_api_save::coinbase_connect_api_save,
         coinbase::commands::coinbase_list_products::coinbase_list_products,
         coinbase::commands::coinbase_get_selected_product::coinbase_get_selected_product
       ]

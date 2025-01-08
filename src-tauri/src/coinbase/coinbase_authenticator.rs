@@ -17,6 +17,7 @@ use tauri_plugin_store::StoreExt;
 use jsonwebtoken::{ encode, EncodingKey, Header };
 use rand::{ distributions::Alphanumeric, Rng };
 use serde::{ Deserialize, Serialize };
+use serde_json::Value;
 //
 
 /// Struct to represent the Authenticator
@@ -46,9 +47,9 @@ pub async fn authenticate_api_request(
   authenticator: &Authenticator
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
   // Step 1: Load API key and secret from the store
-  let store = app_handle.store(".keys.json")?;
+  let store = app_handle.store("app_apis.json")?;
 
-  let coinbase: serde_json::Value = store.get("coinbase").expect("Failed to get value from store");
+  let coinbase: Value = store.get("coinbase").expect("Failed to get value from store");
 
   let api_key: String = coinbase
     .get("api_key")

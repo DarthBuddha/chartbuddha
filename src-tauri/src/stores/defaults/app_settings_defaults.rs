@@ -24,11 +24,11 @@ pub fn app_settings_defaults() -> HashMap<String, Value> {
 
   // Binance
   defaults.insert(
-    "binance".to_string(),
+    "app".to_string(),
     json!({
-        "ApiConfigured": false,
-        "ApiKey": null,
-        "ApiSecrets": null
+        "app_init_run": false,
+        "app_version": null,
+        "app_update": null
       })
   );
 

@@ -6,9 +6,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 // Index
-import ChartBuddha from './pages/ChartBuddha';
+import ChartBuddha from './ChartBuddha';
 // Interface
-import { Provider_Interface } from 'interface/context/Provider_Interface';
+import { Provider_Interface } from 'context/Provider_Interface';
 
 /* ---------------------------------------------------------------------------------------------- */
 

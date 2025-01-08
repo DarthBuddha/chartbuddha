@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # app_apis_defaults.rs
+//! # nav_connect_defaults.rs
 //!
-//! Defaults for app_apis store.
+//! Defaults for nav_connect store.
 /* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
-//! - app_apis_defaults
+//! - nav_connect_defaults
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -15,33 +15,12 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn app_apis_defaults() -> HashMap<String, Value> {
+pub fn nav_connect_defaults() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
-  // Binance
-  defaults.insert(
-    "binance".to_string(),
-    json!({
-      "api_configured": false,
-      "api_key": null,
-      "api_secret": null
-    })
-  );
-
-  // Coinbase
-  defaults.insert(
-    "coinbase".to_string(),
-    json!({
-      "api_configured": false,
-      "api_key": null,
-      "api_secret": null,
-      "perm_can_view": false,
-      "perm_can_trade": false,
-      "perm_can_transfer": false,
-      "perm_portfolio_uuid": null,
-      "perm_portfolio_type": null
-    })
-  );
+  defaults.insert("nav_connect".to_string(), json!({
+    "data_api": null,
+  }));
 
   defaults
 }
