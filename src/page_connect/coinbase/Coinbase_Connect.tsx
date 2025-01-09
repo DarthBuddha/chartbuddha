@@ -106,7 +106,7 @@ const Coinbase_Connect: React.FC = () => {
   // Button Click: Api Save
   const buttonClick_Api_Save = async () => {
     try {
-      const response: string = await invoke('coinbase_connect_api_save', {
+      const response: string = await invoke('coinbase_api_save', {
         api_key: selected_api_key,
         api_secret: selected_api_secret,
       });

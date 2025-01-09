@@ -1,17 +1,37 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # mod: Coinbase
+//! # mod: Coinbase API
 //!
-//! This module contains the API for Coinbase.
+//! Coinbase API.
 /* ---------------------------------------------------------------------------------------------- */
 //! ### Modules
-//! - binance
-//! - coinbase
+//! - accounts
+//! - converts
+//! - data_api
+//! - fees
+//! - futures
+//! - orders
+//! - payment
+//! - perpetuals
+//! - portfolios
+//! - products
+//! - public
 //! - coinbase_authenticator
 /* ---------------------------------------------------------------------------------------------- */
 
 // Modules
-pub mod api;
-pub mod commands;
+pub mod accounts;
+pub mod converts;
+pub mod data_api;
+pub mod fees;
+pub mod futures;
+pub mod orders;
+pub mod payment;
+pub mod perpetuals;
+pub mod portfolios;
+pub mod products;
+pub mod public;
+
+// Modules
 pub mod coinbase_authenticator;
 
 /* ---------------------------------------------------------------------------------------------- */

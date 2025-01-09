@@ -11,6 +11,7 @@
 use tauri::Manager;
 // Library Modules
 pub mod coinbase;
+pub mod commands;
 pub mod stores;
 // Crates
 use crate::stores::initialize_stores::initialize_stores;
@@ -59,9 +60,9 @@ pub fn run() {
     // Tauri Command Register
     .invoke_handler(
       tauri::generate_handler![
-        coinbase::commands::coinbase_connect_api_save::coinbase_connect_api_save,
-        coinbase::commands::coinbase_list_products::coinbase_list_products,
-        coinbase::commands::coinbase_get_selected_product::coinbase_get_selected_product
+        commands::connect::coinbase_api_save::coinbase_api_save,
+        commands::subscribe::coinbase_product_list::coinbase_product_list
+        // coinbase::commands::coinbase_get_selected_product::coinbase_get_selected_product
       ]
     )
 

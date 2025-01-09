@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # coinbase_connect_api_save.rs
+//! # coinbase_api_save.rs
 //!
 //! Command: Save and Test Coinbase Api keys.
 /* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
-//! - coinbase_connect_api_save
+//! - coinbase_api_save
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -19,7 +19,7 @@ use serde_json::json;
 // Crates
 use crate::coinbase::coinbase_authenticator::authenticate_api_request;
 use crate::coinbase::coinbase_authenticator::Authenticator;
-use crate::coinbase::api::get_api_key_permissions::get_api_key_permissions;
+use crate::coinbase::data_api::get_api_key_permissions::get_api_key_permissions;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -61,7 +61,7 @@ pub fn convert_api_secret(api_secret: &str) -> String {
 
 /// Function to test the connection to the Coinbase API
 #[tauri::command(rename_all = "snake_case")]
-pub async fn coinbase_connect_api_save(
+pub async fn coinbase_api_save(
   app_handle: AppHandle<Wry>,
   api_key: String,
   api_secret: String
