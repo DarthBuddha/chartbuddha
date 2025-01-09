@@ -1,6 +1,6 @@
-/* ---------------------------------------------------------------------------------------------- */
+// ---------------------------------------------------------------------------------------------- //
 //! - Coinbase_Connect.tsx
-/* ---------------------------------------------------------------------------------------------- */
+// ---------------------------------------------------------------------------------------------- //
 
 // React
 import React, { useEffect, useState } from 'react';
@@ -12,6 +12,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { Api_Permissions_Type } from './type/Api_Permissions_Type';
 // CSS Modules
 import Style from './Coinbase_Connect.module.css';
+
 /* ---------------------------------------------------------------------------------------------- */
 
 const store = await load('app_apis.json');
@@ -19,17 +20,18 @@ const store = await load('app_apis.json');
 /* ---------------------------------------------------------------------------------------------- */
 
 const Coinbase_Connect: React.FC = () => {
-  // State
+  // State Management
   const [selected_api_key, set_selected_api_key] = useState('');
   const [selected_api_secret, set_selected_api_secret] = useState('');
   const [selected_ApiPermissions, setSelected_ApiPermissions] =
     useState<Api_Permissions_Type | null>(null);
 
+  // Initialize on Component load
   useEffect(() => {
-    loadKeys();
+    load_api();
   }, []);
 
-  const loadKeys = async () => {
+  const load_api = async () => {
     try {
       const savedApiKey = await store.get<{ api_key: string }>('coinbase');
       const savedApiSecret = await store.get<{ api_secret: string }>('coinbase');
@@ -67,7 +69,41 @@ const Coinbase_Connect: React.FC = () => {
     }
   };
 
-  // Button Click - Api Save
+  const delete_api = async () => {
+    try {
+      await store.set('coinbase', {
+        api_configured: false,
+        api_key: null,
+        api_secret: null,
+        perm_can_trade: false,
+        perm_can_transfer: false,
+        perm_can_view: false,
+        perm_portfolio_type: null,
+        perm_portfolio_uuid: null,
+      });
+      await store.save();
+
+      set_selected_api_key('');
+      set_selected_api_secret('');
+      setSelected_ApiPermissions({
+        perm_can_view: false,
+        perm_can_trade: false,
+        perm_can_transfer: false,
+        perm_portfolio_uuid: '',
+        perm_portfolio_type: '',
+      });
+
+      info('Coinbase API configuration has been reset.');
+    } catch (err) {
+      if (err instanceof Error) {
+        error(err.toString());
+      } else {
+        error(String(err));
+      }
+    }
+  };
+
+  // Button Click: Api Save
   const buttonClick_Api_Save = async () => {
     try {
       const response: string = await invoke('coinbase_connect_api_save', {
@@ -110,6 +146,9 @@ const Coinbase_Connect: React.FC = () => {
         perm_portfolio_uuid: parsedResponse.perm_portfolio_uuid ?? '',
         perm_portfolio_type: parsedResponse.perm_portfolio_type ?? '',
       });
+
+      // Call load_api to refresh the state
+      await load_api();
     } catch (err) {
       if (err instanceof Error) {
         error(err.toString());
@@ -121,8 +160,11 @@ const Coinbase_Connect: React.FC = () => {
   };
 
   // Button Click - Api Delete
-  const buttonClick_Api_Delete = async () => {};
+  const buttonClick_Api_Delete = async () => {
+    delete_api();
+  };
 
+  // Component Return
   return (
     <div className={Style.Component}>
       <div className={Style.Title}>Coinbase</div>
@@ -196,10 +238,10 @@ const Coinbase_Connect: React.FC = () => {
         </div>
         <div className={Style.Button_Box}>
           <button type="button" onClick={buttonClick_Api_Save} className={Style.Save_Button}>
-            Save and Test API Keys
+            Save and Test Configuration
           </button>
           <button type="button" onClick={buttonClick_Api_Delete} className={Style.Delete_Button}>
-            Delete Api Keys
+            Delete Configuration
           </button>
         </div>
       </div>
@@ -208,5 +250,5 @@ const Coinbase_Connect: React.FC = () => {
 };
 
 export default Coinbase_Connect;
-//
+
 /* ---------------------------------------------------------------------------------------------- */

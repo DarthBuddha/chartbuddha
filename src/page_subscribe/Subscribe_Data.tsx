@@ -14,13 +14,13 @@ import Style from './Subscribe_Data.module.css';
 /* ---------------------------------------------------------------------------------------------- */
 
 interface Subscribe_Data_Props {
-  data_api: string;
+  api_data: string;
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Subscribe_Data: React.FC<Subscribe_Data_Props> = ({ data_api }) => {
-  if (!data_api) {
+const Subscribe_Data: React.FC<Subscribe_Data_Props> = ({ api_data }) => {
+  if (!api_data) {
     return (
       <div className={Style.Page}>
         <div className={Style.Title}>Select a Provider</div>
@@ -29,7 +29,7 @@ const Subscribe_Data: React.FC<Subscribe_Data_Props> = ({ data_api }) => {
     );
   }
 
-  switch (data_api) {
+  switch (api_data) {
     case 'coinbase':
       return (
         <div className={Style.Page}>

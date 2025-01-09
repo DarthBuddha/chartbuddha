@@ -19,7 +19,7 @@ pub fn nav_connect_defaults() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
   defaults.insert("nav_connect".to_string(), json!({
-    "data_api": null,
+    "api_data": null,
   }));
 
   defaults

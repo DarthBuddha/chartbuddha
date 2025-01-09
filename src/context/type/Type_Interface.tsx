@@ -6,7 +6,6 @@
 import { createContext } from 'react';
 // Interface
 import { Type_ProductData } from './Type_ProductData';
-import { Type_ApiPermissions } from '../../pages/connect/coinbase/type/Api_Permissions_Type';
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -18,8 +17,6 @@ export interface Type_Interface {
   // Connect Page
   selected_Api: string | null;
   setFocus_Api: React.Dispatch<React.SetStateAction<string | null>>;
-  selected_ApiPermissions: Type_ApiPermissions | null;
-  setFocus_ApiPermissions: React.Dispatch<React.SetStateAction<Type_ApiPermissions | null>>;
 
   // Subscribe Page
   selected_Broker: string | null;

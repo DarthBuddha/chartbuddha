@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - useConnectDataApi.ts
+//! - useSubscribeApiData.ts
 // ---------------------------------------------------------------------------------------------- //
 
 // React
@@ -9,17 +9,17 @@ import { accessTauriStore } from 'interface/accessTauriStore';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export const usePageConnect = () => {
-  const { getKey, onKeyChange } = accessTauriStore('page_connect.json');
-  const [data_api, set_data_api] = useState<string>('');
+export const usePageSubscribe = () => {
+  const { getKey, onKeyChange } = accessTauriStore('.nav_subscribe.json');
+  const [api_data, set_api_data] = useState<string>('');
 
   useEffect(() => {
     const init = async () => {
-      const selected = await getKey<{ data_api: string }>('page_connect');
-      if (selected) set_data_api(selected.data_api);
+      const selected = await getKey<{ api_data: string }>('nav_subscribe');
+      if (selected) set_api_data(selected.api_data);
 
-      const unlisten = await onKeyChange<{ data_api: string }>('page_connect', (newValue) => {
-        if (newValue) set_data_api(newValue.data_api);
+      const unlisten = await onKeyChange<{ api_data: string }>('nav_subscribe', (newValue) => {
+        if (newValue) set_api_data(newValue.api_data);
       });
 
       return () => {
@@ -30,7 +30,7 @@ export const usePageConnect = () => {
     init();
   }, [getKey, onKeyChange]);
 
-  return { data_api, set_data_api };
+  return { api_data, set_api_data };
 };
 
 /* ---------------------------------------------------------------------------------------------- */

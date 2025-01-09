@@ -17,7 +17,10 @@ interface MenuBar_Props {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const store = await load('.interface.json');
+const store_interface = await load('.interface.json');
+const store_nav_connect = await load('.nav_connect.json');
+const store_nav_dashboard = await load('.nav_dashboard.json');
+const store_nav_subscribe = await load('.nav_subscribe.json');
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -26,11 +29,26 @@ const MenuBar: React.FC<MenuBar_Props> = ({ setPage }) => {
   const handleClick = async (page: string) => {
     const resetPages = ['home', 'connect', 'subscribe', 'dashboard', 'analyze', 'news', 'profile'];
 
+    // Logic: Reset Store
     if (resetPages.includes(page)) {
-      await store.reset();
+      if (page === 'connect') {
+        await store_nav_connect.reset();
+      } else if (page === 'dashboard') {
+        await store_nav_dashboard.reset();
+      } else if (page === 'subscribe') {
+        await store_nav_subscribe.reset();
+      }
+      await store_interface.reset();
     }
 
-    await store.set('interface', { page });
+    // if (resetPages.includes(page)) {
+    //   await store_interface.reset();
+    //   await store_nav_connect.reset();
+    //   await store_nav_dashboard.reset();
+    //   await store_nav_subscribe.reset();
+    // }
+
+    await store_interface.set('interface', { page });
     setPage(page);
   };
 

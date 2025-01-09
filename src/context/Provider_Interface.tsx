@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 // Interface
 import { Context_Interface } from './Context_Interface';
 import { Type_ProductData } from './type/Type_ProductData';
-import { Type_ApiPermissions } from '../page_connect/coinbase/type/Api_Permissions_Type';
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -16,9 +15,6 @@ export const Provider_Interface: React.FC<{ children: React.ReactNode }> = ({ ch
   const [selected_Page, setFocus_Page] = useState<string | null>(null);
   // Page: Connect
   const [selected_Api, setFocus_Api] = useState<string | null>(null);
-  const [selected_ApiPermissions, setFocus_ApiPermissions] = useState<Type_ApiPermissions | null>(
-    null,
-  );
   // Page: Subscribe
   const [selected_Broker, setFocus_Broker] = useState<string | null>(null);
   const [selected_ProductType, setFocus_ProductType] = useState<string | null>(null);
@@ -34,8 +30,6 @@ export const Provider_Interface: React.FC<{ children: React.ReactNode }> = ({ ch
         // Page: Connect
         selected_Api,
         setFocus_Api,
-        selected_ApiPermissions,
-        setFocus_ApiPermissions,
         // Page: Subscribe
         selected_Broker,
         setFocus_Broker,

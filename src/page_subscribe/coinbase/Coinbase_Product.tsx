@@ -6,54 +6,40 @@
 import React from 'react';
 // import React, { useEffect, useState } from 'react';
 // Tauri
-// import { getStore, Store } from '@tauri-apps/plugin-store';
 // import { debug, error, info } from '@tauri-apps/plugin-log';
-// Interface
-import { useContext_Interface } from 'context/Context_Interface';
+import { load } from '@tauri-apps/plugin-store';
 // CSS Modules
 import Style from './Coinbase_Product.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
-//
+
+const store = await load('.nav_subscribe.json');
+
+/* ---------------------------------------------------------------------------------------------- */
+
 const Coinbase_Product: React.FC = () => {
-  const { selected_Broker, selected_ProductName, selected_ProductData } = useContext_Interface();
-  // const [storeSubscriptions, setStoreSubscriptions] = useState<Store | null>(null);
+  // State Management
 
-  // useEffect(() => {
-  //   const initializeStore = async () => {
-  //     const store = await getStore('.subscriptions.json');
-  //     setStoreSubscriptions(store);
-  //   };
-  //   initializeStore();
-  // }, []);
+  // Button Click: Handle Product Subscriptions
+  const buttonClick_Subscribe = async () => {};
 
-  // const handleError = (err: unknown) => {
-  //   if (err instanceof Error) {
-  //     error(`Error: ${err.message}\nStack: ${err.stack}`);
-  //   } else {
-  //     error(`An unknown error occurred: ${JSON.stringify(err)}`);
-  //   }
-  // };
+  // Button Click: Handle Product UnSubscriptions
+  const buttonClick_UnSubscribe = async () => {};
 
-  const Subscribe_Button = async () => {};
-
-  const UnSubscribe_Button = async () => {};
-
+  // Component Return
   return (
     <div className={Style.Page}>
       <div className={Style.Selection_Menu}>
+        <div className={Style.Selection_Title}>Coinbase</div>
         <div className={Style.Selection_Title}>
-          Selected: {selected_Broker ? selected_Broker : 'Select Broker'}
-        </div>
-        <div className={Style.Selection_Title}>
-          Selected:{' '}
+          {/* Selected:{' '}
           {selected_ProductName && selected_ProductData
             ? selected_ProductData.display_name
-            : 'Select Product'}
+            : 'Select Product'} */}
         </div>
       </div>
       <div className={Style.Product_Container}>
-        {selected_ProductName && (
+        {/* {selected_ProductName && (
           <div>
             {selected_ProductData && (
               <>
@@ -79,18 +65,24 @@ const Coinbase_Product: React.FC = () => {
               </>
             )}
           </div>
-        )}
+        )} */}
       </div>
       <div className={Style.Button_Container}>
-        <button className={Style.Subscribe_Button} onClick={Subscribe_Button}>
-          Subscribe
+        <button type="button" className={Style.Subscribe_Button} onClick={buttonClick_Subscribe}>
+          Subscribe to Product
         </button>
-        <button className={Style.UnSubscribe_Button} onClick={UnSubscribe_Button}>
-          UnSubscribe
+        <button
+          type="button"
+          className={Style.UnSubscribe_Button}
+          onClick={buttonClick_UnSubscribe}
+        >
+          UnSubscribe to Product
         </button>
       </div>
     </div>
   );
 };
-//
+
 export default Coinbase_Product;
+
+/* ---------------------------------------------------------------------------------------------- */
