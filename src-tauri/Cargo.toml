@@ -24,10 +24,11 @@ tauri-build = { version = "2.0.4", features = [] }
 tauri = { version = "2.2.0", features = [] }
 tauri-plugin-shell = "2.2.0"
 tauri-plugin-log = "2.2.0"
+tauri-plugin-store = "2.2.0"
 
 # Async
 async-trait = "0.1.85"
-tokio = { version = "1.42.0", features = ["full"] }
+tokio = { version = "1.43.0", features = ["full"] }
 tokio-tungstenite = "0.26.1"
 
 # Cryptography
@@ -45,7 +46,7 @@ log = "0.4.22"
 # WebSocket
 futures-util = { version = "0.3.31" }
 reqwest = { version = "0.12.12", features = ["json"] }
-tauri-plugin-store = "2"
+
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
-tauri-plugin-window-state = "2"
+tauri-plugin-window-state = "2.2.0"

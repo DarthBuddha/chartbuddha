@@ -52,7 +52,7 @@ pub fn run() {
           } else {
             target
           };
-          out.finish(format_args!("[{}]\n{}\n[{}]\n", record.level(), message, shortened_target))
+          out.finish(format_args!("[{}][{}]\n{}\n", record.level(), shortened_target, message))
         })
         .build()
     )

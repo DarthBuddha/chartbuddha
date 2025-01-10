@@ -56,13 +56,15 @@ pub async fn get_api_key_permissions(
 ) -> Result<ApiKeyPermissionsResponse, String> {
   let url = "https://api.coinbase.com/api/v3/brokerage/key_permissions";
   let client = reqwest::Client::new();
-  //
+
+  // Make the request
   let response = client
     .get(url)
     .header("Content-Type", "application/json")
     .header("Authorization", format!("Bearer {}", jwt_token))
     .send().await;
-  //
+
+  // Handle the response
   match response {
     Ok(resp) => {
       if resp.status().is_success() {

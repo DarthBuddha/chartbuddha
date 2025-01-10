@@ -62,46 +62,27 @@ pub struct Product {
 /// Get a list of the available currency pairs for trading.
 pub async fn list_products(
   jwt_token: String,
-  limit: Option<u32>,
-  offset: Option<u32>,
-  product_type: Option<&str>,
-  product_ids: Option<Vec<&str>>,
-  get_all_products: Option<bool>
+  selected_request_path: String
+  // limit: Option<u32>,
+  // offset: Option<u32>,
+  // product_type: Option<&str>,
+  // product_ids: Option<Vec<&str>>,
+  // contract_expiry_type: Option<&str>,
+  // expiring_contract_status: Option<&str>,
+  // get_tradability_status: Option<bool>,
+  // get_all_products: Option<bool>
 ) -> Result<ListProductsResponse, Box<dyn Error>> {
+  // let base_url = "https://api.coinbase.com/api/v3/brokerage/products";
   let base_url = "https://api.coinbase.com/api/v3/brokerage/products";
   let client = Client::new();
 
-  let mut query_params = vec![];
-
-  // Add query parameters
-  if let Some(lim) = limit {
-    query_params.push(format!("limit={}", lim));
-  }
-  if let Some(off) = offset {
-    query_params.push(format!("offset={}", off));
-  }
-  if let Some(p_type) = product_type {
-    query_params.push(format!("product_type={}", p_type));
-  }
-  if let Some(p_ids) = product_ids {
-    query_params.push(format!("product_ids={}", p_ids.join(",")));
-  }
-  if let Some(all_products) = get_all_products {
-    if all_products {
-      query_params.push("get_all_products=true".to_string());
-    }
-  }
-
   // Construct the final URL with query parameters
-  let final_url = if query_params.is_empty() {
-    base_url.to_string()
-  } else {
-    format!("{}?{}", base_url, query_params.join("&"))
-  };
+  let final_url = base_url.to_string() + &selected_request_path.to_string();
 
   // Log the final request URL
-  // log::info!("Final request URL: {}", final_url);
+  log::info!("Final request URL: {}", final_url);
 
+  // Make the request
   let request = client
     .get(&final_url)
     .header("Content-Type", "application/json")
@@ -118,13 +99,33 @@ pub async fn list_products(
     let status = response.status();
     let error_body: Option<Value> = response.json().await.ok();
 
-    Err(
-      format!(
-        "Request failed with status: {}. Error: {:?}",
-        status,
-        error_body.unwrap_or_else(|| serde_json::json!({"error": "Unknown error"}))
-      ).into()
-    )
+    let error_message = if let Some(body) = error_body {
+      if let Some(error) = body.get("error") {
+        let unknown_code = Value::String("Unknown code".to_string());
+        let code = {
+          let unknown_code_ref = &unknown_code;
+          error.get("code").unwrap_or(unknown_code_ref)
+        };
+        let unknown_message = Value::String("Unknown message".to_string());
+        let unknown_message_ref = &unknown_message;
+        let message = error.get("message").unwrap_or(unknown_message_ref);
+        let details_value = Value::Array(vec![]);
+        let details = error.get("details").unwrap_or(&details_value);
+        format!(
+          "Request failed with status: {}. Error code: {}. Message: {}. Details: {:?}",
+          status,
+          code,
+          message,
+          details
+        )
+      } else {
+        format!("Request failed with status: {}. Error: {:?}", status, body)
+      }
+    } else {
+      format!("Request failed with status: {}. Error: Unknown error", status)
+    };
+
+    Err(error_message.into())
   }
 }
 

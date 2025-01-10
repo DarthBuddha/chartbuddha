@@ -7,8 +7,6 @@
 //! - coinbase_api_save
 /* ---------------------------------------------------------------------------------------------- */
 
-// Rust
-use serde::Serialize;
 // Tauri
 use tauri::{ AppHandle, Wry };
 use tauri_plugin_store::StoreExt;
@@ -20,18 +18,6 @@ use serde_json::json;
 use crate::coinbase::coinbase_authenticator::authenticate_api_request;
 use crate::coinbase::coinbase_authenticator::Authenticator;
 use crate::coinbase::data_api::get_api_key_permissions::get_api_key_permissions;
-
-/* ---------------------------------------------------------------------------------------------- */
-
-/// Struct to represent the Product Data
-#[derive(Serialize)]
-pub struct CoinbaseProductData {
-  product_id: String,
-  product_type: Option<String>,
-  quote_currency_id: Option<String>,
-  base_currency_id: Option<String>,
-  display_name: String,
-}
 
 /* ---------------------------------------------------------------------------------------------- */
 

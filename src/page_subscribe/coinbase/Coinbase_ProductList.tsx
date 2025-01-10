@@ -6,73 +6,120 @@
 // React
 import React, { useState } from 'react';
 // Tauri
-import { info } from '@tauri-apps/plugin-log';
+import { info, error } from '@tauri-apps/plugin-log';
+import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { useContext_Interface } from 'context/Context_Interface';
-// Components
-import Coinbase_ProductList_Spot from './Coinbase_ProductList_Spot';
-import Coinbase_ProductList_Futures from './Coinbase_ProductList_Futures';
-import Coinbase_ProductList_Perps from './Coinbase_ProductList_Perps';
+import { Type_ProductData } from 'context/type/Type_ProductData';
+// import { useContext_Interface } from 'context/Context_Interface';
 // CSS Modules
 import Style from './Coinbase_ProductList.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 //
 const Coinbase_Product_List: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('spot');
-  const { setFocus_ProductType } = useContext_Interface();
+  const [activeTab, setActiveTab] = useState<string>('SPOT');
+  // const { setFocus_ProductType } = useContext_Interface();
+  const [products, setProducts] = useState<Type_ProductData[]>([]);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await invoke<string>('coinbase_product_list', {
+        product_type: activeTab,
+      });
+      const productList = JSON.parse(response);
+      setProducts(productList[activeTab.toUpperCase()] || []);
+    } catch (err) {
+      error(`Failed to fetch products: ${err}`);
+    }
+  };
+
+  // Fetch products based on the active tab
+  // useEffect(() => {
+  //   fetchProducts();
+  // });
 
   // Handle Broker Click
   const handleClick = (productType: string) => {
-    setFocus_ProductType(productType);
-    info(`\nBroker Product Type: ${productType}`);
+    info(`\nProduct Type: ${productType}`);
+    fetchProducts();
   };
 
-  const renderActiveWidget = () => {
-    switch (activeTab) {
-      case 'spot':
-        return <Coinbase_ProductList_Spot />;
-      case 'futures':
-        return <Coinbase_ProductList_Futures />;
-      case 'perpetual':
-        return <Coinbase_ProductList_Perps />;
-      default:
-        return <Coinbase_ProductList_Spot />;
-    }
+  const getStyleForValue = (value: string) => {
+    return parseFloat(value) >= 0 ? Style.Positive : Style.Negative;
+  };
+
+  const formatPercentage = (value: string) => {
+    return parseFloat(value).toFixed(2);
+  };
+
+  const handleProductClick = (product: Type_ProductData) => {
+    // Handle product click logic here
   };
 
   return (
     <div className={Style.Component}>
       <div className={Style.NavMenu}>
-        <button
-          className={`${Style.NavButton} ${activeTab === 'spot' ? Style.Active : ''}`}
+        <div
+          className={`${Style.NavButton} ${activeTab === 'SPOT' ? Style.Active : ''}`}
           onClick={() => {
-            setActiveTab('spot');
-            handleClick('spot');
+            setActiveTab('SPOT');
+            handleClick('SPOT');
           }}
         >
           Spot
-        </button>
-        <button
-          className={`${Style.NavButton} ${activeTab === 'futures' ? Style.Active : ''}`}
+        </div>
+        <div
+          className={`${Style.NavButton} ${activeTab === 'FUTURE' ? Style.Active : ''}`}
           onClick={() => {
-            setActiveTab('futures');
-            handleClick('futures');
+            setActiveTab('FUTURE');
+            handleClick('FUTURE');
           }}
         >
           Futures
-        </button>
-        <button
-          className={`${Style.NavButton} ${activeTab === 'perpetual' ? Style.Active : ''}`}
+        </div>
+        <div
+          className={`${Style.NavButton} ${activeTab === 'PERPETUAL' ? Style.Active : ''}`}
           onClick={() => {
-            setActiveTab('perps');
-            handleClick('perps');
+            setActiveTab('PERPETUAL');
+            handleClick('PERPETUAL');
           }}
         >
           Perps
-        </button>
+        </div>
       </div>
-      <div>{renderActiveWidget()}</div>
+      <div className={Style.Product_List}>
+        {products.map((product, index) => (
+          <div key={index} className={Style.Product} onClick={() => handleProductClick(product)}>
+            <div className={Style.Product_Details_Container}>
+              <div className={Style.Product_Name}>
+                <div>{product.display_name}</div>
+                <div>Status: {product.status}</div>
+              </div>
+              <div className={Style.Product_Price}>
+                <div>
+                  Price:{' '}
+                  <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
+                </div>
+                <div>
+                  Change (24h):{' '}
+                  <span className={getStyleForValue(product.price_percentage_change_24h ?? '')}>
+                    {formatPercentage(product.price_percentage_change_24h ?? '0')}%
+                  </span>
+                </div>
+              </div>
+              <div className={Style.Product_Volume}>
+                <div>Volume (24h): {product.volume_24h}</div>
+                <div>
+                  Change (24h):{' '}
+                  <span className={getStyleForValue(product.volume_percentage_change_24h ?? '')}>
+                    {formatPercentage(product.volume_percentage_change_24h ?? '0')}%
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
