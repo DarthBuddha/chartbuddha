@@ -13,12 +13,12 @@ import MenuBar from './components/menubar/MenuBar';
 import StatusBar from './components/statusbar/StatusBar';
 // Components
 import Analyze from './pages/analyze/Analyze';
-import Dashboard from './page_dashboard/Dashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 import Connect from './pages/connect/Connect';
-import Home from './page_home/Home';
-import News from './page_news/News';
-import Profile from './page_profile/Profile';
-import Subscribe from './page_subscribe/Subscribe';
+import Home from './pages/home/Home';
+import News from './pages/news/News';
+import Profile from './pages/profile/Profile';
+import Subscribe from './pages/subscribe/Subscribe';
 // CSS Modules
 import Style from './ChartBuddha.module.css';
 
