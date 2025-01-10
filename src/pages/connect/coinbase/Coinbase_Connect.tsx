@@ -31,6 +31,7 @@ const Coinbase_Connect: React.FC = () => {
     load_api();
   }, []);
 
+  // Load API
   const load_api = async () => {
     try {
       const savedApiKey = await store.get<{ api_key: string }>('coinbase');
@@ -69,6 +70,7 @@ const Coinbase_Connect: React.FC = () => {
     }
   };
 
+  // Delete API
   const delete_api = async () => {
     try {
       await store.set('coinbase', {
@@ -106,9 +108,9 @@ const Coinbase_Connect: React.FC = () => {
   // Button Click: Api Save
   const buttonClick_Api_Save = async () => {
     try {
-      const response: string = await invoke('coinbase_api_save', {
-        api_key: selected_api_key,
-        api_secret: selected_api_secret,
+      const response: string = await invoke('coinbase_save', {
+        coinbaseApiKey: selected_api_key,
+        coinbaseApiSecret: selected_api_secret,
       });
       info('[coinbase_keys_test]\n' + response);
 
@@ -147,7 +149,7 @@ const Coinbase_Connect: React.FC = () => {
         perm_portfolio_type: parsedResponse.perm_portfolio_type ?? '',
       });
 
-      // Call load_api to refresh the state
+      // Load API permissions after saving
       await load_api();
     } catch (err) {
       if (err instanceof Error) {
@@ -155,7 +157,6 @@ const Coinbase_Connect: React.FC = () => {
       } else {
         error(String(err));
       }
-      info('Failed to test API keys.');
     }
   };
 
@@ -164,7 +165,8 @@ const Coinbase_Connect: React.FC = () => {
     delete_api();
   };
 
-  // Component Return
+  /* -------------------------------------------------------------------------------------------- */
+
   return (
     <div className={Style.Component}>
       <div className={Style.Title}>Coinbase</div>

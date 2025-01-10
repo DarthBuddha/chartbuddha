@@ -12,4 +12,7 @@
 pub mod api;
 pub mod commands;
 
+// Module
+pub mod authenticate_api_request;
+
 /* ---------------------------------------------------------------------------------------------- */

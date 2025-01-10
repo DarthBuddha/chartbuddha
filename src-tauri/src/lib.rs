@@ -9,10 +9,10 @@
 
 // Tauri
 use tauri::Manager;
-// Library Modules
-pub mod coinbase;
-pub mod commands;
+// ChartBuddha Modules
 pub mod stores;
+// Api Modules
+pub mod coinbase;
 // Crates
 use crate::stores::initialize_stores::initialize_stores;
 
@@ -60,8 +60,8 @@ pub fn run() {
     // Tauri Command Register
     .invoke_handler(
       tauri::generate_handler![
-        commands::connect::coinbase_api_save::coinbase_api_save,
-        commands::subscribe::coinbase_product_list::coinbase_product_list
+        coinbase::commands::coinbase_save::coinbase_save,
+        coinbase::commands::coinbase_product_list::coinbase_product_list
         // coinbase::commands::coinbase_get_selected_product::coinbase_get_selected_product
       ]
     )

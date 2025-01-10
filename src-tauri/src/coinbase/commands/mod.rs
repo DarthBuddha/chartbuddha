@@ -4,12 +4,12 @@
 //! Tauri Commands for the ChartBuddha library.
 /* ---------------------------------------------------------------------------------------------- */
 //! ### Modules
-//! - connect
-//! - subscribe
+//! - coinbase_api_save
+//! - coinbase_product_list
 /* ---------------------------------------------------------------------------------------------- */
 
 // Modules
-pub mod connect;
-pub mod subscribe;
+pub mod coinbase_save;
+pub mod coinbase_product_list;
 
 /* ---------------------------------------------------------------------------------------------- */

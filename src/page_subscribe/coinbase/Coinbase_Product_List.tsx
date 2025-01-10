@@ -1,47 +1,91 @@
-//! -------------------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------------------- */
 //! - Coinbase ProductList
-//! -------------------------------------------------------------------------------------------- !//
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // Tauri
+import { load } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
+// Hooks
+import { useProductType } from './hooks/useProductType';
 // Interface
 import { Type_ProductData } from 'context/type/Type_ProductData';
-// import { useContext_Interface } from 'context/Context_Interface';
 // CSS Modules
-import Style from './Coinbase_ProductList.module.css';
+import Style from './Coinbase_Product_List.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
-//
-const Coinbase_Product_List: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('SPOT');
-  // const { setFocus_ProductType } = useContext_Interface();
-  const [products, setProducts] = useState<Type_ProductData[]>([]);
 
+interface Subscribe_Product_List_Props {
+  setProductType: (productType: string) => void;
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+const store = await load('.nav_subscribe');
+
+/* ---------------------------------------------------------------------------------------------- */
+
+const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProductType }) => {
+  // Hooks
+  const { productType } = useProductType();
+  // State Management
+  const [activeTab, setActiveTab] = useState<string>('');
+  const [selectedProducts, setSelectedProducts] = useState<Type_ProductData[]>([]);
+
+  // // Initialize on Component load
+  // useEffect(() => {
+  //   info('useEffect');
+  //   firstLoad();
+  //   loadProductList();
+  // }, []);
+
+  // const firstLoad = async () => {
+  //   // await store.set('nav_subscribe', { productType: 'SPOT' });
+  //   setProductType('SPOT');
+  // };
+
+  const loadProductList = async () => {
+    try {
+      const selectedProductType = await store.get<{ product_type: string }>('nav_subscribe');
+      // const contractType = await store.get<{ contract_type: string }>('nav_subscribe');
+
+      if (selectedProductType) {
+        setActiveTab(selectedProductType.product_type);
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        error(err.toString());
+      } else {
+        error(String(err));
+      }
+    }
+  };
+
+  // Fetch Products
   const fetchProducts = async () => {
     try {
       const response = await invoke<string>('coinbase_product_list', {
-        product_type: activeTab,
+        productType: activeTab,
       });
       const productList = JSON.parse(response);
-      setProducts(productList[activeTab.toUpperCase()] || []);
+      setSelectedProducts(productList[activeTab.toUpperCase()] || []);
     } catch (err) {
       error(`Failed to fetch products: ${err}`);
     }
   };
 
-  // Fetch products based on the active tab
-  // useEffect(() => {
-  //   fetchProducts();
-  // });
+  // Button Click: Product Type
+  const buttonClick_ProductType = (productType: string) => {
+    setActiveTab(productType);
+    info(`Active Tab: ${productType}`);
+    loadProductList();
+  };
 
-  // Handle Broker Click
-  const handleClick = (productType: string) => {
-    info(`\nProduct Type: ${productType}`);
-    fetchProducts();
+  // Button Click: Product
+  const handleProductClick = (selectedProduct: Type_ProductData) => {
+    // Handle product click logic here
   };
 
   const getStyleForValue = (value: string) => {
@@ -52,9 +96,7 @@ const Coinbase_Product_List: React.FC = () => {
     return parseFloat(value).toFixed(2);
   };
 
-  const handleProductClick = (product: Type_ProductData) => {
-    // Handle product click logic here
-  };
+  /* -------------------------------------------------------------------------------------------- */
 
   return (
     <div className={Style.Component}>
@@ -62,8 +104,8 @@ const Coinbase_Product_List: React.FC = () => {
         <div
           className={`${Style.NavButton} ${activeTab === 'SPOT' ? Style.Active : ''}`}
           onClick={() => {
-            setActiveTab('SPOT');
-            handleClick('SPOT');
+            // setActiveTab('SPOT');
+            buttonClick_ProductType('SPOT');
           }}
         >
           Spot
@@ -71,8 +113,8 @@ const Coinbase_Product_List: React.FC = () => {
         <div
           className={`${Style.NavButton} ${activeTab === 'FUTURE' ? Style.Active : ''}`}
           onClick={() => {
-            setActiveTab('FUTURE');
-            handleClick('FUTURE');
+            // setActiveTab('FUTURE');
+            buttonClick_ProductType('FUTURE');
           }}
         >
           Futures
@@ -80,15 +122,15 @@ const Coinbase_Product_List: React.FC = () => {
         <div
           className={`${Style.NavButton} ${activeTab === 'PERPETUAL' ? Style.Active : ''}`}
           onClick={() => {
-            setActiveTab('PERPETUAL');
-            handleClick('PERPETUAL');
+            // setActiveTab('PERPETUAL');
+            buttonClick_ProductType('PERPETUAL');
           }}
         >
           Perps
         </div>
       </div>
       <div className={Style.Product_List}>
-        {products.map((product, index) => (
+        {selectedProducts.map((product, index) => (
           <div key={index} className={Style.Product} onClick={() => handleProductClick(product)}>
             <div className={Style.Product_Details_Container}>
               <div className={Style.Product_Name}>
@@ -125,4 +167,5 @@ const Coinbase_Product_List: React.FC = () => {
 };
 
 export default Coinbase_Product_List;
+
 /* ---------------------------------------------------------------------------------------------- */

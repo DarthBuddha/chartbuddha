@@ -16,26 +16,26 @@ use tauri::{ AppHandle, Emitter, Wry };
 use log::info;
 // use serde_json::Value;
 // Crates
-use crate::coinbase::coinbase_authenticator::Authenticator;
-use crate::coinbase::coinbase_authenticator::authenticate_api_request;
-use crate::coinbase::products::list_products::list_products;
+use crate::coinbase::authenticate_api_request::Authenticator;
+use crate::coinbase::authenticate_api_request::authenticate_api_request;
+use crate::coinbase::api::products::list_products::list_products;
 
 /* ---------------------------------------------------------------------------------------------- */
 
 /// Function to load coinbase product list
-#[tauri::command(rename_all = "snake_case")]
+#[tauri::command]
 pub async fn coinbase_product_list(
   app_handle: AppHandle<Wry>,
   product_type: String
 ) -> Result<String, String> {
-  info!("Command: coinbase_product_list called with product_type: {}", product_type);
+  info!("Command: coinbase_product_list\nParameter: product_type: {}", product_type);
 
   // product_type: SPOT, FUTURE, PERPETUAL
 
   // Determine the selected product type
   let selected_product_type = if product_type == "SPOT" { "SPOT" } else { "FUTURE" };
 
-  info!("Product Type: {}", selected_product_type.to_string());
+  info!("Selected Product Type: {}", selected_product_type.to_string());
 
   // Determine the selected contract expiry type
   let selected_contract_expiry_type = if product_type == "FUTURE" {
@@ -46,7 +46,7 @@ pub async fn coinbase_product_list(
     None
   };
 
-  info!("Contract Expiry Type: {:?}", selected_contract_expiry_type);
+  info!("Selected Contract Expiry Type: {:?}", selected_contract_expiry_type);
 
   // Determine the Request Path based on selected_product_type and selected_contract_expiry_type
   let selected_request_path = if product_type == "FUTURE" {

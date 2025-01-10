@@ -1,25 +1,25 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - useSelectedPage.ts
+//! - setProductType.ts
 // ---------------------------------------------------------------------------------------------- //
 
 // React
 import { useState, useEffect } from 'react';
 // Interface
-import { accessTauriStore } from 'interface/accessTauriStore';
+import { accessTauriStore } from 'hooks/accessTauriStore';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export const useSelectedPage = () => {
-  const { getKey, onKeyChange } = accessTauriStore('.interface.json');
-  const [page, setSelectedPage] = useState<string>('');
+export const useProductType = () => {
+  const { getKey, onKeyChange } = accessTauriStore('.nav_subscribe.json');
+  const [productType, setProductType] = useState<string>('');
 
   useEffect(() => {
     const init = async () => {
-      const selected = await getKey<{ page: string }>('page_interface');
-      if (selected) setSelectedPage(selected.page);
+      const selected = await getKey<{ productType: string }>('nav_subscribe');
+      if (selected) setProductType(selected.productType);
 
-      const unlisten = await onKeyChange<{ page: string }>('page_interface', (newValue) => {
-        if (newValue) setSelectedPage(newValue.page);
+      const unlisten = await onKeyChange<{ productType: string }>('nav_subscribe', (newValue) => {
+        if (newValue) setProductType(newValue.productType);
       });
 
       return () => {
@@ -30,7 +30,7 @@ export const useSelectedPage = () => {
     init();
   }, [getKey, onKeyChange]);
 
-  return { page, setSelectedPage };
+  return { productType, setProductType };
 };
 
 /* ---------------------------------------------------------------------------------------------- */

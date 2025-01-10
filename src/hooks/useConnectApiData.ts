@@ -5,7 +5,7 @@
 // React
 import { useState, useEffect } from 'react';
 // Interface
-import { accessTauriStore } from 'interface/accessTauriStore';
+import { accessTauriStore } from 'hooks/accessTauriStore';
 
 /* ---------------------------------------------------------------------------------------------- */
 

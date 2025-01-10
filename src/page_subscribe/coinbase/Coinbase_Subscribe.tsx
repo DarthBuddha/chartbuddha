@@ -1,20 +1,43 @@
-//! -------------------------------------------------------------------------------------------- !//
+/* ---------------------------------------------------------------------------------------------- */
 //! - Subscribe Product Coinbase
-//! -------------------------------------------------------------------------------------------- !//
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React, { useEffect } from 'react';
 import Split from 'react-split';
+// Tauri
+import { info } from '@tauri-apps/plugin-log';
+import { load } from '@tauri-apps/plugin-store';
+// Hooks
+import { useProductType } from './hooks/useProductType';
 // Components
 import Coinbase_Product from './Coinbase_Product';
-import Coinbase_Product_List from './Coinbase_ProductList';
+import Coinbase_Product_List from './Coinbase_Product_List';
 // CSS Modules
 import Style from './Coinbase_Subscribe.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
-//
+
+const store = await load('.nav_subscribe.json');
+
+/* ---------------------------------------------------------------------------------------------- */
+
 const Coinbase_Subscribe: React.FC = () => {
+  const { setProductType } = useProductType();
+
+  // Initialize on Component load
+  useEffect(() => {
+    const initialize = async () => {
+      info('useEffect');
+      const currentData = await store.get('nav_subscribe');
+      const updatedData = { ...(currentData || {}), product_type: 'SPOT' };
+      await store.set('nav_subscribe', updatedData);
+      setProductType('SPOT');
+    };
+    initialize();
+  });
+
+  /* -------------------------------------------------------------------------------------------- */
   return (
     <div className={Style.Page}>
       <Split
@@ -34,7 +57,7 @@ const Coinbase_Subscribe: React.FC = () => {
           <Coinbase_Product />
         </div>
         <div className={Style.Coinbase_Product_List}>
-          <Coinbase_Product_List />
+          <Coinbase_Product_List setProductType={setProductType} />
         </div>
       </Split>
     </div>
@@ -42,5 +65,5 @@ const Coinbase_Subscribe: React.FC = () => {
 };
 
 export default Coinbase_Subscribe;
-//
+
 /* ---------------------------------------------------------------------------------------------- */

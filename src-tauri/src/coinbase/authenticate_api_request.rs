@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! coinbase_authenticator.rs
+//! authenticate_api_request.rs
 //!
-//! Authenticator for the Coinbase provider.
+//! Authenticator for the Coinbase Api.
 /* ---------------------------------------------------------------------------------------------- */
 //! ### Functions
 //! - authenticate_api_request
@@ -41,7 +41,7 @@ struct Claims {
 /* ---------------------------------------------------------------------------------------------- */
 
 /// Authenticate the API request by generating a JWT token
-#[tauri::command]
+// #[tauri::command]
 pub async fn authenticate_api_request(
   app_handle: AppHandle<Wry>,
   authenticator: &Authenticator

@@ -22,7 +22,7 @@ pub fn nav_subscribe_defaults() -> HashMap<String, Value> {
     "nav_subscribe".to_string(),
     json!({
     "api_data": null,
-    "product_type": "spot",
+    "product_type": null,
     "contract_type": null,
 
   })

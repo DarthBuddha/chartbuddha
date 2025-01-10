@@ -5,9 +5,9 @@
 // React
 import React from 'react';
 // Hooks
-import { usePageConnect } from 'page_connect/hooks/useConnectApiData';
+import { usePageConnect } from 'hooks/useConnectApiData';
 // Components
-import Connect_Data from './Connect_Data';
+import Connect_Data from '../../page_connect/Connect_Data';
 import Connect_Api_List from './Connect_Api_List';
 // CSS Modules
 import Style from './Connect.module.css';

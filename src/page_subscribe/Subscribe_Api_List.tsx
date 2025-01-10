@@ -62,7 +62,7 @@ const Subscribe_Api_List: React.FC<Subscribe_Api_List_Props> = ({ set_api_data }
   };
 
   // Button Click: Handle Data Api
-  const buttonClick_Api_Menu = async (api_data: string) => {
+  const buttonClick_Api = async (api_data: string) => {
     const currentNavSubscribe = await store_nav_subscribe.get<{ [key: string]: string | null }>(
       'nav_subscribe',
     );
@@ -79,7 +79,7 @@ const Subscribe_Api_List: React.FC<Subscribe_Api_List_Props> = ({ set_api_data }
           <div className={Style.Row}>Please configure your API keys on the Connect page.</div>
         ) : (
           apiList.map((api) => (
-            <div key={api} className={Style.Row} onClick={() => buttonClick_Api_Menu(api)}>
+            <div key={api} className={Style.Row} onClick={() => buttonClick_Api(api)}>
               {api.charAt(0).toUpperCase() + api.slice(1)}
             </div>
           ))
