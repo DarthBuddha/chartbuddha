@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Type Product Data
+//! - ProductDataType.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -7,7 +7,7 @@ import { createContext } from 'react';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface Type_ProductData {
+export interface ProductDataType {
   product_id: string;
   price?: string;
   price_percentage_change_24h?: string;
@@ -37,8 +37,8 @@ export interface Type_ProductData {
   display_name?: string;
 }
 
-const Context_ProductData = createContext<Type_ProductData | null>(null);
+const ProductDataContext = createContext<ProductDataType | null>(null);
 
-export default Context_ProductData;
+export default ProductDataContext;
 
 /* ---------------------------------------------------------------------------------------------- */

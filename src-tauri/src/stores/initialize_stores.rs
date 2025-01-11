@@ -14,7 +14,7 @@ use std::error::Error;
 use log::info;
 use tauri::{ AppHandle, Manager, Wry };
 // Tauri Store: Interface Defaults
-use crate::stores::defaults::interface_defaults::interface_defaults;
+// use crate::stores::defaults::interface_defaults::interface_defaults;
 // Tauri Store: Page Nav Defaults
 // use crate::stores::defaults::nav_connect_defaults::nav_connect_defaults;
 // use crate::stores::defaults::nav_dashboard_defaults::nav_dashboard_defaults;
@@ -27,14 +27,14 @@ use crate::stores::defaults::app_settings_defaults::app_settings_defaults;
 
 pub fn initialize_stores(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   // Interface Store Initialization
-  info!("Initialize Interface Store...");
-  let store_page_interface = tauri_plugin_store::StoreBuilder
-    ::new(&app, ".interface.json")
-    .auto_save(Duration::from_millis(100))
-    .defaults(interface_defaults())
-    .build()?;
-  app.manage(store_page_interface.clone());
-  store_page_interface.reset();
+  // info!("Initialize Interface Store...");
+  // let store_page_interface = tauri_plugin_store::StoreBuilder
+  //   ::new(&app, ".interface.json")
+  //   .auto_save(Duration::from_millis(100))
+  //   .defaults(interface_defaults())
+  //   .build()?;
+  // app.manage(store_page_interface.clone());
+  // store_page_interface.reset();
 
   // Page: Connect Store Initialization
   // info!("Initialize Nav Connect Store...");

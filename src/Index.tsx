@@ -1,13 +1,11 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - ChartBuddha.tsx
+//! - Index.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react';
-// Tauri
-import { load } from '@tauri-apps/plugin-store';
 // Interface
-import { useSelectedPage } from 'hooks/useSelectedPage';
+import { useInterfaceContext } from 'interface/InterfaceContext';
 // Common
 import MenuBar from './components/menubar/MenuBar';
 import StatusBar from './components/statusbar/StatusBar';
@@ -20,17 +18,17 @@ import News from './pages/news/News';
 import Profile from './pages/profile/Profile';
 import Subscribe from './pages/subscribe/Subscribe';
 // CSS Modules
-import Style from './ChartBuddha.module.css';
+import Style from './Index.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
-//
-const store = await load('.interface.json');
-const selected = await store.get<{ selectedPage: string }>('interface');
-//
+
+const selected = 'home';
+
 /* ---------------------------------------------------------------------------------------------- */
-//
-const ChartBuddha: React.FC = () => {
-  const { selectedPage, setSelectedPage } = useSelectedPage();
+
+const Index: React.FC = () => {
+  // State Management
+  const { selectedPage } = useInterfaceContext();
 
   if (!selected) {
     return <h1>ERROR - ChartBuddha - ERROR</h1>;
@@ -60,7 +58,7 @@ const ChartBuddha: React.FC = () => {
   return (
     <div className={Style.ChartBuddha}>
       <div className={Style.MenuBar_Container}>
-        <MenuBar setSelectedPage={setSelectedPage} />
+        <MenuBar />
       </div>
       <div className={Style.Page_Container}>{renderPage()}</div>
       <div className={Style.StatusBar_Container}>
@@ -70,6 +68,6 @@ const ChartBuddha: React.FC = () => {
   );
 };
 
-export default ChartBuddha;
-//
+export default Index;
+
 /* ---------------------------------------------------------------------------------------------- */

@@ -1,20 +1,22 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Context Interface
+//! - InterfaceContext.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext, useContext } from 'react';
 // Interface
-import { Type_Interface } from './type/Type_Interface';
+import { InterfaceType } from './InterfaceType';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export const Context_Interface = createContext<Type_Interface | null>(null);
+export const InterfaceContext = createContext<InterfaceType | null>(null);
 
-export const useContext_Interface = () => {
-  const context = useContext(Context_Interface);
+/* ---------------------------------------------------------------------------------------------- */
+
+export const useInterfaceContext = () => {
+  const context = useContext(InterfaceContext);
   if (!context) {
-    throw new Error('useContext_Interface must be used within an Context_Interface');
+    throw new Error('useInterfaceContext must be used within an InterfaceContext');
   }
   return context;
 };

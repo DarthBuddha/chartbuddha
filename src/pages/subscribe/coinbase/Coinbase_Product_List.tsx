@@ -7,11 +7,11 @@ import React, { useEffect, useState } from 'react';
 // Tauri
 import { load } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
-import { invoke } from '@tauri-apps/api/core';
+// import { invoke } from '@tauri-apps/api/core';
 // Hooks
-import { useProductType } from './hooks/useProductType';
+// import { useProductType } from './hooks/useProductType';
 // Interface
-import { Type_ProductData } from 'context/type/Type_ProductData';
+// import { CoinbaseProductDataType } from 'interface/type/CoinbaseProductDataType';
 // CSS Modules
 import Style from './Coinbase_Product_List.module.css';
 
@@ -29,10 +29,10 @@ const store = await load('.nav_subscribe');
 
 const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProductType }) => {
   // Hooks
-  const { productType } = useProductType();
+  // const { productType } = useProductType();
   // State Management
   const [activeTab, setActiveTab] = useState<string>('');
-  const [selectedProducts, setSelectedProducts] = useState<Type_ProductData[]>([]);
+  // const [selectedProducts, setSelectedProducts] = useState<Type_ProductData[]>([]);
 
   // // Initialize on Component load
   // useEffect(() => {
@@ -64,17 +64,17 @@ const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProd
   };
 
   // Fetch Products
-  const fetchProducts = async () => {
-    try {
-      const response = await invoke<string>('coinbase_product_list', {
-        productType: activeTab,
-      });
-      const productList = JSON.parse(response);
-      setSelectedProducts(productList[activeTab.toUpperCase()] || []);
-    } catch (err) {
-      error(`Failed to fetch products: ${err}`);
-    }
-  };
+  // const fetchProducts = async () => {
+  //   try {
+  //     const response = await invoke<string>('coinbase_product_list', {
+  //       productType: activeTab,
+  //     });
+  //     const productList = JSON.parse(response);
+  //     setSelectedProducts(productList[activeTab.toUpperCase()] || []);
+  //   } catch (err) {
+  //     error(`Failed to fetch products: ${err}`);
+  //   }
+  // };
 
   // Button Click: Product Type
   const buttonClick_ProductType = (productType: string) => {
@@ -84,17 +84,17 @@ const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProd
   };
 
   // Button Click: Product
-  const handleProductClick = (selectedProduct: Type_ProductData) => {
-    // Handle product click logic here
-  };
+  // const handleProductClick = (selectedProduct: Type_ProductData) => {
+  //   // Handle product click logic here
+  // };
 
-  const getStyleForValue = (value: string) => {
-    return parseFloat(value) >= 0 ? Style.Positive : Style.Negative;
-  };
+  // const getStyleForValue = (value: string) => {
+  //   return parseFloat(value) >= 0 ? Style.Positive : Style.Negative;
+  // };
 
-  const formatPercentage = (value: string) => {
-    return parseFloat(value).toFixed(2);
-  };
+  // const formatPercentage = (value: string) => {
+  //   return parseFloat(value).toFixed(2);
+  // };
 
   /* -------------------------------------------------------------------------------------------- */
 
@@ -129,7 +129,7 @@ const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProd
           Perps
         </div>
       </div>
-      <div className={Style.Product_List}>
+      {/* <div className={Style.Product_List}>
         {selectedProducts.map((product, index) => (
           <div key={index} className={Style.Product} onClick={() => handleProductClick(product)}>
             <div className={Style.Product_Details_Container}>
@@ -161,7 +161,7 @@ const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProd
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

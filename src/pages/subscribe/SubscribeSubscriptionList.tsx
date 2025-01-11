@@ -5,27 +5,21 @@
 // React
 import React from 'react';
 // Tauri
-// import { info } from '@tauri-apps/plugin-log';
-import { load } from '@tauri-apps/plugin-store';
+// import { error } from '@tauri-apps/plugin-log';
+// import { load } from '@tauri-apps/plugin-store';
 // CSS Modules
-import Style from './Subscribe_Sub_List.module.css';
-
-/* ---------------------------------------------------------------------------------------------- */
-
-interface Connect_Api_List_Props {
-  set_api_data: (api_data: string) => void;
-}
+import Style from './SubscribeSubscriptionList.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 //
 // const store = await getStore('.subscriptions.json');
 //
-const Subscribe_Sub_List: React.FC<Connect_Api_List_Props> = ({ set_api_data }) => {
+const SubscribeSubscriptionList: React.FC = () => {
   // Handle Data Api Click
-  const handleClick = async (api_data: string) => {
-    await store.set('nav_subscription', { api_data });
-    set_api_data(api_data);
-  };
+  // const handleClick = async (api_data: string) => {
+  //   await store.set('nav_subscription', { api_data });
+  //   set_api_data(api_data);
+  // };
 
   return (
     <div className={Style.List_Container}>
@@ -46,6 +40,6 @@ const Subscribe_Sub_List: React.FC<Connect_Api_List_Props> = ({ set_api_data }) 
   );
 };
 
-export default Subscribe_Sub_List;
+export default SubscribeSubscriptionList;
 //
 /* ---------------------------------------------------------------------------------------------- */

@@ -6,17 +6,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 // Index
-import ChartBuddha from './ChartBuddha';
+import ChartBuddha from './Index';
 // Interface
-import { Provider_Interface } from 'context/Provider_Interface';
+import { InterfaceProvider } from 'interface/InterfaceProvider';
 
 /* ---------------------------------------------------------------------------------------------- */
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <Provider_Interface>
+    <InterfaceProvider>
       <ChartBuddha />
-    </Provider_Interface>
+    </InterfaceProvider>
   </StrictMode>,
 );
 

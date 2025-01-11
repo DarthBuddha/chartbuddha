@@ -9,7 +9,7 @@ import { load } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { Api_Permissions_Type } from './type/Api_Permissions_Type';
+import { Api_Permissions_Type } from '../../../interface/type/CoinbaseApiPermissionsType';
 // CSS Modules
 import Style from './Coinbase_Connect.module.css';
 

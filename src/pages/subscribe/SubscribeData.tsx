@@ -5,31 +5,19 @@
 // React
 import React from 'react';
 // Interface
-// import { useContext_Interface } from 'interface/context/Context_Interface';
+import { useInterfaceContext } from 'interface/InterfaceContext';
 // Components
 import Coinbase_Subscribe from './coinbase/Coinbase_Subscribe';
 // CSS Modules
-import Style from './Subscribe_Data.module.css';
+import Style from './SubscribeData.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-interface Subscribe_Data_Props {
-  api_data: string;
-}
+const SubscribeData: React.FC = () => {
+  // State Management
+  const { selectedApi } = useInterfaceContext();
 
-/* ---------------------------------------------------------------------------------------------- */
-
-const Subscribe_Data: React.FC<Subscribe_Data_Props> = ({ api_data }) => {
-  if (!api_data) {
-    return (
-      <div className={Style.Page}>
-        <div className={Style.Title}>Select a Provider</div>
-        <div className={Style.Body}>Select a provider to configure api settings.</div>
-      </div>
-    );
-  }
-
-  switch (api_data) {
+  switch (selectedApi) {
     case 'coinbase':
       return (
         <div className={Style.Page}>
@@ -53,6 +41,6 @@ const Subscribe_Data: React.FC<Subscribe_Data_Props> = ({ api_data }) => {
   }
 };
 
-export default Subscribe_Data;
+export default SubscribeData;
 
 /* ---------------------------------------------------------------------------------------------- */

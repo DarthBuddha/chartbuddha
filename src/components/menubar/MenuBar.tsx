@@ -4,41 +4,26 @@
 
 // React
 import React from 'react';
-// Tauri
-import { load } from '@tauri-apps/plugin-store';
+// Interface
+import { useInterfaceContext } from 'interface/InterfaceContext';
 // CSS Module
 import Style from './MenuBar.module.css';
-// Context
-import { useSelectedPage } from 'context/SelectedPageContext';
-
-/* ---------------------------------------------------------------------------------------------- */
-
-// Define a type for the props
-type MenuBarProps = {
-  setSelectedPage: (selectedPage: string) => void;
-};
-
-/* ---------------------------------------------------------------------------------------------- */
-
-const store_interface = await load('.interface.json');
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const MenuBar: React.FC = () => {
-  const { setSelectedPage } = useSelectedPage();
+  // State Management
+  const { setSelectedPage, setSelectedApi } = useInterfaceContext();
 
   // Handle Click
   const handleClick = async (selectedPage: string) => {
     const resetPages = ['home', 'connect', 'subscribe', 'dashboard', 'analyze', 'news', 'profile'];
 
-    // Logic: Reset Store
+    // Logic: Reset Interface Context
     if (resetPages.includes(selectedPage)) {
-      await store_interface.reset();
+      setSelectedPage(selectedPage);
+      setSelectedApi(null);
     }
-
-    const currentData = await store_interface.get<{ [key: string]: unknown }>('interface');
-    await store_interface.set('interface', { ...currentData, selectedPage });
-    setSelectedPage(selectedPage);
   };
 
   return (

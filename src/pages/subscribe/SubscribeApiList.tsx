@@ -1,31 +1,30 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - Subscribe_Api_List.tsx
+//! - SubscribeApiList.tsx
 // ---------------------------------------------------------------------------------------------- //
 
 // React
 import React, { useEffect, useState } from 'react';
 // Tauri
-import { info, error } from '@tauri-apps/plugin-log';
+import { error } from '@tauri-apps/plugin-log';
 import { load } from '@tauri-apps/plugin-store';
+// Interface
+import { useInterfaceContext } from 'interface/InterfaceContext';
 // CSS Modules
-import Style from './Subscribe_Api_List.module.css';
+import Style from './SubscribeApiList.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-interface Subscribe_Api_List_Props {
-  set_api_data: (api_data: string) => void;
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-const store_nav_subscribe = await load('.nav_subscribe.json');
+// Load Tauri Store
 const store_app_apis = await load('app_apis.json');
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Subscribe_Api_List: React.FC<Subscribe_Api_List_Props> = ({ set_api_data }) => {
+const SubscribeApiList: React.FC = () => {
   // State Management
-  const [apiList, setApiList] = useState<string[]>([]);
+  const { setSelectedApi } = useInterfaceContext();
+
+  // Store Management
+  const [selectedApiListStore, setSelectedApiListStore] = useState<string[]>([]);
 
   // Load Keys
   useEffect(() => {
@@ -51,7 +50,7 @@ const Subscribe_Api_List: React.FC<Subscribe_Api_List_Props> = ({ set_api_data }
       }
 
       // info(`Configured APIs: ${JSON.stringify(configuredApis)}`);
-      setApiList(configuredApis);
+      setSelectedApiListStore(configuredApis);
     } catch (err) {
       if (err instanceof Error) {
         error(`Error loading API list: ${err.message}`);
@@ -62,24 +61,24 @@ const Subscribe_Api_List: React.FC<Subscribe_Api_List_Props> = ({ set_api_data }
   };
 
   // Button Click: Handle Data Api
-  const buttonClick_Api = async (api_data: string) => {
-    const currentNavSubscribe = await store_nav_subscribe.get<{ [key: string]: string | null }>(
-      'nav_subscribe',
-    );
-    const updatedNavSubscribe = { ...currentNavSubscribe, api_data };
-    await store_nav_subscribe.set('nav_subscribe', updatedNavSubscribe);
-    set_api_data(api_data);
-  };
+  const handleClick = async (selectedApi: string) => {
+    const resetApi = ['binance', 'coinbase'];
+    // Logic: Reset Context
+    if (resetApi.includes(selectedApi)) {
+      setSelectedApi(selectedApi);
+    };
+  }
 
+  /* -------------------------------------------------------------------------------------------- */
   return (
     <div className={Style.List_Container}>
       <div className={Style.Title_Bar}>Apis</div>
       <div className={Style.List}>
-        {apiList.length === 0 ? (
+        {selectedApiListStore.length === 0 ? (
           <div className={Style.Row}>Please configure your API keys on the Connect page.</div>
         ) : (
-          apiList.map((api) => (
-            <div key={api} className={Style.Row} onClick={() => buttonClick_Api(api)}>
+          selectedApiListStore.map((api) => (
+            <div key={api} className={Style.Row} onClick={() => handleClick(api)}>
               {api.charAt(0).toUpperCase() + api.slice(1)}
             </div>
           ))
@@ -89,6 +88,6 @@ const Subscribe_Api_List: React.FC<Subscribe_Api_List_Props> = ({ set_api_data }
   );
 };
 
-export default Subscribe_Api_List;
+export default SubscribeApiList;
 
 /* ---------------------------------------------------------------------------------------------- */

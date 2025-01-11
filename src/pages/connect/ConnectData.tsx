@@ -1,33 +1,23 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Connect_Data.tsx
+//! - ConnectData.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react';
+// Interface
+import { useInterfaceContext } from 'interface/InterfaceContext';
 // Components
 import Coinbase_Connect from './coinbase/Coinbase_Connect';
 // CSS Modules
-import Style from './Connect_Data.module.css';
+import Style from './ConnectData.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-interface Connect_Data_Props {
-  api_data: string;
-}
+const ConnectData: React.FC = () => {
+  // State Management
+  const { selectedApi } = useInterfaceContext();
 
-/* ---------------------------------------------------------------------------------------------- */
-
-const Connect_Data: React.FC<Connect_Data_Props> = ({ api_data }) => {
-  if (!api_data) {
-    return (
-      <div className={Style.Component}>
-        <div className={Style.Title}>Select a Provider</div>
-        <div className={Style.Main_Container}>Select a provider to configure api settings.</div>
-      </div>
-    );
-  }
-
-  switch (api_data) {
+  switch (selectedApi) {
     case 'binance':
       return (
         <div className={Style.Component}>
@@ -53,6 +43,6 @@ const Connect_Data: React.FC<Connect_Data_Props> = ({ api_data }) => {
   }
 };
 
-export default Connect_Data;
+export default ConnectData;
 
 /* ---------------------------------------------------------------------------------------------- */
