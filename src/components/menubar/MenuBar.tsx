@@ -13,7 +13,7 @@ import Style from './MenuBar.module.css';
 
 const MenuBar: React.FC = () => {
   // State Management
-  const { setSelectedPage, setSelectedApi } = useInterfaceContext();
+  const { setSelectedPage, setSelectedApi, setSelectedProductType } = useInterfaceContext();
 
   // Handle Click
   const handleClick = async (selectedPage: string) => {
@@ -23,6 +23,7 @@ const MenuBar: React.FC = () => {
     if (resetPages.includes(selectedPage)) {
       setSelectedPage(selectedPage);
       setSelectedApi(null);
+      setSelectedProductType(null);
     }
   };
 

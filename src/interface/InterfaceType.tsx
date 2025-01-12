@@ -16,11 +16,12 @@ export interface InterfaceType {
   selectedApi: string | null;
   setSelectedApi: React.Dispatch<React.SetStateAction<string | null>>;
 
-  // Subscribe Page
-  // selected_Broker: string | null;
-  // setFocus_Broker: React.Dispatch<React.SetStateAction<string | null>>;
-  // selected_ProductType: string | null;
-  // setFocus_ProductType: React.Dispatch<React.SetStateAction<string | null>>;
+  selectedProductType: string | null;
+  setSelectedProductType: React.Dispatch<React.SetStateAction<string | null>>;
+
+  // selectedProductList: string | null;
+  // setSelectedProductList: React.Dispatch<React.SetStateAction<string | null>>;
+
   // selected_ProductName: string | null;
   // setFocus_ProductName: React.Dispatch<React.SetStateAction<string | null>>;
 }

@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Type ApiPermissions
+//! - CoinbaseProductsFuturePerpetual.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -7,16 +7,18 @@ import { createContext } from 'react';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface Api_Permissions_Type {
-  perm_can_view: boolean;
-  perm_can_trade: boolean;
-  perm_can_transfer: boolean;
-  perm_portfolio_uuid: string;
-  perm_portfolio_type: string;
+export interface CoinbaseProductsFuturePerpetualType {
+  open_interest: string;
+  funding_rate: string;
+  funding_time: string; // RFC3339 Timestamp
+  max_leverage: string;
+  base_asset_uuid: string;
+  underlying_type: string;
 }
 
-const Context_ApiPermissions = createContext<Api_Permissions_Type | null>(null);
+const CoinbaseProductsFuturePerpetualContext =
+  createContext<CoinbaseProductsFuturePerpetualType | null>(null);
 
-export default Context_ApiPermissions;
+export default CoinbaseProductsFuturePerpetualContext;
 
 /* ---------------------------------------------------------------------------------------------- */

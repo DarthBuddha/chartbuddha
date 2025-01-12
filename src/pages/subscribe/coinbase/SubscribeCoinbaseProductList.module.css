@@ -1,4 +1,6 @@
 /* ---------------------------------------------------------------------------------------------- */
+/*! SubscribeCoinbaseProductList.module.css !*/
+/* ---------------------------------------------------------------------------------------------- */
 
 .Component {
   height: 100%;
@@ -18,7 +20,7 @@
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-.NavButton {
+.Button {
   flex: 1;
   background: none;
   color: rgb(255, 255, 255);
@@ -28,7 +30,7 @@
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-.NavButton:hover {
+.Button:hover {
   background-color: rgb(68, 68, 68);
 }
 

@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - Coinbase Product
+//! - SubscribeCoinbaseProduct.tsx
 // ---------------------------------------------------------------------------------------------- //
 
 // React
@@ -7,17 +7,17 @@ import React from 'react';
 // import React, { useEffect, useState } from 'react';
 // Tauri
 // import { debug, error, info } from '@tauri-apps/plugin-log';
-import { load } from '@tauri-apps/plugin-store';
+// import { load } from '@tauri-apps/plugin-store';
 // CSS Modules
-import Style from './Coinbase_Product.module.css';
+import Style from './SubscribeCoinbaseProduct.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const store = await load('.nav_subscribe.json');
+// const store = await load('.nav_subscribe.json');
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Coinbase_Product: React.FC = () => {
+const SubscribeCoinbaseProduct: React.FC = () => {
   // State Management
 
   // Button Click: Handle Product Subscriptions
@@ -83,6 +83,6 @@ const Coinbase_Product: React.FC = () => {
   );
 };
 
-export default Coinbase_Product;
+export default SubscribeCoinbaseProduct;
 
 /* ---------------------------------------------------------------------------------------------- */

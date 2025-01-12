@@ -22,17 +22,9 @@ import Style from './Index.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const selected = 'home';
-
-/* ---------------------------------------------------------------------------------------------- */
-
 const Index: React.FC = () => {
   // State Management
   const { selectedPage } = useInterfaceContext();
-
-  if (!selected) {
-    return <h1>ERROR - ChartBuddha - ERROR</h1>;
-  }
 
   const renderPage = () => {
     switch (selectedPage) {

@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - Coinbase_Connect.tsx
+//! - ConnectCoinbase.tsx
 // ---------------------------------------------------------------------------------------------- //
 
 // React
@@ -9,9 +9,9 @@ import { load } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { Api_Permissions_Type } from '../../../interface/type/CoinbaseApiPermissionsType';
+import { ApiPermissionsType } from './type/CoinbaseApiPermissions';
 // CSS Modules
-import Style from './Coinbase_Connect.module.css';
+import Style from './ConnectCoinbase.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -19,12 +19,13 @@ const store = await load('app_apis.json');
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Coinbase_Connect: React.FC = () => {
+const ConnectCoinbase: React.FC = () => {
   // State Management
   const [selected_api_key, set_selected_api_key] = useState('');
   const [selected_api_secret, set_selected_api_secret] = useState('');
-  const [selected_ApiPermissions, setSelected_ApiPermissions] =
-    useState<Api_Permissions_Type | null>(null);
+  const [selected_ApiPermissions, setSelected_ApiPermissions] = useState<ApiPermissionsType | null>(
+    null,
+  );
 
   // Initialize on Component load
   useEffect(() => {
@@ -116,7 +117,7 @@ const Coinbase_Connect: React.FC = () => {
 
       // Parse the response and set API permissions
       const parsedResponse = response.split('\n').reduce(
-        (acc: Api_Permissions_Type, line) => {
+        (acc: ApiPermissionsType, line) => {
           const [key, value] = line.split(':').map((item) => item.trim());
           if (key && value !== undefined) {
             if (
@@ -138,7 +139,7 @@ const Coinbase_Connect: React.FC = () => {
           perm_can_transfer: false,
           perm_portfolio_uuid: '',
           perm_portfolio_type: '',
-        } as Api_Permissions_Type,
+        } as ApiPermissionsType,
       );
 
       setSelected_ApiPermissions({
@@ -251,6 +252,6 @@ const Coinbase_Connect: React.FC = () => {
   );
 };
 
-export default Coinbase_Connect;
+export default ConnectCoinbase;
 
 /* ---------------------------------------------------------------------------------------------- */

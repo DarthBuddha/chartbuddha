@@ -1,23 +1,21 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - App.tsx
+//! - CoinbaseProductsMaintenance.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-// Index
-import ChartBuddha from './Index';
-// Interface
-import { InterfaceProvider } from 'interface/InterfaceProvider';
+import { createContext } from 'react';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <InterfaceProvider>
-      <ChartBuddha />
-    </InterfaceProvider>
-  </StrictMode>,
+export interface CoinbaseProductsMaintenanceType {
+  start_time: string; // RFC3339 Timestamp
+  end_time: string; // RFC3339 Timestamp
+}
+
+const CoinbaseProductsMaintenanceContext = createContext<CoinbaseProductsMaintenanceType | null>(
+  null,
 );
+
+export default CoinbaseProductsMaintenanceContext;
 
 /* ---------------------------------------------------------------------------------------------- */

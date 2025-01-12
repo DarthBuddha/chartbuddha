@@ -1,59 +1,45 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Coinbase ProductList
+//! - SubscribeCoinbaseProductList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 // Tauri
-import { load } from '@tauri-apps/plugin-store';
-import { info, error } from '@tauri-apps/plugin-log';
-// import { invoke } from '@tauri-apps/api/core';
-// Hooks
-// import { useProductType } from './hooks/useProductType';
+import { invoke } from '@tauri-apps/api/core';
 // Interface
-// import { CoinbaseProductDataType } from 'interface/type/CoinbaseProductDataType';
+import { info, error } from '@tauri-apps/plugin-log';
+
+import { useInterfaceContext } from 'interface/InterfaceContext';
+import { CoinbaseProductsType } from './type/CoinbaseProducts';
 // CSS Modules
-import Style from './Coinbase_Product_List.module.css';
+import Style from './SubscribeCoinbaseProductList.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-interface Subscribe_Product_List_Props {
-  setProductType: (productType: string) => void;
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-const store = await load('.nav_subscribe');
-
-/* ---------------------------------------------------------------------------------------------- */
-
-const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProductType }) => {
-  // Hooks
-  // const { productType } = useProductType();
+const SubscribeCoinbaseProductList: React.FC = () => {
   // State Management
-  const [activeTab, setActiveTab] = useState<string>('');
-  // const [selectedProducts, setSelectedProducts] = useState<Type_ProductData[]>([]);
+  const { selectedProductType, setSelectedProductType } = useInterfaceContext();
 
-  // // Initialize on Component load
-  // useEffect(() => {
-  //   info('useEffect');
-  //   firstLoad();
-  //   loadProductList();
-  // }, []);
+  // Initialize on Component load
+  useEffect(() => {
+    loadProductList();
+  }, []);
 
-  // const firstLoad = async () => {
-  //   // await store.set('nav_subscribe', { productType: 'SPOT' });
-  //   setProductType('SPOT');
-  // };
+  // Button Click: Product Type
+  const clickProductType = (productType: string) => {
+    const resetProductType = ['spot', 'future', 'perpetual'];
+    if (resetProductType.includes(productType)) {
+      setSelectedProductType(productType);
+    }
+  };
 
+  // Load: Product List
   const loadProductList = async () => {
     try {
-      const selectedProductType = await store.get<{ product_type: string }>('nav_subscribe');
-      // const contractType = await store.get<{ contract_type: string }>('nav_subscribe');
-
-      if (selectedProductType) {
-        setActiveTab(selectedProductType.product_type);
-      }
+      const response: string = await invoke('coinbase_save', {
+        // coinbaseApiKey: selected_api_key,
+        // coinbaseApiSecret: selected_api_secret,
+      });
     } catch (err) {
       if (err instanceof Error) {
         error(err.toString());
@@ -62,26 +48,7 @@ const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProd
       }
     }
   };
-
-  // Fetch Products
-  // const fetchProducts = async () => {
-  //   try {
-  //     const response = await invoke<string>('coinbase_product_list', {
-  //       productType: activeTab,
-  //     });
-  //     const productList = JSON.parse(response);
-  //     setSelectedProducts(productList[activeTab.toUpperCase()] || []);
-  //   } catch (err) {
-  //     error(`Failed to fetch products: ${err}`);
-  //   }
-  // };
-
-  // Button Click: Product Type
-  const buttonClick_ProductType = (productType: string) => {
-    setActiveTab(productType);
-    info(`Active Tab: ${productType}`);
-    loadProductList();
-  };
+  // const [selectedProducts, setSelectedProducts] = useState<Type_ProductData[]>([]);
 
   // Button Click: Product
   // const handleProductClick = (selectedProduct: Type_ProductData) => {
@@ -102,28 +69,25 @@ const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProd
     <div className={Style.Component}>
       <div className={Style.NavMenu}>
         <div
-          className={`${Style.NavButton} ${activeTab === 'SPOT' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selectedProductType === 'spot' ? Style.Active : ''}`}
           onClick={() => {
-            // setActiveTab('SPOT');
-            buttonClick_ProductType('SPOT');
+            clickProductType('spot');
           }}
         >
           Spot
         </div>
         <div
-          className={`${Style.NavButton} ${activeTab === 'FUTURE' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selectedProductType === 'future' ? Style.Active : ''}`}
           onClick={() => {
-            // setActiveTab('FUTURE');
-            buttonClick_ProductType('FUTURE');
+            clickProductType('future');
           }}
         >
           Futures
         </div>
         <div
-          className={`${Style.NavButton} ${activeTab === 'PERPETUAL' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selectedProductType === 'perpetual' ? Style.Active : ''}`}
           onClick={() => {
-            // setActiveTab('PERPETUAL');
-            buttonClick_ProductType('PERPETUAL');
+            clickProductType('perpetual');
           }}
         >
           Perps
@@ -166,6 +130,6 @@ const Coinbase_Product_List: React.FC<Subscribe_Product_List_Props> = ({ setProd
   );
 };
 
-export default Coinbase_Product_List;
+export default SubscribeCoinbaseProductList;
 
 /* ---------------------------------------------------------------------------------------------- */

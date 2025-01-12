@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - Subscribe_Data.tsx
+//! - SubscribeData.tsx
 // ---------------------------------------------------------------------------------------------- //
 
 // React
@@ -7,7 +7,7 @@ import React from 'react';
 // Interface
 import { useInterfaceContext } from 'interface/InterfaceContext';
 // Components
-import Coinbase_Subscribe from './coinbase/Coinbase_Subscribe';
+import SubscribeCoinbase from './coinbase/SubscribeCoinbase';
 // CSS Modules
 import Style from './SubscribeData.module.css';
 
@@ -21,7 +21,7 @@ const SubscribeData: React.FC = () => {
     case 'coinbase':
       return (
         <div className={Style.Page}>
-          <Coinbase_Subscribe />
+          <SubscribeCoinbase />
         </div>
       );
     case 'binance':

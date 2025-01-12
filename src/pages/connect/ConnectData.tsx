@@ -7,7 +7,7 @@ import React from 'react';
 // Interface
 import { useInterfaceContext } from 'interface/InterfaceContext';
 // Components
-import Coinbase_Connect from './coinbase/Coinbase_Connect';
+import Coinbase_Connect from './coinbase/ConnectCoinbase';
 // CSS Modules
 import Style from './ConnectData.module.css';
 

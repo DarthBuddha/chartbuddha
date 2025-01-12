@@ -1,23 +1,22 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - App.tsx
+//! - CoinbaseApiPermissions
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-// Index
-import ChartBuddha from './Index';
-// Interface
-import { InterfaceProvider } from 'interface/InterfaceProvider';
+import { createContext } from 'react';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <InterfaceProvider>
-      <ChartBuddha />
-    </InterfaceProvider>
-  </StrictMode>,
-);
+export interface ApiPermissionsType {
+  perm_can_view: boolean;
+  perm_can_trade: boolean;
+  perm_can_transfer: boolean;
+  perm_portfolio_uuid: string;
+  perm_portfolio_type: string;
+}
+
+const ApiPermissionsContext = createContext<ApiPermissionsType | null>(null);
+
+export default ApiPermissionsContext;
 
 /* ---------------------------------------------------------------------------------------------- */

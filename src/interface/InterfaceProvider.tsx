@@ -13,9 +13,8 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // Global
   const [selectedPage, setSelectedPage] = useState<string | null>(null);
   const [selectedApi, setSelectedApi] = useState<string | null>(null);
-  // Page: Subscribe
-  // const [selected_Broker, setFocus_Broker] = useState<string | null>(null);
-  // const [selected_ProductType, setFocus_ProductType] = useState<string | null>(null);
+  const [selectedProductType, setSelectedProductType] = useState<string | null>(null);
+  // const [selectedProductList, setSelectedProductList] = useState<string | null>(null);
   // const [selected_ProductName, setFocus_ProductName] = useState<string | null>(null);
 
   return (
@@ -25,11 +24,10 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setSelectedPage,
         selectedApi,
         setSelectedApi,
-        // Page: Subscribe
-        // selected_Broker,
-        // setFocus_Broker,
-        // selected_ProductType,
-        // setFocus_ProductType,
+        selectedProductType,
+        setSelectedProductType,
+        // selectedProductList,
+        // setSelectedProductList,
         // selected_ProductName,
         // setFocus_ProductName,
       }}
