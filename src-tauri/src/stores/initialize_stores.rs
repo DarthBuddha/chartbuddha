@@ -21,7 +21,7 @@ use tauri::{ AppHandle, Manager, Wry };
 // use crate::stores::defaults::nav_subscribe_defaults::nav_subscribe_defaults;
 // Tauri Store: App Defaults
 use crate::stores::defaults::app_apis_defaults::app_apis_defaults;
-use crate::stores::defaults::app_settings_defaults::app_settings_defaults;
+// use crate::stores::defaults::app_settings_defaults::app_settings_defaults;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -77,14 +77,14 @@ pub fn initialize_stores(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   store_app_apis.save()?;
 
   // App: Settings Store Initialization
-  info!("Initialize App Settings Store...");
-  let store_app_settings = tauri_plugin_store::StoreBuilder
-    ::new(&app, "app_settings.json")
-    .auto_save(Duration::from_millis(100))
-    .defaults(app_settings_defaults())
-    .build()?;
-  app.manage(store_app_settings.clone());
-  store_app_settings.save()?;
+  // info!("Initialize App Settings Store...");
+  // let store_app_settings = tauri_plugin_store::StoreBuilder
+  //   ::new(&app, "app_settings.json")
+  //   .auto_save(Duration::from_millis(100))
+  //   .defaults(app_settings_defaults())
+  //   .build()?;
+  // app.manage(store_app_settings.clone());
+  // store_app_settings.save()?;
 
   info!("Interface Store Initialized!");
 

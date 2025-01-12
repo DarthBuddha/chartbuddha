@@ -19,14 +19,14 @@ pub fn app_apis_defaults() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
   // Binance
-  defaults.insert(
-    "binance".to_string(),
-    json!({
-      "api_configured": false,
-      "api_key": null,
-      "api_secret": null
-    })
-  );
+  // defaults.insert(
+  //   "binance".to_string(),
+  //   json!({
+  //     "api_configured": false,
+  //     "api_key": null,
+  //     "api_secret": null
+  //   })
+  // );
 
   // Coinbase
   defaults.insert(
@@ -34,12 +34,14 @@ pub fn app_apis_defaults() -> HashMap<String, Value> {
     json!({
       "api_configured": false,
       "api_key": null,
-      "api_secret": null,
-      "perm_can_view": false,
-      "perm_can_trade": false,
-      "perm_can_transfer": false,
-      "perm_portfolio_uuid": null,
-      "perm_portfolio_type": null
+      "api_key_secret": null,
+      "api_permissions": {
+        "perm_can_trade": false,
+        "perm_can_transfer": false,
+        "perm_can_view": false,
+        "perm_portfolio_type": "",
+        "perm_portfolio_uuid": ""
+      }
     })
   );
 

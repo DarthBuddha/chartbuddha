@@ -9,12 +9,11 @@
 
 // Rust
 use std::collections::HashMap;
+use tauri::Emitter;
 // Tauri
-use tauri::{ AppHandle, Emitter, Wry };
-// use tauri_plugin_store::StoreExt;
+use tauri::{ AppHandle, Wry };
 // Dependencies
 use log::info;
-// use serde_json::Value;
 // Crates
 use crate::coinbase::authenticate_api_request::Authenticator;
 use crate::coinbase::authenticate_api_request::authenticate_api_request;
@@ -24,48 +23,24 @@ use crate::coinbase::api::products::list_products::list_products;
 
 /// Function to load coinbase product list
 #[tauri::command]
-pub async fn coinbase_product_list(
-  app_handle: AppHandle<Wry>,
-  product_type: String
-) -> Result<String, String> {
+pub async fn coinbase_product_list(app_handle: AppHandle<Wry>, product_type: String) -> Result<String, String> {
   info!("Command: coinbase_product_list\nParameter: product_type: {}", product_type);
 
-  // product_type: SPOT, FUTURE, PERPETUAL
-
-  // Determine the selected product type
-  let selected_product_type = if product_type == "SPOT" { "SPOT" } else { "FUTURE" };
-
-  info!("Selected Product Type: {}", selected_product_type.to_string());
-
-  // Determine the selected contract expiry type
-  let selected_contract_expiry_type = if product_type == "FUTURE" {
-    Some("EXPIRING")
-  } else if product_type == "PERPETUAL" {
-    Some("PERPETUAL")
-  } else {
-    None
+  // Determine the selected request path based on product type
+  let selected_request_path = match product_type.as_str() {
+    "future" => "/api/v3/brokerage/products?product_type=FUTURE&contract_expiry_type=EXPIRING",
+    "perps" => "/api/v3/brokerage/products?product_type=FUTURE&contract_expiry_type=PERPETUAL",
+    _ =>
+      "/api/v3/brokerage/products?product_type=SPOT&expiring_contract_status=STATUS_UNEXPIRED&get_tradability_status",
   };
 
-  info!("Selected Contract Expiry Type: {:?}", selected_contract_expiry_type);
-
-  // Determine the Request Path based on selected_product_type and selected_contract_expiry_type
-  let selected_request_path = if product_type == "FUTURE" {
-    "/api/v3/brokerage/products?product_type=FUTURE&contract_expiry_type=EXPIRING"
-  } else if product_type == "PERPETUAL" {
-    "/api/v3/brokerage/products?product_type=FUTURE&contract_expiry_type=PERPETUAL"
-  } else {
-    // "/api/v3/brokerage/products?product_type=SPOT&get_tradability_status"
-    "?product_type=SPOT"
-  };
-
-  info!("Selected Request Path: {}", selected_request_path.to_string());
+  info!("Selected Request Path: {}", selected_request_path);
 
   // Create an instance of Authenticator
   let authenticator = Authenticator {
     request_method: "GET".to_string(),
-    request_path: "/api/v3/brokerage/products?product_type=SPOT".to_string(),
+    request_path: "/api/v3/brokerage/products".to_string(),
     // request_path: selected_request_path.to_string(),
-    // request_path: "/api/v3/brokerage/products".to_string(),
   };
 
   // Generate JWT Token
@@ -80,15 +55,8 @@ pub async fn coinbase_product_list(
   log::info!("JWT Token: {:?}", jwt_token);
 
   // Call list_products with the JWT token
-  let product_list = match
-    list_products(
-      // jwt_token
-      jwt_token.clone(),
-      // request_path
-      selected_request_path.to_string()
-    ).await
-  {
-    Ok(product_list) => { product_list }
+  let product_list = match list_products(jwt_token.clone(), selected_request_path.to_string()).await {
+    Ok(product_list) => product_list,
     Err(e) => {
       log::error!("Failed to get Product List: {:?}", e);
       return Err(format!("Failed to get Product List: {}", e));
@@ -114,20 +82,6 @@ pub async fn coinbase_product_list(
     grouped_products.entry(group.to_string()).or_default().push(product);
   }
 
-  // // Serialize the grouped product list response into JSON
-  // let serialized_data = serde_json
-  //   ::to_value(&grouped_products)
-  //   .map_err(|e| format!("Failed to serialize product data: {}", e))?;
-
-  // // Save to Tauri store
-  // store.set("products", serialized_data);
-
-  // // Save the store and handle potential errors
-  // if let Err(e) = store.save() {
-  //   log::error!("Failed to save store to disk: {}", e);
-  //   return Err(format!("Failed to save store to disk: {}", e));
-  // }
-
   // Serialize product list response
   let response = serde_json
     ::to_string_pretty(&grouped_products)
@@ -136,6 +90,8 @@ pub async fn coinbase_product_list(
   app_handle
     .emit("coinbase_list_products_loaded", "Products loaded successfully")
     .map_err(|e| format!("Failed to emit event: {}", e))?;
+
+  log::info!("{}", response);
 
   // Return the response
   Ok(response)

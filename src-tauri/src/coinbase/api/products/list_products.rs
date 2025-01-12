@@ -14,8 +14,11 @@
 // Dependencies
 use reqwest::Client;
 use serde::{ Deserialize, Serialize };
-use serde_json::Value;
 use std::error::Error;
+
+/* ---------------------------------------------------------------------------------------------- */
+
+const BASE_URL: &str = "https://api.coinbase.com";
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -55,6 +58,68 @@ pub struct Product {
   pub quote_currency_id: Option<String>,
   pub base_currency_id: Option<String>,
   pub display_name: Option<String>,
+  pub fcm_trading_session_details: Option<FcmTradingSessionDetails>,
+  pub maintenance: Option<Maintenance>,
+  pub mid_market_price: Option<String>,
+  pub alias: Option<String>,
+  pub alias_to: Option<Vec<String>>,
+  pub base_display_symbol: String,
+  pub quote_display_symbol: String,
+  pub view_only: Option<bool>,
+  pub price_increment: Option<String>,
+  pub product_venue: Option<String>,
+  pub approximate_quote_24h_volume: Option<String>,
+  pub future_product_details: Option<FutureProductDetails>,
+  pub perpetual_details: Option<PerpetualDetails>,
+}
+
+/// Struct to represent FCM trading session details
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct FcmTradingSessionDetails {
+  pub is_session_open: Option<bool>,
+  pub open_time: Option<String>,
+  pub close_time: Option<String>,
+  pub session_state: Option<String>,
+  pub after_hours_order_entry_disabled: Option<bool>,
+  pub closed_reason: Option<String>,
+}
+
+/// Struct to represent maintenance details
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Maintenance {
+  pub start_time: Option<String>,
+  pub end_time: Option<String>,
+}
+
+/// Struct to represent future product details
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct FutureProductDetails {
+  pub venue: Option<String>,
+  pub contract_code: Option<String>,
+  pub contract_expiry: Option<String>,
+  pub contract_size: Option<String>,
+  pub contract_root_unit: Option<String>,
+  pub group_description: Option<String>,
+  pub contract_expiry_timezone: Option<String>,
+  pub group_short_description: Option<String>,
+  pub risk_managed_by: Option<String>,
+  pub contract_expiry_type: Option<String>,
+}
+
+/// Struct to represent perpetual details
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct PerpetualDetails {
+  pub open_interest: Option<String>,
+  pub funding_rate: Option<String>,
+  pub funding_time: Option<String>,
+  pub max_leverage: Option<String>,
+  pub base_asset_uuid: Option<String>,
+  pub underlying_type: Option<String>,
+  pub contract_display_name: Option<String>,
+  pub time_to_expiry_ms: Option<i64>,
+  pub non_crypto: Option<bool>,
+  pub contract_expiry_name: Option<String>,
+  pub twenty_four_by_seven: Option<bool>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -63,28 +128,17 @@ pub struct Product {
 pub async fn list_products(
   jwt_token: String,
   selected_request_path: String
-  // limit: Option<u32>,
-  // offset: Option<u32>,
-  // product_type: Option<&str>,
-  // product_ids: Option<Vec<&str>>,
-  // contract_expiry_type: Option<&str>,
-  // expiring_contract_status: Option<&str>,
-  // get_tradability_status: Option<bool>,
-  // get_all_products: Option<bool>
 ) -> Result<ListProductsResponse, Box<dyn Error>> {
-  // let base_url = "https://api.coinbase.com/api/v3/brokerage/products";
-  let base_url = "https://api.coinbase.com/api/v3/brokerage/products";
+  // let url = BASE_URL.to_string() + &selected_request_path;
+  let url = "https://api.coinbase.com/api/v3/brokerage/products";
   let client = Client::new();
 
-  // Construct the final URL with query parameters
-  let final_url = base_url.to_string() + &selected_request_path.to_string();
-
   // Log the final request URL
-  log::info!("Final request URL: {}", final_url);
+  log::info!("Final request URL: {}", url);
 
   // Make the request
   let request = client
-    .get(&final_url)
+    .get(url)
     .header("Content-Type", "application/json")
     .header("Authorization", format!("Bearer {}", jwt_token));
 
@@ -97,35 +151,9 @@ pub async fn list_products(
     }
   } else {
     let status = response.status();
-    let error_body: Option<Value> = response.json().await.ok();
-
-    let error_message = if let Some(body) = error_body {
-      if let Some(error) = body.get("error") {
-        let unknown_code = Value::String("Unknown code".to_string());
-        let code = {
-          let unknown_code_ref = &unknown_code;
-          error.get("code").unwrap_or(unknown_code_ref)
-        };
-        let unknown_message = Value::String("Unknown message".to_string());
-        let unknown_message_ref = &unknown_message;
-        let message = error.get("message").unwrap_or(unknown_message_ref);
-        let details_value = Value::Array(vec![]);
-        let details = error.get("details").unwrap_or(&details_value);
-        format!(
-          "Request failed with status: {}. Error code: {}. Message: {}. Details: {:?}",
-          status,
-          code,
-          message,
-          details
-        )
-      } else {
-        format!("Request failed with status: {}. Error: {:?}", status, body)
-      }
-    } else {
-      format!("Request failed with status: {}. Error: Unknown error", status)
-    };
-
-    Err(error_message.into())
+    let error_body = response.text().await.unwrap_or_else(|_| "Unable to read error body".to_string());
+    log::error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
+    Err(format!("Failed with status code: {:?}", status).into())
   }
 }
 

@@ -1,5 +1,4 @@
-/* ---------------------------------------------------------------------------------------------- */
-//! # mod: Store
+/* ---------------------------------------------------------------------------------------------- */ //! # mod: Store
 //!
 //! Tauri Store Defaults.
 /* ---------------------------------------------------------------------------------------------- */
@@ -15,10 +14,5 @@
 // App Modules
 pub mod app_apis_defaults;
 pub mod app_settings_defaults;
-// Page Modules
-pub mod interface_defaults;
-pub mod nav_connect_defaults;
-pub mod nav_dashboard_defaults;
-pub mod nav_subscribe_defaults;
 
 /* ---------------------------------------------------------------------------------------------- */

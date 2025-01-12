@@ -24,41 +24,20 @@ const store = await load('app_apis.json');
 const ConnectCoinbase: React.FC = () => {
   // State Management
   const { selCoinbaseApiKey, setCoinbaseApiKey } = useInterfaceContext();
-  const { selCoinbaseApiSecret, setCoinbaseApiSecret } = useInterfaceContext();
+  const { selCoinbaseApiKeySecret, setCoinbaseApiKeySecret } = useInterfaceContext();
   const { selCoinbaseApiPermissions, setCoinbaseApiPermissions } = useInterfaceContext();
-  // const [selected_api_key, set_selected_api_key] = useState('');
-  // const [selected_api_secret, set_selected_api_secret] = useState('');
-  // const [selected_ApiPermissions, setSelected_ApiPermissions] = useState<useInterfaceContext | null>(null);
 
   // Load API
-  const load_api = async () => {
+  const loadApi = useCallback(async () => {
     try {
-      const savedApiKey = await store.get<{ api_key: string }>('coinbase');
-      const savedApiSecret = await store.get<{ api_secret: string }>('coinbase');
-      const savedApiPermissions = await store.get<{
-        perm_can_view?: boolean;
-        perm_can_trade?: boolean;
-        perm_can_transfer?: boolean;
-        perm_portfolio_uuid?: string;
-        perm_portfolio_type?: string;
-      }>('coinbase');
+      const savedApi = await store.get<ApiType>('coinbase');
 
-      if (savedApiKey) {
-        setCoinbaseApiKey(savedApiKey.api_key);
-      }
-
-      if (savedApiSecret) {
-        setCoinbaseApiSecret(savedApiSecret.api_secret);
-      }
-
-      if (savedApiPermissions) {
-        setCoinbaseApiPermissions({
-          perm_can_view: savedApiPermissions.perm_can_view ?? false,
-          perm_can_trade: savedApiPermissions.perm_can_trade ?? false,
-          perm_can_transfer: savedApiPermissions.perm_can_transfer ?? false,
-          perm_portfolio_uuid: savedApiPermissions.perm_portfolio_uuid ?? '',
-          perm_portfolio_type: savedApiPermissions.perm_portfolio_type ?? '',
-        });
+      if (savedApi) {
+        console.log('Loaded API:', savedApi);
+        setCoinbaseApiKey(savedApi.api_key ? savedApi.api_key : '');
+        setCoinbaseApiKeySecret(savedApi.api_key_secret ? savedApi.api_key_secret : '');
+        setCoinbaseApiPermissions(savedApi.api_permissions);
+        console.log('Permissions:', savedApi.api_permissions);
       }
     } catch (err) {
       if (err instanceof Error) {
@@ -67,30 +46,32 @@ const ConnectCoinbase: React.FC = () => {
         error(String(err));
       }
     }
-  };
+  }, [setCoinbaseApiKey, setCoinbaseApiKeySecret, setCoinbaseApiPermissions]);
 
   // Initialize on Component load
   useEffect(() => {
-    load_api();
-  }, [load_api]);
+    loadApi();
+  }, [loadApi]);
 
   // Delete API
-  const delete_api = async () => {
+  const deleteApi = async () => {
     try {
       await store.set('coinbase', {
         api_configured: false,
         api_key: null,
         api_secret: null,
-        perm_can_trade: false,
-        perm_can_transfer: false,
-        perm_can_view: false,
-        perm_portfolio_type: null,
-        perm_portfolio_uuid: null,
+        api_permissions: {
+          perm_can_trade: false,
+          perm_can_transfer: false,
+          perm_can_view: false,
+          perm_portfolio_type: '',
+          perm_portfolio_uuid: '',
+        },
       });
       await store.save();
 
       setCoinbaseApiKey('');
-      setCoinbaseApiSecret('');
+      setCoinbaseApiKeySecret('');
       setCoinbaseApiPermissions({
         perm_can_view: false,
         perm_can_trade: false,
@@ -110,11 +91,11 @@ const ConnectCoinbase: React.FC = () => {
   };
 
   // Button Click: Api Save
-  const buttonClick_Api_Save = async () => {
+  const clickApiSave = async () => {
     try {
       const response: string = await invoke('coinbase_save', {
         coinbaseApiKey: selCoinbaseApiKey,
-        coinbaseApiSecret: selCoinbaseApiSecret,
+        coinbaseApiSecret: selCoinbaseApiKeySecret,
       });
       info('[coinbase_keys_test]\n' + response);
 
@@ -140,16 +121,10 @@ const ConnectCoinbase: React.FC = () => {
         } as PermissionsType,
       );
 
-      setCoinbaseApiPermissions({
-        perm_can_view: parsedResponse.perm_can_view ?? false,
-        perm_can_trade: parsedResponse.perm_can_trade ?? false,
-        perm_can_transfer: parsedResponse.perm_can_transfer ?? false,
-        perm_portfolio_uuid: parsedResponse.perm_portfolio_uuid ?? '',
-        perm_portfolio_type: parsedResponse.perm_portfolio_type ?? '',
-      });
+      setCoinbaseApiPermissions(parsedResponse);
 
       // Load API permissions after saving
-      await load_api();
+      await loadApi();
     } catch (err) {
       if (err instanceof Error) {
         error(err.toString());
@@ -160,8 +135,8 @@ const ConnectCoinbase: React.FC = () => {
   };
 
   // Button Click - Api Delete
-  const buttonClick_Api_Delete = async () => {
-    delete_api();
+  const clickApiDelete = async () => {
+    deleteApi();
   };
 
   /* -------------------------------------------------------------------------------------------- */
@@ -223,9 +198,9 @@ const ConnectCoinbase: React.FC = () => {
             <div className={Style.Input_Label}>API Secret</div>
             <input
               type="text"
-              id="api_secret"
-              value={selCoinbaseApiSecret ?? ''}
-              onChange={(e) => setCoinbaseApiSecret(e.target.value)}
+              id="api_key_secret"
+              value={selCoinbaseApiKeySecret ?? ''}
+              onChange={(e) => setCoinbaseApiKeySecret(e.target.value)}
               className={Style.Input}
               autoComplete="off"
               placeholder="Enter your Coinbase API Secret"
@@ -233,10 +208,10 @@ const ConnectCoinbase: React.FC = () => {
           </div>
         </div>
         <div className={Style.Button_Box}>
-          <button type="button" onClick={buttonClick_Api_Save} className={Style.Save_Button}>
+          <button type="button" onClick={clickApiSave} className={Style.Save_Button}>
             Save and Test Configuration
           </button>
-          <button type="button" onClick={buttonClick_Api_Delete} className={Style.Delete_Button}>
+          <button type="button" onClick={clickApiDelete} className={Style.Delete_Button}>
             Delete Configuration
           </button>
         </div>

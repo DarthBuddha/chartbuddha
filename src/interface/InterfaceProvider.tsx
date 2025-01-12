@@ -6,8 +6,8 @@
 import React, { useState } from 'react';
 // Components
 import { InterfaceContext } from './InterfaceContext';
-// import { InterfaceType } from './Interface';
-// import { CoinbaseType } from './coinbase/Coinbase';
+import { PermissionsType } from './coinbase/api/permissions/Permissions';
+import { ProductsType } from './coinbase/products/Products';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -17,9 +17,10 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [selApi, setApi] = useState<string | null>(null);
   // Coinbase
   const [selCoinbaseApiKey, setCoinbaseApiKey] = useState<string | null>(null);
-  const [selCoinbaseApiSecret, setCoinbaseApiSecret] = useState<string | null>(null);
-  // const [selCoinbaseProductType, setCoinbaseProductType] = useState<string | null>(null);
-  // const [selCoinbaseProductList, setCoinbaseProductList] = useState<InterfaceType | null>(null);
+  const [selCoinbaseApiKeySecret, setCoinbaseApiKeySecret] = useState<string | null>(null);
+  const [selCoinbaseApiPermissions, setCoinbaseApiPermissions] = useState<PermissionsType | null>(null);
+  const [selCoinbaseProductType, setCoinbaseProductType] = useState<string | null>(null);
+  const [selCoinbaseProductList, setCoinbaseProductList] = useState<ProductsType | null>(null);
   // const [selCoinbaseProductName, setCoinbaseProductName] = useState<string | null>(null);
 
   return (
@@ -33,12 +34,14 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         // Coinbase
         selCoinbaseApiKey,
         setCoinbaseApiKey,
-        selCoinbaseApiSecret,
-        setCoinbaseApiSecret,
-        // selCoinbaseProductType,
-        // setCoinbaseProductType,
-        // selCoinbaseProductList,
-        // setCoinbaseProductList,
+        selCoinbaseApiKeySecret,
+        setCoinbaseApiKeySecret,
+        selCoinbaseApiPermissions,
+        setCoinbaseApiPermissions,
+        selCoinbaseProductType,
+        setCoinbaseProductType,
+        selCoinbaseProductList,
+        setCoinbaseProductList,
         // selCoinbaseProductName,
         // setCoinbaseProductName,
       }}

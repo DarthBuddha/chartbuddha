@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - Subscribe.tsx
+//! - pages.subscribe.Subscribe.tsx
 // ---------------------------------------------------------------------------------------------- //
 
 // React
@@ -14,7 +14,6 @@ import Style from './Subscribe.module.css';
 /* ---------------------------------------------------------------------------------------------- */
 //
 const Subscribe: React.FC = () => {
-
   return (
     <div className={Style.Subscribe}>
       <div className={Style.Main_Container}>
@@ -22,7 +21,8 @@ const Subscribe: React.FC = () => {
           <SubscribeApiList />
         </div>
         <div className={Style.Subscribe_Data}>
-          <SubscribeData /></div>
+          <SubscribeData />
+        </div>
         <div className={Style.Subscribe_Sub_List}>
           <SubscribeSubscriptionList />
         </div>

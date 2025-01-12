@@ -51,9 +51,7 @@ pub struct Detail {
 /* ---------------------------------------------------------------------------------------------- */
 
 /// Get information about your CDP API key permissions.
-pub async fn get_api_key_permissions(
-  jwt_token: String
-) -> Result<ApiKeyPermissionsResponse, String> {
+pub async fn get_api_key_permissions(jwt_token: String) -> Result<ApiKeyPermissionsResponse, String> {
   let url = "https://api.coinbase.com/api/v3/brokerage/key_permissions";
   let client = reqwest::Client::new();
 
@@ -77,9 +75,7 @@ pub async fn get_api_key_permissions(
         }
       } else {
         let status = resp.status();
-        let error_body = resp
-          .text().await
-          .unwrap_or_else(|_| "Unable to read error body".to_string());
+        let error_body = resp.text().await.unwrap_or_else(|_| "Unable to read error body".to_string());
         log::error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
         Err(format!("Failed with status code: {:?}", status))
       }

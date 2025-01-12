@@ -59,7 +59,7 @@ pub async fn authenticate_api_request(
     .to_string();
 
   let api_secret: String = coinbase
-    .get("api_secret")
+    .get("api_key_secret")
     .expect("Failed to get api_secret from coinbase object")
     .as_str()
     .expect("Failed to convert api_secret to string")
@@ -78,19 +78,14 @@ pub async fn authenticate_api_request(
   };
 
   // Generate a random nonce
-  let nonce: String = rand
-    ::thread_rng()
-    .sample_iter(&Alphanumeric)
-    .take(16)
-    .map(char::from)
-    .collect();
+  let nonce: String = rand::thread_rng().sample_iter(&Alphanumeric).take(16).map(char::from).collect();
 
   // Define claims for JWT
   let uri = format!(
     "{} {}{}",
-    &authenticator.request_method,
+    &authenticator.request_method.to_string(),
     "api.coinbase.com",
-    &authenticator.request_path
+    &authenticator.request_path.to_string()
   );
   let claims = Claims {
     iss: "cdp".to_string(),

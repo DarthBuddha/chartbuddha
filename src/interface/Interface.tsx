@@ -6,6 +6,7 @@
 import { createContext } from 'react';
 // Interface
 import { PermissionsType } from './coinbase/api/permissions/Permissions';
+import { ProductsType } from './coinbase/products/Products';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -19,16 +20,14 @@ export interface InterfaceType {
   // Coinbase Context
   selCoinbaseApiKey: string | null;
   setCoinbaseApiKey: React.Dispatch<React.SetStateAction<string | null>>;
-  selCoinbaseApiSecret: string | null;
-  setCoinbaseApiSecret: React.Dispatch<React.SetStateAction<string | null>>;
+  selCoinbaseApiKeySecret: string | null;
+  setCoinbaseApiKeySecret: React.Dispatch<React.SetStateAction<string | null>>;
   selCoinbaseApiPermissions: PermissionsType | null;
   setCoinbaseApiPermissions: React.Dispatch<React.SetStateAction<PermissionsType | null>>;
-  // selCoinbaseApi: CoinbaseType | null;
-  // setCoinbaseApi: React.Dispatch<React.SetStateAction<CoinbaseType | null>>;
-  // selCoinbaseProductType: string | null;
-  // setCoinbaseProductType: React.Dispatch<React.SetStateAction<string | null>>;
-  // selCoinbaseProductList: InterfaceType | null;
-  // setCoinbaseProductList: React.Dispatch<React.SetStateAction<InterfaceType | null>>;
+  selCoinbaseProductType: string | null;
+  setCoinbaseProductType: React.Dispatch<React.SetStateAction<string | null>>;
+  selCoinbaseProductList: ProductsType | null;
+  setCoinbaseProductList: React.Dispatch<React.SetStateAction<ProductsType | null>>;
   // selCoinbaseProductName: string | null;
   // setCoinbaseProductName: React.Dispatch<React.SetStateAction<string | null>>;
 }

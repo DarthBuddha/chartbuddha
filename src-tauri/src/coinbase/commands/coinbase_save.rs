@@ -1,11 +1,11 @@
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //! # coinbase_save.rs
 //!
 //! Command: Save and Test Coinbase Api keys.
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 //! ### Functions
 //! - coinbase_save
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 // Tauri
 use tauri::{ AppHandle, Wry };
@@ -19,7 +19,7 @@ use crate::coinbase::authenticate_api_request::authenticate_api_request;
 use crate::coinbase::authenticate_api_request::Authenticator;
 use crate::coinbase::api::data_api::get_api_key_permissions::get_api_key_permissions;
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 /// Function to convert an EC private key from SEC1 PEM format to PKCS8 PEM format
 pub fn convert_api_secret(api_secret: &str) -> String {
@@ -43,7 +43,7 @@ pub fn convert_api_secret(api_secret: &str) -> String {
   formatted_secret
 }
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 /// Function to test the connection to the Coinbase API
 #[tauri::command]
@@ -71,7 +71,7 @@ pub async fn coinbase_save(
   // Save the API keys to the store
   let mut coinbase = store.get("coinbase").unwrap_or(json!({}));
   coinbase["api_key"] = json!(coinbase_api_key);
-  coinbase["api_secret"] = json!(formatted_api_secret);
+  coinbase["api_key_secret"] = json!(formatted_api_secret);
   store.set("coinbase", coinbase);
   store.save().map_err(|e| e.to_string())?;
   info!("Coinbase API Keys Saved");
@@ -91,6 +91,8 @@ pub async fn coinbase_save(
     }
   };
 
+  log::info!("JWT Token: {:?}", jwt_token);
+
   // Call get_api_key_permissions with the JWT token
   let api_permissions_response = match get_api_key_permissions(jwt_token.clone()).await {
     Ok(api_permissions) => {
@@ -109,11 +111,16 @@ pub async fn coinbase_save(
       // Save the API permissions to the store
       let mut coinbase = store.get("coinbase").unwrap_or(json!({}));
       coinbase["api_configured"] = json!(true);
-      coinbase["perm_can_view"] = json!(api_permissions.can_view);
-      coinbase["perm_can_trade"] = json!(api_permissions.can_trade);
-      coinbase["perm_can_transfer"] = json!(api_permissions.can_transfer);
-      coinbase["perm_portfolio_uuid"] = json!(api_permissions.portfolio_uuid);
-      coinbase["perm_portfolio_type"] = json!(api_permissions.portfolio_type);
+      coinbase["api_key"] = json!(coinbase_api_key);
+      coinbase["api_key_secret"] = json!(formatted_api_secret);
+      coinbase["api_permissions"] =
+        json!({
+        "perm_can_view": api_permissions.can_view,
+        "perm_can_trade": api_permissions.can_trade,
+        "perm_can_transfer": api_permissions.can_transfer,
+        "perm_portfolio_uuid": api_permissions.portfolio_uuid,
+        "perm_portfolio_type": api_permissions.portfolio_type
+      });
       store.set("coinbase", coinbase);
       store.save().map_err(|e| e.to_string())?;
       info!("Coinbase API Permissions Saved");
@@ -130,4 +137,4 @@ pub async fn coinbase_save(
   api_permissions_response
 }
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

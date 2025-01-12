@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - SubscribeApiList.tsx
+//! - pages.subscribe.SubscribeApiList.tsx
 // ---------------------------------------------------------------------------------------------- //
 
 // React
@@ -21,7 +21,7 @@ const store_app_apis = await load('app_apis.json');
 
 const SubscribeApiList: React.FC = () => {
   // State Management
-  const { setSelectedApi } = useInterfaceContext();
+  const { setApi } = useInterfaceContext();
 
   // Store Management
   const [selectedApiListStore, setSelectedApiListStore] = useState<string[]>([]);
@@ -61,13 +61,13 @@ const SubscribeApiList: React.FC = () => {
   };
 
   // Button Click: Handle Data Api
-  const handleClick = async (selectedApi: string) => {
+  const handleClick = async (selApi: string) => {
     const resetApi = ['binance', 'coinbase'];
     // Logic: Reset Context
-    if (resetApi.includes(selectedApi)) {
-      setSelectedApi(selectedApi);
-    };
-  }
+    if (resetApi.includes(selApi)) {
+      setApi(selApi);
+    }
+  };
 
   /* -------------------------------------------------------------------------------------------- */
   return (

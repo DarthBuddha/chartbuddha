@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - SubscribeCoinbase.tsx
+//! - pages.subscribe.coinbase.SubscribeCoinbase.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -19,11 +19,11 @@ import Style from './SubscribeCoinbase.module.css';
 
 const SubscribeCoinbase: React.FC = () => {
   // State Management
-  const { selectedProductType, setSelectedProductType } = useInterfaceContext();
+  const { selCoinbaseProductType, setCoinbaseProductType } = useInterfaceContext();
 
   // Logic: Reset Interface Context
-  if (selectedProductType === null) {
-    setSelectedProductType('spot');
+  if (selCoinbaseProductType === null) {
+    setCoinbaseProductType('spot');
   }
 
   return (
