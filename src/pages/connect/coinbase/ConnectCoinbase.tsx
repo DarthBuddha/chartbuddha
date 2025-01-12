@@ -1,15 +1,17 @@
 // ---------------------------------------------------------------------------------------------- //
-//! - ConnectCoinbase.tsx
+//! - pages.connect.coinbase.ConnectCoinbase.tsx
 // ---------------------------------------------------------------------------------------------- //
 
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 // Tauri
 import { load } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { ApiPermissionsType } from './type/CoinbaseApiPermissions';
+import { useInterfaceContext } from 'interface/InterfaceContext';
+import { PermissionsType } from 'interface/coinbase/api/permissions/Permissions';
+import { ApiType } from 'interface/coinbase/api/Api';
 // CSS Modules
 import Style from './ConnectCoinbase.module.css';
 
@@ -21,16 +23,12 @@ const store = await load('app_apis.json');
 
 const ConnectCoinbase: React.FC = () => {
   // State Management
-  const [selected_api_key, set_selected_api_key] = useState('');
-  const [selected_api_secret, set_selected_api_secret] = useState('');
-  const [selected_ApiPermissions, setSelected_ApiPermissions] = useState<ApiPermissionsType | null>(
-    null,
-  );
-
-  // Initialize on Component load
-  useEffect(() => {
-    load_api();
-  }, []);
+  const { selCoinbaseApiKey, setCoinbaseApiKey } = useInterfaceContext();
+  const { selCoinbaseApiSecret, setCoinbaseApiSecret } = useInterfaceContext();
+  const { selCoinbaseApiPermissions, setCoinbaseApiPermissions } = useInterfaceContext();
+  // const [selected_api_key, set_selected_api_key] = useState('');
+  // const [selected_api_secret, set_selected_api_secret] = useState('');
+  // const [selected_ApiPermissions, setSelected_ApiPermissions] = useState<useInterfaceContext | null>(null);
 
   // Load API
   const load_api = async () => {
@@ -46,15 +44,15 @@ const ConnectCoinbase: React.FC = () => {
       }>('coinbase');
 
       if (savedApiKey) {
-        set_selected_api_key(savedApiKey.api_key);
+        setCoinbaseApiKey(savedApiKey.api_key);
       }
 
       if (savedApiSecret) {
-        set_selected_api_secret(savedApiSecret.api_secret);
+        setCoinbaseApiSecret(savedApiSecret.api_secret);
       }
 
       if (savedApiPermissions) {
-        setSelected_ApiPermissions({
+        setCoinbaseApiPermissions({
           perm_can_view: savedApiPermissions.perm_can_view ?? false,
           perm_can_trade: savedApiPermissions.perm_can_trade ?? false,
           perm_can_transfer: savedApiPermissions.perm_can_transfer ?? false,
@@ -71,6 +69,11 @@ const ConnectCoinbase: React.FC = () => {
     }
   };
 
+  // Initialize on Component load
+  useEffect(() => {
+    load_api();
+  }, [load_api]);
+
   // Delete API
   const delete_api = async () => {
     try {
@@ -86,9 +89,9 @@ const ConnectCoinbase: React.FC = () => {
       });
       await store.save();
 
-      set_selected_api_key('');
-      set_selected_api_secret('');
-      setSelected_ApiPermissions({
+      setCoinbaseApiKey('');
+      setCoinbaseApiSecret('');
+      setCoinbaseApiPermissions({
         perm_can_view: false,
         perm_can_trade: false,
         perm_can_transfer: false,
@@ -110,23 +113,18 @@ const ConnectCoinbase: React.FC = () => {
   const buttonClick_Api_Save = async () => {
     try {
       const response: string = await invoke('coinbase_save', {
-        coinbaseApiKey: selected_api_key,
-        coinbaseApiSecret: selected_api_secret,
+        coinbaseApiKey: selCoinbaseApiKey,
+        coinbaseApiSecret: selCoinbaseApiSecret,
       });
       info('[coinbase_keys_test]\n' + response);
 
       // Parse the response and set API permissions
       const parsedResponse = response.split('\n').reduce(
-        (acc: ApiPermissionsType, line) => {
+        (acc: PermissionsType, line) => {
           const [key, value] = line.split(':').map((item) => item.trim());
           if (key && value !== undefined) {
-            if (
-              key === 'perm_can_view' ||
-              key === 'perm_can_trade' ||
-              key === 'perm_can_transfer'
-            ) {
-              acc[key as 'perm_can_view' | 'perm_can_trade' | 'perm_can_transfer'] =
-                value === 'true';
+            if (key === 'perm_can_view' || key === 'perm_can_trade' || key === 'perm_can_transfer') {
+              acc[key as 'perm_can_view' | 'perm_can_trade' | 'perm_can_transfer'] = value === 'true';
             } else if (key === 'perm_portfolio_uuid' || key === 'perm_portfolio_type') {
               acc[key as 'perm_portfolio_uuid' | 'perm_portfolio_type'] = value;
             }
@@ -139,10 +137,10 @@ const ConnectCoinbase: React.FC = () => {
           perm_can_transfer: false,
           perm_portfolio_uuid: '',
           perm_portfolio_type: '',
-        } as ApiPermissionsType,
+        } as PermissionsType,
       );
 
-      setSelected_ApiPermissions({
+      setCoinbaseApiPermissions({
         perm_can_view: parsedResponse.perm_can_view ?? false,
         perm_can_trade: parsedResponse.perm_can_trade ?? false,
         perm_can_transfer: parsedResponse.perm_can_transfer ?? false,
@@ -176,8 +174,8 @@ const ConnectCoinbase: React.FC = () => {
           <div className={Style.Title}>API Settings</div>
           <div className={Style.Settings_Box}>
             <div className={Style.Settings_Text}>
-              Coinbase requires your API key and secret to connect. You can generate these from the
-              Coinbase Pro website. Make sure to keep your secret key secure.
+              Coinbase requires your API key and secret to connect. You can generate these from the Coinbase Pro
+              website. Make sure to keep your secret key secure.
             </div>
           </div>
         </div>
@@ -187,24 +185,19 @@ const ConnectCoinbase: React.FC = () => {
           <div className={Style.Permission_Box}>
             <div>
               <div className={Style.Permission_Text}>
-                Can View:{' '}
-                {selected_ApiPermissions ? String(selected_ApiPermissions.perm_can_view) : ''}
+                Can View: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.perm_can_view) : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Can Trade:{' '}
-                {selected_ApiPermissions ? String(selected_ApiPermissions.perm_can_trade) : ''}
+                Can Trade: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.perm_can_trade) : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Can Transfer:{' '}
-                {selected_ApiPermissions ? String(selected_ApiPermissions.perm_can_transfer) : ''}
+                Can Transfer: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.perm_can_transfer) : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Portfolio uuid:{' '}
-                {selected_ApiPermissions ? selected_ApiPermissions.perm_portfolio_uuid : ''}
+                Portfolio uuid: {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.perm_portfolio_uuid : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Portfolio Type:{' '}
-                {selected_ApiPermissions ? selected_ApiPermissions.perm_portfolio_type : ''}
+                Portfolio Type: {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.perm_portfolio_type : ''}
               </div>
             </div>
           </div>
@@ -218,8 +211,8 @@ const ConnectCoinbase: React.FC = () => {
             <input
               type="text"
               id="api_key"
-              value={selected_api_key}
-              onChange={(e) => set_selected_api_key(e.target.value)}
+              value={selCoinbaseApiKey ?? ''}
+              onChange={(e) => setCoinbaseApiKey(e.target.value)}
               className={Style.Input}
               autoComplete="off"
               placeholder="Enter your Coinbase API Key"
@@ -231,8 +224,8 @@ const ConnectCoinbase: React.FC = () => {
             <input
               type="text"
               id="api_secret"
-              value={selected_api_secret}
-              onChange={(e) => set_selected_api_secret(e.target.value)}
+              value={selCoinbaseApiSecret ?? ''}
+              onChange={(e) => setCoinbaseApiSecret(e.target.value)}
               className={Style.Input}
               autoComplete="off"
               placeholder="Enter your Coinbase API Secret"

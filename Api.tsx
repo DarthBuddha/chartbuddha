@@ -1,24 +1,22 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - CoinbaseProductsFuturePerpetual.tsx
+//! - CoinbaseApi.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext } from 'react';
+// Interface
+import { CoinbaseApiPermissionsType } from './api/Permissions';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface CoinbaseProductsFuturePerpetualType {
-  open_interest: string;
-  funding_rate: string;
-  funding_time: string; // RFC3339 Timestamp
-  max_leverage: string;
-  base_asset_uuid: string;
-  underlying_type: string;
+export interface CoinbaseApiType {
+  api_key: string;
+  api_secret: string;
+  api_permissions: CoinbaseApiPermissionsType;
 }
 
-const CoinbaseProductsFuturePerpetualContext =
-  createContext<CoinbaseProductsFuturePerpetualType | null>(null);
+const CoinbaseApiContext = createContext<CoinbaseApiType | null>(null);
 
-export default CoinbaseProductsFuturePerpetualContext;
+export default CoinbaseApiContext;
 
 /* ---------------------------------------------------------------------------------------------- */

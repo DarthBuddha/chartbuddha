@@ -1,16 +1,16 @@
-/* ---------------------------------------------------------------------------------------------- */
-//! - CoinbaseProductsType.tsx
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! - interface.coinbase.products.Products.tsx
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import { createContext } from 'react';
 // Interface
-import { CoinbaseProductsSessionType } from './CoinbaseProductsSession';
-import { CoinbaseProductsFutureType } from './CoinbaseProductsFuture';
+import { SessionType } from './session/Session';
+import { FutureType } from './future/Future';
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
-export interface CoinbaseProductsType {
+export interface ProductsType {
   product_id: string;
   price: string;
   price_percentage_change_24h: string;
@@ -36,7 +36,7 @@ export interface CoinbaseProductsType {
   product_type?: string;
   quote_currency_id?: string;
   base_currency_id?: string;
-  fcm_trading_session_details?: CoinbaseProductsSessionType; // object
+  fcm_trading_session_details?: SessionType; // object
   mid_market_price?: string;
   alias?: string;
   alias_to?: string;
@@ -47,12 +47,12 @@ export interface CoinbaseProductsType {
   display_name?: string;
   product_venue?: string;
   approximate_quote_24h_volume?: string;
-  future_product_details?: CoinbaseProductsFutureType; // object
+  future_product_details?: FutureType; // object
   num_products?: number;
 }
 
-const CoinbaseProductsTypeContext = createContext<CoinbaseProductsType | null>(null);
+const ProductsContext = createContext<ProductsType | null>(null);
 
-export default CoinbaseProductsTypeContext;
+export default ProductsContext;
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

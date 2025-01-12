@@ -1,6 +1,6 @@
-/* ---------------------------------------------------------------------------------------------- */
-//! - ConnectApiList.tsx
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! - pages.connect.ConnectApiList.tsx
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
@@ -9,18 +9,18 @@ import { useInterfaceContext } from 'interface/InterfaceContext';
 // CSS Modules
 import Style from './ConnectApiList.module.css';
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 const ConnectApiList: React.FC = () => {
   // State Management
-  const { setSelectedApi } = useInterfaceContext();
+  const { setApi } = useInterfaceContext();
 
   // Handle Data Api Click
   const handleClick = async (selectedApi: string) => {
     const resetApi = ['binance', 'coinbase'];
     // Logic: Reset Context
     if (resetApi.includes(selectedApi)) {
-      setSelectedApi(selectedApi);
+      setApi(selectedApi);
     }
   };
 
@@ -41,4 +41,4 @@ const ConnectApiList: React.FC = () => {
 
 export default ConnectApiList;
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

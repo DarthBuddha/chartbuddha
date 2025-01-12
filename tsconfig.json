@@ -27,9 +27,6 @@
     "paths": {
       "interface/*": [
         "interface/*"
-      ],
-      "context/*": [
-        "context/*"
       ]
     }
   },

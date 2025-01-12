@@ -7,10 +7,10 @@ import React, { useEffect } from 'react';
 // Tauri
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { info, error } from '@tauri-apps/plugin-log';
+import { error } from '@tauri-apps/plugin-log';
 
 import { useInterfaceContext } from 'interface/InterfaceContext';
-import { CoinbaseProductsType } from './type/CoinbaseProducts';
+// import { CoinbaseProductsType } from 'interface/coinbase/products/Products';
 // CSS Modules
 import Style from './SubscribeCoinbaseProductList.module.css';
 
@@ -18,27 +18,27 @@ import Style from './SubscribeCoinbaseProductList.module.css';
 
 const SubscribeCoinbaseProductList: React.FC = () => {
   // State Management
-  const { selectedProductType, setSelectedProductType } = useInterfaceContext();
+  const { selCoinbaseProductType, setCoinbaseProductType } = useInterfaceContext();
+  const { selCoinbaseProductList, setCoinbaseProductList } = useInterfaceContext();
 
   // Initialize on Component load
   useEffect(() => {
     loadProductList();
-  }, []);
+  });
 
   // Button Click: Product Type
   const clickProductType = (productType: string) => {
     const resetProductType = ['spot', 'future', 'perpetual'];
     if (resetProductType.includes(productType)) {
-      setSelectedProductType(productType);
+      setCoinbaseProductType(productType);
     }
   };
 
   // Load: Product List
   const loadProductList = async () => {
     try {
-      const response: string = await invoke('coinbase_save', {
-        // coinbaseApiKey: selected_api_key,
-        // coinbaseApiSecret: selected_api_secret,
+      const response: string = await invoke('coinbase_product_list', {
+        productType: selCoinbaseProductType,
       });
     } catch (err) {
       if (err instanceof Error) {
@@ -48,10 +48,11 @@ const SubscribeCoinbaseProductList: React.FC = () => {
       }
     }
   };
+
   // const [selectedProducts, setSelectedProducts] = useState<Type_ProductData[]>([]);
 
-  // Button Click: Product
-  // const handleProductClick = (selectedProduct: Type_ProductData) => {
+  // // Button Click: Product
+  // const handleProductClick = (selectedProduct: CoinbaseProductsType) => {
   //   // Handle product click logic here
   // };
 
@@ -69,7 +70,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
     <div className={Style.Component}>
       <div className={Style.NavMenu}>
         <div
-          className={`${Style.Button} ${selectedProductType === 'spot' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selCoinbaseProductType === 'spot' ? Style.Active : ''}`}
           onClick={() => {
             clickProductType('spot');
           }}
@@ -77,7 +78,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
           Spot
         </div>
         <div
-          className={`${Style.Button} ${selectedProductType === 'future' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selCoinbaseProductType === 'future' ? Style.Active : ''}`}
           onClick={() => {
             clickProductType('future');
           }}
@@ -85,16 +86,16 @@ const SubscribeCoinbaseProductList: React.FC = () => {
           Futures
         </div>
         <div
-          className={`${Style.Button} ${selectedProductType === 'perpetual' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selCoinbaseProductType === 'perps' ? Style.Active : ''}`}
           onClick={() => {
-            clickProductType('perpetual');
+            clickProductType('perps');
           }}
         >
           Perps
         </div>
       </div>
       {/* <div className={Style.Product_List}>
-        {selectedProducts.map((product, index) => (
+        {selCoinbaseProductList.map((product, index) => (
           <div key={index} className={Style.Product} onClick={() => handleProductClick(product)}>
             <div className={Style.Product_Details_Container}>
               <div className={Style.Product_Name}>

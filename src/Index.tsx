@@ -24,10 +24,10 @@ import Style from './Index.module.css';
 
 const Index: React.FC = () => {
   // State Management
-  const { selectedPage } = useInterfaceContext();
+  const { selPage } = useInterfaceContext();
 
   const renderPage = () => {
-    switch (selectedPage) {
+    switch (selPage) {
       case 'analyze':
         return <Analyze />;
       case 'dashboard':

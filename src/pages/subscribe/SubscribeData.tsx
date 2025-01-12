@@ -15,9 +15,9 @@ import Style from './SubscribeData.module.css';
 
 const SubscribeData: React.FC = () => {
   // State Management
-  const { selectedApi } = useInterfaceContext();
+  const { selApi } = useInterfaceContext();
 
-  switch (selectedApi) {
+  switch (selApi) {
     case 'coinbase':
       return (
         <div className={Style.Page}>

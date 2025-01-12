@@ -129,7 +129,7 @@ pub async fn coinbase_product_list(
   // }
 
   // Serialize product list response
-  let coinbase_product_list_response = serde_json
+  let response = serde_json
     ::to_string_pretty(&grouped_products)
     .map_err(|e| format!("Failed to serialize product list: {}", e))?;
 
@@ -138,7 +138,7 @@ pub async fn coinbase_product_list(
     .map_err(|e| format!("Failed to emit event: {}", e))?;
 
   // Return the response
-  Ok(coinbase_product_list_response)
+  Ok(response)
 }
 
 /* ---------------------------------------------------------------------------------------------- */

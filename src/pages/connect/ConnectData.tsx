@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - ConnectData.tsx
+//! - pages.connect.ConnectData.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -15,9 +15,9 @@ import Style from './ConnectData.module.css';
 
 const ConnectData: React.FC = () => {
   // State Management
-  const { selectedApi } = useInterfaceContext();
+  const { selApi } = useInterfaceContext();
 
-  switch (selectedApi) {
+  switch (selApi) {
     case 'binance':
       return (
         <div className={Style.Component}>
