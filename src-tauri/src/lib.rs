@@ -1,5 +1,4 @@
-/* ---------------------------------------------------------------------------------------------- */
-//! # lib.rs
+/* ---------------------------------------------------------------------------------------------- */ //! # lib.rs
 //!
 //! Main entry point for the ChartBuddha library
 /* ---------------------------------------------------------------------------------------------- */
@@ -10,6 +9,8 @@
 // Tauri
 use tauri::Manager;
 // ChartBuddha Modules
+pub mod api;
+pub mod commands;
 pub mod stores;
 // Api Modules
 pub mod coinbase;
@@ -47,11 +48,7 @@ pub fn run() {
         // .clear_targets()
         .format(|out, message, record| {
           let target = record.target();
-          let shortened_target = if let Some(pos) = target.find("src/") {
-            &target[pos..]
-          } else {
-            target
-          };
+          let shortened_target = if let Some(pos) = target.find("src/") { &target[pos..] } else { target };
           out.finish(format_args!("[{}][{}]\n{}\n", record.level(), shortened_target, message))
         })
         .build()
