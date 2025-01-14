@@ -1,22 +1,15 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! - interface.Coinbase.tsx
+//! structs/coinbase/mod.rs
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! ### Modules
+//! - data_api
+//! - products
+//! - authenticator_struct
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// React
-import { createContext } from 'react';
-// Components
-import { ApiType } from './api/Api';
-import { ProductsType } from './products/Products';
-
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-export interface CoinbaseType {
-  coinbase_api: ApiType;
-  coinbase_products: ProductsType[];
-}
-
-const CoinbaseContext = createContext<CoinbaseType | null>(null);
-
-export default CoinbaseContext;
+// Modules
+pub mod data_api;
+pub mod products;
+pub mod authenticator_struct;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -1,8 +1,8 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! # stores/defaults/app_apis_defaults.rs
+//! stores/defaults/app_subscriptions_defaults.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! ### Functions
-//! - app_apis_defaults
+//! - app_settings_defaults
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Rust
@@ -13,35 +13,15 @@ use serde_json::Value;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-pub fn app_apis_defaults() -> HashMap<String, Value> {
+pub fn app_subscriptions_defaults() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
-  // Binance
-  // defaults.insert(
-  //   "binance".to_string(),
-  //   json!({
-  //     "api_configured": false,
-  //     "api_key": null,
-  //     "api_secret": null
-  //   })
-  // );
+  // App Subscriptions
+  defaults.insert("app_subscriptions".to_string(), json!({}));
 
-  // Coinbase
-  defaults.insert(
-    "coinbase".to_string(),
-    json!({
-      "api_configured": false,
-      "api_key": null,
-      "api_key_secret": null,
-      "api_permissions": {
-        "perm_can_trade": false,
-        "perm_can_transfer": false,
-        "perm_can_view": false,
-        "perm_portfolio_type": "",
-        "perm_portfolio_uuid": ""
-      }
-    })
-  );
+  // Profile settings
+  // defaults.insert("userName".to_string(), Null.into());
+  // defaults.insert("userPassword".to_string(), Null.into());
 
   defaults
 }

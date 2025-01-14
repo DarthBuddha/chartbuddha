@@ -1,6 +1,6 @@
-/* ---------------------------------------------------------------------------------------------- */
-//! - pages.subscribe.coinbase.SubscribeCoinbaseProductList.tsx
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! - pages/subscribe/coinbase/SubscribeCoinbaseProductList.tsx
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React, { useCallback, useEffect } from 'react';
@@ -13,12 +13,13 @@ import { ProductsType } from 'interface/coinbase/products/Products';
 // CSS Modules
 import Style from './SubscribeCoinbaseProductList.module.css';
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 const SubscribeCoinbaseProductList: React.FC = () => {
   // State Management
   const { selCoinbaseProductType, setCoinbaseProductType } = useInterfaceContext();
   const { selCoinbaseProductList, setCoinbaseProductList } = useInterfaceContext();
+  const { setCoinbaseProduct } = useInterfaceContext();
 
   // Button Click: Product Type
   const clickProductType = (productType: string) => {
@@ -31,10 +32,11 @@ const SubscribeCoinbaseProductList: React.FC = () => {
   // Load: Product List
   const loadProductList = useCallback(async () => {
     try {
-      const response: ProductsType = await invoke('coinbase_product_list', {
+      const response: string = await invoke('coinbase_products_list', {
         productType: selCoinbaseProductType || 'spot',
       });
-      setCoinbaseProductList(response);
+      const parsedResponse: { products: ProductsType[] } = JSON.parse(response);
+      setCoinbaseProductList(parsedResponse.products);
     } catch (err) {
       if (err instanceof Error) {
         error(err.toString());
@@ -51,12 +53,10 @@ const SubscribeCoinbaseProductList: React.FC = () => {
     }
   }, [selCoinbaseProductType, loadProductList]);
 
-  // const [selectedProducts, setSelectedProducts] = useState<Type_ProductData[]>([]);
-
   // Button Click: Product
-  const clickProduct = (selProduct: ProductsType) => {
-    info!(JSON.stringify(selProduct));
-    // Handle product click logic here
+  const clickProduct = (product: ProductsType) => {
+    info!(JSON.stringify(product));
+    setCoinbaseProduct(product);
   };
 
   const getStyleForValue = (value: string) => {
@@ -67,7 +67,11 @@ const SubscribeCoinbaseProductList: React.FC = () => {
     return parseFloat(value).toFixed(2);
   };
 
-  /* -------------------------------------------------------------------------------------------- */
+  const formatVolume = (value: string) => {
+    return parseFloat(value).toFixed(2);
+  };
+
+  /* ---------------------------------------------------------------------------------------------------------------- */
 
   return (
     <div className={Style.Component}>
@@ -118,7 +122,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
                   </div>
                 </div>
                 <div className={Style.Product_Volume}>
-                  <div>Volume (24h): {product.volume_24h}</div>
+                  <div>Volume (24h): {formatVolume(product.volume_24h ?? '0')}</div>
                   <div>
                     Change (24h):{' '}
                     <span className={getStyleForValue(product.volume_percentage_change_24h ?? '')}>
@@ -136,4 +140,4 @@ const SubscribeCoinbaseProductList: React.FC = () => {
 
 export default SubscribeCoinbaseProductList;
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

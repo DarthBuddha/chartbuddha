@@ -5,6 +5,7 @@
 // React
 import { createContext } from 'react';
 // Interface
+// import { CoinbaseType } from './coinbase/Coinbase';
 import { PermissionsType } from './coinbase/api/permissions/Permissions';
 import { ProductsType } from './coinbase/products/Products';
 
@@ -26,10 +27,10 @@ export interface InterfaceType {
   setCoinbaseApiPermissions: React.Dispatch<React.SetStateAction<PermissionsType | null>>;
   selCoinbaseProductType: string | null;
   setCoinbaseProductType: React.Dispatch<React.SetStateAction<string | null>>;
-  selCoinbaseProductList: ProductsType | null;
-  setCoinbaseProductList: React.Dispatch<React.SetStateAction<ProductsType | null>>;
-  // selCoinbaseProductName: string | null;
-  // setCoinbaseProductName: React.Dispatch<React.SetStateAction<string | null>>;
+  selCoinbaseProductList: ProductsType[] | null;
+  setCoinbaseProductList: React.Dispatch<React.SetStateAction<ProductsType[] | null>>;
+  selCoinbaseProduct: ProductsType | null;
+  setCoinbaseProduct: React.Dispatch<React.SetStateAction<ProductsType | null>>;
 }
 
 const InterfaceContext = createContext<InterfaceType | null>(null);

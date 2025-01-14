@@ -1,15 +1,13 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! commands.coinbase.subscribe.mod.rs
+//! commands/coinbase/subscribe/mod.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! ### Modules
-//! - products_list_future
-//! - products_list_perps
-//! - products_list_spot
+//! Modules
+//! - coinbase_products_list
+//! - coinbase_subscribe
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Modules
-pub mod products_list_future;
-pub mod products_list_perps;
-pub mod products_list_spot;
+pub mod coinbase_products_list;
+pub mod coinbase_subscribe;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

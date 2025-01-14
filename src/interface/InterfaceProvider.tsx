@@ -20,8 +20,8 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [selCoinbaseApiKeySecret, setCoinbaseApiKeySecret] = useState<string | null>(null);
   const [selCoinbaseApiPermissions, setCoinbaseApiPermissions] = useState<PermissionsType | null>(null);
   const [selCoinbaseProductType, setCoinbaseProductType] = useState<string | null>(null);
-  const [selCoinbaseProductList, setCoinbaseProductList] = useState<ProductsType | null>(null);
-  // const [selCoinbaseProductName, setCoinbaseProductName] = useState<string | null>(null);
+  const [selCoinbaseProductList, setCoinbaseProductList] = useState<ProductsType[] | null>(null);
+  const [selCoinbaseProduct, setCoinbaseProduct] = useState<ProductsType | null>(null);
 
   return (
     <InterfaceContext.Provider
@@ -42,8 +42,8 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setCoinbaseProductType,
         selCoinbaseProductList,
         setCoinbaseProductList,
-        // selCoinbaseProductName,
-        // setCoinbaseProductName,
+        selCoinbaseProduct,
+        setCoinbaseProduct,
       }}
     >
       {children}

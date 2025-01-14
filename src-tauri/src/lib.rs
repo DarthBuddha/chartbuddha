@@ -1,23 +1,19 @@
-/* ---------------------------------------------------------------------------------------------- */ //! # lib.rs
-//!
-//! Main entry point for the ChartBuddha library
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! # lib.rs
+/* ------------------------------------------------------------------------------------------------------------------ */
 //! ### Functions
 //! - run
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 // Tauri
 use tauri::Manager;
-// ChartBuddha Modules
-pub mod api;
 pub mod commands;
 pub mod stores;
-// Api Modules
-pub mod coinbase;
+pub mod structs;
 // Crates
 use crate::stores::initialize_stores::initialize_stores;
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 /// Main entry point for the ChartBuddha library
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -57,9 +53,9 @@ pub fn run() {
     // Tauri Command Register
     .invoke_handler(
       tauri::generate_handler![
-        coinbase::commands::coinbase_save::coinbase_save,
-        coinbase::commands::coinbase_product_list::coinbase_product_list
-        // coinbase::commands::coinbase_get_selected_product::coinbase_get_selected_product
+        commands::coinbase::connect::coinbase_store_api_keys::coinbase_store_api_keys,
+        commands::coinbase::subscribe::coinbase_products_list::coinbase_products_list,
+        commands::coinbase::subscribe::coinbase_subscribe::coinbase_subscribe
       ]
     )
 
@@ -68,4 +64,4 @@ pub fn run() {
     .expect("error while running tauri application");
 }
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------ */

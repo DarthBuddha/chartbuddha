@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! interface.coinbase.products.product_list.rs
+//! coinbase_product_list.rs
 //!
 //! Command: List Coinbase Products.
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -9,29 +9,33 @@
 
 // Rust
 use std::collections::HashMap;
-use std::error::Error;
-use tauri::http::request;
 use tauri::Emitter;
 // Tauri
 use tauri::{ AppHandle, Wry };
 // Dependencies
-use reqwest::Client;
 use log::info;
 // Crates
-use crate::interface::coinbase::authenticate_api_request::Authenticator;
-use crate::interface::coinbase::authenticate_api_request::authenticate_api_request;
-use crate::interface::coinbase::products::products_list::ListProductsResponse;
-
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-const REQUEST_PATH: &str =
-  "/api/v3/brokerage/products?product_type=SPOT&expiring_contract_status=STATUS_UNEXPIRED&get_tradability_status";
+use crate::coinbase::authenticate_api_request::Authenticator;
+use crate::coinbase::authenticate_api_request::authenticate_api_request;
+use crate::coinbase::api::products::list_products::list_products;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 /// Function to load coinbase product list
 #[tauri::command]
-pub async fn coinbase_products_list_spot(app_handle: AppHandle<Wry>) -> Result<String, String> {
+pub async fn coinbase_product_list(app_handle: AppHandle<Wry>, product_type: String) -> Result<String, String> {
+  info!("Command: coinbase_product_list\nParameter: product_type: {}", product_type);
+
+  // Determine the selected request path based on product type
+  let selected_request_path = match product_type.as_str() {
+    "future" => "/api/v3/brokerage/products?product_type=FUTURE&contract_expiry_type=EXPIRING",
+    "perps" => "/api/v3/brokerage/products?product_type=FUTURE&contract_expiry_type=PERPETUAL",
+    _ =>
+      "/api/v3/brokerage/products?product_type=SPOT&expiring_contract_status=STATUS_UNEXPIRED&get_tradability_status",
+  };
+
+  info!("Selected Request Path: {}", selected_request_path);
+
   // Create an instance of Authenticator
   let authenticator = Authenticator {
     request_method: "GET".to_string(),
@@ -51,7 +55,7 @@ pub async fn coinbase_products_list_spot(app_handle: AppHandle<Wry>) -> Result<S
   log::info!("JWT Token: {:?}", jwt_token);
 
   // Call list_products with the JWT token
-  let product_list = match list_products(jwt_token.clone(), REQUEST_PATH.to_string()).await {
+  let product_list = match list_products(jwt_token.clone(), selected_request_path.to_string()).await {
     Ok(product_list) => product_list,
     Err(e) => {
       log::error!("Failed to get Product List: {:?}", e);
