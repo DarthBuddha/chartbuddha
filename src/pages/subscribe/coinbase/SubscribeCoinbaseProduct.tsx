@@ -23,7 +23,7 @@ const SubscribeCoinbaseProduct: React.FC = () => {
   const buttonClick_Subscribe = async () => {
     try {
       const response: string = await invoke('coinbase_subscribe', {
-        coinbaseApiKey: selCoinbaseProduct?.product_id,
+        coinbaseProductId: selCoinbaseProduct?.product_id,
       });
       info('[coinbase_subscribe]\n' + response);
     } catch (err) {

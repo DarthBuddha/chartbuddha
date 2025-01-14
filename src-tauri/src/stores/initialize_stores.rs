@@ -41,8 +41,8 @@ pub fn initialize_stores(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   // app.manage(store_app_settings.clone());
   // store_app_settings.save()?;
 
-  // App: Settings Store Initialization
-  info!("Initialize App Settings Store...");
+  // App: Subscriptions Store Initialization
+  info!("Initialize App Subscriptions Store...");
   let store_app_settings = tauri_plugin_store::StoreBuilder
     ::new(&app, "app_subscriptions.json")
     .auto_save(Duration::from_millis(100))

@@ -17,11 +17,10 @@ pub fn app_subscriptions_defaults() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
   // App Subscriptions
-  defaults.insert("app_subscriptions".to_string(), json!({}));
-
-  // Profile settings
-  // defaults.insert("userName".to_string(), Null.into());
-  // defaults.insert("userPassword".to_string(), Null.into());
+  defaults.insert("app_subscriptions".to_string(), json!({
+    "binance": [],
+    "coinbase": []
+  }));
 
   defaults
 }

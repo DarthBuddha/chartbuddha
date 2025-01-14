@@ -15,6 +15,7 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // Global
   const [selPage, setPage] = useState<string | null>(null);
   const [selApi, setApi] = useState<string | null>(null);
+  const [selProduct, setProduct] = useState<string | null>(null);
   // Coinbase
   const [selCoinbaseApiKey, setCoinbaseApiKey] = useState<string | null>(null);
   const [selCoinbaseApiKeySecret, setCoinbaseApiKeySecret] = useState<string | null>(null);
@@ -31,6 +32,8 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setPage,
         selApi,
         setApi,
+        selProduct,
+        setProduct,
         // Coinbase
         selCoinbaseApiKey,
         setCoinbaseApiKey,

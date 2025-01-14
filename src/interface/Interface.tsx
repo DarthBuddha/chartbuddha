@@ -18,6 +18,8 @@ export interface InterfaceType {
   setPage: React.Dispatch<React.SetStateAction<string | null>>;
   selApi: string | null;
   setApi: React.Dispatch<React.SetStateAction<string | null>>;
+  selProduct: string | null;
+  setProduct: React.Dispatch<React.SetStateAction<string | null>>;
   // Coinbase Context
   selCoinbaseApiKey: string | null;
   setCoinbaseApiKey: React.Dispatch<React.SetStateAction<string | null>>;
