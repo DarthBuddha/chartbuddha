@@ -1,49 +1,44 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! - pages/dashboard/Dashboard.tsx
+//! pages/dashboard/DashboardTrades.tsx
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
 import Split from 'react-split';
 // Components
-import DashboardChart from './DashboardChart';
-import DashboardSubs from './DashboardSubs';
-import DashboardTrades from './DashboardTrades';
+import TimeSales from './trades/Trades';
 // CSS Modules
-import Styles from './Dashboard.module.css';
+import Styles from './DashboardTrades.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
-const Dashboard: React.FC = () => {
+
+const Dashboard_Right: React.FC = () => {
   return (
-    <div className={Styles.Dashboard}>
+    <div className={Styles.DashboardTrades}>
       <Split
         className={Styles.Split}
-        sizes={[10, 80, 10]}
-        minSize={[10, 300, 10]}
-        maxSize={[300, Infinity, 300]}
+        sizes={[50, 50]}
+        minSize={100}
         expandToMin={true}
-        gutterSize={10}
+        gutterSize={20}
         gutterAlign="center"
-        snapOffset={30}
+        snapOffset={10}
         dragInterval={1}
-        direction="horizontal"
-        cursor="col-resize"
+        direction="vertical"
+        cursor="row-resize"
       >
-        <div className={Styles.DashboardSubs}>
-          <DashboardSubs />
+        <div className={Styles.TradesWidget}>
+          <TimeSales title="Large Trades" filter={(trade) => trade.size > 50} />
         </div>
-        <div className={Styles.DashboardChart}>
-          <DashboardChart />
-        </div>
-        <div className={Styles.DashboardTrades}>
-          <DashboardTrades />
+
+        <div className={Styles.TradesWidget}>
+          <TimeSales title="All Trades" filter={null} />
         </div>
       </Split>
     </div>
   );
 };
 
-export default Dashboard;
-//
+export default Dashboard_Right;
+
 /* ------------------------------------------------------------------------------------------------------------------ */

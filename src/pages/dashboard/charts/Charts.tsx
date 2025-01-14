@@ -1,49 +1,48 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! - pages/dashboard/Dashboard.tsx
+//! - pages/dashboard/trades/Charts.tsx
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
 import React from 'react';
 import Split from 'react-split';
-// Components
-import DashboardChart from './DashboardChart';
-import DashboardSubs from './DashboardSubs';
-import DashboardTrades from './DashboardTrades';
 // CSS Modules
-import Styles from './Dashboard.module.css';
+import Style from './Chart.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
-const Dashboard: React.FC = () => {
+
+const Charts: React.FC = () => {
+  /* ---------------------------------------------------------------------------------------------------------------- */
   return (
-    <div className={Styles.Dashboard}>
+    <div className={Style.Page}>
       <Split
-        className={Styles.Split}
-        sizes={[10, 80, 10]}
-        minSize={[10, 300, 10]}
-        maxSize={[300, Infinity, 300]}
+        className={Style.Container_Chart}
+        sizes={[80, 10, 10]}
+        minSize={100}
         expandToMin={true}
         gutterSize={10}
         gutterAlign="center"
-        snapOffset={30}
+        snapOffset={10}
         dragInterval={1}
         direction="horizontal"
         cursor="col-resize"
       >
-        <div className={Styles.DashboardSubs}>
-          <DashboardSubs />
+        <div className={Style.Panel_Chart}>
+          <h3>Chart</h3>
+          {/* <Chart /> */}
         </div>
-        <div className={Styles.DashboardChart}>
-          <DashboardChart />
+        <div className={Style.Panel_OrderBook}>
+          <h3>Order Book</h3>
+          {/* <OrderBook /> */}
         </div>
-        <div className={Styles.DashboardTrades}>
-          <DashboardTrades />
+        <div className={Style.Panel_Volume}>
+          <h3>Volume</h3>
+          {/* <Volume /> */}
         </div>
       </Split>
     </div>
   );
 };
 
-export default Dashboard;
-//
+export default Charts;
+
 /* ------------------------------------------------------------------------------------------------------------------ */

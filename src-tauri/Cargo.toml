@@ -46,6 +46,7 @@ log = "0.4.22"
 # WebSocket
 futures-util = { version = "0.3.31" }
 reqwest = { version = "0.12.12", features = ["json"] }
+tauri-plugin-sql = { version = "2", features = ["postgres"] }
 
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]

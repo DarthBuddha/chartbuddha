@@ -1,6 +1,8 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
+/*! Dashboard.module.css !*/
+/* ------------------------------------------------------------------------------------------------------------------ */
 
-.Dashboard_Page {
+.Dashboard {
   height: 100vh;
   width: 100vw;
   min-height: 800px;
@@ -21,17 +23,17 @@
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-.Dashboard_Left {
+.DashboardSubs {
   border: 5px solid #333;
   overflow: visible;
 }
 
-.Dashboard_Center {
+.DashboardChart {
   border: 5px solid #333;
   overflow: visible;
 }
 
-.Dashboard_Right {
+.DashboardTrades {
   border: 5px solid #333;
   overflow: visible;
 }

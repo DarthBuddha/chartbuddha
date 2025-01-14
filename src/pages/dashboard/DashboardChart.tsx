@@ -1,16 +1,15 @@
-//! # ChartBuddha
-//! Page: Page Name
-//! Description: Short description of the page.
-//! ##### pages/connect/panel/right.tsx
-//
-// Dependencies
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! pages/dashboard/DashboardChart.tsx
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+// React
 import React from 'react';
 import Split from 'react-split';
-// Modules
-// CSS
-import Styles from './Dashboard_Center.module.css';
-//
-/*--------------------------------------< Page >--------------------------------------*/
+// CSS Modules
+import Styles from './DashboardChart.module.css';
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
 const Dashboard_Center: React.FC = () => {
   return (
     <div className={Styles.Dashboard_Center}>
@@ -22,7 +21,8 @@ const Dashboard_Center: React.FC = () => {
       <Split
         className={Styles.Split}
         sizes={[80, 10, 10]}
-        minSize={20}
+        minSize={[100, 100, 100]}
+        maxSize={[Infinity, 300, 300]}
         expandToMin={true}
         gutterSize={10}
         gutterAlign="center"
@@ -49,4 +49,5 @@ const Dashboard_Center: React.FC = () => {
 };
 
 export default Dashboard_Center;
-/*------------------------------------< End-Code >------------------------------------*/
+
+/* ------------------------------------------------------------------------------------------------------------------ */
