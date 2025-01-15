@@ -13,11 +13,6 @@ import Styles from './DashboardChart.module.css';
 const Dashboard_Center: React.FC = () => {
   return (
     <div className={Styles.Dashboard_Center}>
-      <div className={Styles.Container_Provider}>
-        <p>Provider Drop-down-menu ---</p>
-        <p>Selected Product ---</p>
-        <p>Button_Connect</p>
-      </div>
       <Split
         className={Styles.Split}
         sizes={[80, 10, 10]}

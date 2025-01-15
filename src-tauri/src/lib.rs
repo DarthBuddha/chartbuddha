@@ -7,10 +7,11 @@
 
 // Tauri
 use tauri::Manager;
+// Modules
+pub mod apis;
 pub mod commands;
-pub mod entities;
+pub mod db;
 pub mod stores;
-pub mod structs;
 // Crates
 use crate::stores::initialize_stores::initialize_stores;
 
@@ -49,9 +50,9 @@ pub fn run() {
     // Tauri Command Register
     .invoke_handler(
       tauri::generate_handler![
-        commands::coinbase::connect::coinbase_store_api_keys::coinbase_store_api_keys,
-        commands::coinbase::subscribe::coinbase_products_list::coinbase_products_list,
-        commands::coinbase::subscribe::coinbase_subscribe::coinbase_subscribe
+        commands::connect::coinbase_store_api_keys::coinbase_store_api_keys,
+        commands::subscribe::coinbase_products_list::coinbase_products_list,
+        commands::subscribe::coinbase_subscribe::coinbase_subscribe
       ]
     )
     // Run ChartBuddha Application

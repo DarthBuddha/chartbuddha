@@ -1,15 +1,17 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! structs/coinbase/mod.rs
+//! entities/mod.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! ### Modules
-//! - data_api
-//! - products
-//! - authenticator_struct
+//! Modules
+//! - subscriptions
+//! - order_book
+//! - trades
+//! - aggregated_volume
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Modules
-pub mod authenticator_struct;
-pub mod data_api;
-pub mod products;
+pub mod subscriptions;
+pub mod order_book;
+pub mod trades;
+pub mod aggregated_volume;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -1,17 +1,13 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! entities/mod.rs
+//! commands/connect/mod.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! Modules
-//! - subscriptions_table
-//! - orders_table
-//! - trades_table
-//! - aggregated_volume_table
+//! - common
+//! coinbase_store_api_keys
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Modules
-pub mod subscriptions_table;
-pub mod orders_table;
-pub mod trades_table;
-pub mod aggregated_volume_table;
+pub mod common;
+pub mod coinbase_store_api_keys;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
