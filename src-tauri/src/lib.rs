@@ -8,7 +8,7 @@
 // Tauri
 use tauri::Manager;
 pub mod commands;
-pub mod models;
+pub mod entities;
 pub mod stores;
 pub mod structs;
 // Crates
