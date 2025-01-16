@@ -10,7 +10,7 @@ import Styles from './DashboardChart.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-const Dashboard_Center: React.FC = () => {
+const DashboardChart: React.FC = () => {
   return (
     <div className={Styles.Dashboard_Center}>
       <Split
@@ -43,6 +43,6 @@ const Dashboard_Center: React.FC = () => {
   );
 };
 
-export default Dashboard_Center;
+export default DashboardChart;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

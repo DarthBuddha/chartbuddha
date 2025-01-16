@@ -12,7 +12,7 @@ import Styles from './DashboardTrades.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-const Dashboard_Right: React.FC = () => {
+const DashboardTrades: React.FC = () => {
   return (
     <div className={Styles.DashboardTrades}>
       <Split
@@ -39,6 +39,6 @@ const Dashboard_Right: React.FC = () => {
   );
 };
 
-export default Dashboard_Right;
+export default DashboardTrades;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

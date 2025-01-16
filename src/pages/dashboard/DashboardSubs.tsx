@@ -19,7 +19,7 @@ const store_app_subscriptions = await load('app_subscriptions.json');
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-const ConnectLeftPanel: React.FC = () => {
+const DashboardSubs: React.FC = () => {
   // State Management
   const { setApi, setProduct } = useInterfaceContext();
 
@@ -37,12 +37,17 @@ const ConnectLeftPanel: React.FC = () => {
       const apis = ['binance', 'coinbase']; // Add more APIs as needed
       const configuredApis: { api: string; product: string }[] = [];
 
-      for (const api of apis) {
-        const apiData = await store_app_subscriptions.get<{ product_id: string }[]>(api);
-        if (apiData) {
-          apiData.forEach((subscription) => {
-            configuredApis.push({ api, product: subscription.product_id });
-          });
+      const appSubscriptions = await store_app_subscriptions.get<{ [key: string]: { product_id: string }[] }>(
+        'app_subscriptions',
+      );
+      if (appSubscriptions) {
+        for (const api of apis) {
+          const apiData = appSubscriptions[api];
+          if (apiData) {
+            apiData.forEach((subscription) => {
+              configuredApis.push({ api, product: subscription.product_id });
+            });
+          }
         }
       }
 
@@ -66,9 +71,10 @@ const ConnectLeftPanel: React.FC = () => {
       setProduct(resetProduct);
     }
   };
+
   /* ---------------------------------------------------------------------------------------------------------------- */
   return (
-    <div className={Style.DashboardSubs}>
+    <div className={Style.List_Container}>
       <div className={Style.Title_Bar}>Subscriptions</div>
       <div className={Style.List}>
         {selectedApiListStore.length === 0 ? (
@@ -85,5 +91,5 @@ const ConnectLeftPanel: React.FC = () => {
   );
 };
 
-export default ConnectLeftPanel;
+export default DashboardSubs;
 /* ------------------------------------------------------------------------------------------------------------------ */

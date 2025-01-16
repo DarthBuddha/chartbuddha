@@ -9,6 +9,7 @@ import { error } from '@tauri-apps/plugin-log';
 import { load } from '@tauri-apps/plugin-store';
 // Interface
 import { useInterfaceContext } from 'interface/InterfaceContext';
+import { ProductsType } from 'interface/coinbase/products/Products';
 // CSS Modules
 import Style from './SubscribeSubscriptionList.module.css';
 
@@ -21,7 +22,7 @@ const store_app_subscriptions = await load('app_subscriptions.json');
 
 const SubscribeSubscriptionList: React.FC = () => {
   // State Management
-  const { setApi, setProduct } = useInterfaceContext();
+  const { setApi, setCoinbaseProduct } = useInterfaceContext();
 
   // Store Management
   const [selectedApiListStore, setSelectedApiListStore] = useState<{ api: string; product: string }[]>([]);
@@ -37,12 +38,17 @@ const SubscribeSubscriptionList: React.FC = () => {
       const apis = ['binance', 'coinbase']; // Add more APIs as needed
       const configuredApis: { api: string; product: string }[] = [];
 
-      for (const api of apis) {
-        const apiData = await store_app_subscriptions.get<{ product_id: string }[]>(api);
-        if (apiData) {
-          apiData.forEach((subscription) => {
-            configuredApis.push({ api, product: subscription.product_id });
-          });
+      const appSubscriptions = await store_app_subscriptions.get<{ [key: string]: { product_id: string }[] }>(
+        'app_subscriptions',
+      );
+      if (appSubscriptions) {
+        for (const api of apis) {
+          const apiData = appSubscriptions[api];
+          if (apiData) {
+            apiData.forEach((subscription) => {
+              configuredApis.push({ api, product: subscription.product_id });
+            });
+          }
         }
       }
 
@@ -59,11 +65,13 @@ const SubscribeSubscriptionList: React.FC = () => {
   // Button Click: Handle Data Api
   const handleClick = async (selApi: string, selProduct: string) => {
     const resetApi = ['binance', 'coinbase'];
-    const resetProduct = selProduct;
+    // const resetProduct = selProduct;
     // Logic: Reset Context
     if (resetApi.includes(selApi)) {
       setApi(selApi);
-      setProduct(resetProduct);
+      // setProduct(selProduct);
+      const product: ProductsType = { product_id: selProduct };
+      setCoinbaseProduct(product);
     }
   };
 

@@ -1,40 +1,45 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! # lib.rs
+//! lib.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! ### Functions
+//! Functions
 //! - run
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Tauri
+use log::error;
 use tauri::Manager;
+// use tauri::AppHandle;
+// Database
+use std::sync::Arc;
+use tokio::sync::Mutex;
+use sea_orm::DatabaseConnection;
 // Modules
 pub mod apis;
 pub mod commands;
 pub mod db;
 pub mod stores;
 // Crates
+use crate::db::initialize_db::initialize_database;
 use crate::stores::initialize_stores::initialize_stores;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
+
+pub struct AppState {
+  pub db: Arc<Mutex<DatabaseConnection>>,
+}
 
 /// Main entry point for the ChartBuddha library
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder
     ::default()
-    // Tauri Plugin Shell Setup
+    // Plugin Shell Setup
     .plugin(tauri_plugin_shell::init())
-    // Tauri Window State Setup
+    // Window State Plugin
     .plugin(tauri_plugin_window_state::Builder::new().build())
-    // Tauri Store Setup
+    // Store Plugin
     .plugin(tauri_plugin_store::Builder::default().build())
-    .setup(|app| {
-      if let Err(e) = initialize_stores(app.app_handle().clone()) {
-        eprintln!("Error during startup: {:?}", e);
-      }
-      Ok(())
-    })
-    // Tauri Logging Setup
+    // Logging Plugin
     .plugin(
       tauri_plugin_log::Builder
         ::new()
@@ -55,6 +60,23 @@ pub fn run() {
         commands::subscribe::coinbase_subscribe::coinbase_subscribe
       ]
     )
+    // Tauri Startup Setup
+    .setup(|app| {
+      let handle = app.app_handle();
+      let db_connection = tauri::async_runtime::block_on(initialize_database());
+      match db_connection {
+        Ok(db) => {
+          app.manage(AppState { db });
+        }
+        Err(e) => {
+          error!("Error initializing the database: {:?}", e);
+        }
+      }
+      if let Err(e) = initialize_stores(handle.clone()) {
+        error!("Error during store initialization: {:?}", e);
+      }
+      Ok(())
+    })
     // Run ChartBuddha Application
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

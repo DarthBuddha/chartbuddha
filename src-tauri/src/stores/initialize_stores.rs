@@ -51,7 +51,7 @@ pub fn initialize_stores(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   app.manage(store_app_settings.clone());
   store_app_settings.save()?;
 
-  info!("Interface Store Initialized!");
+  info!("Store Initialized!");
 
   Ok(())
 }
