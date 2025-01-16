@@ -1,15 +1,19 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/data_api/mod.rs
+//! apis/coinbase/fees/transaction_summary/margin_rate.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! Modules
-//! - api_key_permissions
-//! Modules
-//! - get_api_key_permissions
+//! Structs
+//! - MarginRate
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Modules
-pub mod api_key_permissions;
-// Modules
-pub mod get_api_key_permissions;
+// Dependencies
+use serde::{ Deserialize, Serialize };
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+/// Margin rate, only applicable to product_type `FUTURE`.
+#[derive(Debug, Deserialize, Serialize)]
+pub struct MarginRate {
+  pub value: String,
+}
 
 /* ------------------------------------------------------------------------------------------------------------------ */

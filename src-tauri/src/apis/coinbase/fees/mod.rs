@@ -1,15 +1,16 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/data_api/mod.rs
+//! apis/coinbase/fees/mod.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! Modules
-//! - api_key_permissions
+//! - transaction_summary
 //! Modules
-//! - get_api_key_permissions
+//! - get_transaction_summary
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Modules
-pub mod api_key_permissions;
+pub mod transaction_summary;
+
 // Modules
-pub mod get_api_key_permissions;
+pub mod get_transaction_summary;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

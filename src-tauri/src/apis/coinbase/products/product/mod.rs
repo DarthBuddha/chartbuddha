@@ -1,15 +1,19 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/data_api/mod.rs
+//! apis/coinbase/products/product/mod.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! Modules
-//! - api_key_permissions
-//! Modules
-//! - get_api_key_permissions
+//! - future_product_details
+//! - maintenance
+//! - perpetual_details
+//! - product
+//! - trading_session
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Modules
-pub mod api_key_permissions;
-// Modules
-pub mod get_api_key_permissions;
+pub mod future_product_details;
+pub mod maintenance;
+pub mod perpetual_details;
+pub mod product;
+pub mod trading_session_details;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -1,8 +1,8 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! commands/coinbase/subscribe/products_list.rs
+//! commands/coinbase/subscribe/list_products.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! Functions
-//! - products_list
+//! - list_products
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Tauri
@@ -15,7 +15,7 @@ use tauri::{ AppHandle, Wry };
 // Crates
 use crate::apis::coinbase::authenticator::use_authenticator;
 use crate::apis::coinbase::authenticator_struct::Authenticator;
-use crate::apis::coinbase::products::products_list_struct::ListProductsResponse;
+use crate::apis::coinbase::products::list_products::ListProductsResponse;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 

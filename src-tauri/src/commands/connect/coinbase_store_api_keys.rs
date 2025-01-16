@@ -11,12 +11,12 @@ use tauri_plugin_store::StoreExt;
 // Dependencies
 use log::{ error, info };
 use serde_json::json;
-// use serde_json::Value;
+use serde_json::to_string;
 // Crates
 use crate::apis::coinbase::authenticator::use_authenticator;
 use crate::commands::connect::common::convert_api_secret::convert_api_secret;
 use crate::apis::coinbase::authenticator_struct::Authenticator;
-use crate::apis::coinbase::data_api::key_permissions_struct::ApiKeyPermissionsResponse;
+use crate::apis::coinbase::data_api::api_key_permissions::api_key_permissions::ApiKeyPermissions;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -87,33 +87,21 @@ pub async fn coinbase_store_api_keys(
   let api_permissions_response = match response {
     Ok(resp) => {
       if resp.status().is_success() {
-        match resp.json::<ApiKeyPermissionsResponse>().await {
+        match resp.json::<ApiKeyPermissions>().await {
           Ok(api_permissions) => {
             info!("permissions validated successfully.");
 
-            // Format the response
-            let api_permissions_response = format!(
-              "can_view: {}\ncan_trade: {}\ncan_transfer: {}\nportfolio_uuid: {}\nportfolio_type: {}",
-              api_permissions.can_view,
-              api_permissions.can_trade,
-              api_permissions.can_transfer,
-              api_permissions.portfolio_uuid,
-              api_permissions.portfolio_type
-            );
+            // Format the response using JSON serialization
+            let api_permissions_response = to_string(&api_permissions).map_err(|e|
+              format!("Failed to serialize API permissions: {}", e)
+            )?;
 
             // Save the API permissions to the store
             let mut coinbase = store.get("coinbase").unwrap_or(json!({}));
             coinbase["api_configured"] = json!(true);
             coinbase["api_key"] = json!(coinbase_api_key);
             coinbase["api_key_secret"] = json!(formatted_api_secret);
-            coinbase["api_permissions"] =
-              json!({
-                          "perm_can_view": api_permissions.can_view,
-                          "perm_can_trade": api_permissions.can_trade,
-                          "perm_can_transfer": api_permissions.can_transfer,
-                          "perm_portfolio_uuid": api_permissions.portfolio_uuid,
-                          "perm_portfolio_type": api_permissions.portfolio_type
-                        });
+            coinbase["api_permissions"] = json!(api_permissions);
             store.set("coinbase", coinbase);
             store.save().map_err(|e| e.to_string())?;
             info!("Coinbase API Permissions Saved");

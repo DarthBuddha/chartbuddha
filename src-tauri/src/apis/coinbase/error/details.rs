@@ -1,15 +1,18 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/data_api/mod.rs
+//! apis/coinbase/error/detail.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! Modules
-//! - api_key_permissions
-//! Modules
-//! - get_api_key_permissions
+//! Structs
+//! - Detail
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Modules
-pub mod api_key_permissions;
-// Modules
-pub mod get_api_key_permissions;
+// Dependencies
+use serde::{ Deserialize, Serialize };
+
+/// Struct for error details
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Details {
+  pub type_url: String,
+  pub value: Vec<u8>,
+}
 
 /* ------------------------------------------------------------------------------------------------------------------ */

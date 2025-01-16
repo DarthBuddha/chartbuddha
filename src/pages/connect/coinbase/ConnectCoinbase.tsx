@@ -3,7 +3,7 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 // Tauri
 import { load } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
@@ -11,8 +11,7 @@ import { invoke } from '@tauri-apps/api/core';
 // Interface
 import { useInterfaceContext } from 'interface/InterfaceContext';
 import { PermissionsType } from 'interface/coinbase/api/permissions/Permissions';
-import { ApiType } from 'interface/coinbase/api/Api';
-// CSS Modules
+// CSS Module
 import Style from './ConnectCoinbase.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -27,32 +26,6 @@ const ConnectCoinbase: React.FC = () => {
   const { selCoinbaseApiKeySecret, setCoinbaseApiKeySecret } = useInterfaceContext();
   const { selCoinbaseApiPermissions, setCoinbaseApiPermissions } = useInterfaceContext();
 
-  // Load API
-  const loadApi = useCallback(async () => {
-    try {
-      const savedApi = await store.get<ApiType>('coinbase');
-
-      if (savedApi) {
-        console.log('Loaded API:', savedApi);
-        setCoinbaseApiKey(savedApi.api_key ? savedApi.api_key : '');
-        setCoinbaseApiKeySecret(savedApi.api_key_secret ? savedApi.api_key_secret : '');
-        setCoinbaseApiPermissions(savedApi.api_permissions);
-        console.log('Permissions:', savedApi.api_permissions);
-      }
-    } catch (err) {
-      if (err instanceof Error) {
-        error(err.toString());
-      } else {
-        error(String(err));
-      }
-    }
-  }, [setCoinbaseApiKey, setCoinbaseApiKeySecret, setCoinbaseApiPermissions]);
-
-  // Initialize on Component load
-  useEffect(() => {
-    loadApi();
-  }, [loadApi]);
-
   // Delete API
   const deleteApi = async () => {
     try {
@@ -61,32 +34,29 @@ const ConnectCoinbase: React.FC = () => {
         api_key: null,
         api_secret: null,
         api_permissions: {
-          perm_can_trade: false,
-          perm_can_transfer: false,
-          perm_can_view: false,
-          perm_portfolio_type: '',
-          perm_portfolio_uuid: '',
+          can_trade: false,
+          can_transfer: false,
+          can_view: false,
+          portfolio_type: '',
+          portfolio_uuid: '',
         },
       });
       await store.save();
 
+      // Reset context explicitly
       setCoinbaseApiKey('');
       setCoinbaseApiKeySecret('');
       setCoinbaseApiPermissions({
-        perm_can_view: false,
-        perm_can_trade: false,
-        perm_can_transfer: false,
-        perm_portfolio_uuid: '',
-        perm_portfolio_type: '',
+        can_view: false,
+        can_trade: false,
+        can_transfer: false,
+        portfolio_uuid: '',
+        portfolio_type: '',
       });
 
       info('Coinbase API configuration has been reset.');
     } catch (err) {
-      if (err instanceof Error) {
-        error(err.toString());
-      } else {
-        error(String(err));
-      }
+      error(err instanceof Error ? err.toString() : String(err));
     }
   };
 
@@ -97,40 +67,16 @@ const ConnectCoinbase: React.FC = () => {
         coinbaseApiKey: selCoinbaseApiKey,
         coinbaseApiSecret: selCoinbaseApiKeySecret,
       });
-      info('[coinbase_keys_test]\n' + response);
 
-      // Parse the response and set API permissions
-      const parsedResponse = response.split('\n').reduce(
-        (acc: PermissionsType, line) => {
-          const [key, value] = line.split(':').map((item) => item.trim());
-          if (key && value !== undefined) {
-            if (key === 'perm_can_view' || key === 'perm_can_trade' || key === 'perm_can_transfer') {
-              acc[key as 'perm_can_view' | 'perm_can_trade' | 'perm_can_transfer'] = value === 'true';
-            } else if (key === 'perm_portfolio_uuid' || key === 'perm_portfolio_type') {
-              acc[key as 'perm_portfolio_uuid' | 'perm_portfolio_type'] = value;
-            }
-          }
-          return acc;
-        },
-        {
-          perm_can_view: false,
-          perm_can_trade: false,
-          perm_can_transfer: false,
-          perm_portfolio_uuid: '',
-          perm_portfolio_type: '',
-        } as PermissionsType,
-      );
-
+      const parsedResponse: PermissionsType = JSON.parse(response);
+      info('Parsed Response: ' + JSON.stringify(parsedResponse));
+      // Update context state explicitly
       setCoinbaseApiPermissions(parsedResponse);
 
-      // Load API permissions after saving
-      await loadApi();
+      // Reload the API to ensure store consistency
+      // await loadApi();
     } catch (err) {
-      if (err instanceof Error) {
-        error(err.toString());
-      } else {
-        error(String(err));
-      }
+      error(err instanceof Error ? err.toString() : String(err));
     }
   };
 
@@ -160,19 +106,19 @@ const ConnectCoinbase: React.FC = () => {
           <div className={Style.Permission_Box}>
             <div>
               <div className={Style.Permission_Text}>
-                Can View: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.perm_can_view) : ''}
+                Can View: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.can_view) : 'undefined'}
               </div>
               <div className={Style.Permission_Text}>
-                Can Trade: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.perm_can_trade) : ''}
+                Can Trade: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.can_trade) : 'undefined'}
               </div>
               <div className={Style.Permission_Text}>
-                Can Transfer: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.perm_can_transfer) : ''}
+                Can Transfer: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.can_transfer) : 'undefined'}
               </div>
               <div className={Style.Permission_Text}>
-                Portfolio uuid: {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.perm_portfolio_uuid : ''}
+                Portfolio uuid: {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_uuid : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Portfolio Type: {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.perm_portfolio_type : ''}
+                Portfolio Type: {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_type : ''}
               </div>
             </div>
           </div>

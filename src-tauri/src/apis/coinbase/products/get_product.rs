@@ -1,31 +1,21 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/products/mod.rs
+//! apis/coinbase/products/get_product.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! Modules
-//! - candles
-//! - market_trades
-//! - product
-//! - product_book
-//! Modules
-//! - get_best_bid_ask
-//! - get_market_trades
+//! Structs
 //! - get_product
-//! - get_product_book
-//! - get_product_candles
-//! - list_products
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Modules
-pub mod candles;
-pub mod market_trades;
-pub mod product;
-pub mod product_book;
-// Modules
-pub mod get_best_bid_ask;
-pub mod get_market_trades;
-pub mod get_product;
-pub mod get_product_book;
-pub mod get_product_candles;
-pub mod list_products;
+// Dependencies
+use serde::{ Deserialize, Serialize };
+// Crate
+use crate::apis::coinbase::products::product::product::Product;
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+/// Struct to represent a single product in the list products response
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct GetProduct {
+  pub product: Option<Product>,
+}
 
 /* ------------------------------------------------------------------------------------------------------------------ */

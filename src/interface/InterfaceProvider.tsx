@@ -24,6 +24,9 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [selCoinbaseProductList, setCoinbaseProductList] = useState<ProductsType[] | null>(null);
   const [selCoinbaseProduct, setCoinbaseProduct] = useState<ProductsType | null>(null);
 
+  // Log initial state
+  console.info('Initial Coinbase API Permissions: ' + JSON.stringify(selCoinbaseApiPermissions));
+
   return (
     <InterfaceContext.Provider
       value={{

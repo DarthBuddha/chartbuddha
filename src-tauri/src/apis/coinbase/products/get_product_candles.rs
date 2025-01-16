@@ -1,15 +1,21 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/data_api/mod.rs
+//! apis/coinbase/products/get_product_candles.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! Modules
-//! - api_key_permissions
-//! Modules
-//! - get_api_key_permissions
+//! Structs
+//! - GetProductCandles
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Modules
-pub mod api_key_permissions;
-// Modules
-pub mod get_api_key_permissions;
+// Dependencies
+use serde::{ Deserialize, Serialize };
+// Crates
+use crate::apis::coinbase::products::candles::candles::Candles;
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+/// Struct to represent maintenance details
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GetProductCandles {
+  pub candles: Vec<Candles>,
+}
 
 /* ------------------------------------------------------------------------------------------------------------------ */

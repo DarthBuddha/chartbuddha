@@ -1,22 +1,20 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! - interface/coinbase/api/permissions/Permissions.tsx
+//! apis/coinbase/products/product/maintenance.rs
+/* ------------------------------------------------------------------------------------------------------------------ */
+//! Structs
+//! - Maintenance
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// React
-import { createContext } from 'react';
+// Dependencies
+use serde::{ Deserialize, Serialize };
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-export interface PermissionsType {
-  can_view: boolean;
-  can_trade: boolean;
-  can_transfer: boolean;
-  portfolio_uuid: string;
-  portfolio_type: string;
+/// Fcm specific scheduled maintenance details.
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Maintenance {
+  pub start_time: Option<String>, // RFC3339 Timestamp
+  pub end_time: Option<String>, // RFC3339 Timestamp
 }
-
-const PermissionsContext = createContext<PermissionsType | null>(null);
-
-export default PermissionsContext;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

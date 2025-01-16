@@ -1,15 +1,20 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/data_api/mod.rs
+//! apis/coinbase/products/product_book/bids.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! Modules
-//! - api_key_permissions
-//! Modules
-//! - get_api_key_permissions
+//! Structs
+//! - Bids
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Modules
-pub mod api_key_permissions;
-// Modules
-pub mod get_api_key_permissions;
+// Dependencies
+use serde::{ Deserialize, Serialize };
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+/// Struct to represent maintenance details
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Bids {
+  pub price: String,
+  pub size: String,
+}
 
 /* ------------------------------------------------------------------------------------------------------------------ */

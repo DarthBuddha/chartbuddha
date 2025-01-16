@@ -4,16 +4,25 @@
 
 // React
 import React from 'react';
+// Tauri
+import { load } from '@tauri-apps/plugin-store';
+import { info, error } from '@tauri-apps/plugin-log';
+// import { invoke } from '@tauri-apps/api/core';
 // Interface
 import { useInterfaceContext } from 'interface/InterfaceContext';
-// CSS Modules
+import { ApiType } from 'interface/coinbase/api/Api';
+// CSS Module
 import Style from './ConnectApiList.module.css';
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+const store = await load('app_apis.json');
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 const ConnectApiList: React.FC = () => {
   // State Management
-  const { setApi } = useInterfaceContext();
+  const { setApi, setCoinbaseApiKey, setCoinbaseApiKeySecret, setCoinbaseApiPermissions } = useInterfaceContext();
 
   // Handle Data Api Click
   const handleClick = async (selectedApi: string) => {
@@ -21,6 +30,27 @@ const ConnectApiList: React.FC = () => {
     // Logic: Reset Context
     if (resetApi.includes(selectedApi)) {
       setApi(selectedApi);
+      try {
+        const savedApi = await store.get<ApiType>('coinbase');
+        info('Loaded API: ' + JSON.stringify(savedApi));
+
+        if (savedApi) {
+          setCoinbaseApiKey(savedApi.api_key || '');
+          setCoinbaseApiKeySecret(savedApi.api_key_secret || '');
+          setCoinbaseApiPermissions(
+            savedApi.api_permissions || {
+              can_view: false,
+              can_trade: false,
+              can_transfer: false,
+              portfolio_uuid: '',
+              portfolio_type: '',
+            },
+          );
+          info('Permissions: ' + JSON.stringify(savedApi.api_permissions));
+        }
+      } catch (err) {
+        error(err instanceof Error ? err.toString() : String(err));
+      }
     }
   };
 

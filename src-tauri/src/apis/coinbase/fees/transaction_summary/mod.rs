@@ -1,15 +1,15 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/data_api/mod.rs
+//! apis/coinbase/fees/transaction_summary/mod.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! Modules
-//! - api_key_permissions
-//! Modules
-//! - get_api_key_permissions
+//! - fee_tier
+//! - goods_and_services_tax
+//! - margin_rate
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Modules
-pub mod api_key_permissions;
-// Modules
-pub mod get_api_key_permissions;
+pub mod fee_tier;
+pub mod goods_and_services_tax;
+pub mod margin_rate;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
