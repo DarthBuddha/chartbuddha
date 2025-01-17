@@ -13,12 +13,14 @@ use tauri::Manager;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use sea_orm::DatabaseConnection;
-// Modules
+// ChartBuddha Modules
 pub mod apis;
 pub mod commands;
 pub mod db;
 pub mod stores;
+pub mod websocket_coordinator;
 // Crates
+use crate::apis::coinbase::coinbase_websocket::connect_to_coinbase;
 use crate::db::initialize_db::initialize_database;
 use crate::stores::initialize_stores::initialize_stores;
 
@@ -26,6 +28,7 @@ use crate::stores::initialize_stores::initialize_stores;
 
 pub struct AppState {
   pub db: Arc<Mutex<DatabaseConnection>>,
+  pub ws_handle: Arc<Mutex<Option<tokio::task::JoinHandle<()>>>>,
 }
 
 /// Main entry point for the ChartBuddha library
@@ -62,20 +65,33 @@ pub fn run() {
     )
     // Tauri Startup Setup
     .setup(|app| {
-      let handle = app.app_handle();
-      let db_connection = tauri::async_runtime::block_on(initialize_database());
-      match db_connection {
-        Ok(db) => {
-          app.manage(AppState { db });
+      tauri::async_runtime::block_on(async move {
+        let handle = app.app_handle().clone();
+        let db_connection = tauri::async_runtime::block_on(initialize_database());
+        match db_connection {
+          Ok(db) => {
+            app.manage(AppState { db, ws_handle: Arc::new(Mutex::new(None)) });
+          }
+          Err(e) => {
+            error!("Error initializing the database: {:?}", e);
+          }
         }
-        Err(e) => {
-          error!("Error initializing the database: {:?}", e);
+        if let Err(e) = initialize_stores(handle.clone()) {
+          error!("Error during store initialization: {:?}", e);
         }
-      }
-      if let Err(e) = initialize_stores(handle.clone()) {
-        error!("Error during store initialization: {:?}", e);
-      }
-      Ok(())
+
+        // Start WebSocket connection
+        // let app_state = app.state::<AppState>();
+        // let db = app_state.db.clone();
+        // let ws_handle = tokio::spawn(async move {
+        //   if let Err(e) = connect_to_coinbase(handle.clone(), db.lock().await.clone()).await {
+        //     error!("WebSocket connection error: {:?}", e);
+        //   }
+        // });
+        // *app_state.inner().ws_handle.lock().await = Some(ws_handle);
+
+        Ok::<_, Box<dyn std::error::Error>>(())
+      })
     })
     // Run ChartBuddha Application
     .run(tauri::generate_context!())

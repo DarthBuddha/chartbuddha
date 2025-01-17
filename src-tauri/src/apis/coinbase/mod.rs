@@ -6,6 +6,7 @@
 //! - error
 //! - fees
 //! - products
+//! - coinbase_websocket
 //!
 //! Modules
 //! - authenticator
@@ -17,6 +18,7 @@ pub mod data_api;
 pub mod error;
 pub mod fees;
 pub mod products;
+pub mod coinbase_websocket;
 
 // Modules
 pub mod authenticator;

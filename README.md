@@ -18,3 +18,5 @@ Lets just see if I can get the visizulations working, Than maybe I can Build Cha
 - - Rust Backend
 - - React TypeScript Frontend
 - - PostgreSql Database
+
+##### ChartBuddha 2025
