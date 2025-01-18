@@ -5,7 +5,7 @@
 // React
 import React from 'react';
 // Interface
-import { useInterfaceContext } from 'interface/InterfaceContext';
+import { useInterfaceContext } from 'context/InterfaceContext';
 // CSS Module
 import Style from './MenuBar.module.css';
 

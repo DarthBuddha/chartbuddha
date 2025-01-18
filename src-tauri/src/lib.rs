@@ -67,7 +67,7 @@ pub fn run() {
     .setup(|app| {
       tauri::async_runtime::block_on(async move {
         let handle = app.app_handle().clone();
-        let db_connection = tauri::async_runtime::block_on(initialize_database());
+        let db_connection = initialize_database().await;
         match db_connection {
           Ok(db) => {
             app.manage(AppState { db, ws_handle: Arc::new(Mutex::new(None)) });
@@ -81,14 +81,14 @@ pub fn run() {
         }
 
         // Start WebSocket connection
-        // let app_state = app.state::<AppState>();
-        // let db = app_state.db.clone();
-        // let ws_handle = tokio::spawn(async move {
-        //   if let Err(e) = connect_to_coinbase(handle.clone(), db.lock().await.clone()).await {
-        //     error!("WebSocket connection error: {:?}", e);
-        //   }
-        // });
-        // *app_state.inner().ws_handle.lock().await = Some(ws_handle);
+        let app_state = app.state::<AppState>();
+        let db = app_state.db.clone();
+        let ws_handle = tokio::spawn(async move {
+          if let Err(e) = connect_to_coinbase(handle.clone(), db.lock().await.clone()).await {
+            error!("WebSocket connection error: {:?}", e);
+          }
+        });
+        *app_state.inner().ws_handle.lock().await = Some(ws_handle);
 
         Ok::<_, Box<dyn std::error::Error>>(())
       })

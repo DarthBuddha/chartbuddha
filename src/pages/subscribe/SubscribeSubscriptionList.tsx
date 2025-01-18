@@ -8,8 +8,8 @@ import React, { useEffect, useState } from 'react';
 import { error } from '@tauri-apps/plugin-log';
 import { load } from '@tauri-apps/plugin-store';
 // Interface
-import { useInterfaceContext } from 'interface/InterfaceContext';
-import { ProductsType } from 'interface/coinbase/products/Products';
+import { useInterfaceContext } from 'context/InterfaceContext';
+import { ProductsType } from 'context/coinbase/products/Products';
 // CSS Modules
 import Style from './SubscribeSubscriptionList.module.css';
 

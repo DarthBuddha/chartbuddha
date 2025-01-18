@@ -9,7 +9,7 @@ import React from 'react';
 import { error, info } from '@tauri-apps/plugin-log';
 import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { useInterfaceContext } from 'interface/InterfaceContext';
+import { useInterfaceContext } from 'context/InterfaceContext';
 // CSS Modules
 import Style from './SubscribeCoinbaseProduct.module.css';
 

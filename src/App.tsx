@@ -8,7 +8,7 @@ import { createRoot } from 'react-dom/client';
 // Index
 import ChartBuddha from './Index';
 // Interface
-import { InterfaceProvider } from 'interface/InterfaceProvider';
+import { InterfaceProvider } from 'context/InterfaceProvider';
 
 /* ---------------------------------------------------------------------------------------------- */
 

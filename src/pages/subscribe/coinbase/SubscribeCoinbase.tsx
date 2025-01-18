@@ -6,7 +6,7 @@
 import React from 'react';
 import Split from 'react-split';
 // Interface
-import { useInterfaceContext } from 'interface/InterfaceContext';
+import { useInterfaceContext } from 'context/InterfaceContext';
 // Components
 import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct';
 import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList';

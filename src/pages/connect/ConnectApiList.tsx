@@ -9,8 +9,8 @@ import { load } from '@tauri-apps/plugin-store';
 import { info, error } from '@tauri-apps/plugin-log';
 // import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { useInterfaceContext } from 'interface/InterfaceContext';
-import { ApiType } from 'interface/coinbase/api/Api';
+import { useInterfaceContext } from 'context/InterfaceContext';
+import { ApiType } from 'context/coinbase/data_api/Api';
 // CSS Module
 import Style from './ConnectApiList.module.css';
 

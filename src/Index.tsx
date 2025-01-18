@@ -5,7 +5,7 @@
 // React
 import React from 'react';
 // Interface
-import { useInterfaceContext } from 'interface/InterfaceContext';
+import { useInterfaceContext } from 'context/InterfaceContext';
 // Common
 import MenuBar from './components/menubar/MenuBar';
 import StatusBar from './components/statusbar/StatusBar';
