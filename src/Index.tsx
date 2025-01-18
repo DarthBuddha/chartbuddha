@@ -4,6 +4,8 @@
 
 // React
 import React from 'react';
+// Tauri
+// import { info } from '@tauri-apps/plugin-log';
 // Interface
 import { useInterfaceContext } from 'context/InterfaceContext';
 // Common

@@ -10,7 +10,11 @@
 use std::error::Error;
 use std::sync::Arc;
 // Tauri
+use tauri::AppHandle;
 use tauri::Manager;
+use tauri::Wry;
+use tauri::async_runtime::Mutex;
+use tauri::State;
 // use tauri::async_runtime::Mutex;
 // use tauri::Emitter;
 // SeaORM
@@ -20,7 +24,7 @@ use sea_orm::{ ActiveModelTrait, Set };
 use chrono::Utc;
 use log::info;
 // Crates
-use crate::AppState;
+use crate::state::app_state::AppState;
 use crate::apis::coinbase::coinbase_streams::start_coinbase_stream;
 use crate::db::entities::subscriptions::ActiveModel;
 use crate::db::entities::trades::ActiveModel as TradeActiveModel;
@@ -34,6 +38,7 @@ pub async fn save_to_database(
   data: &str
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
   let db = db.lock().await;
+  let db_clone = db.clone(); // Clone the DatabaseConnection
   info!("Saving data to database: {}", data);
   let json_data: serde_json::Value = serde_json::from_str(data)?;
 
@@ -47,7 +52,7 @@ pub async fn save_to_database(
       timestamp: Set(Utc::now().naive_utc()), // Adjust as needed
       ..Default::default()
     };
-    trade.insert(&db).await?;
+    trade.insert(&db_clone).await?; // Use the cloned DatabaseConnection
   } else if let Some(order_id) = json_data["order_id"].as_str() {
     let order = OrderBookActiveModel {
       subscription_id: Set(1), // Example subscription ID
@@ -58,7 +63,7 @@ pub async fn save_to_database(
       timestamp: Set(Utc::now().naive_utc()), // Adjust as needed
       ..Default::default()
     };
-    order.insert(&db).await?;
+    order.insert(&db_clone).await?; // Use the cloned DatabaseConnection
   } else {
     let subscription = ActiveModel {
       product_id: Set("BTC-USD".to_string()),
@@ -67,29 +72,40 @@ pub async fn save_to_database(
       data: Set(data.to_string()),
       ..Default::default()
     };
-    subscription.insert(&db).await?;
+    subscription.insert(&db_clone).await?; // Use the cloned DatabaseConnection
   }
 
   Ok(())
 }
 
+pub async fn get_app_state_and_db(app_handle: AppHandle<Wry>) -> Option<(Arc<Mutex<DatabaseConnection>>, AppState)> {
+  let app_state: State<'_, AppState> = app_handle.state();
+  let db_option = app_state.db.lock().await;
+  if let Some(db) = &*db_option {
+    Some((Arc::new(Mutex::new(db.clone())), (*app_state).clone())) // Dereference State to get AppState
+  } else {
+    None
+  }
+}
+
 pub async fn coordinate_subscriptions(
-  app_handle: tauri::AppHandle,
+  app_handle: AppHandle<Wry>,
   coinbase_subscriptions: &Vec<serde_json::Value>
 ) -> Result<(), Box<dyn Error + Send + Sync>> {
   let streams_coordinator = StreamsCoordinator::new();
   for subscription in coinbase_subscriptions.clone() {
     let app_clone = app_handle.clone();
     if let Some(product_id) = subscription["product_id"].as_str() {
-      let product_id = product_id.to_string(); // Clone the product_id to ensure it lives long enough
+      let product_id = product_id.to_string();
       streams_coordinator.manage_active_streams(app_clone.clone(), product_id.clone()).await;
       // Start WebSocket stream and store data
       tokio::spawn(async move {
-        let app_state = app_clone.state::<AppState>();
-        let db = app_state.db.clone();
-        let product_id_clone = product_id.clone();
-        if let Err(e) = start_coinbase_stream(app_clone, db, product_id).await {
-          log::error!("Error starting WebSocket stream for {}: {:?}", product_id_clone, e);
+        let app_clone_inner = app_clone.clone();
+        if let Some((db, _app_state)) = get_app_state_and_db(app_clone_inner).await {
+          let product_id_clone = product_id.clone();
+          if let Err(e) = start_coinbase_stream(app_clone, db, product_id).await {
+            log::error!("Error starting WebSocket stream for {}: {:?}", product_id_clone, e);
+          }
         }
       });
     }

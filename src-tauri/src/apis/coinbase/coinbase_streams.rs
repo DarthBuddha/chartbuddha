@@ -8,6 +8,7 @@
 // Rust
 use std::sync::Arc;
 // Tauri
+use log::info;
 use tauri::AppHandle;
 use tauri::Emitter;
 use tauri::Wry;
@@ -31,6 +32,7 @@ pub async fn start_coinbase_stream(
   db: Arc<Mutex<DatabaseConnection>>,
   product_id: String
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+  info!("Starting Coinbase stream for product ID: {}", product_id);
   let url = "wss://advanced-trade-ws.coinbase.com";
   let (ws_stream, _) = connect_async(url).await?;
   let (mut write, mut read) = ws_stream.split();
@@ -48,6 +50,7 @@ pub async fn start_coinbase_stream(
         "jwt": jwt
     });
   write.send(Message::Text(subscribe_message.to_string().into())).await?;
+  info!("Subscribed to Coinbase WebSocket for product ID: {}", product_id);
 
   // Handle incoming messages
   while let Some(message) = read.next().await {
@@ -55,6 +58,7 @@ pub async fn start_coinbase_stream(
     if let Message::Text(text) = message {
       let data: serde_json::Value = serde_json::from_str(&text)?;
       // Save data to the database
+      info!("Received message from Coinbase WebSocket: {}", text);
       save_to_database(db.clone(), &text).await?;
       // Stream data to the frontend
       app_handle.emit("coinbase_data", data)?;

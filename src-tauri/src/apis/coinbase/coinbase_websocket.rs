@@ -10,6 +10,7 @@
 use std::error::Error;
 use std::sync::Arc;
 // Tauri
+use log::info;
 use tauri::Emitter;
 use tauri::async_runtime::Mutex;
 // use tauri::Manager;
@@ -36,6 +37,7 @@ pub async fn connect_to_coinbase(
   db: Arc<Mutex<DatabaseConnection>>,
   product_id: String
 ) -> Result<(), Box<dyn Error + Send + Sync>> {
+  info!("Connecting to Coinbase WebSocket for product ID: {}", product_id);
   let (ws_stream, _) = connect_async("wss://advanced-trade-ws.coinbase.com").await?;
   let (mut write, mut read) = ws_stream.split();
 
@@ -52,14 +54,15 @@ pub async fn connect_to_coinbase(
     });
 
   write.send(Message::Text(subscribe_message.to_string().into())).await?;
+  info!("Subscribed to Coinbase WebSocket for product ID: {}", product_id);
 
   while let Some(message) = read.next().await {
     let message = message?;
     if let Message::Text(text) = message {
       // Process the incoming message
-      println!("Received: {}", text);
+      info!("Received message from Coinbase WebSocket: {}", text);
       // Save data to the database here
-      save_to_database(db, &text).await?;
+      save_to_database(db.clone(), &text).await?;
       // Emit event to the front end
       let json_text: serde_json::Value = serde_json::from_str(&text)?;
       app_handle.emit("coinbase-data", json_text)?;
@@ -70,7 +73,7 @@ pub async fn connect_to_coinbase(
 }
 
 pub async fn start_coinbase_ws(
-  db: &Mutex<DatabaseConnection>,
+  db: Arc<Mutex<DatabaseConnection>>,
   tx: mpsc::Sender<serde_json::Value>
 ) -> Result<(), Box<dyn Error + Send + Sync>> {
   let (ws_stream, _) = connect_async("wss://advanced-trade-ws.coinbase.com").await?;
@@ -96,7 +99,7 @@ pub async fn start_coinbase_ws(
       // Process the incoming message
       println!("Received: {}", text);
       // Save data to the database here
-      save_to_database(db, &text).await?;
+      save_to_database(db.clone(), &text).await?;
       // Send data to the channel
       let json_data: serde_json::Value = serde_json::from_str(&text)?;
       tx.send(json_data).await?;

@@ -1,29 +1,15 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! apis/coinbase/mod.rs
+//! module_name.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! Modules
-//! - data_api
-//! - error
-//! - fees
-//! - products
-//!
-//! Modules
-//! - authenticator
-//! - coinbase_streams
-//! - coinbase_subscriber
-//! - coinbase_websocket
+//! Functions
+//! - rust_function
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-// Modules
-pub mod data_api;
-pub mod error;
-pub mod fees;
-pub mod products;
+// Rust
+// Tauri
+// Dependencies
+// Crates
 
-// Modules
-pub mod coinbase_authenticator;
-pub mod coinbase_subscriber;
-pub mod coinbase_streams;
-pub mod coinbase_websocket;
+/* ------------------------------------------------------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------------------------------------------------------ */

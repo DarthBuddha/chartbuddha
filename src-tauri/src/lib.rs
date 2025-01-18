@@ -10,21 +10,20 @@
 // use std::error::Error;
 // Tauri
 // use log::error;
+use log::info;
 use tauri::Manager;
-use tauri::async_runtime::Mutex;
 // Module Library
 pub mod apis;
 pub mod commands;
 pub mod db;
 pub mod state;
 pub mod stores;
-// pub mod streams;
-// pub mod ws;
+pub mod streams;
+pub mod ws;
 // Crates
-use crate::db::initialize_db::initialize_database;
 use crate::state::app_state::AppState;
-use crate::stores::initialize_stores::initialize_stores;
-// use crate::ws::initialize_ws::initialize_websocket;
+use crate::db::initialize_db::initialize_database;
+use crate::stores::init_stores::initialize_stores;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -57,14 +56,17 @@ pub fn run() {
       tauri::generate_handler![
         commands::connect::coinbase_store_api_keys::coinbase_store_api_keys,
         commands::subscribe::coinbase_products_list::coinbase_products_list,
-        commands::subscribe::coinbase_subscribe::coinbase_subscribe
+        commands::subscribe::coinbase_subscribe::coinbase_subscribe,
+        commands::websocket::initialize_websocket_command::initialize_websocket_command
       ]
     )
     // Setup Tauri Application
     .setup(|app| {
-      app.manage(Mutex::new(AppState::default()));
+      let app_state = AppState::default();
+      app.manage(app_state);
       initialize_stores(app.handle().clone())?;
       tauri::async_runtime::block_on(initialize_database())?;
+      info!("Database initialized successfully");
       Ok(())
     })
     // Run ChartBuddha Application
