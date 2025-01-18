@@ -7,7 +7,7 @@ import React from 'react';
 // Components
 import SubscribeApiList from './SubscribeApiList';
 import SubscribeData from './SubscribeData';
-import SubscribeSubscriptionList from './SubscribeSubscriptionList';
+import SubscribeSubList from './SubscribeSubList';
 // CSS Modules
 import Style from './Subscribe.module.css';
 
@@ -24,7 +24,7 @@ const Subscribe: React.FC = () => {
           <SubscribeData />
         </div>
         <div className={Style.Subscribe_Sub_List}>
-          <SubscribeSubscriptionList />
+          <SubscribeSubList />
         </div>
       </div>
     </div>

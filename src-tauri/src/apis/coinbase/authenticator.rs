@@ -1,10 +1,10 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! commands/coinbase/authenticator.rs
+//! apis/coinbase/authenticator.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! ### Functions
+//! Functions
 //! - use_authenticator
 /* ------------------------------------------------------------------------------------------------------------------ */
-//
+
 // Rust
 use std::error::Error;
 use std::time::{ SystemTime, UNIX_EPOCH };
@@ -14,10 +14,28 @@ use tauri_plugin_store::StoreExt;
 // Dependencies
 use jsonwebtoken::{ encode, EncodingKey, Header };
 use rand::{ distributions::Alphanumeric, Rng };
+use serde::{ Deserialize, Serialize };
 use serde_json::Value;
-// Crates
-use crate::apis::coinbase::authenticator_struct::Authenticator;
-use crate::apis::coinbase::authenticator_struct::Claims;
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+/// Struct: Authenticator
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Authenticator {
+  pub request_method: String,
+  pub request_path: String,
+}
+
+/// Struct: Claims for JWT token
+#[derive(Debug, Serialize)]
+pub struct Claims {
+  pub iss: String,
+  pub sub: String,
+  pub nbf: u64,
+  pub exp: u64,
+  pub uri: String,
+  pub nonce: String,
+}
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 

@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! - pages/subscribe/Subscribe_Sub_List.tsx
+//! - pages/subscribe/SubscribeSubList.tsx
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // React
@@ -11,7 +11,7 @@ import { load } from '@tauri-apps/plugin-store';
 import { useInterfaceContext } from 'context/InterfaceContext';
 import { ProductsType } from 'context/coinbase/products/Products';
 // CSS Modules
-import Style from './SubscribeSubscriptionList.module.css';
+import Style from './SubscribeSubList.module.css';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -20,7 +20,7 @@ const store_app_subscriptions = await load('app_subscriptions.json');
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-const SubscribeSubscriptionList: React.FC = () => {
+const SubscribeSubList: React.FC = () => {
   // State Management
   const { setApi, setCoinbaseProduct } = useInterfaceContext();
 
@@ -94,6 +94,6 @@ const SubscribeSubscriptionList: React.FC = () => {
   );
 };
 
-export default SubscribeSubscriptionList;
+export default SubscribeSubList;
 
 /* ------------------------------------------------------------------------------------------------------------------ */

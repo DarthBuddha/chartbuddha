@@ -43,13 +43,13 @@ pub fn initialize_stores(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
 
   // App: Subscriptions Store Initialization
   info!("Initialize App Subscriptions Store...");
-  let store_app_settings = tauri_plugin_store::StoreBuilder
+  let store_app_subscriptions = tauri_plugin_store::StoreBuilder
     ::new(&app, "app_subscriptions.json")
     .auto_save(Duration::from_millis(100))
     .defaults(app_subscriptions_defaults())
     .build()?;
-  app.manage(store_app_settings.clone());
-  store_app_settings.save()?;
+  app.manage(store_app_subscriptions.clone());
+  store_app_subscriptions.save()?;
 
   info!("Store Initialized!");
 

@@ -18,6 +18,7 @@ pub struct Model {
   pub product_id: String,
   pub created_at: DateTimeWithTimeZone,
   pub updated_at: DateTime,
+  pub data: String, // Ensure this line is included
 }
 
 #[derive(Copy, Clone, Debug, EnumIter)]

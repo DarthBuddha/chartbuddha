@@ -9,7 +9,7 @@
 use std::sync::Arc;
 // SeaORM
 use sea_orm::{ ConnectionTrait, Database, DatabaseConnection, Schema };
-// use sea_orm::sea_query::{ Table, ColumnDef, Iden };
+use sea_orm::sea_query::Table;
 // Dependencies
 use tokio::sync::Mutex;
 // Crates
@@ -28,14 +28,17 @@ pub async fn initialize_database() -> Result<Arc<Mutex<DatabaseConnection>>, Box
   let db = Database::connect(DB_URL).await?;
   log::info!("Database connected successfully.");
 
-  // Create the subscriptions table if it doesn't exist
+  // Drop the subscriptions table if it exists
   let schema = Schema::new(db.get_database_backend());
   let backend = db.get_database_backend();
-  let mut create_table = schema.create_table_from_entity(Entity);
-  let create_table_statement = create_table.if_not_exists();
+  let drop_table_statement = Table::drop().table(Entity).if_exists().to_owned();
+  db.execute(backend.build(&drop_table_statement)).await?;
+  log::info!("Subscriptions table dropped.");
 
-  db.execute(backend.build(create_table_statement)).await?;
-  log::info!("Subscriptions table created or already exists.");
+  // Create the subscriptions table
+  let create_table_statement = schema.create_table_from_entity(Entity).if_not_exists().to_owned();
+  db.execute(backend.build(&create_table_statement)).await?;
+  log::info!("Subscriptions table created.");
 
   Ok(Arc::new(Mutex::new(db)))
 }

@@ -11,7 +11,7 @@ use std::error::Error;
 use tauri::Emitter;
 // use tauri::Manager;
 // SeaORM
-use sea_orm::{ DatabaseConnection, Set };
+use sea_orm::DatabaseConnection;
 // Dependencies
 use futures_util::{ SinkExt, StreamExt };
 use serde_json::json;
@@ -20,7 +20,7 @@ use tokio_tungstenite::connect_async;
 use tokio_tungstenite::tungstenite::protocol::Message;
 use serde::{ Deserialize, Serialize };
 // Crate
-use crate::websocket_coordinator::save_to_database;
+use crate::ws::ws_coordinator::save_to_database;
 // use crate::db::entities::subscriptions::Entity as SubscriptionEntity;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -30,7 +30,8 @@ struct Utf8Bytes(String);
 
 pub async fn connect_to_coinbase(
   app_handle: tauri::AppHandle,
-  db: DatabaseConnection
+  db: DatabaseConnection,
+  product_id: String
 ) -> Result<(), Box<dyn Error + Send + Sync>> {
   let (ws_stream, _) = connect_async("wss://advanced-trade-ws.coinbase.com").await?;
   let (mut write, mut read) = ws_stream.split();
@@ -42,25 +43,12 @@ pub async fn connect_to_coinbase(
         "channels": [
             {
                 "name": "ticker",
-                "product_ids": ["BTC-USD"]
+                "product_ids": [product_id]
             }
         ]
     });
 
   write.send(Message::Text(subscribe_message.to_string().into())).await?;
-
-  async fn save_to_database(db: &DatabaseConnection, data: &str) -> Result<(), Box<dyn Error + Send + Sync>> {
-    // Parse the data and save it to the database
-    use crate::db::entities::subscriptions::ActiveModel;
-    use sea_orm::ActiveModelTrait;
-
-    let subscription = ActiveModel {
-      product_id: Set(data.to_string()),
-      ..Default::default()
-    };
-    subscription.insert(db).await?;
-    Ok(())
-  }
 
   while let Some(message) = read.next().await {
     let message = message?;
