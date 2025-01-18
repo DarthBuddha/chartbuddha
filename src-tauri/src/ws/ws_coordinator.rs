@@ -1,13 +1,17 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! websocket_coordinator.rs
+//! ws/ws_coordinator.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! Functions
-//! - websocket_coordinator
+//! - save_to_database
+//! - coordinate_subscriptions
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Rust
 use std::error::Error;
+use std::sync::Arc;
 // Tauri
+use tauri::Manager;
+// use tauri::async_runtime::Mutex;
 // use tauri::Emitter;
 // SeaORM
 use sea_orm::DatabaseConnection;
@@ -16,15 +20,20 @@ use sea_orm::{ ActiveModelTrait, Set };
 use chrono::Utc;
 use log::info;
 // Crates
+use crate::AppState;
+use crate::apis::coinbase::coinbase_streams::start_coinbase_stream;
 use crate::db::entities::subscriptions::ActiveModel;
 use crate::db::entities::trades::ActiveModel as TradeActiveModel;
 use crate::db::entities::order_book::ActiveModel as OrderBookActiveModel;
-// use crate::apis::coinbase::coinbase_websocket::connect_to_coinbase;
 use crate::streams::streams_coordinator::StreamsCoordinator;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-pub async fn save_to_database(db: &DatabaseConnection, data: &str) -> Result<(), Box<dyn Error + Send + Sync>> {
+pub async fn save_to_database(
+  db: Arc<tauri::async_runtime::Mutex<DatabaseConnection>>,
+  data: &str
+) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+  let db = db.lock().await;
   info!("Saving data to database: {}", data);
   let json_data: serde_json::Value = serde_json::from_str(data)?;
 
@@ -38,17 +47,18 @@ pub async fn save_to_database(db: &DatabaseConnection, data: &str) -> Result<(),
       timestamp: Set(Utc::now().naive_utc()), // Adjust as needed
       ..Default::default()
     };
-    trade.insert(db).await?;
+    trade.insert(&db).await?;
   } else if let Some(order_id) = json_data["order_id"].as_str() {
     let order = OrderBookActiveModel {
       subscription_id: Set(1), // Example subscription ID
+      order_id: Set(order_id.to_string()), // Include order_id
       price: Set(json_data["price"].as_str().unwrap().parse()?),
       volume: Set(json_data["volume"].as_str().unwrap().parse()?),
       side: Set(json_data["side"].as_str().unwrap().to_string()),
       timestamp: Set(Utc::now().naive_utc()), // Adjust as needed
       ..Default::default()
     };
-    order.insert(db).await?;
+    order.insert(&db).await?;
   } else {
     let subscription = ActiveModel {
       product_id: Set("BTC-USD".to_string()),
@@ -57,7 +67,7 @@ pub async fn save_to_database(db: &DatabaseConnection, data: &str) -> Result<(),
       data: Set(data.to_string()),
       ..Default::default()
     };
-    subscription.insert(db).await?;
+    subscription.insert(&db).await?;
   }
 
   Ok(())
@@ -65,16 +75,23 @@ pub async fn save_to_database(db: &DatabaseConnection, data: &str) -> Result<(),
 
 pub async fn coordinate_subscriptions(
   app_handle: tauri::AppHandle,
-  db: DatabaseConnection,
   coinbase_subscriptions: &Vec<serde_json::Value>
 ) -> Result<(), Box<dyn Error + Send + Sync>> {
   let streams_coordinator = StreamsCoordinator::new();
   for subscription in coinbase_subscriptions.clone() {
     let app_clone = app_handle.clone();
     if let Some(product_id) = subscription["product_id"].as_str() {
-      streams_coordinator.manage_active_streams(app_clone, product_id.to_string()).await;
-      // Save subscription data to the database
-      save_to_database(&db, &subscription.to_string()).await?;
+      let product_id = product_id.to_string(); // Clone the product_id to ensure it lives long enough
+      streams_coordinator.manage_active_streams(app_clone.clone(), product_id.clone()).await;
+      // Start WebSocket stream and store data
+      tokio::spawn(async move {
+        let app_state = app_clone.state::<AppState>();
+        let db = app_state.db.clone();
+        let product_id_clone = product_id.clone();
+        if let Err(e) = start_coinbase_stream(app_clone, db, product_id).await {
+          log::error!("Error starting WebSocket stream for {}: {:?}", product_id_clone, e);
+        }
+      });
     }
   }
   Ok(())

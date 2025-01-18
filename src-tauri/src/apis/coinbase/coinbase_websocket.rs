@@ -2,13 +2,16 @@
 //! apis/coinbase/coinbase_websocket.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! Functions
-//! - coinbase_websocket
+//! - connect_to_coinbase
+//! - start_coinbase_ws
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Rust
 use std::error::Error;
+use std::sync::Arc;
 // Tauri
 use tauri::Emitter;
+use tauri::async_runtime::Mutex;
 // use tauri::Manager;
 // SeaORM
 use sea_orm::DatabaseConnection;
@@ -30,7 +33,7 @@ struct Utf8Bytes(String);
 
 pub async fn connect_to_coinbase(
   app_handle: tauri::AppHandle,
-  db: DatabaseConnection,
+  db: Arc<Mutex<DatabaseConnection>>,
   product_id: String
 ) -> Result<(), Box<dyn Error + Send + Sync>> {
   let (ws_stream, _) = connect_async("wss://advanced-trade-ws.coinbase.com").await?;
@@ -56,7 +59,7 @@ pub async fn connect_to_coinbase(
       // Process the incoming message
       println!("Received: {}", text);
       // Save data to the database here
-      save_to_database(&db, &text).await?;
+      save_to_database(db, &text).await?;
       // Emit event to the front end
       let json_text: serde_json::Value = serde_json::from_str(&text)?;
       app_handle.emit("coinbase-data", json_text)?;
@@ -67,7 +70,7 @@ pub async fn connect_to_coinbase(
 }
 
 pub async fn start_coinbase_ws(
-  db: DatabaseConnection,
+  db: &Mutex<DatabaseConnection>,
   tx: mpsc::Sender<serde_json::Value>
 ) -> Result<(), Box<dyn Error + Send + Sync>> {
   let (ws_stream, _) = connect_async("wss://advanced-trade-ws.coinbase.com").await?;
@@ -93,7 +96,7 @@ pub async fn start_coinbase_ws(
       // Process the incoming message
       println!("Received: {}", text);
       // Save data to the database here
-      save_to_database(&db, &text).await?;
+      save_to_database(db, &text).await?;
       // Send data to the channel
       let json_data: serde_json::Value = serde_json::from_str(&text)?;
       tx.send(json_data).await?;

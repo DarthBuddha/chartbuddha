@@ -1,37 +1,33 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! entities/orders_table.rs
+//! src/state/app_state.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
-//! Entities
-//! - orders_table
+//! Structs
+//! - AppState
 /* ------------------------------------------------------------------------------------------------------------------ */
 
+// Rust
+use std::sync::Arc;
+// Tauri
+use tauri::async_runtime::Mutex;
+// SeaORM
+use sea_orm::DatabaseConnection;
 // Dependencies
-use sea_orm::entity::prelude::*;
+// Crates
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-#[sea_orm(table_name = "orders")]
-pub struct Model {
-  #[sea_orm(primary_key)]
-  pub id: i32,
-  pub subscription_id: i32,
-  pub order_id: String, // New field added
-  pub price: Decimal,
-  pub volume: Decimal,
-  pub side: String,
-  pub timestamp: DateTime,
+pub struct AppState {
+  pub db: Arc<Mutex<Option<DatabaseConnection>>>,
+  pub ws_handle: Arc<Mutex<Option<tokio::task::JoinHandle<()>>>>,
 }
 
-#[derive(Copy, Clone, Debug, EnumIter)]
-pub enum Relation {}
-
-impl RelationTrait for Relation {
-  fn def(&self) -> RelationDef {
-    panic!("No RelationDef")
+impl Default for AppState {
+  fn default() -> Self {
+    AppState {
+      db: Arc::new(Mutex::new(None)),
+      ws_handle: Arc::new(Mutex::new(None)),
+    }
   }
 }
-
-impl ActiveModelBehavior for ActiveModel {}
 
 /* ------------------------------------------------------------------------------------------------------------------ */

@@ -2,7 +2,7 @@
 //! ws/initalize_ws.rs
 /* ------------------------------------------------------------------------------------------------------------------ */
 //! Functions
-//! - initalize_ws
+//! - initialize_websocket
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Rust
@@ -22,8 +22,13 @@ use crate::ws::ws_coordinator::coordinate_subscriptions;
 pub async fn initialize_websocket(app: AppHandle) -> Result<(), Box<dyn std::error::Error>> {
   log::info!("Initializing WebSocket...");
 
-  let app_state = app.state::<AppState>();
-  let db = app_state.db.clone();
+  let app_state = match app.try_state::<AppState>() {
+    Some(state) => state,
+    None => {
+      log::error!("AppState not managed yet.");
+      return Err("AppState not managed yet.".into());
+    }
+  };
   let app_clone = app.clone();
 
   // Read app_subscriptions from the store
@@ -45,7 +50,7 @@ pub async fn initialize_websocket(app: AppHandle) -> Result<(), Box<dyn std::err
 
   // Coordinate subscriptions
   let ws_handle = tokio::spawn(async move {
-    if let Err(e) = coordinate_subscriptions(app_clone, db.lock().await.clone(), &coinbase_subscriptions).await {
+    if let Err(e) = coordinate_subscriptions(app_clone, &coinbase_subscriptions).await {
       log::error!("WebSocket connection error: {:?}", e);
     }
   });

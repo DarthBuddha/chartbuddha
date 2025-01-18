@@ -6,21 +6,25 @@
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 // Rust
+use std::sync::Arc;
 // Tauri
 use tauri::AppHandle;
 use tauri::Emitter;
 use tauri::Manager;
+// use tauri::StateManager;
+// use tauri::State;
 use tauri::Wry;
 // Dependencies
 use tokio_tungstenite::connect_async;
 use tokio_tungstenite::tungstenite::Message;
 use futures_util::{ SinkExt, StreamExt };
 use serde_json::json;
+use sea_orm::DatabaseConnection;
 // Crates
-use crate::apis::coinbase::authenticator::Authenticator;
-use crate::apis::coinbase::authenticator::use_authenticator;
+use crate::apis::coinbase::coinbase_authenticator::Authenticator;
+use crate::apis::coinbase::coinbase_authenticator::use_authenticator;
 use crate::ws::ws_coordinator::save_to_database;
-use crate::AppState;
+// use crate::AppState;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -52,8 +56,12 @@ pub async fn subscribe_to_coinbase(
     if let Message::Text(text) = message {
       let data: serde_json::Value = serde_json::from_str(&text)?;
       // Process and save data to the database
-      let db = app_handle.state::<AppState>().db.lock().await.clone();
-      save_to_database(&db, &text).await?;
+      let db = app_handle
+        .try_state::<tauri::async_runtime::Mutex<DatabaseConnection>>()
+        .ok_or("Failed to get database state")?
+        .lock().await
+        .clone();
+      save_to_database(Arc::new(tauri::async_runtime::Mutex::new(db)), &text).await?;
       // Stream the data
       app_handle.emit("new_data", data)?;
     }

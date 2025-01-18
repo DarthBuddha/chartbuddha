@@ -5,32 +5,28 @@
 //! - run
 /* ------------------------------------------------------------------------------------------------------------------ */
 
+// Rust
+// use std::sync::Arc;
+// use std::error::Error;
 // Tauri
-use log::error;
+// use log::error;
 use tauri::Manager;
-// use tauri::AppHandle;
-// Database
-use std::sync::Arc;
-use tokio::sync::Mutex;
-use sea_orm::DatabaseConnection;
-// ChartBuddha Modules
+use tauri::async_runtime::Mutex;
+// Module Library
 pub mod apis;
 pub mod commands;
 pub mod db;
+pub mod state;
 pub mod stores;
-pub mod streams;
-pub mod ws;
+// pub mod streams;
+// pub mod ws;
 // Crates
 use crate::db::initialize_db::initialize_database;
+use crate::state::app_state::AppState;
 use crate::stores::initialize_stores::initialize_stores;
-use crate::ws::initialize_ws::initialize_websocket;
+// use crate::ws::initialize_ws::initialize_websocket;
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-
-pub struct AppState {
-  pub db: Arc<Mutex<DatabaseConnection>>,
-  pub ws_handle: Arc<Mutex<Option<tokio::task::JoinHandle<()>>>>,
-}
 
 /// Main entry point for the ChartBuddha library
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -66,28 +62,10 @@ pub fn run() {
     )
     // Setup Tauri Application
     .setup(|app| {
-      tauri::async_runtime::block_on(async move {
-        let handle = app.app_handle().clone();
-        let db_connection = initialize_database().await;
-        match db_connection {
-          Ok(db) => {
-            app.manage(AppState { db, ws_handle: Arc::new(Mutex::new(None)) });
-          }
-          Err(e) => {
-            error!("Error initializing the database: {:?}", e);
-          }
-        }
-        if let Err(e) = initialize_stores(handle.clone()) {
-          error!("Error during store initialization: {:?}", e);
-        }
-
-        // Initialize WebSocket connections
-        if let Err(e) = initialize_websocket(handle.clone()).await {
-          error!("Error initializing WebSocket connections: {:?}", e);
-        }
-
-        Ok::<_, Box<dyn std::error::Error>>(())
-      })
+      app.manage(Mutex::new(AppState::default()));
+      initialize_stores(app.handle().clone())?;
+      tauri::async_runtime::block_on(initialize_database())?;
+      Ok(())
     })
     // Run ChartBuddha Application
     .run(tauri::generate_context!())
