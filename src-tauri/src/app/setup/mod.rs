@@ -1,14 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! main.rs
+//! app/setup/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
-//! Functions
-//! - main
+//! Modules
+//! - setup
+//! - setup_state
 /* ---------------------------------------------------------------------------------------------- */
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-fn main() {
-  chartbuddha_lib::run()
-}
+// Modules
+pub mod setup;
+pub mod setup_state;
 
 /* ---------------------------------------------------------------------------------------------- */

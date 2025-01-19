@@ -24,7 +24,7 @@ use sea_orm::{ ActiveModelTrait, Set };
 use chrono::Utc;
 use log::{ info, error };
 // Crates
-use crate::state::app_state::AppState;
+use crate::app::state::state_app::AppState;
 use crate::apis::coinbase::coinbase_streams::start_coinbase_stream;
 use crate::db::entities::subscriptions::ActiveModel;
 use crate::db::entities::trades::ActiveModel as TradeActiveModel;

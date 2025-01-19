@@ -18,7 +18,7 @@ use tauri::async_runtime::Mutex;
 use tokio::task::JoinHandle;
 use log::info;
 // Crates
-use crate::state::app_state::AppState;
+use crate::app::state::state_app::AppState;
 use crate::apis::coinbase::coinbase_streams::start_coinbase_stream;
 use crate::ws::ws_coordinator::get_app_state_and_db;
 

@@ -13,9 +13,9 @@ use std::time::Duration;
 use log::info;
 use tauri::{ AppHandle, Manager, Wry };
 // Tauri Store: App Defaults
-use crate::stores::defaults::app_apis_defaults::app_apis_defaults;
-use crate::stores::defaults::app_settings_defaults::app_settings_defaults;
-use crate::stores::defaults::app_subscriptions_defaults::app_subscriptions_defaults;
+use crate::app::store::defaults::app_apis_defaults::app_apis_defaults;
+use crate::app::store::defaults::app_settings_defaults::app_settings_defaults;
+use crate::app::store::defaults::app_subscriptions_defaults::app_subscriptions_defaults;
 
 /* ---------------------------------------------------------------------------------------------- */
 

@@ -38,45 +38,19 @@ async function setup() {
     await sleep(3);
     info('Frontend setup task complete!');
     // Set the frontend task as being completed
-    await invoke('set_complete', { task: 'frontend' });
+    await invoke('cmd_app_setup', { task: 'frontend' });
     info('Frontend setup marked as complete.');
   } catch (err) {
     info(`Setup failed: ${err instanceof Error ? err.toString() : String(err)}`);
   }
 }
 
-// function initialize() {
-//   info('Initializing application...');
-//   setup()
-//     .then(() => {
-//       info('Setup function executed.');
-//     })
-//     .catch((err) => {
-//       info(`Setup function failed: ${err instanceof Error ? err.toString() : String(err)}`);
-//     });
-// }
-
-// if (document.readyState === 'loading') {
-//   window.addEventListener('DOMContentLoaded', () => {
-//     info('DOMContentLoaded event fired.');
-//     initialize();
-//   });
-// } else {
-//   info('Document already loaded.');
-//   initialize();
-// }
-
-// // Alternative event listener for the 'load' event
-// window.addEventListener('load', () => {
-//   info('Load event fired.');
-//   initialize();
-// });
-
 // Listen for the backend setup completion event
-listen('backend-setup-complete', () => {
+listen('backend-setup-complete', async () => {
+  info('Backend setup complete event received.');
   // Perform any additional frontend setup tasks here
-  setup();
-  info('Backend setup is complete.');
+  await setup();
+  info('Setup Complete.');
 });
 
 /* ---------------------------------------------------------------------------------------------- */
