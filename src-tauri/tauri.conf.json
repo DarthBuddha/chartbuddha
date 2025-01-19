@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.tauri.app/config/2.2.2",
+  "$schema": "https://schema.tauri.app/config/2.2.3",
   "productName": "chartbuddha",
   "version": "0.1.0",
   "identifier": "com.chartbuddha.app",
@@ -10,18 +10,23 @@
     "frontendDist": "../dist"
   },
   "app": {
+    "security": {
+      "csp": null
+    },
     "windows": [
       {
-        "title": "ChartBuddha",
+        "title": "main",
+        "visible": false,
         "width": 1280,
         "height": 800,
         "resizable": true,
         "fullscreen": false
+      },
+      {
+        "label": "splashscreen",
+        "url": "/splashscreen"
       }
-    ],
-    "security": {
-      "csp": null
-    }
+    ]
   },
   "bundle": {
     "active": true,
@@ -33,5 +38,6 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
-  }
+  },
+  "plugins": {}
 }

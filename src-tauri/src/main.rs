@@ -1,15 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: main
-//!
-//! Main entry point for the ChartBuddha library.
+//! main.rs
 /* ---------------------------------------------------------------------------------------------- */
-//! ### Functions
-//! - `main`
+//! Functions
+//! - main
 /* ---------------------------------------------------------------------------------------------- */
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 fn main() {
-    chartbuddha_lib::run()
+  chartbuddha_lib::run()
 }
 
 /* ---------------------------------------------------------------------------------------------- */

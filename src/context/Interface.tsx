@@ -12,6 +12,9 @@ import { ProductsType } from './coinbase/products/Products';
 
 // Global State Management
 export interface InterfaceType {
+  // Glogal Flags
+  selAppInit: boolean | null;
+  setAppInit: React.Dispatch<React.SetStateAction<boolean | null>>;
   // Global Context
   selPage: string | null;
   setPage: React.Dispatch<React.SetStateAction<string | null>>;

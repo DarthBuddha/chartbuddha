@@ -4,6 +4,8 @@
 
 // React
 import React, { useState } from 'react';
+// Tauri
+import { info } from '@tauri-apps/plugin-log';
 // Components
 import { InterfaceContext } from './InterfaceContext';
 import { PermissionsType } from './coinbase/data_api/permissions/Permissions';
@@ -12,7 +14,9 @@ import { ProductsType } from './coinbase/products/Products';
 /* ---------------------------------------------------------------------------------------------- */
 
 export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Global
+  // Global Flags
+  const [selAppInit, setAppInit] = useState<boolean | null>(null);
+  // Global Context
   const [selPage, setPage] = useState<string | null>(null);
   const [selApi, setApi] = useState<string | null>(null);
   const [selProduct, setProduct] = useState<string | null>(null);
@@ -27,19 +31,22 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [selCoinbaseProduct, setCoinbaseProduct] = useState<ProductsType | null>(null);
 
   // Log initial state
-  console.info('Initial Coinbase API Permissions: ' + JSON.stringify(selCoinbaseApiPermissions));
+  info('Initial Coinbase API Permissions: ' + JSON.stringify(selCoinbaseApiPermissions));
 
   return (
     <InterfaceContext.Provider
       value={{
-        // Global
+        // Global Flags
+        selAppInit,
+        setAppInit,
+        // Global Context
         selPage,
         setPage,
         selApi,
         setApi,
         selProduct,
         setProduct,
-        // Coinbase
+        // API: Coinbase
         selCoinbaseApiKey,
         setCoinbaseApiKey,
         selCoinbaseApiKeySecret,

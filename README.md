@@ -14,9 +14,8 @@ Lets just see if I can get the visizulations working, Than maybe I can Build Cha
 
 #### Tech Stack
 
-- Tauri Framework
-- - Rust Backend
-- - React TypeScript Frontend
-- - PostgreSql Database
+- Rust Backend on a Tauri Framework
+- React TypeScript Frontend
+- PostgreSql Database
 
 ##### ChartBuddha 2025
