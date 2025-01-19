@@ -1,6 +1,6 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! - pages/subscribe/coinbase/SubscribeCoinbaseProductList.tsx
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useCallback, useEffect } from 'react';
@@ -13,7 +13,7 @@ import { ProductsType } from 'context/coinbase/products/Products';
 // CSS Modules
 import Style from './SubscribeCoinbaseProductList.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeCoinbaseProductList: React.FC = () => {
   // State Management
@@ -71,7 +71,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
     return parseFloat(value).toFixed(2);
   };
 
-  /* ---------------------------------------------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------------------------- */
 
   return (
     <div className={Style.Component}>
@@ -112,7 +112,8 @@ const SubscribeCoinbaseProductList: React.FC = () => {
                 </div>
                 <div className={Style.Product_Price}>
                   <div>
-                    Price: <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
+                    Price:{' '}
+                    <span className={getStyleForValue(product.price ?? '')}>{product.price}</span>
                   </div>
                   <div>
                     Change (24h):{' '}
@@ -140,4 +141,4 @@ const SubscribeCoinbaseProductList: React.FC = () => {
 
 export default SubscribeCoinbaseProductList;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

@@ -20,17 +20,31 @@ const Home: React.FC = () => {
         await invoke('initialize_websocket_command');
         info('WebSocket initialized');
       } catch (err) {
-        info(`Failed to initialize WebSocket: ${err instanceof Error ? err.toString() : String(err)}`);
+        info(
+          `Failed to initialize WebSocket: ${err instanceof Error ? err.toString() : String(err)}`,
+        );
       }
     };
 
     initializeWebSocket();
   }, []);
 
+  const stopAllStreams = async () => {
+    try {
+      await invoke('stop_all_active_streams_command');
+      info('All active streams stopped');
+    } catch (err) {
+      info(
+        `Failed to stop all active streams: ${err instanceof Error ? err.toString() : String(err)}`,
+      );
+    }
+  };
+
   return (
     <div className={Style.Home}>
       <div className={Style.Main_Container}>
         <h1>Welcome to ChartBuddha</h1>
+        <button onClick={stopAllStreams}>Stop All Streams</button>
       </div>
     </div>
   );

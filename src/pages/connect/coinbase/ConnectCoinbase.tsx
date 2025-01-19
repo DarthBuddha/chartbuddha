@@ -1,6 +1,6 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! - pages/connect/coinbase/ConnectCoinbase.tsx
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react';
@@ -14,11 +14,11 @@ import { PermissionsType } from 'context/coinbase/data_api/permissions/Permissio
 // CSS Module
 import Style from './ConnectCoinbase.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 const store = await load('app_apis.json');
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 const ConnectCoinbase: React.FC = () => {
   // State Management
@@ -85,7 +85,7 @@ const ConnectCoinbase: React.FC = () => {
     deleteApi();
   };
 
-  /* ---------------------------------------------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------------------------- */
 
   return (
     <div className={Style.Component}>
@@ -95,8 +95,8 @@ const ConnectCoinbase: React.FC = () => {
           <div className={Style.Title}>API Settings</div>
           <div className={Style.Settings_Box}>
             <div className={Style.Settings_Text}>
-              Coinbase requires your API key and secret to connect. You can generate these from the Coinbase Pro
-              website. Make sure to keep your secret key secure.
+              Coinbase requires your API key and secret to connect. You can generate these from the
+              Coinbase Pro website. Make sure to keep your secret key secure.
             </div>
           </div>
         </div>
@@ -106,19 +106,30 @@ const ConnectCoinbase: React.FC = () => {
           <div className={Style.Permission_Box}>
             <div>
               <div className={Style.Permission_Text}>
-                Can View: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.can_view) : 'undefined'}
+                Can View:{' '}
+                {selCoinbaseApiPermissions
+                  ? String(selCoinbaseApiPermissions.can_view)
+                  : 'undefined'}
               </div>
               <div className={Style.Permission_Text}>
-                Can Trade: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.can_trade) : 'undefined'}
+                Can Trade:{' '}
+                {selCoinbaseApiPermissions
+                  ? String(selCoinbaseApiPermissions.can_trade)
+                  : 'undefined'}
               </div>
               <div className={Style.Permission_Text}>
-                Can Transfer: {selCoinbaseApiPermissions ? String(selCoinbaseApiPermissions.can_transfer) : 'undefined'}
+                Can Transfer:{' '}
+                {selCoinbaseApiPermissions
+                  ? String(selCoinbaseApiPermissions.can_transfer)
+                  : 'undefined'}
               </div>
               <div className={Style.Permission_Text}>
-                Portfolio uuid: {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_uuid : ''}
+                Portfolio uuid:{' '}
+                {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_uuid : ''}
               </div>
               <div className={Style.Permission_Text}>
-                Portfolio Type: {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_type : ''}
+                Portfolio Type:{' '}
+                {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_type : ''}
               </div>
             </div>
           </div>
@@ -168,4 +179,4 @@ const ConnectCoinbase: React.FC = () => {
 
 export default ConnectCoinbase;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

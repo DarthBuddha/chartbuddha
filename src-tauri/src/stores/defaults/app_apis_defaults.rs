@@ -1,9 +1,9 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
-//! # stores/defaults/app_apis_defaults.rs
-/* ------------------------------------------------------------------------------------------------------------------ */
-//! ### Functions
+/* ---------------------------------------------------------------------------------------------- */
+//! stores/defaults/app_apis_defaults.rs
+/* ---------------------------------------------------------------------------------------------- */
+//! Functions
 //! - app_apis_defaults
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::collections::HashMap;
@@ -11,25 +11,25 @@ use std::collections::HashMap;
 use serde_json::json;
 use serde_json::Value;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 pub fn app_apis_defaults() -> HashMap<String, Value> {
-    let mut defaults = HashMap::new();
+  let mut defaults = HashMap::new();
 
-    // Binance
-    // defaults.insert(
-    //   "binance".to_string(),
-    //   json!({
-    //     "api_configured": false,
-    //     "api_key": null,
-    //     "api_secret": null
-    //   })
-    // );
+  // Binance
+  // defaults.insert(
+  //   "binance".to_string(),
+  //   json!({
+  //     "api_configured": false,
+  //     "api_key": null,
+  //     "api_secret": null
+  //   })
+  // );
 
-    // Coinbase
-    defaults.insert(
-        "coinbase".to_string(),
-        json!({
+  // Coinbase
+  defaults.insert(
+    "coinbase".to_string(),
+    json!({
           "api_configured": false,
           "api_key": null,
           "api_key_secret": null,
@@ -40,10 +40,10 @@ pub fn app_apis_defaults() -> HashMap<String, Value> {
             "perm_portfolio_type": "",
             "perm_portfolio_uuid": ""
           }
-        }),
-    );
+        })
+  );
 
-    defaults
+  defaults
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

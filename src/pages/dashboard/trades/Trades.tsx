@@ -1,6 +1,6 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! - pages/dashboard/trades/Trades.tsx
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useState, useEffect } from 'react';
@@ -9,7 +9,7 @@ import { listen } from '@tauri-apps/api/event';
 // CSS Modules
 import styles from './Trades.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 type Trade = {
   price: number;
@@ -18,14 +18,14 @@ type Trade = {
   timestamp: string;
 };
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 interface TradesWidgetProps {
   title: string;
   filter: ((trade: Trade) => boolean) | null;
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 const TimeSales: React.FC<TradesWidgetProps> = ({ title, filter }) => {
   const [trades, setTrades] = useState<Trade[]>([]);
@@ -46,14 +46,16 @@ const TimeSales: React.FC<TradesWidgetProps> = ({ title, filter }) => {
   // Apply the filter if provided
   const filteredTrades = filter ? trades.filter(filter) : trades;
 
-  /* ---------------------------------------------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------------------------- */
   return (
     <div className={styles.Widget}>
       <div className={styles.Header}>{title}</div>
       <div className={styles.TradeList}>
         {filteredTrades.map((trade, index) => (
           <div key={index} className={`${styles.TradeRow} ${styles[trade.side]}`}>
-            <span className={styles.Timestamp}>{new Date(trade.timestamp).toLocaleTimeString()}</span>
+            <span className={styles.Timestamp}>
+              {new Date(trade.timestamp).toLocaleTimeString()}
+            </span>
             <span className={styles.Side}>{trade.side}</span>
             <span className={styles.Price}>{trade.price.toFixed(2)}</span>
             <span className={styles.Size}>{trade.size}</span>
@@ -66,4 +68,4 @@ const TimeSales: React.FC<TradesWidgetProps> = ({ title, filter }) => {
 
 export default TimeSales;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

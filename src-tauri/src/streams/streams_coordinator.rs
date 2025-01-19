@@ -1,9 +1,9 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! streams/streams_coordinator.rs
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! Functions
 //! - manage_active_streams
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::error::Error;
@@ -22,12 +22,12 @@ use crate::state::app_state::AppState;
 use crate::apis::coinbase::coinbase_streams::start_coinbase_stream;
 use crate::ws::ws_coordinator::get_app_state_and_db;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 type StreamHandle = JoinHandle<Result<(), Box<dyn Error + Send + Sync>>>;
 
 pub struct StreamsCoordinator {
-  active_streams: Arc<Mutex<HashMap<String, StreamHandle>>>,
+  pub active_streams: Arc<Mutex<HashMap<String, StreamHandle>>>,
 }
 
 impl StreamsCoordinator {
@@ -68,9 +68,9 @@ impl StreamsCoordinator {
           start_coinbase_stream(app_clone.clone(), db, product_id_clone).await
         } else {
           Err(
-            Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Failed to get app state and db")) as Box<
-              dyn Error + Send + Sync
-            >
+            Box::new(
+              std::io::Error::new(std::io::ErrorKind::Other, "Failed to get app state and db")
+            ) as Box<dyn Error + Send + Sync>
           )
         }
       });
@@ -80,6 +80,16 @@ impl StreamsCoordinator {
       info!("Stream for product ID: {} is already active", product_id);
     }
   }
+
+  pub async fn stop_active_stream(&self, product_id: String) {
+    let mut streams = self.active_streams.lock().await;
+    if let Some(handle) = streams.remove(&product_id) {
+      info!("Stopping active stream for product ID: {}", product_id);
+      handle.abort();
+    } else {
+      info!("No active stream found for product ID: {}", product_id);
+    }
+  }
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

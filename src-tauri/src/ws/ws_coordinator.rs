@@ -1,10 +1,10 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! ws/ws_coordinator.rs
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! Functions
 //! - save_to_database
 //! - coordinate_subscriptions
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::error::Error;
@@ -22,7 +22,7 @@ use sea_orm::DatabaseConnection;
 use sea_orm::{ ActiveModelTrait, Set };
 // Dependencies
 use chrono::Utc;
-use log::info;
+use log::{ info, error };
 // Crates
 use crate::state::app_state::AppState;
 use crate::apis::coinbase::coinbase_streams::start_coinbase_stream;
@@ -31,7 +31,7 @@ use crate::db::entities::trades::ActiveModel as TradeActiveModel;
 use crate::db::entities::order_book::ActiveModel as OrderBookActiveModel;
 use crate::streams::streams_coordinator::StreamsCoordinator;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 pub async fn save_to_database(
   db: Arc<tauri::async_runtime::Mutex<DatabaseConnection>>,
@@ -52,7 +52,9 @@ pub async fn save_to_database(
       timestamp: Set(Utc::now().naive_utc()), // Adjust as needed
       ..Default::default()
     };
-    trade.insert(&db_clone).await?; // Use the cloned DatabaseConnection
+    if let Err(e) = trade.insert(&db_clone).await {
+      error!("Failed to save trade to database: {}", e);
+    }
   } else if let Some(order_id) = json_data["order_id"].as_str() {
     let order = OrderBookActiveModel {
       subscription_id: Set(1), // Example subscription ID
@@ -63,22 +65,30 @@ pub async fn save_to_database(
       timestamp: Set(Utc::now().naive_utc()), // Adjust as needed
       ..Default::default()
     };
-    order.insert(&db_clone).await?; // Use the cloned DatabaseConnection
+    if let Err(e) = order.insert(&db_clone).await {
+      error!("Failed to save order to database: {}", e);
+    }
   } else {
     let subscription = ActiveModel {
       product_id: Set("BTC-USD".to_string()),
       created_at: Set(Utc::now().with_timezone(&chrono::FixedOffset::east_opt(0).unwrap())),
-      updated_at: Set(Utc::now().with_timezone(&chrono::FixedOffset::east_opt(0).unwrap()).naive_utc()),
+      updated_at: Set(
+        Utc::now().with_timezone(&chrono::FixedOffset::east_opt(0).unwrap()).naive_utc()
+      ),
       data: Set(data.to_string()),
       ..Default::default()
     };
-    subscription.insert(&db_clone).await?; // Use the cloned DatabaseConnection
+    if let Err(e) = subscription.insert(&db_clone).await {
+      error!("Failed to save subscription to database: {}", e);
+    }
   }
 
   Ok(())
 }
 
-pub async fn get_app_state_and_db(app_handle: AppHandle<Wry>) -> Option<(Arc<Mutex<DatabaseConnection>>, AppState)> {
+pub async fn get_app_state_and_db(
+  app_handle: AppHandle<Wry>
+) -> Option<(Arc<Mutex<DatabaseConnection>>, AppState)> {
   let app_state: State<'_, AppState> = app_handle.state();
   let db_option = app_state.db.lock().await;
   if let Some(db) = &*db_option {
@@ -113,4 +123,16 @@ pub async fn coordinate_subscriptions(
   Ok(())
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+impl StreamsCoordinator {
+  // ...existing code...
+
+  pub async fn stop_all_active_streams(&self) {
+    let mut streams = self.active_streams.lock().await;
+    for (product_id, handle) in streams.drain() {
+      info!("Stopping active stream for product ID: {}", product_id);
+      handle.abort();
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------- */

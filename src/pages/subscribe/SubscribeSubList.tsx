@@ -1,6 +1,6 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! - pages/subscribe/SubscribeSubList.tsx
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useEffect, useState } from 'react';
@@ -13,19 +13,21 @@ import { ProductsType } from 'context/coinbase/products/Products';
 // CSS Modules
 import Style from './SubscribeSubList.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Load Tauri Store
 const store_app_subscriptions = await load('app_subscriptions.json');
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeSubList: React.FC = () => {
   // State Management
   const { setApi, setCoinbaseProduct } = useInterfaceContext();
 
   // Store Management
-  const [selectedApiListStore, setSelectedApiListStore] = useState<{ api: string; product: string }[]>([]);
+  const [selectedApiListStore, setSelectedApiListStore] = useState<
+    { api: string; product: string }[]
+  >([]);
 
   // Load Keys
   useEffect(() => {
@@ -38,9 +40,9 @@ const SubscribeSubList: React.FC = () => {
       const apis = ['binance', 'coinbase']; // Add more APIs as needed
       const configuredApis: { api: string; product: string }[] = [];
 
-      const appSubscriptions = await store_app_subscriptions.get<{ [key: string]: { product_id: string }[] }>(
-        'app_subscriptions',
-      );
+      const appSubscriptions = await store_app_subscriptions.get<{
+        [key: string]: { product_id: string }[];
+      }>('app_subscriptions');
       if (appSubscriptions) {
         for (const api of apis) {
           const apiData = appSubscriptions[api];
@@ -75,7 +77,7 @@ const SubscribeSubList: React.FC = () => {
     }
   };
 
-  /* ---------------------------------------------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------------------------- */
   return (
     <div className={Style.List_Container}>
       <div className={Style.Title_Bar}>Subscriptions</div>
@@ -84,7 +86,11 @@ const SubscribeSubList: React.FC = () => {
           <div className={Style.Row}>Your Subscription List.</div>
         ) : (
           selectedApiListStore.map(({ api, product }) => (
-            <div key={`${api}-${product}`} className={Style.Row} onClick={() => handleClick(api, product)}>
+            <div
+              key={`${api}-${product}`}
+              className={Style.Row}
+              onClick={() => handleClick(api, product)}
+            >
               {`${api.charAt(0).toUpperCase() + api.slice(1)} - ${product}`}
             </div>
           ))
@@ -96,4 +102,4 @@ const SubscribeSubList: React.FC = () => {
 
 export default SubscribeSubList;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

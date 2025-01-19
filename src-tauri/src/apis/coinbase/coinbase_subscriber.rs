@@ -1,9 +1,9 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! apis/coinbase/coinbase_subscriber.rs
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! Functions
 //! - subscribe_to_coinbase
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::sync::Arc;
@@ -12,8 +12,6 @@ use log::info;
 use tauri::AppHandle;
 use tauri::Emitter;
 use tauri::Manager;
-// use tauri::StateManager;
-// use tauri::State;
 use tauri::Wry;
 // Dependencies
 use tokio_tungstenite::connect_async;
@@ -22,12 +20,10 @@ use futures_util::{ SinkExt, StreamExt };
 use serde_json::json;
 use sea_orm::DatabaseConnection;
 // Crates
-use crate::apis::coinbase::coinbase_authenticator::Authenticator;
-use crate::apis::coinbase::coinbase_authenticator::use_authenticator;
 use crate::ws::ws_coordinator::save_to_database;
 // use crate::AppState;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 pub async fn subscribe_to_coinbase(
   app_handle: AppHandle<Wry>,
@@ -38,17 +34,13 @@ pub async fn subscribe_to_coinbase(
   let (ws_stream, _) = connect_async(url).await?;
   let (mut write, mut read) = ws_stream.split();
 
-  // Authenticate and generate JWT
-  let authenticator = Authenticator { request_method: "GET".to_string(), request_path: "/".to_string() };
-  let jwt = use_authenticator(app_handle.clone(), &authenticator).await?;
-
   // Subscribe to the product
   let subscribe_message =
     json!({
         "type": "subscribe",
         "product_ids": [product_id],
-        "channel": "ticker",
-        "jwt": jwt
+        "channel": "ticker"
+        // "jwt": jwt // Commented out as JWT is not needed for public channels
     });
   write.send(Message::Text(subscribe_message.to_string().into())).await?;
   info!("Subscribed to Coinbase WebSocket for product ID: {}", product_id);
@@ -74,4 +66,4 @@ pub async fn subscribe_to_coinbase(
   Ok(())
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

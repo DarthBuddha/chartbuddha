@@ -1,6 +1,6 @@
-// ------------------------------------------------------------------------------------------------------------------ //
+// ---------------------------------------------------------------------------------------------- //
 //! - pages/subscribe/coinbase/SubscribeCoinbaseProduct.tsx
-// ------------------------------------------------------------------------------------------------------------------ //
+// ---------------------------------------------------------------------------------------------- //
 
 // React
 import React from 'react';
@@ -13,7 +13,7 @@ import { useInterfaceContext } from 'context/InterfaceContext';
 // CSS Modules
 import Style from './SubscribeCoinbaseProduct.module.css';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeCoinbaseProduct: React.FC = () => {
   // State Management
@@ -78,7 +78,11 @@ const SubscribeCoinbaseProduct: React.FC = () => {
         <button type="button" className={Style.Subscribe_Button} onClick={buttonClick_Subscribe}>
           Subscribe to Product
         </button>
-        <button type="button" className={Style.UnSubscribe_Button} onClick={buttonClick_UnSubscribe}>
+        <button
+          type="button"
+          className={Style.UnSubscribe_Button}
+          onClick={buttonClick_UnSubscribe}
+        >
           UnSubscribe to Product
         </button>
       </div>
@@ -88,4 +92,4 @@ const SubscribeCoinbaseProduct: React.FC = () => {
 
 export default SubscribeCoinbaseProduct;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

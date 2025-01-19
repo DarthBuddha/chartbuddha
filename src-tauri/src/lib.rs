@@ -1,9 +1,9 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! lib.rs
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! Functions
 //! - run
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 // use std::sync::Arc;
@@ -22,10 +22,10 @@ pub mod streams;
 pub mod ws;
 // Crates
 use crate::state::app_state::AppState;
-use crate::db::initialize_db::initialize_database;
-use crate::stores::init_stores::initialize_stores;
+use crate::db::init_database::init_database;
+use crate::stores::init_stores::init_stores;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Main entry point for the ChartBuddha library
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -46,7 +46,11 @@ pub fn run() {
         // .clear_targets()
         .format(|out, message, record| {
           let target = record.target();
-          let shortened_target = if let Some(pos) = target.find("src/") { &target[pos..] } else { target };
+          let shortened_target = if let Some(pos) = target.find("src/") {
+            &target[pos..]
+          } else {
+            target
+          };
           out.finish(format_args!("[{}][{}]\n{}\n", record.level(), shortened_target, message))
         })
         .build()
@@ -57,15 +61,16 @@ pub fn run() {
         commands::connect::coinbase_store_api_keys::coinbase_store_api_keys,
         commands::subscribe::coinbase_products_list::coinbase_products_list,
         commands::subscribe::coinbase_subscribe::coinbase_subscribe,
-        commands::websocket::initialize_websocket_command::initialize_websocket_command
+        commands::websocket::websocket_cmd::init_websocket_cmd,
+        commands::websocket::websocket_cmd::stop_all_active_streams_cmd
       ]
     )
     // Setup Tauri Application
     .setup(|app| {
       let app_state = AppState::default();
       app.manage(app_state);
-      initialize_stores(app.handle().clone())?;
-      tauri::async_runtime::block_on(initialize_database())?;
+      init_stores(app.handle().clone())?;
+      tauri::async_runtime::block_on(init_database())?;
       info!("Database initialized successfully");
       Ok(())
     })
@@ -74,4 +79,4 @@ pub fn run() {
     .expect("error while running tauri application");
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

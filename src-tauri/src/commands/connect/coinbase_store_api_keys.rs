@@ -1,9 +1,9 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! commands/coinbase/connect/store_api_keys.rs
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! Functions
 //! - store_api_keys
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
 use tauri::{ AppHandle, Wry };
@@ -18,7 +18,7 @@ use crate::commands::connect::common::convert_api_secret::convert_api_secret;
 use crate::apis::coinbase::coinbase_authenticator::Authenticator;
 use crate::apis::coinbase::data_api::api_key_permissions::api_key_permissions::ApiKeyPermissions;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Store the API keys in the app_apis store and get API key permissions
 #[tauri::command]
@@ -115,7 +115,9 @@ pub async fn coinbase_store_api_keys(
         }
       } else {
         let status = resp.status();
-        let error_body = resp.text().await.unwrap_or_else(|_| "Unable to read error body".to_string());
+        let error_body = resp
+          .text().await
+          .unwrap_or_else(|_| "Unable to read error body".to_string());
         log::error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
         Err(format!("Failed with status code: {:?}", status))
       }
@@ -129,4 +131,4 @@ pub async fn coinbase_store_api_keys(
   api_permissions_response
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

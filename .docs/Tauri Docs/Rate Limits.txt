@@ -1,0 +1,31 @@
+Advanced Trade WebSocket Rate Limits
+
+The WebSocket feed is publicly available and its real-time market data updates provide the fastest insight into order flow and trades.
+
+    Advanced Trade API WebSocket connections are rate-limited at 750 per second per IP address.
+
+    Advanced Trade API WebSocket unauthenticated messages are rate-limited at 8 per second per IP address.
+
+
+
+Info
+
+You are responsible for reading the message stream and using the messages relevant for your needs, such as building real-time order books and tracking real-time trades.
+
+
+
+Advanced Trade WebSocket Best Practices
+
+Some WebSocket best practices are:
+
+    Remember WebSocket rate limits.
+
+    Spread subscriptions over more than one WebSocket client connection. For example, do not subscribe to BTC-USD and ETH-USD on the same channel if possible. Instead, open up two separate WebSocket connections to help load balance those inbound messages across separate connections.
+
+    Connected clients should increase their web socket receive buffer to the largest configurable amount possible (given any client library or infrastructure limitations), due to the potential volume of data for any given product.
+
+    Use alternative batch channels (such as ticker_batch instead of ticker) which deliver a batched version of the respective data on a set interval reducing overall traffic.
+
+    Use heartbeats channel to keep your connection alive. Subscribing to the heartbeats channel alongside other channels ensures that all subscriptions remain open. This is useful, for example, when fetching marketdata for illiquid pairs.
+
+    Subscribe to user channel and futures balance summary channel with the advanced-trade-ws-user in order to minimize the connection timeouts. If advanced-trade-ws-user is your primary connection, we recommend using advanced-trade-ws as a failover.

@@ -1,10 +1,9 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # initialize_stores.rs
-//!
-//! Initialize the Tauri Store Interface.
+//! # stores/init_stores.rs
+
 /* ---------------------------------------------------------------------------------------------- */
-//! ### Functions
-//! - initialize_store
+//! Functions
+//! - init_store
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -20,7 +19,7 @@ use crate::stores::defaults::app_subscriptions_defaults::app_subscriptions_defau
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn initialize_stores(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
+pub fn init_stores(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   // App: Apis Store Initialization
   info!("Initialize App Apis Store...");
   let store_app_apis = tauri_plugin_store::StoreBuilder

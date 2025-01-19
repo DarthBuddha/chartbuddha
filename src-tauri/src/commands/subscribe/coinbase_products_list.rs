@@ -1,9 +1,9 @@
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! commands/coinbase/subscribe/list_products.rs
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 //! Functions
 //! - list_products
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
 use tauri::{ AppHandle, Wry };
@@ -17,11 +17,14 @@ use crate::apis::coinbase::coinbase_authenticator::use_authenticator;
 use crate::apis::coinbase::coinbase_authenticator::Authenticator;
 use crate::apis::coinbase::products::list_products::ListProductsResponse;
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */
 
 /// Store the API keys in the app_apis store and get API key permissions
 #[tauri::command]
-pub async fn coinbase_products_list(app_handle: AppHandle<Wry>, product_type: String) -> Result<String, String> {
+pub async fn coinbase_products_list(
+  app_handle: AppHandle<Wry>,
+  product_type: String
+) -> Result<String, String> {
   log::info!("Command: products_list\n
     product_type: {}", product_type);
 
@@ -41,7 +44,10 @@ pub async fn coinbase_products_list(app_handle: AppHandle<Wry>, product_type: St
   // TODO: products_list type logic for request path
 
   // Create an instance of Authenticator with correct request method and path
-  let authenticator = Authenticator { request_method: "GET".to_string(), request_path: request_path.to_string() };
+  let authenticator = Authenticator {
+    request_method: "GET".to_string(),
+    request_path: request_path.to_string(),
+  };
 
   // Generate JWT Token with the Authenticator
   let jwt_token = match use_authenticator(app_handle.clone(), &authenticator).await {
@@ -89,7 +95,9 @@ pub async fn coinbase_products_list(app_handle: AppHandle<Wry>, product_type: St
         }
       } else {
         let status = resp.status();
-        let error_body = resp.text().await.unwrap_or_else(|_| "Unable to read error body".to_string());
+        let error_body = resp
+          .text().await
+          .unwrap_or_else(|_| "Unable to read error body".to_string());
         log::error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
         Err(format!("Failed with status code: {:?}", status))
       }
@@ -103,4 +111,4 @@ pub async fn coinbase_products_list(app_handle: AppHandle<Wry>, product_type: St
   products_list_response
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------- */

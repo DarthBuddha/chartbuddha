@@ -1,0 +1,550 @@
+tauri
+Struct AppHandle
+Settings
+Help
+Source
+
+pub struct AppHandle<R: Runtime = Wry> { /* private fields */ }
+
+A handle to the currently running application.
+
+This type implements Manager which allows for manipulation of global application items.
+Implementations
+Source
+impl AppHandle<Wry>
+
+APIs specific to the wry runtime.
+Source
+pub fn create_tao_window<F: FnOnce() -> (String, TaoWindowBuilder) + Send + 'static>(
+    &self,
+    f: F,
+) -> Result<Weak<Window>>
+
+Create a new tao window using a callback. The event loop must be running at this point.
+Source
+pub fn send_tao_window_event(
+    &self,
+    window_id: TaoWindowId,
+    message: WindowMessage,
+) -> Result<()>
+
+Sends a window message to the event loop.
+Source
+impl<R: Runtime> AppHandle<R>
+Source
+pub fn run_on_main_thread<F: FnOnce() + Send + 'static>(
+    &self,
+    f: F,
+) -> Result<()>
+
+Runs the given closure on the main thread.
+Source
+pub fn plugin<P: Plugin<R> + 'static>(&self, plugin: P) -> Result<()>
+
+Adds a Tauri application plugin. This function can be used to register a plugin that is loaded dynamically e.g. after login. For plugins that are created when the app is started, prefer Builder::plugin.
+
+See Builder::plugin for more information.
+Examples
+
+use tauri::{plugin::{Builder as PluginBuilder, TauriPlugin}, Runtime};
+
+fn init_plugin<R: Runtime>() -> TauriPlugin<R> {
+  PluginBuilder::new("dummy").build()
+}
+
+tauri::Builder::default()
+  .setup(move |app| {
+    let handle = app.handle().clone();
+    std::thread::spawn(move || {
+      handle.plugin(init_plugin());
+    });
+
+    Ok(())
+  });
+
+Source
+pub fn remove_plugin(&self, plugin: &'static str) -> bool
+
+Removes the plugin with the given name.
+Examples
+
+use tauri::{plugin::{Builder as PluginBuilder, TauriPlugin, Plugin}, Runtime};
+
+fn init_plugin<R: Runtime>() -> TauriPlugin<R> {
+  PluginBuilder::new("dummy").build()
+}
+
+let plugin = init_plugin();
+// `.name()` requires the `PLugin` trait import
+let plugin_name = plugin.name();
+tauri::Builder::default()
+  .plugin(plugin)
+  .setup(move |app| {
+    let handle = app.handle().clone();
+    std::thread::spawn(move || {
+      handle.remove_plugin(plugin_name);
+    });
+
+    Ok(())
+  });
+
+Source
+pub fn exit(&self, exit_code: i32)
+
+Exits the app by triggering RunEvent::ExitRequested and RunEvent::Exit.
+Source
+pub fn restart(&self) -> !
+
+Restarts the app by triggering RunEvent::ExitRequested with code [RESTART_EXIT_CODE] and RunEvent::Exit..
+Source
+impl<R: Runtime> AppHandle<R>
+Source
+pub fn on_menu_event<F: Fn(&AppHandle<R>, MenuEvent) + Send + Sync + 'static>(
+    &self,
+    handler: F,
+)
+
+Registers a global menu event listener.
+Source
+pub fn on_tray_icon_event<F: Fn(&AppHandle<R>, TrayIconEvent) + Send + Sync + 'static>(
+    &self,
+    handler: F,
+)
+Available on desktop and crate feature tray-icon only.
+
+Registers a global tray icon menu event listener.
+Source
+pub fn tray_by_id<'a, I>(&self, id: &'a I) -> Option<TrayIcon<R>>
+where
+    I: ?Sized,
+    TrayIconId: PartialEq<&'a I>,
+Available on desktop and crate feature tray-icon only.
+
+Gets a tray icon using the provided id.
+Source
+pub fn remove_tray_by_id<'a, I>(&self, id: &'a I) -> Option<TrayIcon<R>>
+where
+    I: ?Sized,
+    TrayIconId: PartialEq<&'a I>,
+Available on desktop and crate feature tray-icon only.
+
+Removes a tray icon using the provided id from tauri’s internal state and returns it.
+
+Note that dropping the returned icon, may cause the tray icon to disappear if it wasn’t cloned somewhere else or referenced by JS.
+Source
+pub fn config(&self) -> &Config
+
+Gets the app’s configuration, defined on the tauri.conf.json file.
+Source
+pub fn package_info(&self) -> &PackageInfo
+
+Gets the app’s package information.
+Source
+pub fn asset_resolver(&self) -> AssetResolver<R>
+
+The application’s asset resolver.
+Source
+pub fn primary_monitor(&self) -> Result<Option<Monitor>>
+
+Returns the primary monitor of the system.
+
+Returns None if it can’t identify any monitor as a primary one.
+Source
+pub fn monitor_from_point(&self, x: f64, y: f64) -> Result<Option<Monitor>>
+
+Returns the monitor that contains the given point.
+Source
+pub fn available_monitors(&self) -> Result<Vec<Monitor>>
+
+Returns the list of all the monitors available on the system.
+Source
+pub fn cursor_position(&self) -> Result<PhysicalPosition<f64>>
+
+Get the cursor position relative to the top-left hand corner of the desktop.
+
+Note that the top-left hand corner of the desktop is not necessarily the same as the screen. If the user uses a desktop with multiple monitors, the top-left hand corner of the desktop is the top-left hand corner of the main monitor on Windows and macOS or the top-left of the leftmost monitor on X11.
+
+The coordinates can be negative if the top-left hand corner of the window is outside of the visible screen region.
+Source
+pub fn set_theme(&self, theme: Option<Theme>)
+
+Set the app theme.
+Source
+pub fn default_window_icon(&self) -> Option<&Image<'_>>
+
+Returns the default window icon.
+Source
+pub fn menu(&self) -> Option<Menu<R>>
+
+Returns the app-wide menu.
+Source
+pub fn set_menu(&self, menu: Menu<R>) -> Result<Option<Menu<R>>>
+
+Sets the app-wide menu and returns the previous one.
+
+If a window was not created with an explicit menu or had one set explicitly, this menu will be assigned to it.
+Source
+pub fn remove_menu(&self) -> Result<Option<Menu<R>>>
+
+Remove the app-wide menu and returns it.
+
+If a window was not created with an explicit menu or had one set explicitly, this will remove the menu from it.
+Source
+pub fn hide_menu(&self) -> Result<()>
+
+Hides the app-wide menu from windows that have it.
+
+If a window was not created with an explicit menu or had one set explicitly, this will hide the menu from it.
+Source
+pub fn show_menu(&self) -> Result<()>
+
+Shows the app-wide menu for windows that have it.
+
+If a window was not created with an explicit menu or had one set explicitly, this will show the menu for it.
+Source
+pub fn cleanup_before_exit(&self)
+
+Runs necessary cleanup tasks before exiting the process. You should always exit the tauri app immediately after this function returns and not use any tauri-related APIs.
+Source
+pub fn invoke_key(&self) -> &str
+
+Gets the invoke key that must be referenced when using crate::webview::InvokeRequest.
+Security
+
+DO NOT expose this key to third party scripts as might grant access to the backend from external URLs and iframes.
+Trait Implementations
+Source
+impl<R: Runtime> Clone for AppHandle<R>
+Source
+fn clone(&self) -> Self
+Returns a copy of the value. Read more
+1.0.0 · Source
+fn clone_from(&mut self, source: &Self)
+Performs copy-assignment from source. Read more
+Source
+impl<'de, R: Runtime> CommandArg<'de, R> for AppHandle<R>
+Source
+fn from_command(command: CommandItem<'de, R>) -> Result<Self, InvokeError>
+
+Grabs the Window from the CommandItem and returns the associated AppHandle. This will never fail.
+Source
+impl<R: Debug + Runtime> Debug for AppHandle<R>
+where
+    R::Handle: Debug,
+Source
+fn fmt(&self, f: &mut Formatter<'_>) -> Result
+Formats the value using the given formatter. Read more
+Source
+impl<R: Runtime> Emitter<R> for AppHandle<R>
+Source
+fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()>
+
+Emits an event to all targets.
+Examples
+
+use tauri::Emitter;
+
+#[tauri::command]
+fn synchronize(app: tauri::AppHandle) {
+  // emits the synchronized event to all webviews
+  app.emit("synchronized", ());
+}
+
+Source
+fn emit_to<I, S>(&self, target: I, event: &str, payload: S) -> Result<()>
+where
+    I: Into<EventTarget>,
+    S: Serialize + Clone,
+
+Emits an event to all targets matching the given target.
+Examples
+
+use tauri::{Emitter, EventTarget};
+
+#[tauri::command]
+fn download(app: tauri::AppHandle) {
+  for i in 1..100 {
+    std::thread::sleep(std::time::Duration::from_millis(150));
+    // emit a download progress event to all listeners
+    app.emit_to(EventTarget::any(), "download-progress", i);
+    // emit an event to listeners that used App::listen or AppHandle::listen
+    app.emit_to(EventTarget::app(), "download-progress", i);
+    // emit an event to any webview/window/webviewWindow matching the given label
+    app.emit_to("updater", "download-progress", i); // similar to using EventTarget::labeled
+    app.emit_to(EventTarget::labeled("updater"), "download-progress", i);
+    // emit an event to listeners that used WebviewWindow::listen
+    app.emit_to(EventTarget::webview_window("updater"), "download-progress", i);
+  }
+}
+
+Source
+fn emit_filter<S, F>(&self, event: &str, payload: S, filter: F) -> Result<()>
+where
+    S: Serialize + Clone,
+    F: Fn(&EventTarget) -> bool,
+
+Emits an event to all targets based on the given filter.
+Examples
+
+use tauri::{Emitter, EventTarget};
+
+#[tauri::command]
+fn download(app: tauri::AppHandle) {
+  for i in 1..100 {
+    std::thread::sleep(std::time::Duration::from_millis(150));
+    // emit a download progress event to the updater window
+    app.emit_filter("download-progress", i, |t| match t {
+      EventTarget::WebviewWindow { label } => label == "main",
+      _ => false,
+    });
+  }
+}
+
+Source
+impl<R: Runtime> FunctionArg for AppHandle<R>
+Source
+fn to_datatype(_: &mut TypeMap) -> Option<DataType>
+Gets the type of an argument as a DataType. Read more
+Source
+impl<R: Runtime> HasDisplayHandle for AppHandle<R>
+Source
+fn display_handle(&self) -> Result<DisplayHandle<'_>, HandleError>
+Get a handle to the display controller of the windowing system.
+Source
+impl<R: Runtime> Listener<R> for AppHandle<R>
+Source
+fn listen<F>(&self, event: impl Into<String>, handler: F) -> EventId
+where
+    F: Fn(Event) + Send + 'static,
+
+Listen to an event on this app.
+Examples
+
+use tauri::Listener;
+
+tauri::Builder::default()
+  .setup(|app| {
+    app.listen("component-loaded", move |event| {
+      println!("window just loaded a component");
+    });
+
+    Ok(())
+  });
+
+Source
+fn once<F>(&self, event: impl Into<String>, handler: F) -> EventId
+where
+    F: FnOnce(Event) + Send + 'static,
+
+Listen to an event on this app only once.
+
+See Self::listen for more information.
+Source
+fn unlisten(&self, id: EventId)
+
+Unlisten to an event on this app.
+Examples
+
+use tauri::Listener;
+
+tauri::Builder::default()
+  .setup(|app| {
+    let handler = app.listen("component-loaded", move |event| {
+      println!("app just loaded a component");
+    });
+
+    // stop listening to the event when you do not need it anymore
+    app.unlisten(handler);
+
+    Ok(())
+  });
+
+Source
+fn listen_any<F>(&self, event: impl Into<String>, handler: F) -> EventId
+where
+    F: Fn(Event) + Send + 'static,
+Listen to an emitted event to any target. Read more
+Source
+fn once_any<F>(&self, event: impl Into<String>, handler: F) -> EventId
+where
+    F: FnOnce(Event) + Send + 'static,
+Listens once to an emitted event to any target . Read more
+Source
+impl<R: Runtime> Manager<R> for AppHandle<R>
+Source
+fn resources_table(&self) -> MutexGuard<'_, ResourceTable>
+Get a reference to the resources table of this manager.
+Source
+fn app_handle(&self) -> &AppHandle<R>
+The application handle associated with this manager.
+Source
+fn config(&self) -> &Config
+The Config the manager was created with.
+Source
+fn package_info(&self) -> &PackageInfo
+The PackageInfo the manager was created with.
+Source
+fn get_window(&self, label: &str) -> Option<Window<R>>
+Available on crate feature unstable only.
+Fetch a single window from the manager.
+Source
+fn get_focused_window(&self) -> Option<Window<R>>
+Available on crate feature unstable only.
+Fetch the focused window. Returns None if there is not any focused window.
+Source
+fn windows(&self) -> HashMap<String, Window<R>>
+Available on crate feature unstable only.
+Fetch all managed windows.
+Source
+fn get_webview(&self, label: &str) -> Option<Webview<R>>
+Available on crate feature unstable only.
+Fetch a single webview from the manager.
+Source
+fn webviews(&self) -> HashMap<String, Webview<R>>
+Available on crate feature unstable only.
+Fetch all managed webviews.
+Source
+fn get_webview_window(&self, label: &str) -> Option<WebviewWindow<R>>
+Fetch a single webview window from the manager.
+Source
+fn webview_windows(&self) -> HashMap<String, WebviewWindow<R>>
+Fetch all managed webview windows.
+Source
+fn manage<T>(&self, state: T) -> bool
+where
+    T: Send + Sync + 'static,
+Add state to the state managed by the application. Read more
+Source
+fn unmanage<T>(&self) -> Option<T>
+where
+    T: Send + Sync + 'static,
+Removes the state managed by the application for T. Returns the state if it was actually removed.
+Source
+fn state<T>(&self) -> State<'_, T> ⓘ
+where
+    T: Send + Sync + 'static,
+Retrieves the managed state for the type T. Read more
+Source
+fn try_state<T>(&self) -> Option<State<'_, T>>
+where
+    T: Send + Sync + 'static,
+Attempts to retrieve the managed state for the type T. Read more
+Source
+fn env(&self) -> Env
+Gets the managed Env.
+Source
+fn asset_protocol_scope(&self) -> Scope
+Gets the scope for the asset protocol.
+Source
+fn path(&self) -> &PathResolver<R>
+The path resolver.
+Source
+fn add_capability(&self, capability: impl RuntimeCapability) -> Result<()>
+Adds a capability to the app. Read more
+Auto Trait Implementations
+impl<R> Freeze for AppHandle<R>
+where
+    <R as Runtime<EventLoopMessage>>::Handle: Freeze,
+impl<R = Wry<EventLoopMessage>> !RefUnwindSafe for AppHandle<R>
+impl<R> Send for AppHandle<R>
+impl<R> Sync for AppHandle<R>
+impl<R> Unpin for AppHandle<R>
+where
+    <R as Runtime<EventLoopMessage>>::Handle: Unpin,
+impl<R = Wry<EventLoopMessage>> !UnwindSafe for AppHandle<R>
+Blanket Implementations
+Source
+impl<T> Any for T
+where
+    T: 'static + ?Sized,
+Source
+fn type_id(&self) -> TypeId
+Gets the TypeId of self. Read more
+Source
+impl<T> Borrow<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow(&self) -> &T
+Immutably borrows from an owned value. Read more
+Source
+impl<T> BorrowMut<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow_mut(&mut self) -> &mut T
+Mutably borrows from an owned value. Read more
+Source
+impl<T> CloneToUninit for T
+where
+    T: Clone,
+Source
+unsafe fn clone_to_uninit(&self, dst: *mut u8)
+🔬This is a nightly-only experimental API. (clone_to_uninit)
+Performs copy-assignment from self to dst. Read more
+Source
+impl<T> From<T> for T
+Source
+fn from(t: T) -> T
+
+Returns the argument unchanged.
+Source
+impl<T> HasRawDisplayHandle for T
+where
+    T: HasDisplayHandle + ?Sized,
+Source
+fn raw_display_handle(&self) -> Result<RawDisplayHandle, HandleError>
+👎Deprecated: Use HasDisplayHandle instead
+Source
+impl<T, U> Into<U> for T
+where
+    U: From<T>,
+Source
+fn into(self) -> U
+
+Calls U::from(self).
+
+That is, this conversion is whatever the implementation of From<T> for U chooses to do.
+Source
+impl<T> ToOwned for T
+where
+    T: Clone,
+Source
+type Owned = T
+The resulting type after obtaining ownership.
+Source
+fn to_owned(&self) -> T
+Creates owned data from borrowed data, usually by cloning. Read more
+Source
+fn clone_into(&self, target: &mut T)
+Uses borrowed data to replace owned data, usually by cloning. Read more
+Source
+impl<T, U> TryFrom<U> for T
+where
+    U: Into<T>,
+Source
+type Error = Infallible
+The type returned in the event of a conversion error.
+Source
+fn try_from(value: U) -> Result<T, <T as TryFrom<U>>::Error>
+Performs the conversion.
+Source
+impl<T, U> TryInto<U> for T
+where
+    U: TryFrom<T>,
+Source
+type Error = <U as TryFrom<T>>::Error
+The type returned in the event of a conversion error.
+Source
+fn try_into(self) -> Result<U, <U as TryFrom<T>>::Error>
+Performs the conversion.
+Source
+impl<T> ErasedDestructor for T
+where
+    T: 'static,
+Source
+impl<T> MaybeSendSync for T
+Source
+impl<T> UserEvent for T
+where
+    T: Debug + Clone + Send + 'static,
