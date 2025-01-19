@@ -13,20 +13,30 @@
     "security": {
       "csp": null,
       "capabilities": [
-        "default",
+        "main",
+        "splash",
         "desktop-capability"
       ]
     },
     "windows": [
       {
+        "title": "ChartBuddha: Main",
         "label": "main",
-        // "url": "/index.html",
+        "url": "/index.html",
         "visible": false,
-        "transparent": true
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "transparent": false,
+        "fullscreen": false,
+        "alwaysOnTop": false,
+        "decorations": true
       },
       {
-        "label": "splashscreen",
-        "url": "/splashscreen.html"
+        "title": "ChartBuddha: Splash",
+        "label": "splash",
+        "url": "/splash.html",
+        "visible": true
       }
     ]
   },

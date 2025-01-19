@@ -1,12 +1,8 @@
 {
-  "identifier": "desktop-capability",
-  "platforms": [
-    "macOS",
-    "windows",
-    "linux"
-  ],
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "splash",
+  "description": "Capability for the splash window",
   "windows": [
-    "main",
     "splash"
   ],
   "permissions": [
