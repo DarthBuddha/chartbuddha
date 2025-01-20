@@ -1,13 +1,23 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! app/setup/setup_state.rs
-/* ---------------------------------------------------------------------------------------------- */
-//! Structs
-//! - SetupState
+//! - main_window.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
-pub struct SetupState {
-  pub frontend_task: bool,
-  pub backend_task: bool,
-}
+// React
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+// Component
+import Main from './Main';
+// Context
+import { InterfaceProvider } from 'context/InterfaceProvider';
+
+/* ---------------------------------------------------------------------------------------------- */
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <InterfaceProvider>
+      <Main />
+    </InterfaceProvider>
+  </React.StrictMode>,
+);
 
 /* ---------------------------------------------------------------------------------------------- */

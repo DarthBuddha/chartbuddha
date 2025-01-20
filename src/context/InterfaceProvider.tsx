@@ -5,7 +5,7 @@
 // React
 import React, { useState } from 'react';
 // Tauri
-import { info } from '@tauri-apps/plugin-log';
+// import { info } from '@tauri-apps/plugin-log';
 // Components
 import { InterfaceContext } from './InterfaceContext';
 import { PermissionsType } from './coinbase/data_api/permissions/Permissions';
@@ -31,7 +31,7 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [selCoinbaseProduct, setCoinbaseProduct] = useState<ProductsType | null>(null);
 
   // Log initial state
-  info('Initial Coinbase API Permissions: ' + JSON.stringify(selCoinbaseApiPermissions));
+  // info('Initial Coinbase API Permissions: ' + JSON.stringify(selCoinbaseApiPermissions));
 
   return (
     <InterfaceContext.Provider

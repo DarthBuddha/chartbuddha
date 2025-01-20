@@ -1,61 +1,65 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Main.tsx
+//! - Index.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-// Tauri
-import { info } from '@tauri-apps/plugin-log';
-import { invoke } from '@tauri-apps/api/core';
-import { listen } from '@tauri-apps/api/event';
-// Index
-import Index from './Index';
-// Interface
-import { InterfaceProvider } from 'context/InterfaceProvider';
+import React from 'react';
+// Components: MenuBar, StatusBar
+import MenuBar from './components/menubar/MenuBar';
+import StatusBar from './components/statusbar/StatusBar';
+// Components
+import Analyze from './pages/analyze/Analyze';
+import Dashboard from './pages/dashboard/Dashboard';
+import Connect from './pages/connect/Connect';
+import Home from './pages/home/Home';
+import News from './pages/news/News';
+import Profile from './pages/profile/Profile';
+import Subscribe from './pages/subscribe/Subscribe';
+// Context
+import { useInterfaceContext } from 'context/InterfaceContext';
+// CSS Module
+import Style from './Main.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <InterfaceProvider>
-      <Index />
-    </InterfaceProvider>
-  </StrictMode>,
-);
+const Main: React.FC = () => {
+  // State Management
+  const { selPage } = useInterfaceContext();
 
-// Utility function to implement a sleep function in TypeScript
-function sleep(seconds: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
-}
+  const renderPage = () => {
+    switch (selPage) {
+      case 'analyze':
+        return <Analyze />;
+      case 'dashboard':
+        return <Dashboard />;
+      case 'connect':
+        return <Connect />;
+      case 'home':
+        return <Home />;
+      case 'news':
+        return <News />;
+      case 'profile':
+        return <Profile />;
+      case 'subscribe':
+        return <Subscribe />;
+      default:
+        return <Home />;
+    }
+  };
 
-// Setup function
-async function setup() {
-  try {
-    info('Starting frontend setup...');
-    // Fake perform some really heavy setup task
-    info('Performing really heavy frontend setup task...');
-    await sleep(3);
-    info('Frontend setup task complete!');
-    // Set the frontend task as being completed
-    await invoke('cmd_app_setup', { task: 'frontend' });
-    info('Frontend setup marked as complete.');
-  } catch (err) {
-    info(`Setup failed: ${err instanceof Error ? err.toString() : String(err)}`);
-  }
-}
+  return (
+    <div className={Style.Main_Window}>
+      <div className={Style.MenuBar_Component}>
+        <MenuBar />
+      </div>
+      <div className={Style.Page_Component}>{renderPage()}</div>
+      <div className={Style.StatusBar_Component}>
+        <StatusBar />
+      </div>
+    </div>
+  );
+};
 
-// Listen for the backend setup completion event
-listen('backend-setup-complete', async () => {
-  info('Backend setup complete event received.');
-  // Perform any additional frontend setup tasks here
-  await setup();
-  info('Setup Complete.');
-});
-
-// Effectively a JavaScript main function
-window.addEventListener('DOMContentLoaded', () => {
-  setup();
-});
+export default Main;
 
 /* ---------------------------------------------------------------------------------------------- */
