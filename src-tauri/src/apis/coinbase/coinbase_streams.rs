@@ -22,7 +22,7 @@ use tokio_tungstenite::tungstenite::Message;
 use futures_util::{ SinkExt, StreamExt };
 use serde_json::json;
 // Crates
-use crate::ws::ws_coordinator::save_to_database;
+use crate::app::websocket::websocket::save_to_database;
 
 /* ---------------------------------------------------------------------------------------------- */
 

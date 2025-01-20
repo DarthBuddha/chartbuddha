@@ -17,11 +17,9 @@ use sea_orm::prelude::DateTime;
 #[sea_orm(table_name = "subscriptions")]
 pub struct Model {
   #[sea_orm(primary_key)]
-  // Housekeeping fields
+  // Primary key
   pub id: i32,
-  pub created_at: DateTimeWithTimeZone,
-  pub updated_at: DateTime,
-  // Subscription: Mets
+  // Subscription: Meta Data
   pub subscription_type: String, // --> broker, market, news
   pub platform: String, // -----------> Platform Name / Api Name
   pub exchange: String, // -----------> equity, future, spot, perpetual
@@ -30,6 +28,9 @@ pub struct Model {
   pub tick: f64, // ---------> Tick Size
   pub granularity: f64, // -------> Granularity
   pub historical: String, // ---------> Historical Data
+  // Housekeeping fields
+  pub created_at: DateTimeWithTimeZone,
+  pub updated_at: DateTime,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter)]

@@ -22,8 +22,8 @@ pub mod products;
 
 // Modules
 pub mod coinbase_authenticator;
-// pub mod coinbase_subscriber;
-// pub mod coinbase_streams;
-// pub mod coinbase_websocket;
+pub mod coinbase_subscriber;
+pub mod coinbase_streams;
+pub mod coinbase_websocket;
 
 /* ---------------------------------------------------------------------------------------------- */

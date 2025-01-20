@@ -15,7 +15,7 @@ use serde_json::json;
 // Crates
 // use crate::AppState;
 // use crate::apis::coinbase::coinbase_websocket::connect_to_coinbase;
-use crate::ws::ws_coordinator::coordinate_subscriptions;
+use crate::app::websocket::websocket::coordinate_subscriptions;
 
 /* ---------------------------------------------------------------------------------------------- */
 

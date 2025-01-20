@@ -14,13 +14,20 @@ use sea_orm::entity::prelude::*;
 #[sea_orm(table_name = "orders")]
 pub struct Model {
   #[sea_orm(primary_key)]
+  // Record id
   pub id: i32,
+  // Foreign key
   pub subscription_id: i32,
-  pub order_id: String, // New field added
+  // Record id
+  pub order_id: String,
+  // Order: Meta Data
   pub price: Decimal,
   pub volume: Decimal,
   pub side: String,
   pub timestamp: DateTime,
+  // Housekeeping fields
+  pub created_at: DateTimeWithTimeZone,
+  pub updated_at: DateTime,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter)]

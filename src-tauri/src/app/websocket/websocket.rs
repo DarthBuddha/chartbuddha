@@ -19,17 +19,18 @@ use tauri::State;
 // use tauri::Emitter;
 // SeaORM
 use sea_orm::DatabaseConnection;
-use sea_orm::{ ActiveModelTrait, Set };
+// use sea_orm::ActiveModelTrait;
+use sea_orm::Set;
 // Dependencies
 use chrono::Utc;
 use log::{ info, error };
 // Crates
-use crate::app::state::state_app::AppState;
+use crate::app::state::app_state::AppState;
 use crate::apis::coinbase::coinbase_streams::start_coinbase_stream;
-use crate::db::entities::subscriptions::ActiveModel;
-use crate::db::entities::trades::ActiveModel as TradeActiveModel;
-use crate::db::entities::order_book::ActiveModel as OrderBookActiveModel;
-use crate::streams::streams_coordinator::StreamsCoordinator;
+use crate::app::entities::subscriptions::ActiveModel;
+use crate::app::entities::trades::ActiveModel as TradeActiveModel;
+use crate::app::entities::order_book::ActiveModel as OrderBookActiveModel;
+use crate::app::streams::streams::StreamsCoordinator;
 
 /* ---------------------------------------------------------------------------------------------- */
 

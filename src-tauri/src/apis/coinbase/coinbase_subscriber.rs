@@ -20,7 +20,7 @@ use futures_util::{ SinkExt, StreamExt };
 use serde_json::json;
 use sea_orm::DatabaseConnection;
 // Crates
-use crate::ws::ws_coordinator::save_to_database;
+use crate::app::websocket::websocket::save_to_database;
 // use crate::AppState;
 
 /* ---------------------------------------------------------------------------------------------- */

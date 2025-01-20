@@ -24,7 +24,7 @@ use tokio_tungstenite::connect_async;
 use tokio_tungstenite::tungstenite::protocol::Message;
 use serde::{ Deserialize, Serialize };
 // Crate
-use crate::ws::ws_coordinator::save_to_database;
+use crate::app::websocket::websocket::save_to_database;
 // use crate::db::entities::subscriptions::Entity as SubscriptionEntity;
 
 /* ---------------------------------------------------------------------------------------------- */
