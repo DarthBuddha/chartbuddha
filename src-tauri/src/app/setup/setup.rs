@@ -6,32 +6,41 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
-use std::sync::Arc;
+use std::sync::Mutex;
 // Tauri
 use tauri::{ AppHandle, Emitter, Manager };
 // Dependencies
-// use log::{ error, info };
+use log::info;
+use log::error;
 use tokio::time::{ sleep, Duration };
-use tokio::sync::Mutex;
 // Crates
-use crate::app::setup::setup_state::SetupState;
-// use crate::db::init_database::init_database;
+use crate::app::state::app_state::AppState;
+use crate::app::commands::app_setup_complete::app_setup_complete;
+use crate::app::setup::setup_database::initalize_database;
+use crate::app::setup::setup_store::setup_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-// An async function that does some heavy setup task
+/// Perform the backend setup task
 pub async fn setup(app: AppHandle) -> Result<(), ()> {
-  let setup_state = app.state::<Arc<Mutex<SetupState>>>();
-  {
-    let mut state = setup_state.lock().await;
-    // Perform setup tasks while holding the lock
-    log::info!("Performing really heavy backend setup task...");
-    sleep(Duration::from_secs(3)).await;
-    log::info!("Backend setup task completed!");
-    state.backend_task = true;
+  info!("Performing backend setup task...");
+
+  if let Err(e) = setup_store(app.clone()) {
+    error!("Failed to initialize store: {}", e);
+    return Err(());
   }
+
+  initalize_database().await.unwrap();
+
+  info!("Fake Pause...");
+  sleep(Duration::from_secs(3)).await;
+
+  app_setup_complete(app.clone(), app.state::<Mutex<AppState>>(), "backend".to_string()).await?;
+  info!("Set the backend task as being completed");
+
   // Emit an event to the frontend indicating that the backend setup is complete
-  app.emit("backend-setup-complete", {}).unwrap();
+  app.emit("backend-setup-complete", "").unwrap();
+  info!("backend-setup-complete");
   Ok(())
 }
 

@@ -5,19 +5,18 @@
 //! - init_database
 /* ---------------------------------------------------------------------------------------------- */
 
-// Rust
-// use std::error::Error;
-// use std::sync::Arc;
 // Tauri
 use log::info;
-// use tauri::{ AppHandle, Manager, Wry };
 // SeaORM
-use sea_orm::{ ConnectionTrait, Database, DatabaseConnection, Schema };
-use sea_orm::sea_query::Table;
-// Dependencies
-// use tokio::sync::Mutex;
+use sea_orm::ConnectionTrait;
+use sea_orm::{ Database, DatabaseConnection, Schema };
+// use sea_orm::sea_query::Table;
 // Crates
-use crate::db::entities::subscriptions::Entity;
+use crate::app::entities::{
+  subscriptions::Entity as SubscriptionsEntity,
+  trades::Entity as TradesEntity,
+  order_book::Entity as OrdersEntity,
+};
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -25,24 +24,40 @@ const DB_URL: &str = "postgres://postgres:DB@localhost:5432/chartbuddha";
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub async fn init_database() -> Result<DatabaseConnection, Box<dyn std::error::Error>> {
+pub async fn initalize_database() -> Result<DatabaseConnection, Box<dyn std::error::Error>> {
   info!("Initializing Database...");
 
   // Connect to the database
   let db = Database::connect(DB_URL).await?;
   info!("Database connected successfully.");
 
-  // Drop the subscriptions table if it exists
+  // Drop and create tables
   let schema = Schema::new(db.get_database_backend());
   let backend = db.get_database_backend();
-  let drop_table_statement = Table::drop().table(Entity).if_exists().to_owned();
-  db.execute(backend.build(&drop_table_statement)).await?;
-  info!("Subscriptions table dropped.");
 
   // Create the subscriptions table
-  let create_table_statement = schema.create_table_from_entity(Entity).if_not_exists().to_owned();
-  db.execute(backend.build(&create_table_statement)).await?;
+  let create_subscriptions_table = schema
+    .create_table_from_entity(SubscriptionsEntity)
+    .if_not_exists()
+    .to_owned();
+  db.execute(backend.build(&create_subscriptions_table)).await?;
   info!("Subscriptions table created.");
+
+  // Create the trades table
+  let create_trades_table = schema
+    .create_table_from_entity(TradesEntity)
+    .if_not_exists()
+    .to_owned();
+  db.execute(backend.build(&create_trades_table)).await?;
+  info!("Trades table created.");
+
+  // Create the orders table
+  let create_orders_table = schema
+    .create_table_from_entity(OrdersEntity)
+    .if_not_exists()
+    .to_owned();
+  db.execute(backend.build(&create_orders_table)).await?;
+  info!("Orders table created.");
 
   Ok(db)
 }

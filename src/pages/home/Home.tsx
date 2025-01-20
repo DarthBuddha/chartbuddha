@@ -14,33 +14,6 @@ import Style from './Home.module.css';
 /* ---------------------------------------------------------------------------------------------- */
 
 const Home: React.FC = () => {
-  // Initialize websocket on component mount
-  // useEffect(() => {
-  //   const initializeWebSocket = async () => {
-  //     try {
-  //       await invoke('init_websocket_cmd');
-  //       info('WebSocket initialized');
-  //     } catch (err) {
-  //       info(
-  //         `Failed to initialize WebSocket: ${err instanceof Error ? err.toString() : String(err)}`,
-  //       );
-  //     }
-  //   };
-
-  //   initializeWebSocket();
-  // });
-
-  // const stopAllStreams = async () => {
-  //   try {
-  //     await invoke('stop_all_active_streams_command');
-  //     info('All active streams stopped');
-  //   } catch (err) {
-  //     info(
-  //       `Failed to stop all active streams: ${err instanceof Error ? err.toString() : String(err)}`,
-  //     );
-  //   }
-  // };
-
   return (
     <div className={Style.Home}>
       <div className={Style.Main_Container}>

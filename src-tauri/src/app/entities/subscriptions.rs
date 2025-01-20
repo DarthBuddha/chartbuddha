@@ -7,6 +7,9 @@
 
 // Dependencies
 use sea_orm::entity::prelude::*;
+// use sea_orm::prelude::Decimal;
+use sea_orm::prelude::DateTimeWithTimeZone;
+use sea_orm::prelude::DateTime;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -14,11 +17,19 @@ use sea_orm::entity::prelude::*;
 #[sea_orm(table_name = "subscriptions")]
 pub struct Model {
   #[sea_orm(primary_key)]
+  // Housekeeping fields
   pub id: i32,
-  pub product_id: String,
   pub created_at: DateTimeWithTimeZone,
   pub updated_at: DateTime,
-  pub data: String, // Ensure this line is included
+  // Subscription: Mets
+  pub subscription_type: String, // --> broker, market, news
+  pub platform: String, // -----------> Platform Name / Api Name
+  pub exchange: String, // -----------> equity, future, spot, perpetual
+  pub symbol: String, // -------------> Symbol Name / Product ID
+  // Subscription: Settings
+  pub tick: f64, // ---------> Tick Size
+  pub granularity: f64, // -------> Granularity
+  pub historical: String, // ---------> Historical Data
 }
 
 #[derive(Copy, Clone, Debug, EnumIter)]

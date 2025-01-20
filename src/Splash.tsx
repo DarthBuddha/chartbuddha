@@ -31,9 +31,15 @@ const Splash: React.FC = () => {
   }, []);
 
   return (
-    <main className={Style.Splash_Container}>
-      <h1>Welcome to ChartBuddha</h1>
-    </main>
+    <div className={Style.Main_Window}>
+      <div className={Style.MenuBar_Component}>{/* <MenuBar /> */}</div>
+      <div className={Style.Page_Component}>
+        <h1>Welcome to ChartBuddha</h1>
+        {/* TODO - Show loading information */}
+        <p>Setting up the application...</p>
+      </div>
+      <div className={Style.StatusBar_Component}>{/* <StatusBar /> */}</div>
+    </div>
   );
 };
 
@@ -51,7 +57,7 @@ async function setup() {
   await sleep(3);
   info('Frontend setup task complete!');
   // Set the frontend task as being completed
-  invoke('set_complete', { task: 'frontend' });
+  invoke('app_setup_complete', { task: 'frontend' });
 }
 
 /* ---------------------------------------------------------------------------------------------- */

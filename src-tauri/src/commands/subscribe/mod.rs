@@ -9,5 +9,6 @@
 // Modules
 pub mod coinbase_products_list;
 pub mod coinbase_subscribe;
+pub mod subscription_save;
 
 /* ---------------------------------------------------------------------------------------------- */

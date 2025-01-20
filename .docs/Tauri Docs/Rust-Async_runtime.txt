@@ -41,3 +41,404 @@ Functions
     Spawns a future onto the runtime.
     spawn_blocking
     Runs the provided function on an executor dedicated to blocking operations.
+
+
+pub struct Mutex<T>
+where
+    T: ?Sized,
+{ /* private fields */ }
+
+An asynchronous Mutex-like type.
+
+This type acts similarly to std::sync::Mutex, with two major differences: lock is an async method so does not block, and the lock guard is designed to be held across .await points.
+
+Tokio’s Mutex operates on a guaranteed FIFO basis. This means that the order in which tasks call the lock method is the exact order in which they will acquire the lock.
+Which kind of mutex should you use?
+
+Contrary to popular belief, it is ok and often preferred to use the ordinary Mutex from the standard library in asynchronous code.
+
+The feature that the async mutex offers over the blocking mutex is the ability to keep it locked across an .await point. This makes the async mutex more expensive than the blocking mutex, so the blocking mutex should be preferred in the cases where it can be used. The primary use case for the async mutex is to provide shared mutable access to IO resources such as a database connection. If the value behind the mutex is just data, it’s usually appropriate to use a blocking mutex such as the one in the standard library or parking_lot.
+
+Note that, although the compiler will not prevent the std Mutex from holding its guard across .await points in situations where the task is not movable between threads, this virtually never leads to correct concurrent code in practice as it can easily lead to deadlocks.
+
+A common pattern is to wrap the Arc<Mutex<...>> in a struct that provides non-async methods for performing operations on the data within, and only lock the mutex inside these methods. The mini-redis example provides an illustration of this pattern.
+
+Additionally, when you do want shared access to an IO resource, it is often better to spawn a task to manage the IO resource, and to use message passing to communicate with that task.
+Examples:
+
+use tokio::sync::Mutex;
+use std::sync::Arc;
+
+#[tokio::main]
+async fn main() {
+    let data1 = Arc::new(Mutex::new(0));
+    let data2 = Arc::clone(&data1);
+
+    tokio::spawn(async move {
+        let mut lock = data2.lock().await;
+        *lock += 1;
+    });
+
+    let mut lock = data1.lock().await;
+    *lock += 1;
+}
+
+use tokio::sync::Mutex;
+use std::sync::Arc;
+
+#[tokio::main]
+async fn main() {
+    let count = Arc::new(Mutex::new(0));
+
+    for i in 0..5 {
+        let my_count = Arc::clone(&count);
+        tokio::spawn(async move {
+            for j in 0..10 {
+                let mut lock = my_count.lock().await;
+                *lock += 1;
+                println!("{} {} {}", i, j, lock);
+            }
+        });
+    }
+
+    loop {
+        if *count.lock().await >= 50 {
+            break;
+        }
+    }
+    println!("Count hit 50.");
+}
+
+There are a few things of note here to pay attention to in this example.
+
+    The mutex is wrapped in an Arc to allow it to be shared across threads.
+    Each spawned task obtains a lock and releases it on every iteration.
+    Mutation of the data protected by the Mutex is done by de-referencing the obtained lock as seen on lines 13 and 20.
+
+Tokio’s Mutex works in a simple FIFO (first in, first out) style where all calls to lock complete in the order they were performed. In that way the Mutex is “fair” and predictable in how it distributes the locks to inner data. Locks are released and reacquired after every iteration, so basically, each thread goes to the back of the line after it increments the value once. Note that there’s some unpredictability to the timing between when the threads are started, but once they are going they alternate predictably. Finally, since there is only a single valid lock at any given time, there is no possibility of a race condition when mutating the inner value.
+
+Note that in contrast to std::sync::Mutex, this implementation does not poison the mutex when a thread holding the MutexGuard panics. In such a case, the mutex will be unlocked. If the panic is caught, this might leave the data protected by the mutex in an inconsistent state.
+Implementations
+Source
+impl<T> Mutex<T>
+where
+    T: ?Sized,
+Source
+pub fn new(t: T) -> Mutex<T>
+
+Creates a new lock in an unlocked state ready for use.
+Examples
+
+use tokio::sync::Mutex;
+
+let lock = Mutex::new(5);
+
+Source
+pub const fn const_new(t: T) -> Mutex<T>
+
+Creates a new lock in an unlocked state ready for use.
+
+When using the tracing unstable feature, a Mutex created with const_new will not be instrumented. As such, it will not be visible in tokio-console. Instead, Mutex::new should be used to create an instrumented object if that is needed.
+Examples
+
+use tokio::sync::Mutex;
+
+static LOCK: Mutex<i32> = Mutex::const_new(5);
+
+Source
+pub async fn lock(&self) -> MutexGuard<'_, T>
+
+Locks this mutex, causing the current task to yield until the lock has been acquired. When the lock has been acquired, function returns a MutexGuard.
+
+If the mutex is available to be acquired immediately, then this call will typically not yield to the runtime. However, this is not guaranteed under all circumstances.
+Cancel safety
+
+This method uses a queue to fairly distribute locks in the order they were requested. Cancelling a call to lock makes you lose your place in the queue.
+Examples
+
+use tokio::sync::Mutex;
+
+#[tokio::main]
+async fn main() {
+    let mutex = Mutex::new(1);
+
+    let mut n = mutex.lock().await;
+    *n = 2;
+}
+
+Source
+pub fn blocking_lock(&self) -> MutexGuard<'_, T>
+
+Blockingly locks this Mutex. When the lock has been acquired, function returns a MutexGuard.
+
+This method is intended for use cases where you need to use this mutex in asynchronous code as well as in synchronous code.
+Panics
+
+This function panics if called within an asynchronous execution context.
+
+    If you find yourself in an asynchronous execution context and needing to call some (synchronous) function which performs one of these blocking_ operations, then consider wrapping that call inside spawn_blocking() (or block_in_place()).
+
+Examples
+
+use std::sync::Arc;
+use tokio::sync::Mutex;
+
+#[tokio::main]
+async fn main() {
+    let mutex =  Arc::new(Mutex::new(1));
+    let lock = mutex.lock().await;
+
+    let mutex1 = Arc::clone(&mutex);
+    let blocking_task = tokio::task::spawn_blocking(move || {
+        // This shall block until the `lock` is released.
+        let mut n = mutex1.blocking_lock();
+        *n = 2;
+    });
+
+    assert_eq!(*lock, 1);
+    // Release the lock.
+    drop(lock);
+
+    // Await the completion of the blocking task.
+    blocking_task.await.unwrap();
+
+    // Assert uncontended.
+    let n = mutex.try_lock().unwrap();
+    assert_eq!(*n, 2);
+}
+
+Source
+pub fn blocking_lock_owned(self: Arc<Mutex<T>>) -> OwnedMutexGuard<T>
+
+Blockingly locks this Mutex. When the lock has been acquired, function returns an OwnedMutexGuard.
+
+This method is identical to Mutex::blocking_lock, except that the returned guard references the Mutex with an Arc rather than by borrowing it. Therefore, the Mutex must be wrapped in an Arc to call this method, and the guard will live for the 'static lifetime, as it keeps the Mutex alive by holding an Arc.
+Panics
+
+This function panics if called within an asynchronous execution context.
+
+    If you find yourself in an asynchronous execution context and needing to call some (synchronous) function which performs one of these blocking_ operations, then consider wrapping that call inside spawn_blocking() (or block_in_place()).
+
+Examples
+
+use std::sync::Arc;
+use tokio::sync::Mutex;
+
+#[tokio::main]
+async fn main() {
+    let mutex =  Arc::new(Mutex::new(1));
+    let lock = mutex.lock().await;
+
+    let mutex1 = Arc::clone(&mutex);
+    let blocking_task = tokio::task::spawn_blocking(move || {
+        // This shall block until the `lock` is released.
+        let mut n = mutex1.blocking_lock_owned();
+        *n = 2;
+    });
+
+    assert_eq!(*lock, 1);
+    // Release the lock.
+    drop(lock);
+
+    // Await the completion of the blocking task.
+    blocking_task.await.unwrap();
+
+    // Assert uncontended.
+    let n = mutex.try_lock().unwrap();
+    assert_eq!(*n, 2);
+}
+
+Source
+pub async fn lock_owned(self: Arc<Mutex<T>>) -> OwnedMutexGuard<T>
+
+Locks this mutex, causing the current task to yield until the lock has been acquired. When the lock has been acquired, this returns an OwnedMutexGuard.
+
+If the mutex is available to be acquired immediately, then this call will typically not yield to the runtime. However, this is not guaranteed under all circumstances.
+
+This method is identical to Mutex::lock, except that the returned guard references the Mutex with an Arc rather than by borrowing it. Therefore, the Mutex must be wrapped in an Arc to call this method, and the guard will live for the 'static lifetime, as it keeps the Mutex alive by holding an Arc.
+Cancel safety
+
+This method uses a queue to fairly distribute locks in the order they were requested. Cancelling a call to lock_owned makes you lose your place in the queue.
+Examples
+
+use tokio::sync::Mutex;
+use std::sync::Arc;
+
+#[tokio::main]
+async fn main() {
+    let mutex = Arc::new(Mutex::new(1));
+
+    let mut n = mutex.clone().lock_owned().await;
+    *n = 2;
+}
+
+Source
+pub fn try_lock(&self) -> Result<MutexGuard<'_, T>, TryLockError>
+
+Attempts to acquire the lock, and returns TryLockError if the lock is currently held somewhere else.
+Examples
+
+use tokio::sync::Mutex;
+
+let mutex = Mutex::new(1);
+
+let n = mutex.try_lock()?;
+assert_eq!(*n, 1);
+
+Source
+pub fn get_mut(&mut self) -> &mut T
+
+Returns a mutable reference to the underlying data.
+
+Since this call borrows the Mutex mutably, no actual locking needs to take place – the mutable borrow statically guarantees no locks exist.
+Examples
+
+use tokio::sync::Mutex;
+
+fn main() {
+    let mut mutex = Mutex::new(1);
+
+    let n = mutex.get_mut();
+    *n = 2;
+}
+
+Source
+pub fn try_lock_owned(
+    self: Arc<Mutex<T>>,
+) -> Result<OwnedMutexGuard<T>, TryLockError>
+
+Attempts to acquire the lock, and returns TryLockError if the lock is currently held somewhere else.
+
+This method is identical to Mutex::try_lock, except that the returned guard references the Mutex with an Arc rather than by borrowing it. Therefore, the Mutex must be wrapped in an Arc to call this method, and the guard will live for the 'static lifetime, as it keeps the Mutex alive by holding an Arc.
+Examples
+
+use tokio::sync::Mutex;
+use std::sync::Arc;
+
+let mutex = Arc::new(Mutex::new(1));
+
+let n = mutex.clone().try_lock_owned()?;
+assert_eq!(*n, 1);
+
+Source
+pub fn into_inner(self) -> T
+
+Consumes the mutex, returning the underlying data.
+Examples
+
+use tokio::sync::Mutex;
+
+#[tokio::main]
+async fn main() {
+    let mutex = Mutex::new(1);
+
+    let n = mutex.into_inner();
+    assert_eq!(n, 1);
+}
+
+Trait Implementations
+Source
+impl<T> Debug for Mutex<T>
+where
+    T: Debug + ?Sized,
+Source
+fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
+Formats the value using the given formatter. Read more
+Source
+impl<T> Default for Mutex<T>
+where
+    T: Default,
+Source
+fn default() -> Mutex<T>
+Returns the “default value” for a type. Read more
+Source
+impl<T> From<T> for Mutex<T>
+Source
+fn from(s: T) -> Mutex<T>
+Converts to this type from the input type.
+Source
+impl<T> Send for Mutex<T>
+where
+    T: Send + ?Sized,
+Source
+impl<T> Sync for Mutex<T>
+where
+    T: Send + ?Sized,
+Auto Trait Implementations
+impl<T> !Freeze for Mutex<T>
+impl<T> !RefUnwindSafe for Mutex<T>
+impl<T> Unpin for Mutex<T>
+where
+    T: Unpin + ?Sized,
+impl<T> UnwindSafe for Mutex<T>
+where
+    T: UnwindSafe + ?Sized,
+Blanket Implementations
+Source
+impl<T> Any for T
+where
+    T: 'static + ?Sized,
+Source
+fn type_id(&self) -> TypeId
+Gets the TypeId of self. Read more
+Source
+impl<T> Borrow<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow(&self) -> &T
+Immutably borrows from an owned value. Read more
+Source
+impl<T> BorrowMut<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow_mut(&mut self) -> &mut T
+Mutably borrows from an owned value. Read more
+Source
+impl<T> From<!> for T
+Source
+fn from(t: !) -> T
+Converts to this type from the input type.
+Source
+impl<T> From<T> for T
+Source
+fn from(t: T) -> T
+
+Returns the argument unchanged.
+Source
+impl<T, U> Into<U> for T
+where
+    U: From<T>,
+Source
+fn into(self) -> U
+
+Calls U::from(self).
+
+That is, this conversion is whatever the implementation of From<T> for U chooses to do.
+Source
+impl<T, U> TryFrom<U> for T
+where
+    U: Into<T>,
+Source
+type Error = Infallible
+The type returned in the event of a conversion error.
+Source
+fn try_from(value: U) -> Result<T, <T as TryFrom<U>>::Error>
+Performs the conversion.
+Source
+impl<T, U> TryInto<U> for T
+where
+    U: TryFrom<T>,
+Source
+type Error = <U as TryFrom<T>>::Error
+The type returned in the event of a conversion error.
+Source
+fn try_into(self) -> Result<U, <U as TryFrom<T>>::Error>
+Performs the conversion.
+Source
+impl<T> ErasedDestructor for T
+where
+    T: 'static,
+Source
+impl<T> MaybeSendSync for T

@@ -13,7 +13,7 @@ use log::{ info, error };
 use tauri::Manager;
 // Dependencies
 // Crates
-use crate::app::state::state_app::AppState;
+// use crate::app::state::state_app::AppState;
 use crate::ws::init_ws::initialize_websocket;
 use crate::streams::streams_coordinator::StreamsCoordinator;
 

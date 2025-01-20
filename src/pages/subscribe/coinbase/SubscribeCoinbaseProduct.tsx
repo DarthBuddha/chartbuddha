@@ -22,8 +22,16 @@ const SubscribeCoinbaseProduct: React.FC = () => {
   // Button Click: Handle Product Subscriptions
   const buttonClick_Subscribe = async () => {
     try {
-      const response: string = await invoke('coinbase_subscribe', {
-        coinbaseProductId: selCoinbaseProduct?.product_id,
+      const response: string = await invoke('subscription_save', {
+        // Subscription: Meta
+        subscriptionType: 'broker',
+        platform: 'coinbase',
+        exchange: 'spot',
+        symbol: selCoinbaseProduct?.product_id,
+        // Subscription: Settings
+        tick: 10, // Changed to tickSize
+        granularity: 0.01, // Changed to granularity
+        historical: 'none',
       });
       info('[coinbase_subscribe]\n' + response);
     } catch (err) {

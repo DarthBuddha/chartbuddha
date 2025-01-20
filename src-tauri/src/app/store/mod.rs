@@ -2,12 +2,12 @@
 //! stores/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 //! Modules
-//! - defaults
-//! - initialize_stores
+//! - app_interface_defaults
 /* ---------------------------------------------------------------------------------------------- */
 
 // Modules
-pub mod defaults;
-pub mod store_init;
+pub mod app_apis_defaults;
+pub mod app_settings_defaults;
+pub mod app_subscriptions_defaults;
 
 /* ---------------------------------------------------------------------------------------------- */

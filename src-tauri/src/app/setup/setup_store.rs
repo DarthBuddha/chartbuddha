@@ -1,9 +1,9 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # app/store/store_init.rs
+//! # app/store/setup_store.rs
 
 /* ---------------------------------------------------------------------------------------------- */
 //! Functions
-//! - init_store
+//! - setup_store
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -13,13 +13,13 @@ use std::time::Duration;
 use log::info;
 use tauri::{ AppHandle, Manager, Wry };
 // Tauri Store: App Defaults
-use crate::app::store::defaults::app_apis_defaults::app_apis_defaults;
-use crate::app::store::defaults::app_settings_defaults::app_settings_defaults;
-use crate::app::store::defaults::app_subscriptions_defaults::app_subscriptions_defaults;
+use crate::app::store::app_apis_defaults::app_apis_defaults;
+use crate::app::store::app_settings_defaults::app_settings_defaults;
+// use crate::app::store::app_subscriptions_defaults::app_subscriptions_defaults;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn store_init(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
+pub fn setup_store(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   // App: Apis Store Initialization
   info!("Initialize App Apis Store...");
   let store_app_apis = tauri_plugin_store::StoreBuilder
@@ -41,14 +41,14 @@ pub fn store_init(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   store_app_settings.save()?;
 
   // App: Subscriptions Store Initialization
-  info!("Initialize App Subscriptions Store...");
-  let store_app_subscriptions = tauri_plugin_store::StoreBuilder
-    ::new(&app, "app_subscriptions.json")
-    .auto_save(Duration::from_millis(100))
-    .defaults(app_subscriptions_defaults())
-    .build()?;
-  app.manage(store_app_subscriptions.clone());
-  store_app_subscriptions.save()?;
+  // info!("Initialize App Subscriptions Store...");
+  // let store_app_subscriptions = tauri_plugin_store::StoreBuilder
+  //   ::new(&app, "app_subscriptions.json")
+  //   .auto_save(Duration::from_millis(100))
+  //   .defaults(app_subscriptions_defaults())
+  //   .build()?;
+  // app.manage(store_app_subscriptions.clone());
+  // store_app_subscriptions.save()?;
 
   info!("Store Initialized!");
 

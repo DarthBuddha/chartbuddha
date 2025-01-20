@@ -1,38 +1,35 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! module_name.rs
+//! app/commands/app_setup_complete.rs
 /* ---------------------------------------------------------------------------------------------- */
 //! Functions
-//! - rust_function
+//! - app_setup_complete
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
+use std::sync::Mutex;
 // Tauri
 use tauri::{ AppHandle, Manager, State };
 // Dependencies
-use tokio::sync::Mutex;
-use std::sync::Arc;
 // Crates
-use crate::app::setup::setup_state::SetupState;
+use crate::app::state::app_state::AppState;
 
 /* ---------------------------------------------------------------------------------------------- */
 
 // A custom task for setting the state of a setup task
 #[tauri::command]
-pub async fn cmd_app_setup(
+pub async fn app_setup_complete(
   app: AppHandle,
-  state: State<'_, Arc<Mutex<SetupState>>>,
+  state: State<'_, Mutex<AppState>>,
   task: String
 ) -> Result<(), ()> {
   // Lock the state without write access
-  let mut state_lock = state.lock().await;
+  let mut state_lock = state.lock().unwrap();
   match task.as_str() {
     "frontend" => {
       state_lock.frontend_task = true;
-      println!("Frontend task marked as complete.");
     }
     "backend" => {
       state_lock.backend_task = true;
-      println!("Backend task marked as complete.");
     }
     _ => panic!("invalid task completed!"),
   }
@@ -40,17 +37,10 @@ pub async fn cmd_app_setup(
   if state_lock.backend_task && state_lock.frontend_task {
     // Setup is complete, we can close the splashscreen
     // and unhide the main window!
-    if let Some(splash_window) = app.get_webview_window("splash") {
-      splash_window.close().unwrap();
-    } else {
-      println!("Splashscreen window not found.");
-    }
-    if let Some(main_window) = app.get_webview_window("main") {
-      main_window.show().unwrap();
-    } else {
-      println!("Main window not found.");
-    }
-    println!("Both tasks completed. Splashscreen closed and main window shown.");
+    let splash_window = app.get_webview_window("splash").unwrap();
+    let main_window = app.get_webview_window("main").unwrap();
+    splash_window.close().unwrap();
+    main_window.show().unwrap();
   }
   Ok(())
 }

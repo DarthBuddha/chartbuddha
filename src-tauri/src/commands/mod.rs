@@ -10,6 +10,6 @@
 // Modules
 pub mod connect;
 pub mod subscribe;
-pub mod websocket;
+// pub mod websocket;
 
 /* ---------------------------------------------------------------------------------------------- */
