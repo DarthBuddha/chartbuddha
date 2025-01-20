@@ -1,13 +1,15 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! stores/mod.rs
+//! app/store/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 //! Modules
-//! - app_interface_defaults
+//! - apis_defaults
+//! - settings_defaults
+//! - subscriptions_defaults
 /* ---------------------------------------------------------------------------------------------- */
 
 // Modules
-pub mod app_apis_defaults;
-pub mod app_settings_defaults;
-pub mod app_subscriptions_defaults;
+pub mod apis_defaults;
+pub mod settings_defaults;
+pub mod subscriptions_defaults;
 
 /* ---------------------------------------------------------------------------------------------- */

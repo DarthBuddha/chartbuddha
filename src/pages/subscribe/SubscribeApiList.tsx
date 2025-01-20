@@ -15,7 +15,7 @@ import Style from './SubscribeApiList.module.css';
 /* ---------------------------------------------------------------------------------------------- */
 
 // Load Tauri Store
-const store_app_apis = await load('app_apis.json');
+const store_app_apis = await load('apis.json');
 
 /* ---------------------------------------------------------------------------------------------- */
 

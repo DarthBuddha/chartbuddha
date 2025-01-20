@@ -1,18 +1,20 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! commands/coinbase/subscribe/coinbase_subscribe.rs
+//! commands/coinbase/subscribe/subscription_save.rs
 /* ---------------------------------------------------------------------------------------------- */
 //! Functions
-//! - store_api_keys
+//! - subscription_save
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
+// use serde_json::json;
 // Tauri
 use tauri::{ AppHandle, Manager, Wry };
+// use tauri_plugin_store::StoreExt;
 // SeaOrm
 use sea_orm::{ ActiveModelTrait, DatabaseConnection, Set };
-// use sea_orm::prelude::Decimal;
-// Crate
+// Crates
 use crate::app::entities::subscriptions::ActiveModel as SubscriptionActiveModel;
+use crate::commands::subscribe::common::store_subscription::store_subscription;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -29,12 +31,21 @@ pub async fn subscription_save(
   historical: String
 ) -> Result<String, String> {
   // initialize app_subscriptions store
-  log::info!("Save Subscription");
+  log::info!("Save Subscription to Store");
+  store_subscription(
+    app_handle.clone(),
+    subscription_type.clone(),
+    platform.clone(),
+    exchange.clone(),
+    symbol.clone(),
+    tick.clone(),
+    granularity.clone(),
+    historical.clone()
+  ).await.map_err(|e| e.to_string())?;
 
   // Access the database connection state
   let db = app_handle.state::<DatabaseConnection>();
 
-  // ! Error
   // Save subscription to the database
   let new_subscription = SubscriptionActiveModel {
     // Housekeeping fields
@@ -52,27 +63,6 @@ pub async fn subscription_save(
 
     ..Default::default()
   };
-
-  // TODO: Store the subscription in the app store
-  let store = app_handle.store("app_subscriptions.json").map_err(|e| e.to_string())?;
-
-  // get existing subscriptions
-  // let mut app_subscriptions = store
-  //   .get("app_subscriptions")
-  //   .unwrap_or(json!({
-  //   "binance": [],
-  //   "coinbase": []
-  // }));
-
-  // store the coinbase product id
-  // let new_subscription = json!({ "product_id": coinbase_product_id });
-  // app_subscriptions["coinbase"].as_array_mut().unwrap().push(new_subscription);
-  // store.set("app_subscriptions", app_subscriptions);
-  // store.save().map_err(|e| e.to_string())?;
-  // log::info!("Coinbase Product id Saved");
-
-  // Store additional data if needed
-  // Example: store.set("additional_data", json!({ "key": "value" }));
 
   new_subscription.insert(db.inner()).await.map_err(|e| e.to_string())?;
 

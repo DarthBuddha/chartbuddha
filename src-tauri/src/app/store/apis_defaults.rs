@@ -1,8 +1,8 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! stores/defaults/app_settings_defaults.rs
+//! stores/defaults/app_apis_defaults.rs
 /* ---------------------------------------------------------------------------------------------- */
 //! Functions
-//! - app_settings_defaults
+//! - app_apis_defaults
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -13,27 +13,34 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn app_settings_defaults() -> HashMap<String, Value> {
+pub fn apis_defaults() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
-  // app
-  defaults.insert(
-    "app".to_string(),
-    json!({
-          "app_init_run": false,
-          "app_version": null,
-          "app_update": null
-        })
-  );
+  // Binance
+  // defaults.insert(
+  //   "binance".to_string(),
+  //   json!({
+  //     "api_configured": false,
+  //     "api_key": null,
+  //     "api_secret": null
+  //   })
+  // );
 
-  // database
+  // Coinbase
   defaults.insert(
-    "database".to_string(),
+    "coinbase".to_string(),
     json!({
-        "database_name": null,
-        "database_pass": null,
-        "database_url": null
-      })
+          "api_configured": false,
+          "api_key": null,
+          "api_key_secret": null,
+          "api_permissions": {
+            "perm_can_trade": false,
+            "perm_can_transfer": false,
+            "perm_can_view": false,
+            "perm_portfolio_type": "",
+            "perm_portfolio_uuid": ""
+          }
+        })
   );
 
   defaults

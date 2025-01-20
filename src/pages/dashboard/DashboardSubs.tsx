@@ -14,18 +14,13 @@ import Style from './DashboardSubs.module.css';
 
 /* ---------------------------------------------------------------------------------------------- */
 
-// Load Tauri Store
-const store_app_subscriptions = await load('app_subscriptions.json');
-
-/* ---------------------------------------------------------------------------------------------- */
-
 const DashboardSubs: React.FC = () => {
   // State Management
   const { setApi, setProduct } = useInterfaceContext();
 
   // Store Management
   const [selectedApiListStore, setSelectedApiListStore] = useState<
-    { api: string; product: string }[]
+    { api: string; symbol: string }[]
   >([]);
 
   // Load Keys
@@ -37,17 +32,20 @@ const DashboardSubs: React.FC = () => {
   const load_subscriptions_list = async () => {
     try {
       const apis = ['binance', 'coinbase']; // Add more APIs as needed
-      const configuredApis: { api: string; product: string }[] = [];
+      const configuredApis: { api: string; symbol: string }[] = [];
 
+      const store_app_subscriptions = await load('subscriptions.json');
       const appSubscriptions = await store_app_subscriptions.get<{
-        [key: string]: { product_id: string }[];
-      }>('app_subscriptions');
+        [key: string]: { symbol: string; subscription_type: string }[];
+      }>('subscriptions');
       if (appSubscriptions) {
         for (const api of apis) {
           const apiData = appSubscriptions[api];
           if (apiData) {
             apiData.forEach((subscription) => {
-              configuredApis.push({ api, product: subscription.product_id });
+              if (subscription.subscription_type === 'broker') {
+                configuredApis.push({ api, symbol: subscription.symbol });
+              }
             });
           }
         }
@@ -64,9 +62,9 @@ const DashboardSubs: React.FC = () => {
   };
 
   // Button Click: Handle Data Api
-  const handleClick = async (selApi: string, selProduct: string) => {
+  const handleClick = async (selApi: string, selSymbol: string) => {
     const resetApi = ['binance', 'coinbase'];
-    const resetProduct = selProduct;
+    const resetProduct = selSymbol;
     // Logic: Reset Context
     if (resetApi.includes(selApi)) {
       setApi(selApi);
@@ -82,13 +80,13 @@ const DashboardSubs: React.FC = () => {
         {selectedApiListStore.length === 0 ? (
           <div className={Style.Row}>Your Subscription List.</div>
         ) : (
-          selectedApiListStore.map(({ api, product }) => (
+          selectedApiListStore.map(({ api, symbol }) => (
             <div
-              key={`${api}-${product}`}
+              key={`${api}-${symbol}`}
               className={Style.Row}
-              onClick={() => handleClick(api, product)}
+              onClick={() => handleClick(api, symbol)}
             >
-              {`${api.charAt(0).toUpperCase() + api.slice(1)} - ${product}`}
+              {`${api.charAt(0).toUpperCase() + api.slice(1)} - ${symbol}`}
             </div>
           ))
         )}

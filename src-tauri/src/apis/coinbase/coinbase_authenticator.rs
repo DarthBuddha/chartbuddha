@@ -45,7 +45,7 @@ pub async fn use_authenticator(
   authenticator: &Authenticator
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
   // Step 1: Load API key and secret from the store
-  let store = app_handle.store("app_apis.json")?;
+  let store = app_handle.store("apis.json")?;
 
   let coinbase: Value = store.get("coinbase").expect("Failed to get value from store");
 

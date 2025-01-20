@@ -1,16 +1,11 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! commands/subscribe/mod.rs
+//! commands/subscribe/common/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 //! Modules
-//! - common
-//! - coinbase_products_list
-//! - coinbase_subscribe
+//! - store_subscription
 /* ---------------------------------------------------------------------------------------------- */
 
 // Modules
-pub mod common;
-pub mod coinbase_products_list;
-pub mod coinbase_subscribe;
-pub mod subscription_save;
+pub mod store_subscription;
 
 /* ---------------------------------------------------------------------------------------------- */
