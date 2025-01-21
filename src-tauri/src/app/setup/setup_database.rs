@@ -1,8 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! db/init_database.rs
+//! # App Setup Setup Database Module
 /* ---------------------------------------------------------------------------------------------- */
-//! Functions
-//! - init_database
+//! #### Functions:
+//! * initalize_database
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### app/setup/setup_database.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
@@ -14,7 +16,7 @@ use sea_orm::{ Database, DatabaseConnection, Schema };
 // Crates
 use crate::app::entities::{
   order_book::Entity as OrdersEntity,
-  subscriptions::Entity as SubscriptionsEntity,
+  app_subscriptions::Entity as SubscriptionsEntity,
   trades::Entity as TradesEntity,
 };
 

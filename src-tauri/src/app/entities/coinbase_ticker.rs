@@ -1,8 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! app/entities/coinbase_ticker.rs
+//! # App Entities Coinbase Ticker
 /* ---------------------------------------------------------------------------------------------- */
-//! Entities
-//! - coinbase_ticker
+//! #### Entities:
+//! * coinbase_ticker
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### app/entities/coinbase_ticker.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
@@ -46,15 +48,15 @@ impl RelationTrait for Relation {
   fn def(&self) -> RelationDef {
     match self {
       Self::Subscription =>
-        Entity::belongs_to(super::subscriptions::Entity)
+        Entity::belongs_to(super::app_subscriptions::Entity)
           .from(Column::SubscriptionId)
-          .to(super::subscriptions::Column::Id)
+          .to(super::app_subscriptions::Column::Id)
           .into(),
     }
   }
 }
 
-impl Related<super::subscriptions::Entity> for Entity {
+impl Related<super::app_subscriptions::Entity> for Entity {
   fn to() -> RelationDef {
     Relation::Subscription.def()
   }

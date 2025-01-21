@@ -16,7 +16,7 @@ use sea_orm::{ ActiveModelTrait, DatabaseConnection, Set };
 // Crates
 use crate::app::state::app_state::AppState;
 // use crate::app::store::
-use crate::app::entities::subscriptions::ActiveModel as SubscriptionActiveModel;
+use crate::app::entities::app_subscriptions::ActiveModel as SubscriptionActiveModel;
 use crate::app::commands::subscribe::common::store_subscription::store_subscription;
 // TODO: Implement the subscriber Streams Manager
 // use crate::apis::coinbase::coinbase_subscriber::coinbase_subscriber;

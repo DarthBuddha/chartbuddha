@@ -1,13 +1,15 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! app/store/mod.rs
+//! # App Store Mod
 /* ---------------------------------------------------------------------------------------------- */
-//! Modules
-//! - apis_defaults
-//! - settings_defaults
-//! - subscriptions_defaults
+//! #### Files:
+//! * apis_defaults
+//! * settings_defaults
+//! * subscriptions_defaults
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### app/store/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Modules
+// Files:
 pub mod apis_defaults;
 pub mod settings_defaults;
 pub mod subscriptions_defaults;

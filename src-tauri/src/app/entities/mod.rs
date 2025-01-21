@@ -1,19 +1,16 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! entities/mod.rs
+//! # App Entities Mod
 /* ---------------------------------------------------------------------------------------------- */
-//! Modules
-//! - subscriptions
-//! - order_book
-//! - trades
-//! - aggregated_volume
+//! #### Entities: App
+//! * subscriptions
+//! #### Entities: Coinbase
+//! * coinbase_ticker
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### app/entities/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Modules
-pub mod aggregated_volume;
-pub mod order_book;
-pub mod subscriptions;
-pub mod trades;
-
+// App
+pub mod app_subscriptions;
 // Coinbase
 pub mod coinbase_ticker;
 

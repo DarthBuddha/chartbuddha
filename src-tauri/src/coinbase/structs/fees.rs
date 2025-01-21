@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Coinbase Fees Structs
+//! # Coinbase Structs Fees Module
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Endpoints:
-//! - GetTransactionSummary
+//! * GetTransactionSummary
 //! #### Structs: Fees
-//! - FeeTier
-//! - MarginRate
-//! - GoodsAndServicesTax <TaxType>
+//! * FeeTier
+//! * MarginRate
+//! * GoodsAndServicesTax <TaxType>
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### coinbase/structs/fees.rs
 /* ---------------------------------------------------------------------------------------------- */
