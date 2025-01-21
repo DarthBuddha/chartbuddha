@@ -1,16 +1,14 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! commands/subscribe/mod.rs
+//! # App Commands Common Mod
 /* ---------------------------------------------------------------------------------------------- */
-//! Modules
-//! - common
-//! - coinbase_products_list
-//! - coinbase_subscribe
+//! #### Files:
+//! - convert_api_secret
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### app/commands/common/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Modules
-pub mod coinbase_products_list;
-pub mod coinbase_subscribe;
-pub mod common;
-pub mod subscription_save;
+// Files:
+pub mod convert_api_secret;
+pub mod store_subscription;
 
 /* ---------------------------------------------------------------------------------------------- */

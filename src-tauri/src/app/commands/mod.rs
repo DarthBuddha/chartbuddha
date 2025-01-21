@@ -2,16 +2,22 @@
 //! # App Commands Mod
 /* ---------------------------------------------------------------------------------------------- */
 //! Folder:
-//! * connect
-//! * subscribe
+//! * common
+//! Files:
+//! * app_setup_complete
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### app/commands/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Folder:
-pub mod connect;
-pub mod subscribe;
+pub mod common;
+
 // pub mod websocket;
 pub mod app_setup_complete;
+pub mod coinbase_store_api_keys;
+pub mod coinbase_products_list;
+pub mod coinbase_subscribe;
+pub mod subscription_save;
+pub mod websocket_cmd;
 
 /* ---------------------------------------------------------------------------------------------- */

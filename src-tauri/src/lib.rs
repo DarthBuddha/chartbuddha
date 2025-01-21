@@ -62,11 +62,11 @@ pub async fn run() -> () {
         // App Setup
         app::commands::app_setup_complete::app_setup_complete,
         // Interface Subscribe Page
-        app::commands::subscribe::subscription_save::subscription_save,
+        app::commands::subscription_save::subscription_save,
         // old commands
-        app::commands::connect::coinbase_store_api_keys::coinbase_store_api_keys,
-        app::commands::subscribe::coinbase_products_list::coinbase_products_list,
-        app::commands::subscribe::coinbase_subscribe::coinbase_subscribe
+        app::commands::coinbase_store_api_keys::coinbase_store_api_keys,
+        app::commands::coinbase_products_list::coinbase_products_list,
+        app::commands::coinbase_subscribe::coinbase_subscribe
         // commands::websocket::websocket_cmd::init_websocket_cmd,
         // commands::websocket::websocket_cmd::stop_all_active_streams_cmd
       ]

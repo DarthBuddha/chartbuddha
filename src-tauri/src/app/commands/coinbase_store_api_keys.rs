@@ -16,7 +16,7 @@ use serde_json::to_string;
 use crate::coinbase::coinbase_authenticator::use_authenticator;
 use crate::coinbase::coinbase_authenticator::Authenticator;
 use crate::coinbase::structs::data_api::ApiKeyPermissions;
-use crate::app::commands::connect::common::convert_api_secret::convert_api_secret;
+use crate::app::commands::common::convert_api_secret::convert_api_secret;
 
 /* ---------------------------------------------------------------------------------------------- */
 

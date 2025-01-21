@@ -15,9 +15,9 @@ use sea_orm::{ Database, DatabaseConnection, Schema };
 // use sea_orm::sea_query::Table;
 // Crates
 use crate::app::entities::{
-  order_book::Entity as OrdersEntity,
+  // order_book::Entity as OrdersEntity,
   app_subscriptions::Entity as SubscriptionsEntity,
-  trades::Entity as TradesEntity,
+  // trades::Entity as TradesEntity,
 };
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -46,20 +46,20 @@ pub async fn initalize_database() -> Result<DatabaseConnection, Box<dyn std::err
   info!("Subscriptions table created.");
 
   // Create the trades table
-  let create_trades_table = schema
-    .create_table_from_entity(TradesEntity)
-    .if_not_exists()
-    .to_owned();
-  db.execute(backend.build(&create_trades_table)).await?;
-  info!("Trades table created.");
+  // let create_trades_table = schema
+  //   .create_table_from_entity(TradesEntity)
+  //   .if_not_exists()
+  //   .to_owned();
+  // db.execute(backend.build(&create_trades_table)).await?;
+  // info!("Trades table created.");
 
   // Create the orders table
-  let create_orders_table = schema
-    .create_table_from_entity(OrdersEntity)
-    .if_not_exists()
-    .to_owned();
-  db.execute(backend.build(&create_orders_table)).await?;
-  info!("Orders table created.");
+  // let create_orders_table = schema
+  //   .create_table_from_entity(OrdersEntity)
+  //   .if_not_exists()
+  //   .to_owned();
+  // db.execute(backend.build(&create_orders_table)).await?;
+  // info!("Orders table created.");
 
   Ok(db)
 }
