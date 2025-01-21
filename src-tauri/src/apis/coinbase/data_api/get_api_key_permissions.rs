@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 // Crates
 use crate::apis::coinbase::data_api::api_key_permissions::api_key_permissions::ApiKeyPermissions;
 
@@ -15,7 +15,7 @@ use crate::apis::coinbase::data_api::api_key_permissions::api_key_permissions::A
 /// Struct to represent the API key permissions response
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GetApiKeyPermissions {
-  pub api_key_permissions: Vec<ApiKeyPermissions>,
+    pub api_key_permissions: Vec<ApiKeyPermissions>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

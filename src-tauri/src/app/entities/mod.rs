@@ -9,9 +9,9 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Modules
-pub mod subscriptions;
-pub mod order_book;
-pub mod trades;
 pub mod aggregated_volume;
+pub mod order_book;
+pub mod subscriptions;
+pub mod trades;
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -8,7 +8,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-  chartbuddha_lib::run()
+    chartbuddha_lib::run()
 }
 
 /* ---------------------------------------------------------------------------------------------- */

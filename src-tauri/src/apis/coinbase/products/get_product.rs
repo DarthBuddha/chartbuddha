@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 // Crate
 use crate::apis::coinbase::products::product::product::Product;
 
@@ -15,7 +15,7 @@ use crate::apis::coinbase::products::product::product::Product;
 /// Struct to represent a single product in the list products response
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct GetProduct {
-  pub product: Option<Product>,
+    pub product: Option<Product>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

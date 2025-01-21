@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 // Crate
 use crate::apis::coinbase::products::market_trades::trades::Trades;
 
@@ -15,9 +15,9 @@ use crate::apis::coinbase::products::market_trades::trades::Trades;
 /// Struct to represent the response from the list products endpoint
 #[derive(Debug, Deserialize, Serialize)]
 pub struct GetMarketTrades {
-  pub trades: Vec<Trades>,
-  pub best_bid: String,
-  pub best_ask: String,
+    pub trades: Vec<Trades>,
+    pub best_bid: String,
+    pub best_ask: String,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -18,6 +18,29 @@
     "log:default",
     "shell:allow-open",
     "window-state:default",
-    "store:default"
+    "store:default",
+    "websocket:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "https://*.tauri.app"
+        },
+        {
+          "url": "https://api.coinbase.com"
+        },
+        {
+          "url": "wss://advanced-trade-ws.coinbase.com"
+        },
+        {
+          "url": "wss://advanced-trade-ws-user.coinbase.com"
+        }
+      ],
+      "deny": [
+        {
+          "url": "https://private.tauri.app"
+        }
+      ]
+    }
   ]
 }

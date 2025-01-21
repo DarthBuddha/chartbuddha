@@ -6,13 +6,13 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
 /// Struct for error details
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Details {
-  pub type_url: String,
-  pub value: Vec<u8>,
+    pub type_url: String,
+    pub value: Vec<u8>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

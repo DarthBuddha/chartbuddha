@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 // Crates
 use crate::apis::coinbase::products::candles::candles::Candles;
 
@@ -15,7 +15,7 @@ use crate::apis::coinbase::products::candles::candles::Candles;
 /// Struct to represent maintenance details
 #[derive(Debug, Deserialize, Serialize)]
 pub struct GetProductCandles {
-  pub candles: Vec<Candles>,
+    pub candles: Vec<Candles>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

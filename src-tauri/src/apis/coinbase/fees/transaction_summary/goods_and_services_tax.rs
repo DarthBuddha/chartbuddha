@@ -6,15 +6,15 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
 /* ---------------------------------------------------------------------------------------------- */
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "UPPERCASE")]
 pub enum TaxType {
-  Inclusive,
-  Exclusive,
+    Inclusive,
+    Exclusive,
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -22,9 +22,9 @@ pub enum TaxType {
 /// Margin rate, only applicable to product_type `FUTURE`.
 #[derive(Debug, Deserialize, Serialize)]
 pub struct GoodsAndServicesTax {
-  pub rate: String,
-  #[serde(rename = "type")]
-  pub tax_type: TaxType,
+    pub rate: String,
+    #[serde(rename = "type")]
+    pub tax_type: TaxType,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

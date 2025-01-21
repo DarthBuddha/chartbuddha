@@ -8,9 +8,9 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Modules
-pub mod common;
 pub mod coinbase_products_list;
 pub mod coinbase_subscribe;
+pub mod common;
 pub mod subscription_save;
 
 /* ---------------------------------------------------------------------------------------------- */

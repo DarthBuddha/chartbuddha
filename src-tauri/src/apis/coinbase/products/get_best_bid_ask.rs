@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 // Crates
 use crate::apis::coinbase::products::product_book::price_book::PriceBook;
 
@@ -15,7 +15,7 @@ use crate::apis::coinbase::products::product_book::price_book::PriceBook;
 /// Struct to represent maintenance details
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct GetBestBidAsk {
-  pub price_book: Vec<PriceBook>,
+    pub price_book: Vec<PriceBook>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -14,18 +14,18 @@ use serde_json::Value;
 /* ---------------------------------------------------------------------------------------------- */
 
 pub fn subscriptions_defaults() -> HashMap<String, Value> {
-  let mut defaults = HashMap::new();
+    let mut defaults = HashMap::new();
 
-  // App Subscriptions
-  defaults.insert(
-    "subscriptions".to_string(),
-    json!({
-      "binance": [],
-      "coinbase": []
-    })
-  );
+    // App Subscriptions
+    defaults.insert(
+        "subscriptions".to_string(),
+        json!({
+          "binance": [],
+          "coinbase": []
+        }),
+    );
 
-  defaults
+    defaults
 }
 
 /* ---------------------------------------------------------------------------------------------- */

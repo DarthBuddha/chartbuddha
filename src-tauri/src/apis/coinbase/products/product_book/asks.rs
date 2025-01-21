@@ -6,15 +6,15 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
 /* ---------------------------------------------------------------------------------------------- */
 
 /// Struct to represent maintenance details
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Asks {
-  pub price: String,
-  pub size: String,
+    pub price: String,
+    pub size: String,
 }
 
 /* ---------------------------------------------------------------------------------------------- */
