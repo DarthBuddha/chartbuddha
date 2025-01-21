@@ -7,15 +7,13 @@
 
 // Rust
 use std::collections::HashMap;
-// use serde_json::json;
 // Tauri
 use tauri::{ AppHandle, Manager, Wry };
-use tauri_plugin_store::{ StoreExt, Store };
+use tauri_plugin_store::Store;
 // SeaOrm
 use sea_orm::{ ActiveModelTrait, DatabaseConnection, Set };
 // Crates
-use crate::app::state::app_state::AppState;
-// use crate::app::store::
+use crate::app::structs::subscription::Subscription;
 use crate::app::entities::app_subscriptions::ActiveModel as SubscriptionActiveModel;
 use crate::app::commands::common::store_subscription::store_subscription;
 // TODO: Implement the subscriber Streams Manager
@@ -44,6 +42,18 @@ pub async fn subscription_save(
   // Check for duplicate subscription in the store
   let subscriptions: HashMap<String, Vec<Subscription>> = store
     .get("subscriptions")
+    .unwrap_or_default()
+    .as_object()
+    .and_then(|obj| {
+      obj
+        .iter()
+        .map(|(k, v)| {
+          let subs: Vec<Subscription> = serde_json::from_value(v.clone()).unwrap_or_default();
+          (k.clone(), subs)
+        })
+        .collect::<HashMap<String, Vec<Subscription>>>()
+        .into()
+    })
     .unwrap_or_default();
   if let Some(platform_subscriptions) = subscriptions.get(&platform) {
     if platform_subscriptions.iter().any(|s| s.symbol == symbol) {

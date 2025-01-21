@@ -30,9 +30,9 @@ Thanks in advance for helping to develop the ChartBuddha ecosystem!
 
 ### Licence
 
-<!-- This project is licensed under the [MIT license]. -->
+This project is licensed under the [MIT license].
 
-<!-- [MIT license]: https://github.com/barter-rs/barter-rs/blob/develop/LICENSE -->
+[MIT license]: https://github.com/DarthBuddha/chartbuddha/blob/master/LICENSE
 
 ### Contribution License Agreement
 

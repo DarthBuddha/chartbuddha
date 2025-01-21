@@ -1,0 +1,43 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "cSpell.words": []
+  },
+  "extensions": {
+    "recommendations": [
+      "aaron-bond.better-comments",
+      "streetsidesoftware.code-spell-checker",
+      "vadimcn.vscode-lldb",
+      "darthbuddha.db-dank",
+      "fill-labs.dependi",
+      "editorconfig.editorconfig",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "jinxdash.prettier-rust",
+      "rvest.vs-code-prettier-eslint",
+      "alefragnani.project-manager",
+      "rust-lang.rust-analyzer",
+      "foxundermoon.shell-format",
+      "tauri-apps.tauri-vscode",
+      "gruntfuggly.todo-tree",
+      "ms-vscode.vscode-speech",
+      "vscode-icons-team.vscode-icons",
+      "redhat.vscode-yaml",
+      "mdrashid.npm-manager",
+      "visualstudioexptteam.vscodeintellicode",
+      "visualstudioexptteam.intellicode-api-usage-examples",
+      "redhat.java",
+      "ms-vscode.cpptools",
+      "ms-vscode.cmake-tools",
+      "socheatsok78-lab.dotenv-vscode-stripped",
+      "tamasfe.even-better-toml",
+      "twxs.cmake",
+      "naumovs.color-highlight",
+      "royaction.color-manager"
+    ]
+  }
+}
