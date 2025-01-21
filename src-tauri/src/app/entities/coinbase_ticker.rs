@@ -1,8 +1,8 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! entities/trades_table.rs
+//! app/entities/coinbase_ticker.rs
 /* ---------------------------------------------------------------------------------------------- */
 //! Entities
-//! - trades_table
+//! - coinbase_ticker
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
@@ -11,7 +11,7 @@ use sea_orm::entity::prelude::*;
 /* ---------------------------------------------------------------------------------------------- */
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-#[sea_orm(table_name = "trades")]
+#[sea_orm(table_name = "coinbase_ticker")]
 pub struct Model {
   #[sea_orm(primary_key)]
   // Primary key
@@ -21,21 +21,42 @@ pub struct Model {
   // Record id
   pub trade_id: String,
   // Trade: Meta Data
-  pub price: Decimal,
-  pub volume: Decimal,
-  pub side: String,
-  pub timestamp: DateTime,
+  pub product_id: String,
+  pub volume_24_h: Decimal,
+  pub low_24_h: Decimal,
+  pub high_24_h: Decimal,
+  pub low_52_w: Decimal,
+  pub high_52_w: Decimal,
+  pub price_percent_chg_24_h: Decimal,
+  pub best_bid: Decimal,
+  pub best_ask: Decimal,
+  pub best_bid_quantity: Decimal,
+  pub best_ask_quantity: Decimal,
   // Housekeeping fields
   pub created_at: DateTimeWithTimeZone,
   pub updated_at: DateTime,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter)]
-pub enum Relation {}
+pub enum Relation {
+  Subscription,
+}
 
 impl RelationTrait for Relation {
   fn def(&self) -> RelationDef {
-    panic!("No RelationDef")
+    match self {
+      Self::Subscription =>
+        Entity::belongs_to(super::subscriptions::Entity)
+          .from(Column::SubscriptionId)
+          .to(super::subscriptions::Column::Id)
+          .into(),
+    }
+  }
+}
+
+impl Related<super::subscriptions::Entity> for Entity {
+  fn to() -> RelationDef {
+    Relation::Subscription.def()
   }
 }
 

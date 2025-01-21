@@ -14,4 +14,7 @@ pub mod order_book;
 pub mod subscriptions;
 pub mod trades;
 
+// Coinbase
+pub mod coinbase_ticker;
+
 /* ---------------------------------------------------------------------------------------------- */

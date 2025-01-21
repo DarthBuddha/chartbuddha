@@ -16,7 +16,7 @@ pub mod entities;
 pub mod setup;
 pub mod state;
 pub mod store;
-// pub mod streams;
+pub mod streams;
 // pub mod websocket;
 pub mod window;
 

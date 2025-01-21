@@ -1,3 +1,7 @@
 # ChartBuddha - Tauri Ignore
 
-
+.dev
+.docs
+.github
+.template
+.vscode

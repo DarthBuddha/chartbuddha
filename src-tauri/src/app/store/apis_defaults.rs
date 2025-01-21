@@ -14,22 +14,22 @@ use serde_json::Value;
 /* ---------------------------------------------------------------------------------------------- */
 
 pub fn apis_defaults() -> HashMap<String, Value> {
-    let mut defaults = HashMap::new();
+  let mut defaults = HashMap::new();
 
-    // Binance
-    // defaults.insert(
-    //   "binance".to_string(),
-    //   json!({
-    //     "api_configured": false,
-    //     "api_key": null,
-    //     "api_secret": null
-    //   })
-    // );
+  // Binance
+  // defaults.insert(
+  //   "binance".to_string(),
+  //   json!({
+  //     "api_configured": false,
+  //     "api_key": null,
+  //     "api_secret": null
+  //   })
+  // );
 
-    // Coinbase
-    defaults.insert(
-        "coinbase".to_string(),
-        json!({
+  // Coinbase
+  defaults.insert(
+    "coinbase".to_string(),
+    json!({
           "api_configured": false,
           "api_key": null,
           "api_key_secret": null,
@@ -40,10 +40,10 @@ pub fn apis_defaults() -> HashMap<String, Value> {
             "perm_portfolio_type": "",
             "perm_portfolio_uuid": ""
           }
-        }),
-    );
+        })
+  );
 
-    defaults
+  defaults
 }
 
 /* ---------------------------------------------------------------------------------------------- */

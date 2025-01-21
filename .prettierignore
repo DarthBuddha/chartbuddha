@@ -1,0 +1,6 @@
+/.vscode
+
+# dependcies and artifacts directories
+node_modules/
+target/
+dist/
