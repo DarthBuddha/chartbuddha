@@ -2,13 +2,13 @@
 
 A Tauri app, Built on Rust and React but made with Love.
 
-ChartBuddha will be a BookMap style app with data api intagrations from various providers.
+ChartBuddha will be a BookMap style app with data api integrations from various providers.
 
-Exchanges, brokers and analitics data providers.
+Exchanges, brokers and analytics data providers.
 
 ## Overview
 
-- proof of concet
+- proof of concept
 
 Realtime Websocket Connection
 
@@ -28,7 +28,7 @@ Basic Database storage with PostgreSql
 
 Thanks in advance for helping to develop the ChartBuddha ecosystem!
 
-### Licence
+### License
 
 This project is licensed under the [MIT license].
 
