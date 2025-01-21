@@ -6,9 +6,8 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Library
-pub mod apis;
 pub mod app;
-pub mod commands;
+pub mod coinbase;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -61,11 +60,12 @@ pub async fn run() -> () {
         // App Setup
         app::commands::app_setup_complete::app_setup_complete,
         // Interface Subscribe Page
-        commands::subscribe::subscription_save::subscription_save,
+        app::commands::subscribe::subscription_save::subscription_save,
         // old commands
-        commands::connect::coinbase_store_api_keys::coinbase_store_api_keys,
-        commands::subscribe::coinbase_products_list::coinbase_products_list,
-        commands::subscribe::coinbase_subscribe::coinbase_subscribe // commands::websocket::websocket_cmd::init_websocket_cmd,
+        app::commands::connect::coinbase_store_api_keys::coinbase_store_api_keys,
+        app::commands::subscribe::coinbase_products_list::coinbase_products_list,
+        app::commands::subscribe::coinbase_subscribe::coinbase_subscribe
+        // commands::websocket::websocket_cmd::init_websocket_cmd,
         // commands::websocket::websocket_cmd::stop_all_active_streams_cmd
       ]
     )

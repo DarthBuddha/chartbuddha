@@ -1,25 +1,19 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! apis/coinbase/products/trades.rs
+//! # Coinbase Structs
 /* ---------------------------------------------------------------------------------------------- */
-//! Structs
-//! - Trades
+//! Folders:
+//! - data_api
+//! - error
+//! - fees
+//! - products
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### coinbase/structs/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Dependencies
-use serde::{Deserialize, Serialize};
-
-/* ---------------------------------------------------------------------------------------------- */
-
-/// Struct to represent the response from the list products endpoint
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Trades {
-    pub trade_id: String,
-    pub product_id: String,
-    pub price: String,
-    pub size: String,
-    pub time: Option<String>,
-    pub side: String,
-    pub exchange: String,
-}
+// Folders:
+pub mod data_api;
+pub mod error;
+pub mod fees;
+pub mod products;
 
 /* ---------------------------------------------------------------------------------------------- */

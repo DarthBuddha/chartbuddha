@@ -1,21 +1,32 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! apis/coinbase/data_api/api_key_permissions_response.rs
+//! # Coinbase Structs Error
 /* ---------------------------------------------------------------------------------------------- */
-//! Structs
-//! - GetApiKeyPermissions
+//! #### Structs: Error
+//! - ErrorResponse
+//! - Details
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### coinbase/structs/error.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{Deserialize, Serialize};
-// Crates
-use crate::apis::coinbase::data_api::api_key_permissions::api_key_permissions::ApiKeyPermissions;
+use serde::{ Deserialize, Serialize };
 
 /* ---------------------------------------------------------------------------------------------- */
 
-/// Struct to represent the API key permissions response
+/// Struct for unexpected error responses
 #[derive(Debug, Serialize, Deserialize)]
-pub struct GetApiKeyPermissions {
-    pub api_key_permissions: Vec<ApiKeyPermissions>,
+pub struct ErrorResponse {
+  pub error: String,
+  pub code: i32,
+  pub message: String,
+  pub details: Vec<Details>,
+}
+
+/// Struct for error details
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Details {
+  pub type_url: String,
+  pub value: Vec<u8>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

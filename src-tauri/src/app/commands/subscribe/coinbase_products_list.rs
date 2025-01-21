@@ -13,9 +13,9 @@ use tauri::{ AppHandle, Wry };
 // use serde_json::json;
 // use serde_json::Value;
 // Crates
-use crate::apis::coinbase::coinbase_authenticator::use_authenticator;
-use crate::apis::coinbase::coinbase_authenticator::Authenticator;
-use crate::apis::coinbase::products::list_products::ListProductsResponse;
+use crate::coinbase::coinbase_authenticator::use_authenticator;
+use crate::coinbase::coinbase_authenticator::Authenticator;
+use crate::coinbase::structs::products::ListProductsResponse;
 
 /* ---------------------------------------------------------------------------------------------- */
 

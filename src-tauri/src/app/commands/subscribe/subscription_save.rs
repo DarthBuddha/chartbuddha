@@ -6,17 +6,20 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
+use std::collections::HashMap;
 // use serde_json::json;
 // Tauri
 use tauri::{ AppHandle, Manager, Wry };
-// use tauri_plugin_store::StoreExt;
+use tauri_plugin_store::{ StoreExt, Store };
 // SeaOrm
 use sea_orm::{ ActiveModelTrait, DatabaseConnection, Set };
 // Crates
+use crate::app::state::app_state::AppState;
+// use crate::app::store::
 use crate::app::entities::subscriptions::ActiveModel as SubscriptionActiveModel;
-use crate::commands::subscribe::common::store_subscription::store_subscription;
-// temp
-use crate::apis::coinbase::coinbase_subscriber::coinbase_subscriber;
+use crate::app::commands::subscribe::common::store_subscription::store_subscription;
+// TODO: Implement the subscriber Streams Manager
+// use crate::apis::coinbase::coinbase_subscriber::coinbase_subscriber;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -32,8 +35,22 @@ pub async fn subscription_save(
   granularity: f64, // Changed to granularity
   historical: String
 ) -> Result<String, String> {
-  // initialize app_subscriptions store
+  // initialize subscriptions store
   log::info!("Save Subscription to Store");
+
+  // Access the Tauri store
+  let store = app_handle.state::<Store<Wry>>();
+
+  // Check for duplicate subscription in the store
+  let subscriptions: HashMap<String, Vec<Subscription>> = store
+    .get("subscriptions")
+    .unwrap_or_default();
+  if let Some(platform_subscriptions) = subscriptions.get(&platform) {
+    if platform_subscriptions.iter().any(|s| s.symbol == symbol) {
+      return Err("Subscription already exists".to_string());
+    }
+  }
+
   store_subscription(
     app_handle.clone(),
     subscription_type.clone(),
@@ -68,7 +85,7 @@ pub async fn subscription_save(
 
   new_subscription.insert(db.inner()).await.map_err(|e| e.to_string())?;
 
-  coinbase_subscriber(app_handle.clone(), symbol.clone()).await.map_err(|e| e.to_string())?;
+  // coinbase_subscriber(app_handle.clone(), symbol.clone()).await.map_err(|e| e.to_string())?;
 
   Ok("Subscription Saved".to_string())
 }

@@ -13,10 +13,10 @@ use log::{ error, info };
 use serde_json::json;
 use serde_json::to_string;
 // Crates
-use crate::apis::coinbase::coinbase_authenticator::use_authenticator;
-use crate::apis::coinbase::coinbase_authenticator::Authenticator;
-use crate::apis::coinbase::data_api::api_key_permissions::api_key_permissions::ApiKeyPermissions;
-use crate::commands::connect::common::convert_api_secret::convert_api_secret;
+use crate::coinbase::coinbase_authenticator::use_authenticator;
+use crate::coinbase::coinbase_authenticator::Authenticator;
+use crate::coinbase::structs::data_api::ApiKeyPermissions;
+use crate::app::commands::connect::common::convert_api_secret::convert_api_secret;
 
 /* ---------------------------------------------------------------------------------------------- */
 
