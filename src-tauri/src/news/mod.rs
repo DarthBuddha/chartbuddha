@@ -1,30 +1,18 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Mod
+//! # Mod: News Data Apis
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Folders:
-//! * commands
-//! * entities
-//! * setup
-//! * state
-//! * store
-//! * structs
-//! * subscription
-//! * websocket
-//! * window
+//! - fileName
+//! #### Files:
+//! - fileName
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/mod.rs
+//! ##### news/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Folders:
-pub mod commands;
-pub mod entities;
-pub mod setup;
-pub mod state;
-pub mod store;
-pub mod structs;
-pub mod streams;
-pub mod subscriber;
-pub mod websocket;
-pub mod window;
+// Folder:
+// pub mod module_name;
+
+// Files:
+// pub mod module_name;
 
 /* ---------------------------------------------------------------------------------------------- */

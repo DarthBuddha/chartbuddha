@@ -1,30 +1,18 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Mod
+//! # Mod: Broker Data Apis
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Folders:
-//! * commands
-//! * entities
-//! * setup
-//! * state
-//! * store
-//! * structs
-//! * subscription
-//! * websocket
-//! * window
+//! - Coinbase
+//! #### Files:
+//! - fileName
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/mod.rs
+//! ##### broker/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Folders:
-pub mod commands;
-pub mod entities;
-pub mod setup;
-pub mod state;
-pub mod store;
-pub mod structs;
-pub mod streams;
-pub mod subscriber;
-pub mod websocket;
-pub mod window;
+// Folder:
+pub mod coinbase;
+
+// Files:
+// pub mod module_name;
 
 /* ---------------------------------------------------------------------------------------------- */

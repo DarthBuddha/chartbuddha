@@ -1,30 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Mod
+//! # App: Subscription Mod
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Folders:
-//! * commands
-//! * entities
-//! * setup
-//! * state
-//! * store
-//! * structs
-//! * subscription
-//! * websocket
-//! * window
+//! #### Files:
+//! * subscription_manager
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/mod.rs
+//! ##### app/subscription.mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Folders:
-pub mod commands;
-pub mod entities;
-pub mod setup;
-pub mod state;
-pub mod store;
-pub mod structs;
-pub mod streams;
-pub mod subscriber;
-pub mod websocket;
-pub mod window;
+pub mod manage_subscription;
 
 /* ---------------------------------------------------------------------------------------------- */

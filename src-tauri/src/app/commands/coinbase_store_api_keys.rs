@@ -13,9 +13,9 @@ use log::{ error, info };
 use serde_json::json;
 use serde_json::to_string;
 // Crates
-use crate::coinbase::coinbase_authenticator::use_authenticator;
-use crate::coinbase::coinbase_authenticator::Authenticator;
-use crate::coinbase::structs::data_api::ApiKeyPermissions;
+use crate::broker::coinbase::coinbase_authenticator::use_authenticator;
+use crate::broker::coinbase::coinbase_authenticator::Authenticator;
+use crate::broker::coinbase::structs::data_api::ApiKeyPermissions;
 use crate::app::commands::common::convert_api_secret::convert_api_secret;
 
 /* ---------------------------------------------------------------------------------------------- */

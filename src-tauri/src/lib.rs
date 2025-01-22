@@ -9,7 +9,9 @@
 
 // Library
 pub mod app;
-pub mod coinbase;
+pub mod broker;
+pub mod market;
+pub mod news;
 
 /* ---------------------------------------------------------------------------------------------- */
 
