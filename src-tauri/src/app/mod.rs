@@ -22,7 +22,7 @@ pub mod state;
 pub mod store;
 pub mod structs;
 pub mod streams;
-// pub mod websocket;
+pub mod websocket;
 pub mod window;
 
 /* ---------------------------------------------------------------------------------------------- */

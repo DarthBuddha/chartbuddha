@@ -2,17 +2,16 @@
 //! # App Setup Setup Database Module
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
-//! * initalize_database
+//! * initialize_database
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### app/setup/setup_database.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Tauri
-use log::info;
 // SeaORM
 use sea_orm::ConnectionTrait;
 use sea_orm::{ Database, DatabaseConnection, Schema };
-// use sea_orm::sea_query::Table;
+// Dependencies
+use log::info;
 // Crates
 use crate::app::entities::{
   // order_book::Entity as OrdersEntity,
@@ -26,7 +25,7 @@ const DB_URL: &str = "postgres://postgres:DB@localhost:5432/chartbuddha";
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub async fn initalize_database() -> Result<DatabaseConnection, Box<dyn std::error::Error>> {
+pub async fn initialize_database() -> Result<DatabaseConnection, Box<dyn std::error::Error>> {
   info!("Initializing Database...");
 
   // Connect to the database

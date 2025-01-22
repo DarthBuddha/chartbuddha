@@ -5,7 +5,11 @@
     }
   ],
   "settings": {
-    "cSpell.words": []
+    "cSpell.words": [
+      "chrono",
+      "rustls",
+      "tungstenite"
+    ]
   },
   "extensions": {
     "recommendations": [

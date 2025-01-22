@@ -1,9 +1,11 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! commands/websocket/websocket_cmd.rs
+//! # App Commands: websocket_cmd Module
 /* ---------------------------------------------------------------------------------------------- */
-//! Functions
-//! - init_websocket_cmd
-//! - stop_all_active_streams_cmd
+//! #### Functions
+//! * init_websocket_cmd
+//! * stop_all_active_streams_cmd
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### app/commands/websocket_cmd.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -13,9 +15,9 @@ use log::{ info, error };
 use tauri::Manager;
 // Dependencies
 // Crates
-// use crate::app::state::state_app::AppState;
-use crate::ws::init_ws::initialize_websocket;
-use crate::streams::streams_coordinator::StreamsCoordinator;
+use crate::app::state::app_state::AppState;
+use crate::app::websocket::websocket::initialize_websocket;
+use crate::app::streams::streams::Streams;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -41,7 +43,7 @@ pub async fn init_websocket_cmd(app_handle: AppHandle) -> Result<(), String> {
 
 #[tauri::command]
 pub async fn stop_all_active_streams_cmd() -> Result<(), String> {
-  let streams_coordinator = StreamsCoordinator::new();
+  let streams_coordinator = Streams::new();
   streams_coordinator.stop_all_active_streams().await;
   Ok(())
 }

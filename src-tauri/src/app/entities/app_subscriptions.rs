@@ -1,13 +1,14 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! entities/subscriptions_table.rs
+//! # App Entities: app_subscriptions Module
 /* ---------------------------------------------------------------------------------------------- */
-//! Entities
-//! - subscriptions_table
+//! #### Entities:
+//! * app_subscriptions
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### app/entities/app_subscriptions.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
 use sea_orm::entity::prelude::*;
-// use sea_orm::prelude::Decimal;
 use sea_orm::prelude::DateTime;
 use sea_orm::prelude::DateTimeWithTimeZone;
 
@@ -19,7 +20,7 @@ pub struct Model {
   #[sea_orm(primary_key)]
   // Primary key
   pub id: i32,
-  // Subscription: Meta Data
+  // Subscription: Data
   pub subscription_type: String, // --> broker, market, news
   pub platform: String, // -----------> Platform Name / Api Name
   pub exchange: String, // -----------> equity, future, spot, perpetual
@@ -28,7 +29,7 @@ pub struct Model {
   pub tick: f64, // ------------------> Tick Interval
   pub granularity: f64, // -----------> Granularity
   pub historical: String, // ---------> Historical Data
-  // Housekeeping fields
+  // Housekeeping
   pub created_at: DateTimeWithTimeZone,
   pub updated_at: DateTime,
 }

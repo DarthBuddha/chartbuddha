@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App State Module
+//! # App: State Module
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Structs: AppState
 //! * AppState
@@ -7,10 +7,18 @@
 //! ##### app/state/app_state.rs
 /* ---------------------------------------------------------------------------------------------- */
 
+// Rust
+use std::sync::Arc;
+use std::sync::Mutex;
+// SeaORM
+use sea_orm::DatabaseConnection;
+
 /// AppState
+#[derive(Clone)]
 pub struct AppState {
   pub frontend_task: bool,
   pub backend_task: bool,
+  pub db: Arc<Mutex<Option<DatabaseConnection>>>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */

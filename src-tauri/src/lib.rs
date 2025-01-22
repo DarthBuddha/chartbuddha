@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Lib Module
+//! # ChartBuddha: lib Module
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
 //! * run
@@ -14,12 +14,13 @@ pub mod coinbase;
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
+use std::sync::Arc;
 use std::sync::Mutex;
 // Tauri
 use tauri::async_runtime::spawn;
 // Crates
 use crate::app::setup::setup::setup;
-use crate::app::setup::setup_database::initalize_database;
+use crate::app::setup::setup_database::initialize_database;
 use crate::app::state::app_state::AppState;
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -54,8 +55,14 @@ pub async fn run() -> () {
     // Plugin: Window State
     // .plugin(tauri_plugin_window_state::Builder::new().build())
     // Manage: State
-    .manage(Mutex::new(AppState { frontend_task: false, backend_task: false }))
-    .manage(initalize_database().await.expect("Failed to initialize database"))
+    .manage(
+      Mutex::new(AppState {
+        frontend_task: false,
+        backend_task: false,
+        db: Arc::new(Mutex::new(None)),
+      })
+    )
+    .manage(initialize_database().await.expect("Failed to initialize database"))
     // Manage: Commands
     .invoke_handler(
       tauri::generate_handler![

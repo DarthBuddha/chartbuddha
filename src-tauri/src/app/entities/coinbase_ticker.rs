@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Entities Coinbase Ticker
+//! # App Entities: Coinbase Ticker Module
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Entities:
 //! * coinbase_ticker
@@ -22,7 +22,7 @@ pub struct Model {
   pub subscription_id: i32,
   // Record id
   pub trade_id: String,
-  // Trade: Meta Data
+  // Trade: Data
   pub product_id: String,
   pub volume_24_h: Decimal,
   pub low_24_h: Decimal,
