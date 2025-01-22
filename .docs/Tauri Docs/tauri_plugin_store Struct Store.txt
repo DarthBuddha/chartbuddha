@@ -1,0 +1,163 @@
+pub struct Store<R: Runtime> { /* private fields */ }
+
+Implementations
+§
+Source
+impl<R: Runtime> Store<R>
+Source
+pub fn set(&self, key: impl Into<String>, value: impl Into<JsonValue>)
+
+Inserts a key-value pair into the store.
+Source
+pub fn get(&self, key: impl AsRef<str>) -> Option<JsonValue>
+
+Returns the value for the given key or None if the key does not exist.
+Source
+pub fn has(&self, key: impl AsRef<str>) -> bool
+
+Returns true if the given key exists in the store.
+Source
+pub fn delete(&self, key: impl AsRef<str>) -> bool
+
+Removes a key-value pair from the store.
+Source
+pub fn clear(&self)
+
+Clears the store, removing all key-value pairs.
+
+Note: To clear the storage and reset it to its default value, use reset instead.
+Source
+pub fn reset(&self)
+
+Resets the store to its default value.
+
+If no default value has been set, this method behaves identical to clear.
+Source
+pub fn keys(&self) -> Vec<String>
+
+Returns a list of all keys in the store.
+Source
+pub fn values(&self) -> Vec<JsonValue>
+
+Returns a list of all values in the store.
+Source
+pub fn entries(&self) -> Vec<(String, JsonValue)>
+
+Returns a list of all key-value pairs in the store.
+Source
+pub fn length(&self) -> usize
+
+Returns the number of elements in the store.
+Source
+pub fn is_empty(&self) -> bool
+
+Returns true if the store contains no elements.
+Source
+pub fn reload(&self) -> Result<()>
+
+Update the store from the on-disk state
+Source
+pub fn save(&self) -> Result<()>
+
+Saves the store to disk at the store’s path.
+Source
+pub fn close_resource(&self)
+
+Removes the store from the resource table
+Trait Implementations
+Source
+impl<R: Runtime> Drop for Store<R>
+Source
+fn drop(&mut self)
+Executes the destructor for this type. Read more
+Source
+impl<R: Runtime> Resource for Store<R>
+Source
+fn close(self: Arc<Self>)
+Resources may implement the close() trait method if they need to do resource specific clean-ups, such as cancelling pending futures, after a resource has been removed from the resource table.
+Source
+fn name(&self) -> Cow<'_, str>
+Returns a string representation of the resource. The default implementation returns the Rust type name, but specific resource types may override this trait method.
+Auto Trait Implementations
+impl<R> Freeze for Store<R>
+impl<R> RefUnwindSafe for Store<R>
+impl<R> Send for Store<R>
+impl<R> Sync for Store<R>
+impl<R> Unpin for Store<R>
+impl<R> UnwindSafe for Store<R>
+Blanket Implementations
+Source
+impl<T> Any for T
+where
+    T: 'static + ?Sized,
+Source
+fn type_id(&self) -> TypeId
+Gets the TypeId of self. Read more
+Source
+impl<T> Borrow<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow(&self) -> &T
+Immutably borrows from an owned value. Read more
+Source
+impl<T> BorrowMut<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow_mut(&mut self) -> &mut T
+Mutably borrows from an owned value. Read more
+Source
+impl<T> From<T> for T
+Source
+fn from(t: T) -> T
+
+Returns the argument unchanged.
+Source
+impl<T> Instrument for T
+Source
+fn instrument(self, span: Span) -> Instrumented<Self>
+Instruments this type with the provided Span, returning an Instrumented wrapper. Read more
+Source
+fn in_current_span(self) -> Instrumented<Self>
+Instruments this type with the current Span, returning an Instrumented wrapper. Read more
+Source
+impl<T, U> Into<U> for T
+where
+    U: From<T>,
+Source
+fn into(self) -> U
+
+Calls U::from(self).
+
+That is, this conversion is whatever the implementation of From<T> for U chooses to do.
+Source
+impl<T, U> TryFrom<U> for T
+where
+    U: Into<T>,
+Source
+impl<T, U> TryInto<U> for T
+where
+    U: TryFrom<T>,
+Source
+type Error = <U as TryFrom<T>>::Error
+The type returned in the event of a conversion error.
+Source
+fn try_into(self) -> Result<U, <U as TryFrom<T>>::Error>
+Performs the conversion.
+Source
+impl<T> WithSubscriber for T
+Source
+fn with_subscriber<S>(self, subscriber: S) -> WithDispatch<Self>
+where
+    S: Into<Dispatch>,
+Attaches the provided Subscriber to this type, returning a WithDispatch wrapper. Read more
+Source
+fn with_current_subscriber(self) -> WithDispatch<Self>
+Attaches the current default Subscriber to this type, returning a WithDispatch wrapper. Read more
+Source
+impl<T> ErasedDestructor for T
+where
+    T: 'static,
+Source
+impl<T> MaybeSendSync for T

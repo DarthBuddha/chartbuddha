@@ -24,7 +24,7 @@ const SubscribeCoinbaseProduct: React.FC = () => {
     try {
       const response: string = await invoke('subscription_save', {
         // Subscription: Meta
-        subscriptionType: 'broker',
+        subscriptionType: 'broker', // Pass as string
         platform: 'coinbase',
         exchange: 'spot',
         symbol: selCoinbaseProduct?.product_id,
@@ -48,14 +48,14 @@ const SubscribeCoinbaseProduct: React.FC = () => {
     try {
       const response: string = await invoke('subscription_delete', {
         // Subscription: Meta
-        subscriptionType: 'broker',
+        // subscriptionType: 'broker',
         platform: 'coinbase',
-        exchange: 'spot',
+        // exchange: 'spot',
         symbol: selCoinbaseProduct?.product_id,
         // Subscription: Settings
-        tick: 10, // Changed to tickSize
-        granularity: 0.01, // Changed to granularity
-        historical: 'none',
+        // tick: 10, // Changed to tickSize
+        // granularity: 0.01, // Changed to granularity
+        // historical: 'none',
       })
       info('[coinbase_subscribe]\n' + response)
     } catch (err) {

@@ -5,7 +5,6 @@
 //! * commands
 //! * entities
 //! * setup
-//! * state
 //! * store
 //! * subscription
 //! * websocket
@@ -18,7 +17,6 @@
 pub mod commands;
 pub mod entities;
 pub mod setup;
-pub mod state;
 pub mod store;
 pub mod streams;
 pub mod subscriber;

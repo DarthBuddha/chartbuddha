@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Streams: streams Module
+//! # Module: App Streams - streams
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Structs:
 //! * Streams
@@ -15,7 +15,7 @@
 //! * start_binance_stream
 //! * start_kraken_stream
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/streams/streams.rs
+//! ##### Path: app/streams/streams.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -38,9 +38,9 @@ use chrono::Utc;
 use log::{ info, error };
 use tokio::task::JoinHandle;
 // Crates
-use crate::app::entities::app_subscriptions::ActiveModel;
-use crate::app::state::app_state::AppState;
-use crate::coinbase::coinbase_subscriber::coinbase_subscriber;
+// use crate::app::entities::app_subscriptions::ActiveModel;
+use crate::AppState;
+use crate::broker::coinbase::coinbase_subscriber::coinbase_subscriber;
 
 /* ---------------------------------------------------------------------------------------------- */
 

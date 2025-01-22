@@ -16,10 +16,10 @@ use log::error;
 use log::info;
 use tokio::time::{ sleep, Duration };
 // Crates
+use crate::AppState;
 use crate::app::commands::app_setup_complete::app_setup_complete;
-use crate::app::setup::setup_database::initialize_database;
+// use crate::app::setup::setup_database::initialize_database;
 use crate::app::setup::setup_store::setup_store;
-use crate::app::state::app_state::AppState;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -32,7 +32,7 @@ pub async fn setup(app: AppHandle) -> Result<(), ()> {
     return Err(());
   }
 
-  initialize_database().await.unwrap();
+  // initialize_database().await.unwrap();
 
   info!("Fake Pause...");
   sleep(Duration::from_secs(3)).await;

@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Structs: subscription Module
+//! # Module: App Structs - subscription
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Structs:
 //! * Subscription
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/structs/subscription.rs
+//! ##### Path: app/structs/subscription.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -29,6 +29,17 @@ pub enum SubscriptionType {
 impl Display for SubscriptionType {
   fn fmt(&self, f: &mut Formatter<'_>) -> Result {
     write!(f, "{:?}", self)
+  }
+}
+
+impl SubscriptionType {
+  pub fn from_str(s: &str) -> Self {
+    match s.to_uppercase().as_str() {
+      "BROKER" => SubscriptionType::Broker,
+      "MARKET" => SubscriptionType::Market,
+      "NEWS" => SubscriptionType::News,
+      _ => SubscriptionType::UnknownSubscriptionType,
+    }
   }
 }
 

@@ -1,0 +1,217 @@
+pub struct StoreBuilder<R: Runtime> { /* private fields */ }
+
+Builds a Store
+Implementations
+Source
+impl<R: Runtime> StoreBuilder<R>
+Source
+pub fn new<M: Manager<R>, P: AsRef<Path>>(manager: &M, path: P) -> Self
+
+Creates a new StoreBuilder.
+Examples
+
+tauri::Builder::default()
+  .plugin(tauri_plugin_store::Builder::default().build())
+  .setup(|app| {
+    let builder = tauri_plugin_store::StoreBuilder::new(app, "store.bin");
+    Ok(())
+  });
+
+Source
+pub fn defaults(self, defaults: HashMap<String, JsonValue>) -> Self
+
+Inserts a default key-value pair.
+Examples
+
+tauri::Builder::default()
+  .plugin(tauri_plugin_store::Builder::default().build())
+  .setup(|app| {
+    let mut defaults = std::collections::HashMap::new();
+    defaults.insert("foo".to_string(), "bar".into());
+
+    let store = tauri_plugin_store::StoreBuilder::new(app, "store.bin")
+      .defaults(defaults)
+      .build()?;
+    Ok(())
+  });
+
+Source
+pub fn default(
+    self,
+    key: impl Into<String>,
+    value: impl Into<JsonValue>,
+) -> Self
+
+Inserts multiple default key-value pairs.
+Examples
+
+tauri::Builder::default()
+  .plugin(tauri_plugin_store::Builder::default().build())
+  .setup(|app| {
+    let store = tauri_plugin_store::StoreBuilder::new(app, "store.bin")
+      .default("foo".to_string(), "bar")
+      .build()?;
+    Ok(())
+  });
+
+Source
+pub fn serialize(self, serialize: SerializeFn) -> Self
+
+Defines a custom serialization function.
+Examples
+
+tauri::Builder::default()
+  .plugin(tauri_plugin_store::Builder::default().build())
+  .setup(|app| {
+    let store = tauri_plugin_store::StoreBuilder::new(app, "store.json")
+      .serialize(|cache| serde_json::to_vec(&cache).map_err(Into::into))
+      .build()?;
+    Ok(())
+  });
+
+Source
+pub fn deserialize(self, deserialize: DeserializeFn) -> Self
+
+Defines a custom deserialization function
+Examples
+
+tauri::Builder::default()
+  .plugin(tauri_plugin_store::Builder::default().build())
+  .setup(|app| {
+    let store = tauri_plugin_store::StoreBuilder::new(app, "store.json")
+      .deserialize(|bytes| serde_json::from_slice(&bytes).map_err(Into::into))
+      .build()?;
+    Ok(())
+  });
+
+Source
+pub fn auto_save(self, debounce_duration: Duration) -> Self
+
+Auto save on modified with a debounce duration
+Examples
+
+tauri::Builder::default()
+   .plugin(tauri_plugin_store::Builder::default().build())
+  .setup(|app| {
+    let store = tauri_plugin_store::StoreBuilder::new(app, "store.json")
+        .auto_save(std::time::Duration::from_millis(100))
+        .build()?;
+    Ok(())
+  });
+
+Source
+pub fn disable_auto_save(self) -> Self
+
+Disable auto save on modified with a debounce duration.
+Source
+pub fn create_new(self) -> Self
+
+Force create a new store with default values even if it already exists.
+Source
+pub fn build(self) -> Result<Arc<Store<R>>>
+
+Load the existing store with the same path or creates a new Store.
+
+If a store with the same path has already been loaded its instance is returned.
+Examples
+
+tauri::Builder::default()
+  .plugin(tauri_plugin_store::Builder::default().build())
+  .setup(|app| {
+    let store = tauri_plugin_store::StoreBuilder::new(app, "store.json").build();
+    Ok(())
+  });
+
+Auto Trait Implementations
+impl<R> Freeze for StoreBuilder<R>
+where
+    <R as Runtime<EventLoopMessage>>::Handle: Freeze,
+impl<R> !RefUnwindSafe for StoreBuilder<R>
+impl<R> Send for StoreBuilder<R>
+impl<R> Sync for StoreBuilder<R>
+impl<R> Unpin for StoreBuilder<R>
+where
+    <R as Runtime<EventLoopMessage>>::Handle: Unpin,
+impl<R> !UnwindSafe for StoreBuilder<R>
+Blanket Implementations
+Source
+impl<T> Any for T
+where
+    T: 'static + ?Sized,
+Source
+fn type_id(&self) -> TypeId
+Gets the TypeId of self. Read more
+Source
+impl<T> Borrow<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow(&self) -> &T
+Immutably borrows from an owned value. Read more
+Source
+impl<T> BorrowMut<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow_mut(&mut self) -> &mut T
+Mutably borrows from an owned value. Read more
+Source
+impl<T> From<T> for T
+Source
+fn from(t: T) -> T
+
+Returns the argument unchanged.
+Source
+impl<T> Instrument for T
+Source
+fn instrument(self, span: Span) -> Instrumented<Self>
+Instruments this type with the provided Span, returning an Instrumented wrapper. Read more
+Source
+fn in_current_span(self) -> Instrumented<Self>
+Instruments this type with the current Span, returning an Instrumented wrapper. Read more
+Source
+impl<T, U> Into<U> for T
+where
+    U: From<T>,
+Source
+fn into(self) -> U
+
+Calls U::from(self).
+
+That is, this conversion is whatever the implementation of From<T> for U chooses to do.
+Source
+impl<T, U> TryFrom<U> for T
+where
+    U: Into<T>,
+Source
+type Error = Infallible
+The type returned in the event of a conversion error.
+Source
+fn try_from(value: U) -> Result<T, <T as TryFrom<U>>::Error>
+Performs the conversion.
+Source
+impl<T, U> TryInto<U> for T
+where
+    U: TryFrom<T>,
+Source
+type Error = <U as TryFrom<T>>::Error
+The type returned in the event of a conversion error.
+Source
+fn try_into(self) -> Result<U, <U as TryFrom<T>>::Error>
+Performs the conversion.
+Source
+impl<T> WithSubscriber for T
+Source
+fn with_subscriber<S>(self, subscriber: S) -> WithDispatch<Self>
+where
+    S: Into<Dispatch>,
+Attaches the provided Subscriber to this type, returning a WithDispatch wrapper. Read more
+Source
+fn with_current_subscriber(self) -> WithDispatch<Self>
+Attaches the current default Subscriber to this type, returning a WithDispatch wrapper. Read more
+Source
+impl<T> ErasedDestructor for T
+where
+    T: 'static,
+Source
+impl<T> MaybeSendSync for T

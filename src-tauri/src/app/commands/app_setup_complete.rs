@@ -1,17 +1,21 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! app/commands/app_setup_complete.rs
+//! # Module: App Commands - app_setup_complete
 /* ---------------------------------------------------------------------------------------------- */
-//! Functions
+//! #### Functions:
 //! - app_setup_complete
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/commands/app_setup_complete.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::sync::Mutex;
 // Tauri
-use tauri::{ AppHandle, Manager, State };
+use tauri::AppHandle;
+use tauri::Manager;
+use tauri::State;
 // Dependencies
 // Crates
-use crate::app::state::app_state::AppState;
+use crate::AppState;
 
 /* ---------------------------------------------------------------------------------------------- */
 

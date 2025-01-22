@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha: lib Module
+//! # Module: lib
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
 //! * run
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### lib.rs
+//! ##### Path: lib.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Library
@@ -16,14 +16,26 @@ pub mod news;
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
-use std::sync::Arc;
-use std::sync::Mutex;
+use std::sync::{ Arc, Mutex };
 // Tauri
+// use tauri::Manager;
+// use tauri::Wry;
 use tauri::async_runtime::spawn;
+// SeaORM
+use sea_orm::DatabaseConnection;
 // Crates
 use crate::app::setup::setup::setup;
 use crate::app::setup::setup_database::initialize_database;
-use crate::app::state::app_state::AppState;
+
+/* ---------------------------------------------------------------------------------------------- */
+
+// AppState
+#[derive(Clone)]
+pub struct AppState {
+  pub frontend_task: bool,
+  pub backend_task: bool,
+  pub db: Arc<Mutex<Option<DatabaseConnection>>>,
+}
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -31,6 +43,9 @@ use crate::app::state::app_state::AppState;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 #[tokio::main]
 pub async fn run() -> () {
+  // Initialize the database
+  let db = initialize_database().await.expect("Failed to initialize database");
+
   // Manage: Tauri Plugins
   tauri::Builder
     ::default()
@@ -61,10 +76,14 @@ pub async fn run() -> () {
       Mutex::new(AppState {
         frontend_task: false,
         backend_task: false,
-        db: Arc::new(Mutex::new(None)),
+        db: Arc::new(Mutex::new(Some(db))),
       })
     )
-    .manage(initialize_database().await.expect("Failed to initialize database"))
+    .setup(|app| {
+      let app_handle = app.handle();
+      spawn(setup(app_handle.clone()));
+      Ok(())
+    })
     // Manage: Commands
     .invoke_handler(
       tauri::generate_handler![
@@ -80,11 +99,6 @@ pub async fn run() -> () {
         // commands::websocket::websocket_cmd::stop_all_active_streams_cmd
       ]
     )
-    // Manage: Setup
-    .setup(|app| {
-      spawn(setup(app.handle().clone()));
-      Ok(())
-    })
     // Run: ChartBuddha Application
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

@@ -1,11 +1,11 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Commands: websocket_cmd Module
+//! # Module: App Commands - websocket_cmd
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions
 //! * init_websocket_cmd
 //! * stop_all_active_streams_cmd
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/commands/websocket_cmd.rs
+//! ##### Path: app/commands/websocket_cmd.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -15,7 +15,7 @@ use log::{ info, error };
 use tauri::Manager;
 // Dependencies
 // Crates
-use crate::app::state::app_state::AppState;
+use crate::AppState;
 use crate::app::websocket::websocket::initialize_websocket;
 use crate::app::streams::streams::Streams;
 
