@@ -3,21 +3,21 @@
 // ---------------------------------------------------------------------------------------------- //
 
 // React
-import React from 'react';
+import React from 'react'
 // import React, { useEffect, useState } from 'react';
 // Tauri
-import { error, info } from '@tauri-apps/plugin-log';
-import { invoke } from '@tauri-apps/api/core';
+import { error, info } from '@tauri-apps/plugin-log'
+import { invoke } from '@tauri-apps/api/core'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
+import { useInterfaceContext } from 'context/InterfaceContext'
 // CSS Modules
-import Style from './SubscribeCoinbaseProduct.module.css';
+import Style from './SubscribeCoinbaseProduct.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeCoinbaseProduct: React.FC = () => {
   // State Management
-  const { selCoinbaseProduct } = useInterfaceContext();
+  const { selCoinbaseProduct } = useInterfaceContext()
 
   // Button Click: Handle Product Subscriptions
   const buttonClick_Subscribe = async () => {
@@ -32,19 +32,40 @@ const SubscribeCoinbaseProduct: React.FC = () => {
         tick: 10, // Changed to tickSize
         granularity: 0.01, // Changed to granularity
         historical: 'none',
-      });
-      info('[coinbase_subscribe]\n' + response);
+      })
+      info('[coinbase_subscribe]\n' + response)
     } catch (err) {
       if (err instanceof Error) {
-        error(err.toString());
+        error(err.toString())
       } else {
-        error(String(err));
+        error(String(err))
       }
     }
-  };
+  }
 
   // Button Click: Handle Product UnSubscriptions
-  const buttonClick_UnSubscribe = async () => {};
+  const buttonClick_UnSubscribe = async () => {
+    try {
+      const response: string = await invoke('subscription_delete', {
+        // Subscription: Meta
+        subscriptionType: 'broker',
+        platform: 'coinbase',
+        exchange: 'spot',
+        symbol: selCoinbaseProduct?.product_id,
+        // Subscription: Settings
+        tick: 10, // Changed to tickSize
+        granularity: 0.01, // Changed to granularity
+        historical: 'none',
+      })
+      info('[coinbase_subscribe]\n' + response)
+    } catch (err) {
+      if (err instanceof Error) {
+        error(err.toString())
+      } else {
+        error(String(err))
+      }
+    }
+  }
 
   // Component Return
   return (
@@ -84,20 +105,20 @@ const SubscribeCoinbaseProduct: React.FC = () => {
       </div>
       <div className={Style.Button_Container}>
         <button type="button" className={Style.Subscribe_Button} onClick={buttonClick_Subscribe}>
-          Subscribe to Product
+          Save Subscription
         </button>
         <button
           type="button"
           className={Style.UnSubscribe_Button}
           onClick={buttonClick_UnSubscribe}
         >
-          UnSubscribe to Product
+          Delete Subscription
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SubscribeCoinbaseProduct;
+export default SubscribeCoinbaseProduct
 
 /* ---------------------------------------------------------------------------------------------- */

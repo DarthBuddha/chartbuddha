@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Commands: subscription_save Module
+//! # Module: App Subscriber Commands - subscription_save
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions
 //! * subscription_save
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/commands/subscription_save.rs
+//! ##### app/subscriber/commands/subscription_save.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -15,11 +15,10 @@ use tauri_plugin_store::Store;
 // SeaOrm
 use sea_orm::{ ActiveModelTrait, DatabaseConnection, Set };
 // Crates
-use crate::app::structs::subscription::Subscription;
+use crate::app::subscriber::structs::subscription::Subscription;
+use crate::app::subscriber::structs::subscription::SubscriptionType;
 use crate::app::entities::app_subscriptions::ActiveModel as SubscriptionActiveModel;
-use crate::app::commands::common::store_subscription::store_subscription;
-// TODO: Implement the subscriber Streams Manager
-// use crate::apis::coinbase::coinbase_subscriber::coinbase_subscriber;
+use crate::app::subscriber::common::subscription_store::save_subscription_to_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -27,7 +26,7 @@ use crate::app::commands::common::store_subscription::store_subscription;
 #[tauri::command]
 pub async fn subscription_save(
   app_handle: AppHandle<Wry>,
-  subscription_type: String,
+  subscription_type: SubscriptionType,
   platform: String,
   exchange: String,
   symbol: String,
@@ -63,9 +62,9 @@ pub async fn subscription_save(
     }
   }
 
-  store_subscription(
+  save_subscription_to_store(
     app_handle.clone(),
-    subscription_type.clone(),
+    subscription_type.clone().to_string(),
     platform.clone(),
     exchange.clone(),
     symbol.clone(),
@@ -96,8 +95,6 @@ pub async fn subscription_save(
   };
 
   new_subscription.insert(db.inner()).await.map_err(|e| e.to_string())?;
-
-  // coinbase_subscriber(app_handle.clone(), symbol.clone()).await.map_err(|e| e.to_string())?;
 
   Ok("Subscription Saved".to_string())
 }

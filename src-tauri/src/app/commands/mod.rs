@@ -17,7 +17,6 @@ pub mod app_setup_complete;
 pub mod coinbase_store_api_keys;
 pub mod coinbase_products_list;
 pub mod coinbase_subscribe;
-pub mod subscription_save;
 pub mod websocket_cmd;
 
 /* ---------------------------------------------------------------------------------------------- */

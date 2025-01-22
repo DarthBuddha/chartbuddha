@@ -7,7 +7,6 @@
 //! * setup
 //! * state
 //! * store
-//! * structs
 //! * subscription
 //! * websocket
 //! * window
@@ -21,7 +20,6 @@ pub mod entities;
 pub mod setup;
 pub mod state;
 pub mod store;
-pub mod structs;
 pub mod streams;
 pub mod subscriber;
 pub mod websocket;

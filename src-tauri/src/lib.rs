@@ -70,8 +70,8 @@ pub async fn run() -> () {
       tauri::generate_handler![
         // App Setup
         app::commands::app_setup_complete::app_setup_complete,
-        // Interface Subscribe Page
-        app::commands::subscription_save::subscription_save,
+        app::subscriber::commands::subscription_save::subscription_save,
+        app::subscriber::commands::subscription_delete::subscription_delete,
         // old commands
         app::commands::coinbase_store_api_keys::coinbase_store_api_keys,
         app::commands::coinbase_products_list::coinbase_products_list,
