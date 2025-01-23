@@ -1,17 +1,20 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Store Mod
+//! # Mod: App Store
 /* ---------------------------------------------------------------------------------------------- */
+//! #### Folders:
+//! * defaults
 //! #### Files:
-//! * apis_defaults
-//! * settings_defaults
-//! * subscriptions_defaults
+//! * setup_store
+//! * store_manager
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/store/mod.rs
+//! ##### Path: app/store/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
+// Folders:
+pub mod defaults;
+
 // Files:
-pub mod apis_defaults;
-pub mod settings_defaults;
-pub mod subscriptions_defaults;
+pub mod store_manager;
+pub mod initialize_store;
 
 /* ---------------------------------------------------------------------------------------------- */

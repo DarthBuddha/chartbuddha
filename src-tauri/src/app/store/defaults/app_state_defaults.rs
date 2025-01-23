@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Store Apis Defaults Module
+//! # Module: App Store Defaults - app_defaults
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Functions:
-//! * apis_defaults
+//! Functions:
+//! * app_defaults
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/store/apis_defaults.rs
+//! ##### Path: app/store/defaults/app_defaults.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -15,33 +15,15 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn apis_defaults() -> HashMap<String, Value> {
+pub fn app_state_defaults() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
-  // Binance
-  // defaults.insert(
-  //   "binance".to_string(),
-  //   json!({
-  //     "api_configured": false,
-  //     "api_key": null,
-  //     "api_secret": null
-  //   })
-  // );
-
-  // Coinbase
+  // app
   defaults.insert(
-    "coinbase".to_string(),
+    "app_state".to_string(),
     json!({
-          "api_configured": false,
-          "api_key": null,
-          "api_key_secret": null,
-          "api_permissions": {
-            "perm_can_trade": false,
-            "perm_can_transfer": false,
-            "perm_can_view": false,
-            "perm_portfolio_type": "",
-            "perm_portfolio_uuid": ""
-          }
+          "tauri_ready": false,
+          "react_ready": false
         })
   );
 

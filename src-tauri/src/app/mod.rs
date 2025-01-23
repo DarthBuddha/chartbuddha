@@ -1,26 +1,29 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Mod
+//! # Mod: App
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Folders:
-//! * commands
+//! * database
 //! * entities
 //! * setup
 //! * store
 //! * subscription
 //! * websocket
 //! * window
+//! #### Files:
+//! * setup
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/mod.rs
+//! ##### Path: app/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Folders:
-pub mod commands;
+pub mod database;
 pub mod entities;
-pub mod setup;
 pub mod store;
-pub mod streams;
 pub mod subscriber;
-pub mod websocket;
+// pub mod websocket;
 pub mod window;
+
+// Files:
+pub mod setup;
 
 /* ---------------------------------------------------------------------------------------------- */

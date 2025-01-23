@@ -1,17 +1,17 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Setup Mod
+//! # Mod: Broker Coinbase Commands
 /* ---------------------------------------------------------------------------------------------- */
 //! Files:
-//! * setup
-//! * setup_database
-//! * setup_store
+//! * coinbase_store_api_keys
+//! * coinbase_products_list
+//! * coinbase_subscribe
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/setup/mod.rs
+//! ##### Path: broker/coinbase/commands/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Files:
-pub mod setup;
-pub mod setup_database;
-pub mod setup_store;
+pub mod coinbase_store_api_keys;
+pub mod coinbase_products_list;
+pub mod coinbase_subscribe;
 
 /* ---------------------------------------------------------------------------------------------- */

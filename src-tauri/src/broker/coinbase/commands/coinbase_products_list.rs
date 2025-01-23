@@ -19,7 +19,7 @@ use crate::broker::coinbase::structs::products::ListProductsResponse;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-/// Store the API keys in the app_apis store and get API key permissions
+/// Store the API keys in the apis store and get API key permissions
 #[tauri::command]
 pub async fn coinbase_products_list(
   app_handle: AppHandle<Wry>,

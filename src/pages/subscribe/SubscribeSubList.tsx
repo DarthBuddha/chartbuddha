@@ -3,75 +3,75 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 // Tauri
-import { error } from '@tauri-apps/plugin-log';
-import { load } from '@tauri-apps/plugin-store';
+import { error } from '@tauri-apps/plugin-log'
+import { load } from '@tauri-apps/plugin-store'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
-import { ProductsType } from 'context/coinbase/products/Products';
+import { useInterfaceContext } from 'context/InterfaceContext'
+import { ProductsType } from 'context/coinbase/products/Products'
 // CSS Modules
-import Style from './SubscribeSubList.module.css';
+import Style from './SubscribeSubList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeSubList: React.FC = () => {
   // State Management
-  const { setApi, setCoinbaseProduct } = useInterfaceContext();
+  const { setApi, setCoinbaseProduct } = useInterfaceContext()
 
   // Store Management
   const [selectedApiListStore, setSelectedApiListStore] = useState<
     { api: string; symbol: string }[]
-  >([]);
+  >([])
 
   // Load Keys
   useEffect(() => {
-    load_subscriptions_list();
-  }, []);
+    getSubscriptionsList()
+  }, [])
 
-  // Load Subscriptions List
-  const load_subscriptions_list = async () => {
+  // Get Subscriptions List
+  const getSubscriptionsList = async () => {
     try {
-      const apis = ['binance', 'coinbase']; // Add more APIs as needed
-      const configuredApis: { api: string; symbol: string }[] = [];
+      const apis = ['binance', 'coinbase'] // Add more APIs as needed
+      const subscriptions: { api: string; symbol: string }[] = []
 
-      const store_app_subscriptions = await load('subscriptions.json');
-      const appSubscriptions = await store_app_subscriptions.get<{
-        [key: string]: { symbol: string; subscription_type: string }[];
-      }>('subscriptions');
+      const store_subscriptions = await load('subscriptions.json')
+      const appSubscriptions = await store_subscriptions.get<{
+        [key: string]: { symbol: string; subscription_type: string }[]
+      }>('subscriptions')
       if (appSubscriptions) {
         for (const api of apis) {
-          const apiData = appSubscriptions[api];
+          const apiData = appSubscriptions[api]
           if (apiData) {
             apiData.forEach((subscription) => {
               if (subscription.subscription_type === 'broker') {
-                configuredApis.push({ api, symbol: subscription.symbol });
+                subscriptions.push({ api, symbol: subscription.symbol })
               }
-            });
+            })
           }
         }
       }
 
-      setSelectedApiListStore(configuredApis);
+      setSelectedApiListStore(subscriptions)
     } catch (err) {
       if (err instanceof Error) {
-        error(`Error loading subscriptions list: ${err.message}`);
+        error(`Error loading subscriptions list: ${err.message}`)
       } else {
-        error(`Unexpected error: ${String(err)}`);
+        error(`Unexpected error: ${String(err)}`)
       }
     }
-  };
+  }
 
   // Button Click: Handle Data Api
   const handleClick = async (selApi: string, selSymbol: string) => {
-    const resetApi = ['binance', 'coinbase'];
+    const resetApi = ['binance', 'coinbase']
     // Logic: Reset Context
     if (resetApi.includes(selApi)) {
-      setApi(selApi);
-      const product: ProductsType = { product_id: selSymbol };
-      setCoinbaseProduct(product);
+      setApi(selApi)
+      const product: ProductsType = { product_id: selSymbol }
+      setCoinbaseProduct(product)
     }
-  };
+  }
 
   /* -------------------------------------------------------------------------------------------- */
   return (
@@ -93,9 +93,9 @@ const SubscribeSubList: React.FC = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SubscribeSubList;
+export default SubscribeSubList
 
 /* ---------------------------------------------------------------------------------------------- */

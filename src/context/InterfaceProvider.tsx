@@ -3,32 +3,32 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 // Tauri
 // import { info } from '@tauri-apps/plugin-log';
 // Components
-import { InterfaceContext } from './InterfaceContext';
-import { PermissionsType } from './coinbase/data_api/permissions/Permissions';
-import { ProductsType } from './coinbase/products/Products';
+import { InterfaceContext } from './InterfaceContext'
+import { PermissionsType } from './coinbase/data_api/permissions/Permissions'
+import { ProductsType } from './coinbase/products/Products'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Global Flags
-  const [selAppInit, setAppInit] = useState<boolean | null>(null);
   // Global Context
-  const [selPage, setPage] = useState<string | null>(null);
-  const [selApi, setApi] = useState<string | null>(null);
-  const [selProduct, setProduct] = useState<string | null>(null);
+  const [selPage, setPage] = useState<string | null>(null)
+  const [selApi, setApi] = useState<string | null>(null)
+  const [selProduct, setProduct] = useState<string | null>(null)
+  const [selApiList, setApiList] = useState<string | null>(null)
+  const [selSubList, setSubList] = useState<string | null>(null)
   // Coinbase
-  const [selCoinbaseApiKey, setCoinbaseApiKey] = useState<string | null>(null);
-  const [selCoinbaseApiKeySecret, setCoinbaseApiKeySecret] = useState<string | null>(null);
+  const [selCoinbaseApiKey, setCoinbaseApiKey] = useState<string | null>(null)
+  const [selCoinbaseApiKeySecret, setCoinbaseApiKeySecret] = useState<string | null>(null)
   const [selCoinbaseApiPermissions, setCoinbaseApiPermissions] = useState<PermissionsType | null>(
     null,
-  );
-  const [selCoinbaseProductType, setCoinbaseProductType] = useState<string | null>(null);
-  const [selCoinbaseProductList, setCoinbaseProductList] = useState<ProductsType[] | null>(null);
-  const [selCoinbaseProduct, setCoinbaseProduct] = useState<ProductsType | null>(null);
+  )
+  const [selCoinbaseProductType, setCoinbaseProductType] = useState<string | null>(null)
+  const [selCoinbaseProductList, setCoinbaseProductList] = useState<ProductsType[] | null>(null)
+  const [selCoinbaseProduct, setCoinbaseProduct] = useState<ProductsType | null>(null)
 
   // Log initial state
   // info('Initial Coinbase API Permissions: ' + JSON.stringify(selCoinbaseApiPermissions));
@@ -37,8 +37,8 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     <InterfaceContext.Provider
       value={{
         // Global Flags
-        selAppInit,
-        setAppInit,
+        // selAppInit,
+        // setAppInit,
         // Global Context
         selPage,
         setPage,
@@ -46,6 +46,10 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setApi,
         selProduct,
         setProduct,
+        selApiList,
+        setApiList,
+        selSubList,
+        setSubList,
         // API: Coinbase
         selCoinbaseApiKey,
         setCoinbaseApiKey,
@@ -63,7 +67,7 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     >
       {children}
     </InterfaceContext.Provider>
-  );
-};
+  )
+}
 
 /* ---------------------------------------------------------------------------------------------- */

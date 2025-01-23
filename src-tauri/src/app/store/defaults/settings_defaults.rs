@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Store Subscriptions Defaults Module
+//! # Module: App Store Defaults - settings_defaults
 /* ---------------------------------------------------------------------------------------------- */
 //! Functions:
 //! * settings_defaults
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/store/subscriptions_defaults.rs
+//! ##### Path: app/store/defaults/settings_defaults.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -15,15 +15,26 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn subscriptions_defaults() -> HashMap<String, Value> {
+pub fn settings_defaults() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
-  // App Subscriptions
+  // app
   defaults.insert(
-    "subscriptions".to_string(),
+    "app".to_string(),
     json!({
-          "binance": [],
-          "coinbase": []
+          "app_init_run": false,
+          "app_version": null,
+          "app_update": null
+        })
+  );
+
+  // database
+  defaults.insert(
+    "database".to_string(),
+    json!({
+          "database_name": null,
+          "database_pass": null,
+          "database_url": null
         })
   );
 

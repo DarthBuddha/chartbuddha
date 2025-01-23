@@ -1,23 +1,28 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Coinbase Authenticator Module
+//! # Module: Broker Coinbase - coinbase_authenticator
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
 //! * use_authenticator
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### coinbase/authenticator.rs
+//! ##### Path: broker/coinbase/coinbase_authenticator.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::error::Error;
 use std::time::{ SystemTime, UNIX_EPOCH };
 // Tauri
-use tauri::{ AppHandle, Wry };
+use tauri::AppHandle;
 use tauri_plugin_store::StoreExt;
 // Dependencies
+use log::error;
+use log::info;
 use jsonwebtoken::{ encode, EncodingKey, Header };
 use rand::{ distributions::Alphanumeric, Rng };
-use serde::{ Deserialize, Serialize };
+use serde::Deserialize;
+use serde::Serialize;
 use serde_json::Value;
+// Crates
+use crate::app::store::store_manager::APIS_STORE;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -43,11 +48,14 @@ pub struct Claims {
 
 /// Authenticate the API request by generating a JWT token
 pub async fn use_authenticator(
-  app_handle: AppHandle<Wry>,
+  app: AppHandle,
   authenticator: &Authenticator
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
-  // Step 1: Load API key and secret from the store
-  let store = app_handle.store("apis.json")?;
+  info!("Get API key and secret from apis store...");
+  let store = app.store(APIS_STORE).map_err(|e| {
+    error!("Failed to get store: {}", e);
+    Box::<dyn Error + Send + Sync>::from(e)
+  })?;
 
   let coinbase: Value = store.get("coinbase").expect("Failed to get value from store");
 
@@ -72,7 +80,7 @@ pub async fn use_authenticator(
   let now = match SystemTime::now().duration_since(UNIX_EPOCH) {
     Ok(duration) => duration.as_secs(),
     Err(e) => {
-      log::error!("Failed to get current time: {:?}", e);
+      error!("Failed to get current time: {:?}", e);
       return Err("Failed to get current time".into());
     }
   };
@@ -109,7 +117,7 @@ pub async fn use_authenticator(
   let encoding_key = match EncodingKey::from_ec_pem(api_secret.as_bytes()) {
     Ok(key) => key,
     Err(e) => {
-      log::error!("Failed to parse EC private key: {:?}", e);
+      error!("Failed to parse EC private key: {:?}", e);
       return Err("Failed to parse EC private key".into());
     }
   };
@@ -118,7 +126,7 @@ pub async fn use_authenticator(
   match encode(&header, &claims, &encoding_key) {
     Ok(token) => Ok(token),
     Err(e) => {
-      log::error!("Failed to encode JWT: {:?}", e);
+      error!("Failed to encode JWT: {:?}", e);
       Err("Failed to encode JWT".into())
     }
   }

@@ -1,22 +1,19 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Commands Mod
+//! # Mod: App Store Defaults
 /* ---------------------------------------------------------------------------------------------- */
-//! Folder:
-//! * common
-//! Files:
-//! * app_setup_complete
+//! #### Files:
+//! * apis_defaults
+//! * app_state_defaults
+//! * settings_defaults
+//! * subscriptions_defaults
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/commands/mod.rs
+//! ##### Path: app/store/defaults/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Folder:
-pub mod common;
-
-// pub mod websocket;
-pub mod app_setup_complete;
-pub mod coinbase_store_api_keys;
-pub mod coinbase_products_list;
-pub mod coinbase_subscribe;
-pub mod websocket_cmd;
+// Files:
+pub mod apis_defaults;
+pub mod app_state_defaults;
+pub mod settings_defaults;
+pub mod subscriptions_defaults;
 
 /* ---------------------------------------------------------------------------------------------- */

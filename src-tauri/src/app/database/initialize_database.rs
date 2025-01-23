@@ -1,8 +1,8 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Setup Setup Database Module
+//! # Module: App Database - initialize_database
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
-//! * initialize_database
+//! * setup_database
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### app/setup/setup_database.rs
 /* ---------------------------------------------------------------------------------------------- */
@@ -26,13 +26,13 @@ const DB_URL: &str = "postgres://postgres:DB@localhost:5432/chartbuddha";
 /* ---------------------------------------------------------------------------------------------- */
 
 pub async fn initialize_database() -> Result<DatabaseConnection, Box<dyn std::error::Error>> {
-  info!("Initializing Database...");
+  info!("Setup Database...");
 
   // Connect to the database
   let db = Database::connect(DB_URL).await?;
   info!("Database connected successfully.");
 
-  // Drop and create tables
+  // Create tables
   let schema = Schema::new(db.get_database_backend());
   let backend = db.get_database_backend();
 
@@ -44,21 +44,7 @@ pub async fn initialize_database() -> Result<DatabaseConnection, Box<dyn std::er
   db.execute(backend.build(&create_subscriptions_table)).await?;
   info!("Subscriptions table created.");
 
-  // Create the trades table
-  // let create_trades_table = schema
-  //   .create_table_from_entity(TradesEntity)
-  //   .if_not_exists()
-  //   .to_owned();
-  // db.execute(backend.build(&create_trades_table)).await?;
-  // info!("Trades table created.");
-
-  // Create the orders table
-  // let create_orders_table = schema
-  //   .create_table_from_entity(OrdersEntity)
-  //   .if_not_exists()
-  //   .to_owned();
-  // db.execute(backend.build(&create_orders_table)).await?;
-  // info!("Orders table created.");
+  info!("Database Setup successfully.");
 
   Ok(db)
 }

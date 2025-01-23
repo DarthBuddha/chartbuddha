@@ -43,9 +43,9 @@ pub async fn subscription_save(
 
   // Convert string to SubscriptionType
   let subscription_type = SubscriptionType::from_str(&subscription_type);
+  let app = app_handle.clone();
 
   // Access the Tauri store
-  let app = app_handle.clone();
   let store = app.store("subscriptions.json").map_err(|e| e.to_string())?;
 
   // Check for duplicate subscription in the store

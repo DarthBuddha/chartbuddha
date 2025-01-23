@@ -33,9 +33,9 @@ pub async fn save_subscription_to_store(
   historical: String
 ) -> Result<String, String> {
   info!("Save Subscription to Store");
+  let app = app_handle.clone();
 
   // Access the Tauri store
-  let app = app_handle.clone();
   let store = app.store("subscriptions.json").map_err(|e| e.to_string())?;
 
   // get existing subscriptions
@@ -77,20 +77,13 @@ pub async fn save_subscription_to_store(
 /// Delete the subscription from the app store
 pub async fn delete_subscription_from_store(
   app_handle: AppHandle<Wry>,
-  // subscription_type: String,
   platform: String,
-  // exchange: String,
   symbol: String
-  // tick: f64, // Changed to tickSize
-  // granularity: f64, // Changed to granularity
-  // historical: String
 ) -> Result<String, String> {
   // initialize app_subscriptions store
   info!("Delete Subscription from Store");
 
-  // Access the Tauri store
-  let app = app_handle.clone();
-  let store = app.store("subscriptions.json").map_err(|e| e.to_string())?;
+  let store = app_handle.store("subscriptions.json").map_err(|e| e.to_string())?;
 
   // get existing subscriptions
   let mut subscriptions_store = store

@@ -22,10 +22,19 @@ use std::sync::{ Arc, Mutex };
 // use tauri::Wry;
 use tauri::async_runtime::spawn;
 // SeaORM
-use sea_orm::DatabaseConnection;
+// use sea_orm::DatabaseConnection;
 // Crates
-use crate::app::setup::setup::setup;
-use crate::app::setup::setup_database::initialize_database;
+use crate::app::setup::setup_tauri;
+use crate::app::database::initialize_database::initialize_database;
+use crate::app::database::database::DbConnection;
+use crate::app::database::database::DbStorage;
+// Command Modules
+use crate::app::setup::setup_complete;
+use crate::app::subscriber::commands::subscription_save::subscription_save;
+use crate::app::subscriber::commands::subscription_delete::subscription_delete;
+use crate::broker::coinbase::commands::coinbase_products_list::coinbase_products_list;
+use crate::broker::coinbase::commands::coinbase_store_api_keys::coinbase_store_api_keys;
+use crate::broker::coinbase::commands::coinbase_subscribe::coinbase_subscribe;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -34,7 +43,7 @@ use crate::app::setup::setup_database::initialize_database;
 pub struct AppState {
   pub frontend_task: bool,
   pub backend_task: bool,
-  pub db: Arc<Mutex<Option<DatabaseConnection>>>,
+  // pub db: Arc<Mutex<Option<DatabaseConnection>>>,
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -72,29 +81,29 @@ pub async fn run() -> () {
     // Plugin: Window State
     // .plugin(tauri_plugin_window_state::Builder::new().build())
     // Manage: State
-    .manage(
-      Mutex::new(AppState {
-        frontend_task: false,
-        backend_task: false,
-        db: Arc::new(Mutex::new(Some(db))),
-      })
-    )
+    .manage(AppState {
+      frontend_task: false,
+      backend_task: false,
+      // db: Arc::new(Mutex::new(Some(db))),
+    })
+    .manage(DbStorage { store: Default::default() })
+    .manage(DbConnection { db: Arc::new(Mutex::new(Some(db))) })
     .setup(|app| {
       let app_handle = app.handle();
-      spawn(setup(app_handle.clone()));
+      spawn(setup_tauri(app_handle.clone()));
       Ok(())
     })
     // Manage: Commands
     .invoke_handler(
       tauri::generate_handler![
-        // App Setup
-        app::commands::app_setup_complete::app_setup_complete,
-        app::subscriber::commands::subscription_save::subscription_save,
-        app::subscriber::commands::subscription_delete::subscription_delete,
-        // old commands
-        app::commands::coinbase_store_api_keys::coinbase_store_api_keys,
-        app::commands::coinbase_products_list::coinbase_products_list,
-        app::commands::coinbase_subscribe::coinbase_subscribe
+        // Commands: App
+        setup_complete,
+        subscription_save,
+        subscription_delete,
+        // Commands: Coinbase
+        coinbase_store_api_keys,
+        coinbase_products_list,
+        coinbase_subscribe
         // commands::websocket::websocket_cmd::init_websocket_cmd,
         // commands::websocket::websocket_cmd::stop_all_active_streams_cmd
       ]

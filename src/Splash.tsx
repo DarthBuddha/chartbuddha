@@ -3,32 +3,37 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 // Tauri
-import { info } from '@tauri-apps/plugin-log';
-import { invoke } from '@tauri-apps/api/core';
-import { listen } from '@tauri-apps/api/event';
+import { info } from '@tauri-apps/plugin-log'
+import { invoke } from '@tauri-apps/api/core'
+import { listen } from '@tauri-apps/api/event'
+import { load } from '@tauri-apps/plugin-store'
 // Interface
 // import { useInterfaceContext } from 'context/InterfaceContext';
 // Common
 // import MenuBar from './components/menubar/MenuBar';
 // import StatusBar from './components/statusbar/StatusBar';
 // CSS Module
-import Style from './Splash.module.css';
+import Style from './Splash.module.css'
+
+/* ---------------------------------------------------------------------------------------------- */
+
+const store = await load('app_state.json')
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const Splash: React.FC = () => {
   useEffect(() => {
-    const unlisten = listen('backend-setup-complete', () => {
-      info('Backend setup complete event received');
-      setup();
-    });
+    const unlisten = listen('tauri-ready', () => {
+      info('Tauri Ready - event received')
+      setupReact()
+    })
 
     return () => {
-      unlisten.then((fn) => fn());
-    };
-  }, []);
+      unlisten.then((fn) => fn())
+    }
+  }, [])
 
   return (
     <div className={Style.Main_Window}>
@@ -40,24 +45,39 @@ const Splash: React.FC = () => {
       </div>
       <div className={Style.StatusBar_Component}>{/* <StatusBar /> */}</div>
     </div>
-  );
-};
+  )
+}
 
-export default Splash;
+export default Splash
 
 // Utility function to implement a sleep function in TypeScript
 function sleep(seconds: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000))
 }
 
 // Setup function
-async function setup() {
+async function setupReact() {
   // Fake perform some really heavy setup task
-  info('Performing really heavy frontend setup task...');
-  await sleep(3);
-  info('Frontend setup task complete!');
+  info('Fake Pause...')
+  await sleep(3)
+
+  // React Setup Tasks Complete
+  info('React Ready...')
+  try {
+    const appState = await store.get<{ react_ready: boolean }>('app_state')
+    if (appState) {
+      appState.react_ready = true
+      await store.set('app_state', appState)
+      await store.save()
+    } else {
+      info('Failed to load app state')
+    }
+  } catch (err) {
+    info(String(err))
+  }
+
   // Set the frontend task as being completed
-  invoke('app_setup_complete', { task: 'frontend' });
+  invoke('setup_complete')
 }
 
 /* ---------------------------------------------------------------------------------------------- */

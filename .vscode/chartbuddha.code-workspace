@@ -8,8 +8,10 @@
     "cSpell.words": [
       "chrono",
       "codegen",
+      "downcasting",
       "isize",
       "millis",
+      "PKCS",
       "println",
       "rustls",
       "sqlx",

@@ -1,29 +1,55 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! commands/coinbase/connect/store_api_keys.rs
+//! # Module: App Commands - coinbase_store_api_keys
 /* ---------------------------------------------------------------------------------------------- */
-//! Functions
-//! - store_api_keys
+//! #### Functions:
+//! - coinbase_store_api_keys
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/commands/coinbase_store_api_keys.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
-use tauri::{ AppHandle, Wry };
+use tauri::AppHandle;
 use tauri_plugin_store::StoreExt;
 // Dependencies
 use log::{ error, info };
 use serde_json::json;
 use serde_json::to_string;
 // Crates
+use crate::app::store::store_manager::APIS_STORE;
 use crate::broker::coinbase::coinbase_authenticator::use_authenticator;
 use crate::broker::coinbase::coinbase_authenticator::Authenticator;
 use crate::broker::coinbase::structs::data_api::ApiKeyPermissions;
-use crate::app::commands::common::convert_api_secret::convert_api_secret;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-/// Store the API keys in the app_apis store and get API key permissions
+/// Function to convert an EC private key from SEC1 PEM format to PKCS8 PEM format
+fn convert_api_secret(api_secret: &str) -> String {
+  let mut formatted_secret = api_secret.replace("\\n", "\n");
+  formatted_secret = formatted_secret
+    .replace("-----BEGIN EC PRIVATE KEY-----", "-----BEGIN PRIVATE KEY-----")
+    .replace("-----END EC PRIVATE KEY-----", "-----END PRIVATE KEY-----");
+  formatted_secret = format!(
+    "-----BEGIN PRIVATE KEY-----\n{}\n-----END PRIVATE KEY-----\n",
+    formatted_secret
+      .replace("-----BEGIN PRIVATE KEY-----", "")
+      .replace("-----END PRIVATE KEY-----", "")
+      .replace("\n", "")
+      .chars()
+      .collect::<Vec<_>>()
+      .chunks(64)
+      .map(|chunk| chunk.iter().collect::<String>())
+      .collect::<Vec<_>>()
+      .join("\n")
+  );
+  formatted_secret
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+/// Store the API keys in the apis store and get API key permissions
 #[tauri::command]
 pub async fn coinbase_store_api_keys(
-  app_handle: AppHandle<Wry>,
+  app: AppHandle,
   coinbase_api_key: String,
   coinbase_api_secret: String
 ) -> Result<String, String> {
@@ -42,9 +68,9 @@ pub async fn coinbase_store_api_keys(
   let formatted_api_secret = convert_api_secret(&coinbase_api_secret);
   info!("{}", formatted_api_secret.to_string());
 
-  // initialize app_apis store
-  info!("Initializing app_apis store");
-  let store = app_handle.store("app_apis.json").map_err(|e| e.to_string())?;
+  // initialize apis store
+  info!("Initializing apis store");
+  let store = app.store(APIS_STORE).map_err(|e| e.to_string())?;
 
   // Save the API keys to the store
   let mut coinbase = store.get("coinbase").unwrap_or(json!({}));
@@ -62,7 +88,7 @@ pub async fn coinbase_store_api_keys(
   };
 
   // Generate JWT Token with the Authenticator
-  let jwt_token = match use_authenticator(app_handle.clone(), &authenticator).await {
+  let jwt_token = match use_authenticator(app.clone(), &authenticator).await {
     Ok(token) => token,
     Err(e) => {
       error!("Failed to authenticate API request: {:?}", e);
