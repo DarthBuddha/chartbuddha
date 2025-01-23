@@ -1,15 +1,20 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/subscribe/coinbase/SubscribeCoinbase.tsx
+//! # Component: Broker Coinbase - SubscribeCoinbase
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This component is responsible for subscribing to the Coinbase API.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: broker/coinbase/SubscribeCoinbase.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 import Split from 'react-split'
-// Interface
+// Context
 import { useInterfaceContext } from 'app/context/InterfaceContext'
 // Components
-import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct'
-import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList'
+import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct.tsx'
+import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList.tsx'
 // CSS Modules
 import Style from './SubscribeCoinbase.module.css'
 

@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: main_window
+//! # Window: main_window
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * Main window for the application
@@ -10,10 +10,10 @@
 // React
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// Component
-import Main from './app/Main'
 // Context
-import { InterfaceProvider } from 'app/context/InterfaceProvider'
+import { InterfaceProvider } from 'app/context/InterfaceProvider.tsx'
+// Components
+import Main from './app/Main.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 

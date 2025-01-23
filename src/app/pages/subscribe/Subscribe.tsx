@@ -1,15 +1,20 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/subscribe/Subscribe.tsx
+//! # Page: App Pages Subscribe - Subscribe
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Subscribe page for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/subscribe/Subscribe.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // Components
-import SubscribeApiList from './SubscribeApiList';
-import SubscribeData from './SubscribeData';
-import SubscribeSubList from './SubscribeSubList';
-// CSS Modules
-import Style from './Subscribe.module.css';
+import SubscribeApiList from './SubscribeApiList'
+import SubscribeData from './SubscribeData'
+import SubscribeSubList from './SubscribeSubList'
+// CSS Module
+import Style from './Subscribe.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -28,9 +33,9 @@ const Subscribe: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Subscribe;
+export default Subscribe
 
 /* ---------------------------------------------------------------------------------------------- */

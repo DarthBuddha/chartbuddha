@@ -1,15 +1,20 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/Home.tsx
+//! # Page: App Pages Home - Home
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Home page for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/home/Home.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // import { useEffect } from 'react';
 // Tauri
 // import { invoke } from '@tauri-apps/api/core';
 // import { info } from '@tauri-apps/plugin-log';
-// CSS Modules
-import Style from './Home.module.css';
+// CSS Module
+import Style from './Home.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -21,9 +26,9 @@ const Home: React.FC = () => {
         {/* <button onClick={stopAllStreams}>Stop All Streams</button> */}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
 /* ---------------------------------------------------------------------------------------------- */

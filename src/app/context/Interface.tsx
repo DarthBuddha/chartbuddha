@@ -1,12 +1,17 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - context/Interface.tsx
+//! # Context: App Context - Interface
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This context is responsible for managing the global state of the application.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/context/Interface.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext } from 'react'
-// Interface
-import { PermissionsType } from './coinbase/data_api/permissions/Permissions'
-import { ProductsType } from './coinbase/products/Products'
+// Context
+import { DataApiPermissionsType } from './broker/Coinbase.tsx'
+import { ProductsType } from './broker/Coinbase.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -28,8 +33,8 @@ export interface InterfaceType {
   setCoinbaseApiKey: React.Dispatch<React.SetStateAction<string | null>>
   selCoinbaseApiKeySecret: string | null
   setCoinbaseApiKeySecret: React.Dispatch<React.SetStateAction<string | null>>
-  selCoinbaseApiPermissions: PermissionsType | null
-  setCoinbaseApiPermissions: React.Dispatch<React.SetStateAction<PermissionsType | null>>
+  selCoinbaseApiPermissions: DataApiPermissionsType | null
+  setCoinbaseApiPermissions: React.Dispatch<React.SetStateAction<DataApiPermissionsType | null>>
   selCoinbaseProductType: string | null
   setCoinbaseProductType: React.Dispatch<React.SetStateAction<string | null>>
   selCoinbaseProductList: ProductsType[] | null

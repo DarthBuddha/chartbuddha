@@ -1,11 +1,16 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - components/menubar/MenuBar.tsx
+//! # Component: App Components MenuBar - MenuBar
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This component is responsible for rendering the application's menu bar.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/components/menubar/MenuBar.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-// Interface
-import { useInterfaceContext } from 'app/context/InterfaceContext'
+// Context
+import { useInterfaceContext } from 'app/context/InterfaceContext.tsx'
 // CSS Module
 import Style from './MenuBar.module.css'
 

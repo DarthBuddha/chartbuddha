@@ -1,11 +1,16 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Profile.tsx
+//! # Page: App Pages Profile - Profile
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Profile page for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/profile/Profile.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-// CSS Modules
-import Style from './Profile.module.css';
+import React from 'react'
+// CSS Module
+import Style from './Profile.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 //
@@ -17,9 +22,9 @@ const Profile: React.FC = () => {
         <p>User Profile page.</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
 //
 /* ---------------------------------------------------------------------------------------------- */

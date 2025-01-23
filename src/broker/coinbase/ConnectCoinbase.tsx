@@ -1,5 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/connect/coinbase/ConnectCoinbase.tsx
+//! # Component: Broker Coinbase - ConnectCoinbase
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This component is responsible for connecting to the Coinbase API.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: broker/coinbase/ConnectCoinbase.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -8,9 +13,9 @@ import React from 'react'
 import { load } from '@tauri-apps/plugin-store'
 import { info, error } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
-// Interface
-import { useInterfaceContext } from 'app/context/InterfaceContext'
-import { PermissionsType } from 'context/coinbase/data_api/permissions/Permissions'
+// Context
+import { useInterfaceContext } from 'app/context/InterfaceContext.tsx'
+import { DataApiPermissionsType } from 'app/context/broker/Coinbase.tsx'
 // CSS Module
 import Style from './ConnectCoinbase.module.css'
 
@@ -68,7 +73,7 @@ const ConnectCoinbase: React.FC = () => {
         coinbaseApiSecret: selCoinbaseApiKeySecret,
       })
 
-      const parsedResponse: PermissionsType = JSON.parse(response)
+      const parsedResponse: DataApiPermissionsType = JSON.parse(response)
       info('Parsed Response: ' + JSON.stringify(parsedResponse))
       // Update context state explicitly
       setCoinbaseApiPermissions(parsedResponse)

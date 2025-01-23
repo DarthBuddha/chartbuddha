@@ -1,5 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/subscribe/SubscribeSubList.tsx
+//! # Component: App Pages Subscribe - SubscribeSubList
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Subscribe Sub List page for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/subscribe/SubscribeSubList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -7,10 +12,10 @@ import React, { useEffect, useState } from 'react'
 // Tauri
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
-// Interface
+// Context
 import { useInterfaceContext } from 'app/context/InterfaceContext'
-import { ProductsType } from 'context/coinbase/products/Products'
-// CSS Modules
+import { ProductsType } from 'app/context/broker/Coinbase.tsx'
+// CSS Module
 import Style from './SubscribeSubList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -1,14 +1,19 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/connect/Connect.tsx
+//! # Page: App Pages Connect - Connect
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Connect page for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/connect/Connect.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // Components
-import ConnectData from './ConnectData';
-import ConnectApiList from './ConnectApiList';
-// CSS Modules
-import Style from './Connect.module.css';
+import ConnectData from './ConnectData.tsx'
+import ConnectApiList from './ConnectApiList.tsx'
+// CSS Module
+import Style from './Connect.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -24,9 +29,9 @@ const Connect: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Connect;
+export default Connect
 
 /* ---------------------------------------------------------------------------------------------- */

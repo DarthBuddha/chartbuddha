@@ -1,14 +1,19 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/subscribe/SubscribeData.tsx
+//! # Component: App Pages Subscribe - SubscribeData
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Subscribe Data component for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/subscribe/SubscribeData.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-// Interface
+// Context
 import { useInterfaceContext } from 'app/context/InterfaceContext'
 // Components
 import SubscribeCoinbase from 'broker/coinbase/SubscribeCoinbase'
-// CSS Modules
+// CSS Module
 import Style from './SubscribeData.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */

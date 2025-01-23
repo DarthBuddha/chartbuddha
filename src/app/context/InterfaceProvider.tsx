@@ -1,15 +1,20 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - context/InterfaceProvider.tsx
+//! # Context: App Context - InterfaceProvider
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This context is responsible for managing the global state of the application.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/context/InterfaceProvider.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useState } from 'react'
 // Tauri
 // import { info } from '@tauri-apps/plugin-log';
-// Components
+// Context
 import { InterfaceContext } from './InterfaceContext'
-import { PermissionsType } from './coinbase/data_api/permissions/Permissions'
-import { ProductsType } from './coinbase/products/Products'
+import { DataApiPermissionsType } from './broker/Coinbase.tsx'
+import { ProductsType } from './broker/Coinbase.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -23,9 +28,8 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // Coinbase
   const [selCoinbaseApiKey, setCoinbaseApiKey] = useState<string | null>(null)
   const [selCoinbaseApiKeySecret, setCoinbaseApiKeySecret] = useState<string | null>(null)
-  const [selCoinbaseApiPermissions, setCoinbaseApiPermissions] = useState<PermissionsType | null>(
-    null,
-  )
+  const [selCoinbaseApiPermissions, setCoinbaseApiPermissions] =
+    useState<DataApiPermissionsType | null>(null)
   const [selCoinbaseProductType, setCoinbaseProductType] = useState<string | null>(null)
   const [selCoinbaseProductList, setCoinbaseProductList] = useState<ProductsType[] | null>(null)
   const [selCoinbaseProduct, setCoinbaseProduct] = useState<ProductsType | null>(null)

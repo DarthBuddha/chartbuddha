@@ -1,5 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/connect/ConnectApiList.tsx
+//! # Component: App Pages Connect - ConnectApiList
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This component is responsible for rendering the list of available API providers.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/connect/ConnectApiList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -8,9 +13,9 @@ import React from 'react'
 import { load } from '@tauri-apps/plugin-store'
 import { info, error } from '@tauri-apps/plugin-log'
 // import { invoke } from '@tauri-apps/api/core';
-// Interface
-import { useInterfaceContext } from 'app/context/InterfaceContext'
-import { ApiType } from 'context/coinbase/data_api/Api'
+// Context
+import { useInterfaceContext } from 'app/context/InterfaceContext.tsx'
+import { DataApiType } from 'app/context/broker/Coinbase.tsx'
 // CSS Module
 import Style from './ConnectApiList.module.css'
 
@@ -32,7 +37,7 @@ const ConnectApiList: React.FC = () => {
     if (resetApi.includes(selectedApi)) {
       setApi(selectedApi)
       try {
-        const savedApi = await store.get<ApiType>('coinbase')
+        const savedApi = await store.get<DataApiType>('coinbase')
         info('Loaded API: ' + JSON.stringify(savedApi))
 
         if (savedApi) {

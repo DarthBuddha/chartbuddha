@@ -1,5 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! pages/dashboard/DashboardSubs.tsx
+//! # Component: App Pages Dashboard - DashboardSubs
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Dashboard subscription list for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/dashboard/DashboardSubs.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -8,7 +13,7 @@ import React, { useEffect, useState } from 'react'
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Interface
-import { useInterfaceContext } from 'app/context/InterfaceContext'
+import { useInterfaceContext } from 'app/context/InterfaceContext.tsx'
 // CSS Modules
 import Style from './DashboardSubs.module.css'
 

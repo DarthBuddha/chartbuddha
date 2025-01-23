@@ -1,5 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/subscribe/coinbase/SubscribeCoinbaseProductList.tsx
+//! # Component: Broker Coinbase - SubscribeCoinbaseProductList
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This component is responsible for subscribing to the Coinbase API.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: broker/coinbase/SubscribeCoinbaseProductList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -7,9 +12,9 @@ import React, { useCallback, useEffect } from 'react'
 // Tauri
 import { invoke } from '@tauri-apps/api/core'
 import { error, info } from '@tauri-apps/plugin-log'
-// Interface
-import { useInterfaceContext } from 'app/context/InterfaceContext'
-import { ProductsType } from 'context/coinbase/products/Products'
+// Context
+import { useInterfaceContext } from 'app/context/InterfaceContext.tsx'
+import { ProductsType } from 'app/context/broker/Coinbase.tsx'
 // CSS Modules
 import Style from './SubscribeCoinbaseProductList.module.css'
 

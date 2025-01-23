@@ -1,10 +1,15 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/connect/ConnectData.tsx
+//! # Component: App Pages Connect - ConnectData
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This component is responsible for rendering the data connection settings.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/connect/ConnectData.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-// Interface
+// Context
 import { useInterfaceContext } from 'app/context/InterfaceContext'
 // Components
 import Coinbase_Connect from 'broker/coinbase/ConnectCoinbase'

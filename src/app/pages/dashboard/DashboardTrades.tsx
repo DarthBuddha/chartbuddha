@@ -1,14 +1,19 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! pages/dashboard/DashboardTrades.tsx
+//! # Component: App Pages Dashboard - DashboardTrades
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Dashboard trades component for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/dashboard/DashboardTrades.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-import Split from 'react-split';
+import React from 'react'
+import Split from 'react-split'
 // Components
-import TimeSales from './trades/Trades';
+import TimeSales from './trades/Trades.tsx'
 // CSS Modules
-import Styles from './DashboardTrades.module.css';
+import Styles from './DashboardTrades.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -36,9 +41,9 @@ const DashboardTrades: React.FC = () => {
         </div>
       </Split>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardTrades;
+export default DashboardTrades
 
 /* ---------------------------------------------------------------------------------------------- */

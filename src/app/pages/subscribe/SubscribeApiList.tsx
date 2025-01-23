@@ -1,5 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/subscribe/SubscribeApiList.tsx
+//! # Component: App Pages Subscribe - SubscribeApiList
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Subscribe Api List component for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/subscribe/SubscribeApiList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -7,9 +12,9 @@ import React, { useEffect, useState } from 'react'
 // Tauri
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
-// Interface
+// Context
 import { useInterfaceContext } from 'app/context/InterfaceContext'
-// CSS Modules
+// CSS Module
 import Style from './SubscribeApiList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */

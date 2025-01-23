@@ -1,22 +1,27 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - Index.tsx
+//! # Interface: App - Main
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Main window for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/Main.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 // Components: MenuBar, StatusBar
-import MenuBar from './components/menubar/MenuBar'
-import StatusBar from './components/statusbar/StatusBar'
+import MenuBar from './components/menubar/MenuBar.tsx'
+import StatusBar from './components/statusbar/StatusBar.tsx'
 // Components
-import Analyze from './pages/analyze/Analyze'
-import Dashboard from './pages/dashboard/Dashboard'
-import Connect from './pages/connect/Connect'
-import Home from './pages/home/Home'
-import News from './pages/news/News'
-import Profile from './pages/profile/Profile'
-import Subscribe from './pages/subscribe/Subscribe'
+import Analyze from './pages/analyze/Analyze.tsx'
+import Dashboard from './pages/dashboard/Dashboard.tsx'
+import Connect from './pages/connect/Connect.tsx'
+import Home from './pages/home/Home.tsx'
+import News from './pages/news/News.tsx'
+import Profile from './pages/profile/Profile.tsx'
+import Subscribe from './pages/subscribe/Subscribe.tsx'
 // Context
-import { useInterfaceContext } from 'app/context/InterfaceContext'
+import { useInterfaceContext } from 'app/context/InterfaceContext.tsx'
 // CSS Module
 import Style from './Main.module.css'
 

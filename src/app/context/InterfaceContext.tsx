@@ -1,11 +1,16 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - context/InterfaceContext.tsx
+//! # Context: App Context - InterfaceContext
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This context is responsible for managing the global state of the application.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/context/InterfaceContext.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext, useContext } from 'react'
-// Components
-import { InterfaceType } from './Interface'
+// Context
+import { InterfaceType } from './Interface.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 

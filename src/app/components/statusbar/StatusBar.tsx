@@ -1,14 +1,19 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - components/menubar/StatusBar.tsx
+//! # Component: App Components StatusBar - StatusBar
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * This component is responsible for rendering the application's status bar.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/components/statusbar/StatusBar.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // CSS Module
-import Style from './StatusBar.module.css';
+import Style from './StatusBar.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
-//
+
 const StatusBar: React.FC = () => {
   return (
     <div className={Style.StatusBar}>
@@ -16,9 +21,9 @@ const StatusBar: React.FC = () => {
       <div className={Style.Container_Center}></div>
       <div className={Style.Container_Right}></div>
     </div>
-  );
-};
+  )
+}
 
-export default StatusBar;
-//
+export default StatusBar
+
 /* ---------------------------------------------------------------------------------------------- */

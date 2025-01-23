@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: splash_window
+//! # Window: splash_window
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * Splash window for the application
@@ -10,10 +10,10 @@
 // React
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// Components
-import Splash from './app/Splash'
 // Context
-import { InterfaceProvider } from 'app/context/InterfaceProvider'
+import { InterfaceProvider } from 'app/context/InterfaceProvider.tsx'
+// Components
+import Splash from './app/Splash.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 

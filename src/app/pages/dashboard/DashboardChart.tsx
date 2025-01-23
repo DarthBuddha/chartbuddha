@@ -1,12 +1,17 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! pages/dashboard/DashboardChart.tsx
+//! # Component: App Pages Dashboard - DashboardChart
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Dashboard chart component for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/dashboard/DashboardChart.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-import Split from 'react-split';
+import React from 'react'
+import Split from 'react-split'
 // CSS Modules
-import Styles from './DashboardChart.module.css';
+import Styles from './DashboardChart.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -40,9 +45,9 @@ const DashboardChart: React.FC = () => {
         </div>
       </Split>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardChart;
+export default DashboardChart
 
 /* ---------------------------------------------------------------------------------------------- */

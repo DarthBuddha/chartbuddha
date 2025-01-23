@@ -1,16 +1,21 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - pages/dashboard/Dashboard.tsx
+//! # Page: App Pages Dashboard - Dashboard
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Dashboard page for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: app/pages/dashboard/Dashboard.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-import Split from 'react-split';
+import React from 'react'
+import Split from 'react-split'
 // Components
-import DashboardChart from './DashboardChart';
-import DashboardSubs from './DashboardSubs';
-import DashboardTrades from './DashboardTrades';
-// CSS Modules
-import Styles from './Dashboard.module.css';
+import DashboardChart from './DashboardChart.tsx'
+import DashboardSubs from './DashboardSubs.tsx'
+import DashboardTrades from './DashboardTrades.tsx'
+// CSS Module
+import Styles from './Dashboard.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -41,9 +46,9 @@ const Dashboard: React.FC = () => {
         </div>
       </Split>
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard
 
 /* ---------------------------------------------------------------------------------------------- */
