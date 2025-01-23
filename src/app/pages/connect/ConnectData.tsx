@@ -3,19 +3,19 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
+import { useInterfaceContext } from 'app/context/InterfaceContext'
 // Components
-import Coinbase_Connect from './coinbase/ConnectCoinbase';
+import Coinbase_Connect from 'broker/coinbase/ConnectCoinbase'
 // CSS Modules
-import Style from './ConnectData.module.css';
+import Style from './ConnectData.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const ConnectData: React.FC = () => {
   // State Management
-  const { selApi } = useInterfaceContext();
+  const { selApi } = useInterfaceContext()
 
   switch (selApi) {
     case 'binance':
@@ -24,14 +24,14 @@ const ConnectData: React.FC = () => {
           <div className={Style.Title}>Binance</div>
           <div className={Style.Main_Container}>Binance API is not supported yet.</div>
         </div>
-      );
+      )
 
     case 'coinbase':
       return (
         <div className={Style.Component}>
           <Coinbase_Connect />
         </div>
-      );
+      )
 
     default:
       return (
@@ -39,10 +39,10 @@ const ConnectData: React.FC = () => {
           <div className={Style.Title}>Select a Provider</div>
           <div className={Style.Main_Container}>Select a provider to configure api settings.</div>
         </div>
-      );
+      )
   }
-};
+}
 
-export default ConnectData;
+export default ConnectData
 
 /* ---------------------------------------------------------------------------------------------- */

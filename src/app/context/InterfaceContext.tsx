@@ -3,22 +3,22 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react'
 // Components
-import { InterfaceType } from './Interface';
+import { InterfaceType } from './Interface'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export const InterfaceContext = createContext<InterfaceType | null>(null);
+export const InterfaceContext = createContext<InterfaceType | null>(null)
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export const useInterfaceContext = () => {
-  const context = useContext(InterfaceContext);
+  const context = useContext(InterfaceContext)
   if (!context) {
-    throw new Error('useInterfaceContext must be used within an InterfaceContext');
+    throw new Error('useInterfaceContext must be used within an InterfaceContext')
   }
-  return context;
-};
+  return context
+}
 
 /* ---------------------------------------------------------------------------------------------- */

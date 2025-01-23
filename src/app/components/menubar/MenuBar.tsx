@@ -3,31 +3,31 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
+import { useInterfaceContext } from 'app/context/InterfaceContext'
 // CSS Module
-import Style from './MenuBar.module.css';
+import Style from './MenuBar.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const MenuBar: React.FC = () => {
   // State Management
-  const { setPage, setApi, setCoinbaseProductType } = useInterfaceContext();
+  const { setPage, setApi, setCoinbaseProductType } = useInterfaceContext()
 
   // Handle Click
   const handleClick = async (selectedPage: string) => {
-    const resetPages = ['home', 'connect', 'subscribe', 'dashboard', 'analyze', 'news', 'profile'];
+    const resetPages = ['home', 'connect', 'subscribe', 'dashboard', 'analyze', 'news', 'profile']
 
     // Logic: Reset Interface Context
     if (resetPages.includes(selectedPage)) {
       // Global Context
-      setPage(selectedPage);
-      setApi(null);
+      setPage(selectedPage)
+      setApi(null)
       // Coinbase Context
-      setCoinbaseProductType(null);
+      setCoinbaseProductType(null)
     }
-  };
+  }
 
   return (
     <div className={Style.MenuBar}>
@@ -63,9 +63,9 @@ const MenuBar: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MenuBar;
+export default MenuBar
 
 /* ---------------------------------------------------------------------------------------------- */

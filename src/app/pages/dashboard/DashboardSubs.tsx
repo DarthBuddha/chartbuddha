@@ -3,74 +3,74 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 // Tauri
-import { error } from '@tauri-apps/plugin-log';
-import { load } from '@tauri-apps/plugin-store';
+import { error } from '@tauri-apps/plugin-log'
+import { load } from '@tauri-apps/plugin-store'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
+import { useInterfaceContext } from 'app/context/InterfaceContext'
 // CSS Modules
-import Style from './DashboardSubs.module.css';
+import Style from './DashboardSubs.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const DashboardSubs: React.FC = () => {
   // State Management
-  const { setApi, setProduct } = useInterfaceContext();
+  const { setApi, setProduct } = useInterfaceContext()
 
   // Store Management
   const [selectedApiListStore, setSelectedApiListStore] = useState<
     { api: string; symbol: string }[]
-  >([]);
+  >([])
 
   // Load Keys
   useEffect(() => {
-    load_subscriptions_list();
-  }, []);
+    load_subscriptions_list()
+  }, [])
 
   // Load Subscriptions List
   const load_subscriptions_list = async () => {
     try {
-      const apis = ['binance', 'coinbase']; // Add more APIs as needed
-      const configuredApis: { api: string; symbol: string }[] = [];
+      const apis = ['binance', 'coinbase'] // Add more APIs as needed
+      const configuredApis: { api: string; symbol: string }[] = []
 
-      const store_app_subscriptions = await load('subscriptions.json');
+      const store_app_subscriptions = await load('subscriptions.json')
       const appSubscriptions = await store_app_subscriptions.get<{
-        [key: string]: { symbol: string; subscription_type: string }[];
-      }>('subscriptions');
+        [key: string]: { symbol: string; subscription_type: string }[]
+      }>('subscriptions')
       if (appSubscriptions) {
         for (const api of apis) {
-          const apiData = appSubscriptions[api];
+          const apiData = appSubscriptions[api]
           if (apiData) {
             apiData.forEach((subscription) => {
               if (subscription.subscription_type === 'broker') {
-                configuredApis.push({ api, symbol: subscription.symbol });
+                configuredApis.push({ api, symbol: subscription.symbol })
               }
-            });
+            })
           }
         }
       }
 
-      setSelectedApiListStore(configuredApis);
+      setSelectedApiListStore(configuredApis)
     } catch (err) {
       if (err instanceof Error) {
-        error(`Error loading subscriptions list: ${err.message}`);
+        error(`Error loading subscriptions list: ${err.message}`)
       } else {
-        error(`Unexpected error: ${String(err)}`);
+        error(`Unexpected error: ${String(err)}`)
       }
     }
-  };
+  }
 
   // Button Click: Handle Data Api
   const handleClick = async (selApi: string, selSymbol: string) => {
-    const resetApi = ['binance', 'coinbase'];
-    const resetProduct = selSymbol;
+    const resetApi = ['binance', 'coinbase']
+    const resetProduct = selSymbol
     // Logic: Reset Context
     if (resetApi.includes(selApi)) {
-      setApi(selApi);
-      setProduct(resetProduct);
+      setApi(selApi)
+      setProduct(resetProduct)
     }
-  };
+  }
 
   /* -------------------------------------------------------------------------------------------- */
   return (
@@ -92,9 +92,9 @@ const DashboardSubs: React.FC = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardSubs;
+export default DashboardSubs
 
 /* ---------------------------------------------------------------------------------------------- */

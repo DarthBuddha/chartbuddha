@@ -3,28 +3,28 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // Tauri
-import { load } from '@tauri-apps/plugin-store';
-import { info, error } from '@tauri-apps/plugin-log';
-import { invoke } from '@tauri-apps/api/core';
+import { load } from '@tauri-apps/plugin-store'
+import { info, error } from '@tauri-apps/plugin-log'
+import { invoke } from '@tauri-apps/api/core'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
-import { PermissionsType } from 'context/coinbase/data_api/permissions/Permissions';
+import { useInterfaceContext } from 'app/context/InterfaceContext'
+import { PermissionsType } from 'context/coinbase/data_api/permissions/Permissions'
 // CSS Module
-import Style from './ConnectCoinbase.module.css';
+import Style from './ConnectCoinbase.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const store = await load('apis.json');
+const store = await load('apis.json')
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const ConnectCoinbase: React.FC = () => {
   // State Management
-  const { selCoinbaseApiKey, setCoinbaseApiKey } = useInterfaceContext();
-  const { selCoinbaseApiKeySecret, setCoinbaseApiKeySecret } = useInterfaceContext();
-  const { selCoinbaseApiPermissions, setCoinbaseApiPermissions } = useInterfaceContext();
+  const { selCoinbaseApiKey, setCoinbaseApiKey } = useInterfaceContext()
+  const { selCoinbaseApiKeySecret, setCoinbaseApiKeySecret } = useInterfaceContext()
+  const { selCoinbaseApiPermissions, setCoinbaseApiPermissions } = useInterfaceContext()
 
   // Delete API
   const deleteApi = async () => {
@@ -40,25 +40,25 @@ const ConnectCoinbase: React.FC = () => {
           portfolio_type: '',
           portfolio_uuid: '',
         },
-      });
-      await store.save();
+      })
+      await store.save()
 
       // Reset context explicitly
-      setCoinbaseApiKey('');
-      setCoinbaseApiKeySecret('');
+      setCoinbaseApiKey('')
+      setCoinbaseApiKeySecret('')
       setCoinbaseApiPermissions({
         can_view: false,
         can_trade: false,
         can_transfer: false,
         portfolio_uuid: '',
         portfolio_type: '',
-      });
+      })
 
-      info('Coinbase API configuration has been reset.');
+      info('Coinbase API configuration has been reset.')
     } catch (err) {
-      error(err instanceof Error ? err.toString() : String(err));
+      error(err instanceof Error ? err.toString() : String(err))
     }
-  };
+  }
 
   // Button Click: Api Save
   const clickApiSave = async () => {
@@ -66,24 +66,24 @@ const ConnectCoinbase: React.FC = () => {
       const response: string = await invoke('coinbase_store_api_keys', {
         coinbaseApiKey: selCoinbaseApiKey,
         coinbaseApiSecret: selCoinbaseApiKeySecret,
-      });
+      })
 
-      const parsedResponse: PermissionsType = JSON.parse(response);
-      info('Parsed Response: ' + JSON.stringify(parsedResponse));
+      const parsedResponse: PermissionsType = JSON.parse(response)
+      info('Parsed Response: ' + JSON.stringify(parsedResponse))
       // Update context state explicitly
-      setCoinbaseApiPermissions(parsedResponse);
+      setCoinbaseApiPermissions(parsedResponse)
 
       // Reload the API to ensure store consistency
       // await loadApi();
     } catch (err) {
-      error(err instanceof Error ? err.toString() : String(err));
+      error(err instanceof Error ? err.toString() : String(err))
     }
-  };
+  }
 
   // Button Click - Api Delete
   const clickApiDelete = async () => {
-    deleteApi();
-  };
+    deleteApi()
+  }
 
   /* -------------------------------------------------------------------------------------------- */
 
@@ -174,9 +174,9 @@ const ConnectCoinbase: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ConnectCoinbase;
+export default ConnectCoinbase
 
 /* ---------------------------------------------------------------------------------------------- */

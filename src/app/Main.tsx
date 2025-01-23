@@ -3,49 +3,49 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // Components: MenuBar, StatusBar
-import MenuBar from './components/menubar/MenuBar';
-import StatusBar from './components/statusbar/StatusBar';
+import MenuBar from './components/menubar/MenuBar'
+import StatusBar from './components/statusbar/StatusBar'
 // Components
-import Analyze from './pages/analyze/Analyze';
-import Dashboard from './pages/dashboard/Dashboard';
-import Connect from './pages/connect/Connect';
-import Home from './pages/home/Home';
-import News from './pages/news/News';
-import Profile from './pages/profile/Profile';
-import Subscribe from './pages/subscribe/Subscribe';
+import Analyze from './pages/analyze/Analyze'
+import Dashboard from './pages/dashboard/Dashboard'
+import Connect from './pages/connect/Connect'
+import Home from './pages/home/Home'
+import News from './pages/news/News'
+import Profile from './pages/profile/Profile'
+import Subscribe from './pages/subscribe/Subscribe'
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext';
+import { useInterfaceContext } from 'app/context/InterfaceContext'
 // CSS Module
-import Style from './Main.module.css';
+import Style from './Main.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const Main: React.FC = () => {
   // State Management
-  const { selPage } = useInterfaceContext();
+  const { selPage } = useInterfaceContext()
 
   const renderPage = () => {
     switch (selPage) {
       case 'analyze':
-        return <Analyze />;
+        return <Analyze />
       case 'dashboard':
-        return <Dashboard />;
+        return <Dashboard />
       case 'connect':
-        return <Connect />;
+        return <Connect />
       case 'home':
-        return <Home />;
+        return <Home />
       case 'news':
-        return <News />;
+        return <News />
       case 'profile':
-        return <Profile />;
+        return <Profile />
       case 'subscribe':
-        return <Subscribe />;
+        return <Subscribe />
       default:
-        return <Home />;
+        return <Home />
     }
-  };
+  }
 
   return (
     <div className={Style.Main_Window}>
@@ -57,9 +57,9 @@ const Main: React.FC = () => {
         <StatusBar />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main
 
 /* ---------------------------------------------------------------------------------------------- */

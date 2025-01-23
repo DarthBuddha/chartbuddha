@@ -25,9 +25,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "paths": {
-      "context/*": [
-        "context/*"
-      ]
+      // "context/*": [
+      //   "app/context/*"
+      // ]
     }
   },
   "include": [

@@ -3,41 +3,41 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
+import React from 'react'
 // Tauri
-import { load } from '@tauri-apps/plugin-store';
-import { info, error } from '@tauri-apps/plugin-log';
+import { load } from '@tauri-apps/plugin-store'
+import { info, error } from '@tauri-apps/plugin-log'
 // import { invoke } from '@tauri-apps/api/core';
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
-import { ApiType } from 'context/coinbase/data_api/Api';
+import { useInterfaceContext } from 'app/context/InterfaceContext'
+import { ApiType } from 'context/coinbase/data_api/Api'
 // CSS Module
-import Style from './ConnectApiList.module.css';
+import Style from './ConnectApiList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const store = await load('apis.json');
+const store = await load('apis.json')
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const ConnectApiList: React.FC = () => {
   // State Management
   const { setApi, setCoinbaseApiKey, setCoinbaseApiKeySecret, setCoinbaseApiPermissions } =
-    useInterfaceContext();
+    useInterfaceContext()
 
   // Handle Data Api Click
   const handleClick = async (selectedApi: string) => {
-    const resetApi = ['binance', 'coinbase'];
+    const resetApi = ['binance', 'coinbase']
     // Logic: Reset Context
     if (resetApi.includes(selectedApi)) {
-      setApi(selectedApi);
+      setApi(selectedApi)
       try {
-        const savedApi = await store.get<ApiType>('coinbase');
-        info('Loaded API: ' + JSON.stringify(savedApi));
+        const savedApi = await store.get<ApiType>('coinbase')
+        info('Loaded API: ' + JSON.stringify(savedApi))
 
         if (savedApi) {
-          setCoinbaseApiKey(savedApi.api_key || '');
-          setCoinbaseApiKeySecret(savedApi.api_key_secret || '');
+          setCoinbaseApiKey(savedApi.api_key || '')
+          setCoinbaseApiKeySecret(savedApi.api_key_secret || '')
           setCoinbaseApiPermissions(
             savedApi.api_permissions || {
               can_view: false,
@@ -46,14 +46,14 @@ const ConnectApiList: React.FC = () => {
               portfolio_uuid: '',
               portfolio_type: '',
             },
-          );
-          info('Permissions: ' + JSON.stringify(savedApi.api_permissions));
+          )
+          info('Permissions: ' + JSON.stringify(savedApi.api_permissions))
         }
       } catch (err) {
-        error(err instanceof Error ? err.toString() : String(err));
+        error(err instanceof Error ? err.toString() : String(err))
       }
     }
-  };
+  }
 
   return (
     <div className={Style.List_Container}>
@@ -67,9 +67,9 @@ const ConnectApiList: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ConnectApiList;
+export default ConnectApiList
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -3,25 +3,25 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-import Split from 'react-split';
+import React from 'react'
+import Split from 'react-split'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
+import { useInterfaceContext } from 'app/context/InterfaceContext'
 // Components
-import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct';
-import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList';
+import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct'
+import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList'
 // CSS Modules
-import Style from './SubscribeCoinbase.module.css';
+import Style from './SubscribeCoinbase.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeCoinbase: React.FC = () => {
   // State Management
-  const { selCoinbaseProductType, setCoinbaseProductType } = useInterfaceContext();
+  const { selCoinbaseProductType, setCoinbaseProductType } = useInterfaceContext()
 
   // Logic: Reset Interface Context
   if (selCoinbaseProductType === null) {
-    setCoinbaseProductType('spot');
+    setCoinbaseProductType('spot')
   }
 
   return (
@@ -47,9 +47,9 @@ const SubscribeCoinbase: React.FC = () => {
         </div>
       </Split>
     </div>
-  );
-};
+  )
+}
 
-export default SubscribeCoinbase;
+export default SubscribeCoinbase
 
 /* ---------------------------------------------------------------------------------------------- */

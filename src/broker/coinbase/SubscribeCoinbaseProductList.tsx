@@ -3,73 +3,73 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react'
 // Tauri
-import { invoke } from '@tauri-apps/api/core';
-import { error, info } from '@tauri-apps/plugin-log';
+import { invoke } from '@tauri-apps/api/core'
+import { error, info } from '@tauri-apps/plugin-log'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext';
-import { ProductsType } from 'context/coinbase/products/Products';
+import { useInterfaceContext } from 'app/context/InterfaceContext'
+import { ProductsType } from 'context/coinbase/products/Products'
 // CSS Modules
-import Style from './SubscribeCoinbaseProductList.module.css';
+import Style from './SubscribeCoinbaseProductList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeCoinbaseProductList: React.FC = () => {
   // State Management
-  const { selCoinbaseProductType, setCoinbaseProductType } = useInterfaceContext();
-  const { selCoinbaseProductList, setCoinbaseProductList } = useInterfaceContext();
-  const { setCoinbaseProduct } = useInterfaceContext();
+  const { selCoinbaseProductType, setCoinbaseProductType } = useInterfaceContext()
+  const { selCoinbaseProductList, setCoinbaseProductList } = useInterfaceContext()
+  const { setCoinbaseProduct } = useInterfaceContext()
 
   // Button Click: Product Type
   const clickProductType = (productType: string) => {
-    const resetProductType = ['spot', 'future', 'perpetual'];
+    const resetProductType = ['spot', 'future', 'perpetual']
     if (resetProductType.includes(productType)) {
-      setCoinbaseProductType(productType);
+      setCoinbaseProductType(productType)
     }
-  };
+  }
 
   // Load: Product List
   const loadProductList = useCallback(async () => {
     try {
       const response: string = await invoke('coinbase_products_list', {
         productType: selCoinbaseProductType || 'spot',
-      });
-      const parsedResponse: { products: ProductsType[] } = JSON.parse(response);
-      setCoinbaseProductList(parsedResponse.products);
+      })
+      const parsedResponse: { products: ProductsType[] } = JSON.parse(response)
+      setCoinbaseProductList(parsedResponse.products)
     } catch (err) {
       if (err instanceof Error) {
-        error(err.toString());
+        error(err.toString())
       } else {
-        error(String(err));
+        error(String(err))
       }
     }
-  }, [selCoinbaseProductType, setCoinbaseProductList]);
+  }, [selCoinbaseProductType, setCoinbaseProductList])
 
   // Initialize on Component load
   useEffect(() => {
     if (selCoinbaseProductType) {
-      loadProductList();
+      loadProductList()
     }
-  }, [selCoinbaseProductType, loadProductList]);
+  }, [selCoinbaseProductType, loadProductList])
 
   // Button Click: Product
   const clickProduct = (product: ProductsType) => {
-    info!(JSON.stringify(product));
-    setCoinbaseProduct(product);
-  };
+    info!(JSON.stringify(product))
+    setCoinbaseProduct(product)
+  }
 
   const getStyleForValue = (value: string) => {
-    return parseFloat(value) >= 0 ? Style.Positive : Style.Negative;
-  };
+    return parseFloat(value) >= 0 ? Style.Positive : Style.Negative
+  }
 
   const formatPercentage = (value: string) => {
-    return parseFloat(value).toFixed(2);
-  };
+    return parseFloat(value).toFixed(2)
+  }
 
   const formatVolume = (value: string) => {
-    return parseFloat(value).toFixed(2);
-  };
+    return parseFloat(value).toFixed(2)
+  }
 
   /* -------------------------------------------------------------------------------------------- */
 
@@ -79,7 +79,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
         <div
           className={`${Style.Button} ${selCoinbaseProductType === 'spot' ? Style.Active : ''}`}
           onClick={() => {
-            clickProductType('spot');
+            clickProductType('spot')
           }}
         >
           Spot
@@ -87,7 +87,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
         <div
           className={`${Style.Button} ${selCoinbaseProductType === 'future' ? Style.Active : ''}`}
           onClick={() => {
-            clickProductType('future');
+            clickProductType('future')
           }}
         >
           Futures
@@ -95,7 +95,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
         <div
           className={`${Style.Button} ${selCoinbaseProductType === 'perps' ? Style.Active : ''}`}
           onClick={() => {
-            clickProductType('perps');
+            clickProductType('perps')
           }}
         >
           Perps
@@ -136,9 +136,9 @@ const SubscribeCoinbaseProductList: React.FC = () => {
           ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SubscribeCoinbaseProductList;
+export default SubscribeCoinbaseProductList
 
 /* ---------------------------------------------------------------------------------------------- */

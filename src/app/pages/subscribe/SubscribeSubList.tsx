@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext'
+import { useInterfaceContext } from 'app/context/InterfaceContext'
 import { ProductsType } from 'context/coinbase/products/Products'
 // CSS Modules
 import Style from './SubscribeSubList.module.css'

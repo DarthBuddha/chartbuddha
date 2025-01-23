@@ -1,14 +1,19 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! - main_window.tsx
+//! # Module: main_window
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Main window for the application
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: main_window.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 // Component
-import Main from './Main';
+import Main from './app/Main'
 // Context
-import { InterfaceProvider } from 'context/InterfaceProvider';
+import { InterfaceProvider } from 'app/context/InterfaceProvider'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -18,6 +23,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Main />
     </InterfaceProvider>
   </React.StrictMode>,
-);
+)
 
 /* ---------------------------------------------------------------------------------------------- */
