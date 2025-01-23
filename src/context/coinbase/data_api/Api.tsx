@@ -3,20 +3,20 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import { createContext } from 'react';
+import { createContext } from 'react'
 // Components
-import { PermissionsType } from './permissions/Permissions';
+import { PermissionsType } from './permissions/Permissions'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface ApiType {
-  api_key: string;
-  api_key_secret: string;
-  api_permissions: PermissionsType;
+  api_key: string
+  api_key_secret: string
+  api_permissions: PermissionsType
 }
 
-const ApiContext = createContext<ApiType | null>(null);
+const ApiContext = createContext<ApiType | null>(null)
 
-export default ApiContext;
+export default ApiContext
 
 /* ---------------------------------------------------------------------------------------------- */

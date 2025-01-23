@@ -3,20 +3,20 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import { createContext } from 'react';
+import { createContext } from 'react'
 // Components
-import { ApiType } from './data_api/Api';
-import { ProductsType } from './products/Products';
+import { ApiType } from './data_api/Api'
+import { ProductsType } from './products/Products'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface CoinbaseType {
-  coinbase_api: ApiType;
-  coinbase_products: ProductsType[];
+  coinbase_api: ApiType
+  coinbase_products: ProductsType[]
 }
 
-const CoinbaseContext = createContext<CoinbaseType | null>(null);
+const CoinbaseContext = createContext<CoinbaseType | null>(null)
 
-export default CoinbaseContext;
+export default CoinbaseContext
 
 /* ---------------------------------------------------------------------------------------------- */
