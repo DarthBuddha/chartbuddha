@@ -3,12 +3,12 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 // Components
-import Splash from './Splash';
+import Splash from './app/Splash'
 // Context
-import { InterfaceProvider } from 'context/InterfaceProvider';
+import { InterfaceProvider } from 'context/InterfaceProvider'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -18,6 +18,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Splash />
     </InterfaceProvider>
   </React.StrictMode>,
-);
+)
 
 /* ---------------------------------------------------------------------------------------------- */
