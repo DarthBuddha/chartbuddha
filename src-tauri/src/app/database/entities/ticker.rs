@@ -1,29 +1,25 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Entities: App Entities - entity_ticker
+//! # Entities: App Database Entities - ticker
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Entity:
-//! * entity_ticker
+//! * ticker
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/entities/entity_ticker.rs
+//! ##### Path: app/database/entities/ticker.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // SeaOrm
 use sea_orm::entity::prelude::*;
-// Crates
-use crate::app::database::entity_subscription::Entity as SubscriptionEntity;
-
-use super::entity_subscription;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-#[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "ticker")]
 pub struct Model {
-  #[sea_orm(primary_key, auto_increment = true)]
-  // Primary key
-  pub id: i32,
-  // Foreign key
-  pub subscription_id: i32,
+  #[sea_orm(primary_key)]
+  pub ticker_id: i32,
+  // pub name: String,
+  #[sea_orm(foreign_key)]
+  pub subscription_id: Option<i32>,
   // Record id
   pub trade_id: String,
   // Trade: Data
@@ -43,24 +39,17 @@ pub struct Model {
   pub updated_at: DateTime,
 }
 
-#[derive(Copy, Clone, Debug, EnumIter)]
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+  #[sea_orm(
+    belongs_to = "super::subscription::Entity",
+    from = "Column::SubscriptionId",
+    to = "super::subscription::Column::SubscriptionId"
+  )]
   Subscription,
 }
 
-impl RelationTrait for Relation {
-  fn def(&self) -> RelationDef {
-    match self {
-      Self::Subscription =>
-        Entity::belongs_to(SubscriptionEntity)
-          .from(Column::SubscriptionId)
-          .to(entity_subscription::Column::Id)
-          .into(),
-    }
-  }
-}
-
-impl Related<SubscriptionEntity> for Entity {
+impl Related<super::subscription::Entity> for Entity {
   fn to() -> RelationDef {
     Relation::Subscription.def()
   }

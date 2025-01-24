@@ -42,8 +42,8 @@ pub async fn save_subscription_to_store(
   let mut subscriptions_store = store
     .get("subscriptions")
     .unwrap_or(json!({
-    "binance": [],
-    "coinbase": []
+    "Binance": [],
+    "Coinbase": []
   }));
 
   // create new subscription
@@ -59,10 +59,10 @@ pub async fn save_subscription_to_store(
   });
 
   // store the subscription based on the platform
-  if platform == "coinbase" {
-    subscriptions_store["coinbase"].as_array_mut().unwrap().push(new_subscription);
-  } else if platform == "binance" {
-    subscriptions_store["binance"].as_array_mut().unwrap().push(new_subscription);
+  if platform == "Coinbase" {
+    subscriptions_store["Coinbase"].as_array_mut().unwrap().push(new_subscription);
+  } else if platform == "Binance" {
+    subscriptions_store["Binance"].as_array_mut().unwrap().push(new_subscription);
   }
 
   store.set("subscriptions", subscriptions_store);
@@ -94,25 +94,25 @@ pub async fn delete_subscription_from_store(
   }));
 
   // find and remove the subscription
-  if platform == "coinbase" {
+  if platform == "Coinbase" {
     if
-      let Some(pos) = subscriptions_store["coinbase"]
+      let Some(pos) = subscriptions_store["Coinbase"]
         .as_array_mut()
         .unwrap()
         .iter()
         .position(|x| x["symbol"] == symbol)
     {
-      subscriptions_store["coinbase"].as_array_mut().unwrap().remove(pos);
+      subscriptions_store["Coinbase"].as_array_mut().unwrap().remove(pos);
     }
-  } else if platform == "binance" {
+  } else if platform == "Binance" {
     if
-      let Some(pos) = subscriptions_store["binance"]
+      let Some(pos) = subscriptions_store["Binance"]
         .as_array_mut()
         .unwrap()
         .iter()
         .position(|x| x["symbol"] == symbol)
     {
-      subscriptions_store["binance"].as_array_mut().unwrap().remove(pos);
+      subscriptions_store["Binance"].as_array_mut().unwrap().remove(pos);
     }
   }
 

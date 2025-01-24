@@ -20,9 +20,7 @@ use tauri_plugin_store::StoreExt;
 // Dependencies
 use log::info;
 // Crates
-use crate::app::subscriber::structs::subscription::Subscription;
-use crate::app::subscriber::structs::subscription::SubscriptionType;
-// use crate::app::entities::app_subscriptions::ActiveModel as SubscriptionActiveModel;
+use crate::app::subscriber::subscriber::Subscriber;
 use crate::app::subscriber::common::store_subscription::save_subscription_to_store;
 use crate::app::subscriber::common::db_subscriptions::save_subscription_to_db;
 
@@ -33,8 +31,8 @@ use crate::app::subscriber::common::db_subscriptions::save_subscription_to_db;
 pub async fn save_subscription_cmd(
   app_handle: AppHandle<Wry>,
   subscription_type: String,
+  exchange_type: String,
   platform: String,
-  exchange: String,
   symbol: String,
   tick: f64,
   granularity: f64,
@@ -42,15 +40,13 @@ pub async fn save_subscription_cmd(
 ) -> Result<String, String> {
   info!("Command: Save Subscription");
 
-  // Convert string to SubscriptionType
-  let subscription_type = SubscriptionType::from_str(&subscription_type);
   let app = app_handle.clone();
 
   // Access the Tauri store
   let store = app.store("subscriptions.json").map_err(|e| e.to_string())?;
 
   // Check for duplicate subscription in the store
-  let subscriptions: HashMap<String, Vec<Subscription>> = store
+  let subscriptions: HashMap<String, Vec<Subscriber>> = store
     .get("subscriptions")
     .unwrap_or_default()
     .as_object()
@@ -58,10 +54,10 @@ pub async fn save_subscription_cmd(
       obj
         .iter()
         .map(|(k, v)| {
-          let subs: Vec<Subscription> = serde_json::from_value(v.clone()).unwrap_or_default();
+          let subs: Vec<Subscriber> = serde_json::from_value(v.clone()).unwrap_or_default();
           (k.clone(), subs)
         })
-        .collect::<HashMap<String, Vec<Subscription>>>()
+        .collect::<HashMap<String, Vec<Subscriber>>>()
         .into()
     })
     .unwrap_or_default();
@@ -71,29 +67,30 @@ pub async fn save_subscription_cmd(
     }
   }
 
+  info!("Save Subscription to Store");
   save_subscription_to_store(
     app_handle.clone(),
-    subscription_type.clone().to_string(),
+    subscription_type.clone(),
+    exchange_type.clone(),
     platform.clone(),
-    exchange.clone(),
     symbol.clone(),
     tick,
     granularity,
     historical.clone()
   ).await.map_err(|e| e.to_string())?;
 
-  info!("Save Subscription to database");
+  info!("Save Subscription to Database");
   save_subscription_to_db(
-    subscription_type.clone().to_string(),
+    subscription_type.clone(),
+    exchange_type.clone(),
     platform.clone(),
-    exchange.clone(),
     symbol.clone(),
     tick,
     granularity,
     historical.clone()
   ).await.map_err(|e| e.to_string())?;
 
-  Ok("Subscription Saved".to_string())
+  Ok("Command: Save Subscription".to_string())
 }
 
 /* ---------------------------------------------------------------------------------------------- */

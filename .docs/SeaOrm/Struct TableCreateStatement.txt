@@ -1,0 +1,378 @@
+pub struct TableCreateStatement { /* private fields */ }
+
+Create a table
+Examples
+
+use sea_query::{*, tests_cfg::*};
+
+let table = Table::create()
+    .table(Char::Table)
+    .if_not_exists()
+    .comment("table's comment")
+    .col(ColumnDef::new(Char::Id).integer().not_null().auto_increment().primary_key())
+    .col(ColumnDef::new(Char::FontSize).integer().not_null().comment("font's size"))
+    .col(ColumnDef::new(Char::Character).string().not_null())
+    .col(ColumnDef::new(Char::SizeW).integer().not_null())
+    .col(ColumnDef::new(Char::SizeH).integer().not_null())
+    .col(ColumnDef::new(Char::FontId).integer().default(Value::Int(None)))
+    .foreign_key(
+        ForeignKey::create()
+            .name("FK_2e303c3a712662f1fc2a4d0aad6")
+            .from(Char::Table, Char::FontId)
+            .to(Font::Table, Font::Id)
+            .on_delete(ForeignKeyAction::Cascade)
+            .on_update(ForeignKeyAction::Cascade)
+    )
+    .to_owned();
+
+assert_eq!(
+    table.to_string(MysqlQueryBuilder),
+    [
+        r#"CREATE TABLE IF NOT EXISTS `character` ("#,
+            r#"`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,"#,
+            r#"`font_size` int NOT NULL COMMENT 'font\'s size',"#,
+            r#"`character` varchar(255) NOT NULL,"#,
+            r#"`size_w` int NOT NULL,"#,
+            r#"`size_h` int NOT NULL,"#,
+            r#"`font_id` int DEFAULT NULL,"#,
+            r#"CONSTRAINT `FK_2e303c3a712662f1fc2a4d0aad6`"#,
+                r#"FOREIGN KEY (`font_id`) REFERENCES `font` (`id`)"#,
+                r#"ON DELETE CASCADE ON UPDATE CASCADE"#,
+        r#") COMMENT 'table\'s comment'"#,
+    ].join(" ")
+);
+assert_eq!(
+    table.to_string(PostgresQueryBuilder),
+    [
+        r#"CREATE TABLE IF NOT EXISTS "character" ("#,
+            r#""id" serial NOT NULL PRIMARY KEY,"#,
+            r#""font_size" integer NOT NULL,"#,
+            r#""character" varchar NOT NULL,"#,
+            r#""size_w" integer NOT NULL,"#,
+            r#""size_h" integer NOT NULL,"#,
+            r#""font_id" integer DEFAULT NULL,"#,
+            r#"CONSTRAINT "FK_2e303c3a712662f1fc2a4d0aad6""#,
+                r#"FOREIGN KEY ("font_id") REFERENCES "font" ("id")"#,
+                r#"ON DELETE CASCADE ON UPDATE CASCADE"#,
+        r#")"#,
+    ].join(" ")
+);
+assert_eq!(
+    table.to_string(SqliteQueryBuilder),
+    [
+       r#"CREATE TABLE IF NOT EXISTS "character" ("#,
+           r#""id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,"#,
+           r#""font_size" integer NOT NULL,"#,
+           r#""character" varchar NOT NULL,"#,
+           r#""size_w" integer NOT NULL,"#,
+           r#""size_h" integer NOT NULL,"#,
+           r#""font_id" integer DEFAULT NULL,"#,
+           r#"FOREIGN KEY ("font_id") REFERENCES "font" ("id") ON DELETE CASCADE ON UPDATE CASCADE"#,
+       r#")"#,
+    ].join(" ")
+);
+
+Implementations
+Source
+impl TableCreateStatement
+Source
+pub fn new() -> Self
+
+Construct create table statement
+Source
+pub fn if_not_exists(&mut self) -> &mut Self
+
+Create table if table not exists
+Source
+pub fn table<T>(&mut self, table: T) -> &mut Self
+where
+    T: IntoTableRef,
+
+Set table name
+Source
+pub fn comment<T>(&mut self, comment: T) -> &mut Self
+where
+    T: Into<String>,
+
+Set table comment
+Source
+pub fn col<C: IntoColumnDef>(&mut self, column: C) -> &mut Self
+
+Add a new table column
+Source
+pub fn check(&mut self, value: SimpleExpr) -> &mut Self
+Source
+pub fn index(&mut self, index: &mut IndexCreateStatement) -> &mut Self
+
+Add an index. MySQL only.
+Examples
+
+use sea_query::{tests_cfg::*, *};
+
+assert_eq!(
+    Table::create()
+        .table(Glyph::Table)
+        .col(ColumnDef::new(Glyph::Id).integer().not_null())
+        .index(Index::create().unique().name("idx-glyph-id").col(Glyph::Id))
+        .to_string(MysqlQueryBuilder),
+    [
+        "CREATE TABLE `glyph` (",
+        "`id` int NOT NULL,",
+        "UNIQUE KEY `idx-glyph-id` (`id`)",
+        ")",
+    ]
+    .join(" ")
+);
+
+Source
+pub fn primary_key(&mut self, index: &mut IndexCreateStatement) -> &mut Self
+
+Add an primary key.
+Examples
+
+use sea_query::{tests_cfg::*, *};
+
+let mut statement = Table::create();
+statement
+    .table(Glyph::Table)
+    .col(ColumnDef::new(Glyph::Id).integer().not_null())
+    .col(ColumnDef::new(Glyph::Image).string().not_null())
+    .primary_key(Index::create().col(Glyph::Id).col(Glyph::Image));
+assert_eq!(
+    statement.to_string(MysqlQueryBuilder),
+    [
+        "CREATE TABLE `glyph` (",
+        "`id` int NOT NULL,",
+        "`image` varchar(255) NOT NULL,",
+        "PRIMARY KEY (`id`, `image`)",
+        ")",
+    ]
+    .join(" ")
+);
+assert_eq!(
+    statement.to_string(PostgresQueryBuilder),
+    [
+        "CREATE TABLE \"glyph\" (",
+        "\"id\" integer NOT NULL,",
+        "\"image\" varchar NOT NULL,",
+        "PRIMARY KEY (\"id\", \"image\")",
+        ")",
+    ]
+    .join(" ")
+);
+assert_eq!(
+    statement.to_string(SqliteQueryBuilder),
+    [
+        r#"CREATE TABLE "glyph" ("#,
+        r#""id" integer NOT NULL,"#,
+        r#""image" varchar NOT NULL,"#,
+        r#"PRIMARY KEY ("id", "image")"#,
+        r#")"#,
+    ]
+    .join(" ")
+);
+
+Source
+pub fn foreign_key(
+    &mut self,
+    foreign_key: &mut ForeignKeyCreateStatement,
+) -> &mut Self
+
+Add a foreign key
+Source
+pub fn engine<T>(&mut self, string: T) -> &mut Self
+where
+    T: Into<String>,
+
+Set database engine. MySQL only.
+Source
+pub fn collate<T>(&mut self, string: T) -> &mut Self
+where
+    T: Into<String>,
+
+Set database collate. MySQL only.
+Source
+pub fn character_set<T>(&mut self, name: T) -> &mut Self
+where
+    T: Into<String>,
+
+Set database character set. MySQL only.
+Source
+pub fn get_table_name(&self) -> Option<&TableRef>
+Source
+pub fn get_columns(&self) -> &Vec<ColumnDef>
+Source
+pub fn get_comment(&self) -> Option<&String>
+Source
+pub fn get_foreign_key_create_stmts(&self) -> &Vec<ForeignKeyCreateStatement>
+Source
+pub fn get_indexes(&self) -> &Vec<IndexCreateStatement>
+Source
+pub fn extra<T>(&mut self, extra: T) -> &mut Self
+where
+    T: Into<String>,
+
+Rewriting extra param. You should take care self about concat extra params. Add extra after options. Example for PostgresSQL Citus extension:
+
+use sea_query::{tests_cfg::*, *};
+let table = Table::create()
+    .table(Char::Table)
+    .col(
+        ColumnDef::new(Char::Id)
+            .uuid()
+            .extra("DEFAULT uuid_generate_v4()")
+            .primary_key()
+            .not_null(),
+    )
+    .col(
+        ColumnDef::new(Char::CreatedAt)
+            .timestamp_with_time_zone()
+            .extra("DEFAULT NOW()")
+            .not_null(),
+    )
+    .col(ColumnDef::new(Char::UserData).json_binary().not_null())
+    .extra("USING columnar")
+    .to_owned();
+assert_eq!(
+    table.to_string(PostgresQueryBuilder),
+    [
+        r#"CREATE TABLE "character" ("#,
+        r#""id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,"#,
+        r#""created_at" timestamp with time zone DEFAULT NOW() NOT NULL,"#,
+        r#""user_data" jsonb NOT NULL"#,
+        r#") USING columnar"#,
+    ]
+    .join(" ")
+);
+
+Source
+pub fn get_extra(&self) -> Option<&String>
+Source
+pub fn take(&mut self) -> Self
+Source
+impl TableCreateStatement
+Source
+pub fn build<T: SchemaBuilder>(&self, schema_builder: T) -> String
+
+See SchemaStatementBuilder::build
+Source
+pub fn build_any(&self, schema_builder: &dyn SchemaBuilder) -> String
+
+See SchemaStatementBuilder::build_any
+Source
+pub fn to_string<T: SchemaBuilder>(&self, schema_builder: T) -> String
+
+See SchemaStatementBuilder::to_string
+Trait Implementations
+Source
+impl Clone for TableCreateStatement
+Source
+fn clone(&self) -> TableCreateStatement
+Returns a copy of the value. Read more
+1.0.0 · Source
+fn clone_from(&mut self, source: &Self)
+Performs copy-assignment from source. Read more
+Source
+impl Debug for TableCreateStatement
+Source
+fn fmt(&self, f: &mut Formatter<'_>) -> Result
+Formats the value using the given formatter. Read more
+Source
+impl Default for TableCreateStatement
+Source
+fn default() -> TableCreateStatement
+Returns the “default value” for a type. Read more
+Source
+impl SchemaStatementBuilder for TableCreateStatement
+Source
+fn build<T: SchemaBuilder>(&self, schema_builder: T) -> String
+Build corresponding SQL statement for certain database backend and return SQL string
+Source
+fn build_any(&self, schema_builder: &dyn SchemaBuilder) -> String
+Build corresponding SQL statement for certain database backend and return SQL string
+Source
+fn to_string<T: SchemaBuilder>(&self, schema_builder: T) -> String
+Build corresponding SQL statement for certain database backend and return SQL string
+Auto Trait Implementations
+impl Freeze for TableCreateStatement
+impl !RefUnwindSafe for TableCreateStatement
+impl Send for TableCreateStatement
+impl Sync for TableCreateStatement
+impl Unpin for TableCreateStatement
+impl !UnwindSafe for TableCreateStatement
+Blanket Implementations
+Source
+impl<T> Any for T
+where
+    T: 'static + ?Sized,
+Source
+fn type_id(&self) -> TypeId
+Gets the TypeId of self. Read more
+Source
+impl<T> Borrow<T> for T
+where
+    T: ?Sized,
+Source
+impl<T> BorrowMut<T> for T
+where
+    T: ?Sized,
+Source
+fn borrow_mut(&mut self) -> &mut T
+Mutably borrows from an owned value. Read more
+Source
+impl<T> CloneToUninit for T
+where
+    T: Clone,
+Source
+unsafe fn clone_to_uninit(&self, dst: *mut u8)
+🔬This is a nightly-only experimental API. (clone_to_uninit)
+Performs copy-assignment from self to dst. Read more
+Source
+impl<T> From<T> for T
+Source
+fn from(t: T) -> T
+
+Returns the argument unchanged.
+Source
+impl<T, U> Into<U> for T
+where
+    U: From<T>,
+Source
+fn into(self) -> U
+
+Calls U::from(self).
+
+That is, this conversion is whatever the implementation of From<T> for U chooses to do.
+Source
+impl<T> ToOwned for T
+where
+    T: Clone,
+Source
+type Owned = T
+The resulting type after obtaining ownership.
+Source
+fn to_owned(&self) -> T
+Creates owned data from borrowed data, usually by cloning. Read more
+Source
+fn clone_into(&self, target: &mut T)
+Uses borrowed data to replace owned data, usually by cloning. Read more
+Source
+impl<T, U> TryFrom<U> for T
+where
+    U: Into<T>,
+Source
+type Error = Infallible
+The type returned in the event of a conversion error.
+Source
+fn try_from(value: U) -> Result<T, <T as TryFrom<U>>::Error>
+Performs the conversion.
+Source
+impl<T, U> TryInto<U> for T
+where
+    U: TryFrom<T>,
+Source
+type Error = <U as TryFrom<T>>::Error
+The type returned in the event of a conversion error.
+Source
+fn try_into(self) -> Result<U, <U as TryFrom<T>>::Error>
+Performs the conversion.

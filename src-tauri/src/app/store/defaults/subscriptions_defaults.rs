@@ -22,9 +22,9 @@ pub fn subscriptions_defaults() -> HashMap<String, Value> {
   defaults.insert(
     "subscriptions".to_string(),
     json!({
-      "binance": [],
-      "coinbase": []
-    }),
+      "Binance": [],
+      "Coinbase": []
+    })
   );
 
   defaults

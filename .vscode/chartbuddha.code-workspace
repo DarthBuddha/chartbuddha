@@ -8,6 +8,7 @@
     "cSpell.words": [
       "AUTOINCREMENT",
       "chrono",
+      "Citus",
       "codegen",
       "datname",
       "downcasting",
@@ -22,7 +23,8 @@
       "turbofish",
       "Uninit",
       "unmanage",
-      "usize"
+      "usize",
+      "varchar"
     ]
   },
   "extensions": {
