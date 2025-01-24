@@ -22,9 +22,9 @@ pub fn app_state_defaults() -> HashMap<String, Value> {
   defaults.insert(
     "app_state".to_string(),
     json!({
-          "tauri_ready": false,
-          "react_ready": false
-        })
+      "tauri_ready": false,
+      "react_ready": false
+    }),
   );
 
   defaults

@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Subscriber Commands - subscription_save
+//! # Module: App Subscriber Commands - save_subscription_cmd
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Functions
-//! * subscription_save
+//! #### Functions:
+//! * save_subscription_cmd
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/subscriber/commands/subscription_save.rs
+//! ##### Path: app/subscriber/commands/save_subscription_cmd.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -23,21 +23,21 @@ use log::info;
 use crate::app::subscriber::structs::subscription::Subscription;
 use crate::app::subscriber::structs::subscription::SubscriptionType;
 // use crate::app::entities::app_subscriptions::ActiveModel as SubscriptionActiveModel;
-use crate::app::subscriber::common::subscription_store::save_subscription_to_store;
+use crate::app::subscriber::common::store_subscription::save_subscription_to_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-/// Store the API keys and additional data in the app store
+/// Save the subscription to the app store
 #[tauri::command]
-pub async fn subscription_save(
+pub async fn save_subscription_cmd(
   app_handle: AppHandle<Wry>,
-  subscription_type: String, // Changed to String
+  subscription_type: String,
   platform: String,
   exchange: String,
   symbol: String,
-  tick: f64, // Changed to tickSize
-  granularity: f64, // Changed to granularity
-  historical: String
+  tick: f64,
+  granularity: f64,
+  historical: String,
 ) -> Result<String, String> {
   info!("Command: Save Subscription");
 
@@ -78,11 +78,13 @@ pub async fn subscription_save(
     symbol.clone(),
     tick,
     granularity,
-    historical.clone()
-  ).await.map_err(|e| e.to_string())?;
+    historical.clone(),
+  )
+  .await
+  .map_err(|e| e.to_string())?;
 
-  // info!("Save Subscription to database");
-  // // Access the database connection state
+  info!("Save Subscription to database");
+  // Access the database connection state
   // let db = app_handle.state::<DatabaseConnection>();
 
   // // Save subscription to the database

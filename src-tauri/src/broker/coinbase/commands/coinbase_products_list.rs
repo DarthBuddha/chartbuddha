@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
-use tauri::{ AppHandle, Wry };
+use tauri::{AppHandle, Wry};
 // use tauri_plugin_store::StoreExt;
 // Dependencies
 // use log::{ info, error };
@@ -23,10 +23,13 @@ use crate::broker::coinbase::structs::products::ListProductsResponse;
 #[tauri::command]
 pub async fn coinbase_products_list(
   app_handle: AppHandle<Wry>,
-  product_type: String
+  product_type: String,
 ) -> Result<String, String> {
-  log::info!("Command: products_list\n
-    product_type: {}", product_type);
+  log::info!(
+    "Command: products_list\n
+    product_type: {}",
+    product_type
+  );
 
   // Query Params
   // let params = match product_type.as_str() {
@@ -72,7 +75,8 @@ pub async fn coinbase_products_list(
     .get(url)
     .header("Content-Type", "application/json")
     .header("Authorization", format!("Bearer {}", jwt_token))
-    .send().await;
+    .send()
+    .await;
 
   // Handle the response
   let products_list_response = match response {
@@ -81,11 +85,10 @@ pub async fn coinbase_products_list(
         match resp.json::<ListProductsResponse>().await {
           Ok(products_response) => {
             log::info!("Products list retrieved successfully.");
-            let response_body =
-              serde_json::json!({
-                          "products": products_response.products,
-                          "num_products": products_response.num_products
-                        });
+            let response_body = serde_json::json!({
+              "products": products_response.products,
+              "num_products": products_response.num_products
+            });
             Ok(response_body.to_string())
           }
           Err(parse_err) => {
@@ -96,9 +99,14 @@ pub async fn coinbase_products_list(
       } else {
         let status = resp.status();
         let error_body = resp
-          .text().await
+          .text()
+          .await
           .unwrap_or_else(|_| "Unable to read error body".to_string());
-        log::error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
+        log::error!(
+          "Error: Status code: {:?}, Response: {:?}",
+          status,
+          error_body
+        );
         Err(format!("Failed with status code: {:?}", status))
       }
     }

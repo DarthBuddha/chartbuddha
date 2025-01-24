@@ -15,6 +15,8 @@ use tauri::Emitter;
 use tauri::Manager;
 // use tauri::State;
 use tauri_plugin_store::StoreExt;
+// SeaOrm
+// use sea_orm::DbErr;
 // Dependencies
 use log::error;
 use log::info;
@@ -22,11 +24,9 @@ use serde_json::json;
 use serde_json::Value;
 use tokio::time::{ sleep, Duration };
 // Crates
-// use crate::AppState;
-// use crate::app::commands::app_setup_complete::app_setup_complete;
-use crate::app::store::store_manager::APP_STORE;
-use crate::app::database::initialize_database::initialize_database;
+use crate::app::database::database::setup_database;
 use crate::app::store::initialize_store::initialize_store;
+use crate::app::store::store_manager::APP_STORE;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -41,7 +41,7 @@ pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
     return Err(());
   }
 
-  initialize_database().await.unwrap();
+  setup_database().await.unwrap();
 
   info!("Fake Pause...");
   sleep(Duration::from_secs(3)).await;

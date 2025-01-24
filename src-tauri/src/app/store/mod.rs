@@ -14,7 +14,7 @@
 pub mod defaults;
 
 // Files:
-pub mod store_manager;
 pub mod initialize_store;
+pub mod store_manager;
 
 /* ---------------------------------------------------------------------------------------------- */

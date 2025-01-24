@@ -12,7 +12,7 @@ use std::fmt::Display;
 use std::fmt::Formatter;
 use std::fmt::Result;
 // Dependencies
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 
 /* ---------------------------------------------------------------------------------------------- */
 

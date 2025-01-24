@@ -32,17 +32,17 @@ pub fn apis_defaults() -> HashMap<String, Value> {
   defaults.insert(
     "coinbase".to_string(),
     json!({
-          "api_configured": false,
-          "api_key": null,
-          "api_key_secret": null,
-          "api_permissions": {
-            "perm_can_trade": false,
-            "perm_can_transfer": false,
-            "perm_can_view": false,
-            "perm_portfolio_type": "",
-            "perm_portfolio_uuid": ""
-          }
-        })
+      "api_configured": false,
+      "api_key": null,
+      "api_key_secret": null,
+      "api_permissions": {
+        "perm_can_trade": false,
+        "perm_can_transfer": false,
+        "perm_can_view": false,
+        "perm_portfolio_type": "",
+        "perm_portfolio_uuid": ""
+      }
+    }),
   );
 
   defaults

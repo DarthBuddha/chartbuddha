@@ -9,15 +9,15 @@
 
 // Rust
 use std::error::Error;
-use std::time::{ SystemTime, UNIX_EPOCH };
+use std::time::{SystemTime, UNIX_EPOCH};
 // Tauri
 use tauri::AppHandle;
 use tauri_plugin_store::StoreExt;
 // Dependencies
+use jsonwebtoken::{encode, EncodingKey, Header};
 use log::error;
 use log::info;
-use jsonwebtoken::{ encode, EncodingKey, Header };
-use rand::{ distributions::Alphanumeric, Rng };
+use rand::{distributions::Alphanumeric, Rng};
 use serde::Deserialize;
 use serde::Serialize;
 use serde_json::Value;
@@ -49,7 +49,7 @@ pub struct Claims {
 /// Authenticate the API request by generating a JWT token
 pub async fn use_authenticator(
   app: AppHandle,
-  authenticator: &Authenticator
+  authenticator: &Authenticator,
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
   info!("Get API key and secret from apis store...");
   let store = app.store(APIS_STORE).map_err(|e| {
@@ -57,7 +57,9 @@ pub async fn use_authenticator(
     Box::<dyn Error + Send + Sync>::from(e)
   })?;
 
-  let coinbase: Value = store.get("coinbase").expect("Failed to get value from store");
+  let coinbase: Value = store
+    .get("coinbase")
+    .expect("Failed to get value from store");
 
   let api_key: String = coinbase
     .get("api_key")
@@ -86,8 +88,7 @@ pub async fn use_authenticator(
   };
 
   // Generate a random nonce
-  let nonce: String = rand
-    ::thread_rng()
+  let nonce: String = rand::thread_rng()
     .sample_iter(&Alphanumeric)
     .take(16)
     .map(char::from)

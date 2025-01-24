@@ -47,11 +47,10 @@ pub enum Relation {
 impl RelationTrait for Relation {
   fn def(&self) -> RelationDef {
     match self {
-      Self::Subscription =>
-        Entity::belongs_to(super::app_subscriptions::Entity)
-          .from(Column::SubscriptionId)
-          .to(super::app_subscriptions::Column::Id)
-          .into(),
+      Self::Subscription => Entity::belongs_to(super::app_subscriptions::Entity)
+        .from(Column::SubscriptionId)
+        .to(super::app_subscriptions::Column::Id)
+        .into(),
     }
   }
 }

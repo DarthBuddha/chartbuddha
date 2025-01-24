@@ -27,7 +27,7 @@ const SubscribeCoinbaseProduct: React.FC = () => {
   // Button Click: Handle Product Subscriptions
   const buttonClick_Subscribe = async () => {
     try {
-      const response: string = await invoke('subscription_save', {
+      const response: string = await invoke('save_subscription_cmd', {
         // Subscription: Meta
         subscriptionType: 'broker', // Pass as string
         platform: 'coinbase',
@@ -51,7 +51,7 @@ const SubscribeCoinbaseProduct: React.FC = () => {
   // Button Click: Handle Product UnSubscriptions
   const buttonClick_UnSubscribe = async () => {
     try {
-      const response: string = await invoke('subscription_delete', {
+      const response: string = await invoke('delete_subscription_cmd', {
         // Subscription: Meta
         // subscriptionType: 'broker',
         platform: 'coinbase',

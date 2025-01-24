@@ -11,7 +11,7 @@
 use tauri::AppHandle;
 use tauri_plugin_store::StoreExt;
 // Dependencies
-use log::{ error, info };
+use log::{error, info};
 use serde_json::json;
 use serde_json::to_string;
 // Crates
@@ -26,7 +26,10 @@ use crate::broker::coinbase::structs::data_api::ApiKeyPermissions;
 fn convert_api_secret(api_secret: &str) -> String {
   let mut formatted_secret = api_secret.replace("\\n", "\n");
   formatted_secret = formatted_secret
-    .replace("-----BEGIN EC PRIVATE KEY-----", "-----BEGIN PRIVATE KEY-----")
+    .replace(
+      "-----BEGIN EC PRIVATE KEY-----",
+      "-----BEGIN PRIVATE KEY-----",
+    )
     .replace("-----END EC PRIVATE KEY-----", "-----END PRIVATE KEY-----");
   formatted_secret = format!(
     "-----BEGIN PRIVATE KEY-----\n{}\n-----END PRIVATE KEY-----\n",
@@ -51,14 +54,13 @@ fn convert_api_secret(api_secret: &str) -> String {
 pub async fn coinbase_store_api_keys(
   app: AppHandle,
   coinbase_api_key: String,
-  coinbase_api_secret: String
+  coinbase_api_secret: String,
 ) -> Result<String, String> {
   info!(
     "Command: store_api_keys\n
     coinbase_api_key: {}\n
     coinbase_api_secret: {}",
-    coinbase_api_key,
-    coinbase_api_secret
+    coinbase_api_key, coinbase_api_secret
   );
 
   // Request Path
@@ -107,7 +109,8 @@ pub async fn coinbase_store_api_keys(
     .get(url)
     .header("Content-Type", "application/json")
     .header("Authorization", format!("Bearer {}", jwt_token))
-    .send().await;
+    .send()
+    .await;
 
   // Handle the response
   let api_permissions_response = match response {
@@ -118,9 +121,8 @@ pub async fn coinbase_store_api_keys(
             info!("permissions validated successfully.");
 
             // Format the response using JSON serialization
-            let api_permissions_response = to_string(&api_permissions).map_err(|e|
-              format!("Failed to serialize API permissions: {}", e)
-            )?;
+            let api_permissions_response = to_string(&api_permissions)
+              .map_err(|e| format!("Failed to serialize API permissions: {}", e))?;
 
             // Save the API permissions to the store
             let mut coinbase = store.get("coinbase").unwrap_or(json!({}));
@@ -142,9 +144,14 @@ pub async fn coinbase_store_api_keys(
       } else {
         let status = resp.status();
         let error_body = resp
-          .text().await
+          .text()
+          .await
           .unwrap_or_else(|_| "Unable to read error body".to_string());
-        log::error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
+        log::error!(
+          "Error: Status code: {:?}, Response: {:?}",
+          status,
+          error_body
+        );
         Err(format!("Failed with status code: {:?}", status))
       }
     }

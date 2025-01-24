@@ -10,8 +10,8 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Files:
-pub mod coinbase_store_api_keys;
 pub mod coinbase_products_list;
+pub mod coinbase_store_api_keys;
 pub mod coinbase_subscribe;
 
 /* ---------------------------------------------------------------------------------------------- */

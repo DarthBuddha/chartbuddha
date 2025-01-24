@@ -41,7 +41,7 @@ const ConnectData: React.FC = () => {
     default:
       return (
         <div className={Style.Component}>
-          <div className={Style.Title}>Select a Provider</div>
+          <div className={Style.Title}>Connection Settings</div>
           <div className={Style.Main_Container}>Select a provider to configure api settings.</div>
         </div>
       )

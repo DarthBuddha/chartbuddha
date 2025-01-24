@@ -20,6 +20,8 @@
     "window-state:default",
     "store:default",
     "websocket:default",
+    "sql:default",
+    "sql:allow-execute",
     {
       "identifier": "http:default",
       "allow": [

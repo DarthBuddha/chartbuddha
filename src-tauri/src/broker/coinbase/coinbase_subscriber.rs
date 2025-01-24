@@ -17,7 +17,7 @@ use tauri::Emitter;
 // use tauri::Manager;
 use tauri::Wry;
 // Dependencies
-use futures_util::{ SinkExt, StreamExt };
+use futures_util::{SinkExt, StreamExt};
 // use tauri_plugin_http::reqwest;
 // use sea_orm::DatabaseConnection;
 use serde_json::json;
@@ -30,21 +30,28 @@ use tokio_tungstenite::tungstenite::Message;
 
 pub async fn coinbase_subscriber(
   app_handle: AppHandle<Wry>,
-  product_id: String
+  product_id: String,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-  info!("Subscribing to Coinbase WebSocket for product ID: {}", product_id);
+  info!(
+    "Subscribing to Coinbase WebSocket for product ID: {}",
+    product_id
+  );
   let url = "wss://advanced-trade-ws.coinbase.com";
   let (ws_stream, _) = connect_async(url).await?;
   let (mut write, mut read) = ws_stream.split();
 
-  let subscribe_message =
-    json!({
-        "type": "subscribe",
-        "product_ids": [product_id],
-        "channel": "ticker"
-    });
-  write.send(Message::Text(subscribe_message.to_string().into())).await?;
-  info!("Subscribed to Coinbase WebSocket for product ID: {}", product_id);
+  let subscribe_message = json!({
+      "type": "subscribe",
+      "product_ids": [product_id],
+      "channel": "ticker"
+  });
+  write
+    .send(Message::Text(subscribe_message.to_string().into()))
+    .await?;
+  info!(
+    "Subscribed to Coinbase WebSocket for product ID: {}",
+    product_id
+  );
 
   while let Some(message) = read.next().await {
     let message = message?;

@@ -22,12 +22,12 @@ pub struct Model {
   pub id: i32,
   // Subscription: Data
   pub subscription_type: String, // --> broker, market, news
-  pub platform: String, // -----------> Platform Name / Api Name
-  pub exchange: String, // -----------> equity, future, spot, perpetual
-  pub symbol: String, // -------------> Symbol Name / Product ID
+  pub platform: String,          // -----------> Platform Name / Api Name
+  pub exchange: String,          // -----------> equity, future, spot, perpetual
+  pub symbol: String,            // -------------> Symbol Name / Product ID
   // Subscription: Settings
-  pub tick: f64, // ------------------> Tick Interval
-  pub granularity: f64, // -----------> Granularity
+  pub tick: f64,          // ------------------> Tick Interval
+  pub granularity: f64,   // -----------> Granularity
   pub historical: String, // ---------> Historical Data
   // Housekeeping
   pub created_at: DateTimeWithTimeZone,

@@ -21,6 +21,8 @@
     "log:default",
     "shell:allow-open",
     "window-state:default",
-    "store:default"
+    "store:default",
+    "sql:default",
+    "sql:allow-execute"
   ]
 }

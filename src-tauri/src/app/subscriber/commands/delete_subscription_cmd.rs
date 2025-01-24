@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Subscriber Commands - subscription_delete
+//! # Module: App Subscriber Commands - delete_subscription_cmd
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Functions
-//! * subscription_delete
+//! #### Functions:
+//! * delete_subscription_cmd
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/subscriber/commands/subscription_delete.rs
+//! ##### app/subscriber/commands/delete_subscription_cmd.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -22,61 +22,23 @@ use log::info;
 // Crates
 // use crate::app::subscriber::structs::subscription::Subscription;
 // use crate::app::entities::app_subscriptions::ActiveModel as SubscriptionActiveModel;
-use crate::app::subscriber::common::subscription_store::delete_subscription_from_store;
+use crate::app::subscriber::common::store_subscription::delete_subscription_from_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-/// Store the API keys and additional data in the app store
+/// Delete the subscription from the app store
 #[tauri::command]
-pub async fn subscription_delete(
+pub async fn delete_subscription_cmd(
   app_handle: AppHandle<Wry>,
-  // subscription_type: String,
   platform: String,
-  // exchange: String,
-  symbol: String
-  // tick: f64, // Changed to tickSize
-  // granularity: f64, // Changed to granularity
-  // historical: String
+  symbol: String,
 ) -> Result<String, String> {
   // initialize subscriptions store
   info!("Delete Subscription from Store");
 
-  // Access the Tauri store
-  // let app = app_handle.clone();
-  // let store = app.store("subscriptions.json").map_err(|e| e.to_string())?;
-
-  // Check for duplicate subscription in the store
-  // let subscriptions: HashMap<String, Vec<Subscription>> = store
-  //   .get("subscriptions")
-  //   .unwrap_or_default()
-  //   .as_object()
-  //   .and_then(|obj| {
-  //     obj
-  //       .iter()
-  //       .map(|(k, v)| {
-  //         let subs: Vec<Subscription> = serde_json::from_value(v.clone()).unwrap_or_default();
-  //         (k.clone(), subs)
-  //       })
-  //       .collect::<HashMap<String, Vec<Subscription>>>()
-  //       .into()
-  //   })
-  //   .unwrap_or_default();
-  // if let Some(platform_subscriptions) = subscriptions.get(&platform) {
-  //   if platform_subscriptions.iter().any(|s| s.symbol == symbol) {
-  //     return Err("Subscription already exists".to_string());
-  //   }
-  // }
-
-  delete_subscription_from_store(
-    app_handle.clone(),
-    // subscription_type.clone(),
-    platform.clone(),
-    // exchange.clone(),
-    symbol.clone()
-    // tick,
-    // granularity,
-    // historical.clone()
-  ).await.map_err(|e| e.to_string())?;
+  delete_subscription_from_store(app_handle.clone(), platform.clone(), symbol.clone())
+    .await
+    .map_err(|e| e.to_string())?;
 
   // // Access the database connection state
   // let db = app_handle.state::<DatabaseConnection>();
