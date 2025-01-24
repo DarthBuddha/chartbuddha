@@ -2,40 +2,34 @@
 //! # Module: App Database - database
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
-//! * subscription_delete
+//! * setup_database
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path: app/database/database.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Rust
-// use std::collections::HashMap;
-// use std::sync::{ Arc, Mutex };
-// Tauri
-// use tauri::AppHandle;
-// use tauri::Manager;
-// use tauri::State;
-// use tauri::Wry;
-// use tauri_plugin_store::Store;
-// use tauri_plugin_store::StoreExt;
 // SeaOrm
+use sea_orm::sea_query::*;
 use sea_orm::ConnectionTrait;
 use sea_orm::Database;
-// use sea_orm::DatabaseConnection;
 use sea_orm::Schema;
 use sea_orm::DbErr;
-use sea_orm::{ DbBackend, Statement };
+use sea_orm::DbBackend;
+use sea_orm::Statement;
+use sea_orm::EntityName;
+// use sea_orm::sea_query::ColumnDef;
+// use sea_orm::sea_query::ForeignKeyCreateStatement;
+// use sea_orm::sea_query::Table;
+// use sea_orm::sea_query::*;
 // Dependencies
 use log::info;
 // Crates
-use crate::app::entities::app_subscriptions::Entity as SubscriptionsEntity;
-// use crate::app::subscriber::structs::subscription::Subscription;
-// use crate::app::entities::app_subscriptions::ActiveModel as SubscriptionActiveModel;
-// use crate::app::subscriber::common::subscription_store::delete_subscription_from_store;
+use crate::app::database::entity_subscription;
+use crate::app::database::entity_ticker;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const DB_NAME: &str = "chartbuddha";
-const DATABASE_URL: &str = "postgres://postgres:DB@localhost:5432";
+pub const DB_NAME: &str = "chartbuddha";
+pub const DATABASE_URL: &str = "postgres://postgres:DB@localhost:5432";
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -74,20 +68,70 @@ pub async fn setup_database() -> Result<(), DbErr> {
     DbBackend::Sqlite => {}
   }
 
-  let url = format!("{}/{}", DATABASE_URL, DB_NAME);
-  let db = Database::connect(&url).await?;
+  let builder = db.get_database_backend();
+  let schema = Schema::new(builder);
 
-  // Create tables
-  let schema = Schema::new(db.get_database_backend());
-  let backend = db.get_database_backend();
+  // Create Table: Subscription
+  assert_eq!(
+    builder.build(&schema.create_table_from_entity(entity_subscription::Entity)),
+    builder.build(
+      &Table::create()
+        .table(entity_subscription::Entity.table_ref())
+        .col(ColumnDef::new(entity_subscription::Column::Id).integer().not_null().auto_increment())
+        .col(ColumnDef::new(entity_subscription::Column::SubscriptionType).string_len(1))
+        .col(ColumnDef::new(entity_subscription::Column::ExchangeType).string_len(1))
+        .col(ColumnDef::new(entity_subscription::Column::Platform).string().not_null())
+        .col(ColumnDef::new(entity_subscription::Column::Symbol).string().not_null())
+        .col(ColumnDef::new(entity_subscription::Column::Tick).double().not_null())
+        .col(ColumnDef::new(entity_subscription::Column::Granularity).double().not_null())
+        .col(ColumnDef::new(entity_subscription::Column::Historical).string().not_null())
+        .col(
+          ColumnDef::new(entity_subscription::Column::CreatedAt)
+            .timestamp_with_time_zone()
+            .not_null()
+        )
+        .col(ColumnDef::new(entity_subscription::Column::UpdatedAt).timestamp().not_null())
+        .primary_key(
+          Index::create().name("pk-subscription").col(entity_subscription::Column::Id).primary()
+        )
+        .to_owned()
+    )
+  );
 
-  // Create the subscriptions table
-  info!("Create the subscriptions table...");
-  let create_subscriptions_table = schema
-    .create_table_from_entity(SubscriptionsEntity)
-    .if_not_exists()
-    .to_owned();
-  db.execute(backend.build(&create_subscriptions_table)).await?;
+  // Create Table: Ticker
+  assert_eq!(
+    builder.build(&schema.create_table_from_entity(entity_ticker::Entity)),
+    builder.build(
+      &Table::create()
+        .table(entity_ticker::Entity.table_ref())
+        .col(ColumnDef::new(entity_ticker::Column::Id).integer().not_null().auto_increment())
+        .col(ColumnDef::new(entity_ticker::Column::SubscriptionId).integer().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::TradeId).string().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::ProductId).string().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::Volume24H).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::Low24H).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::High24H).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::Low52W).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::High52W).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::PricePercentChg24H).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::BestBid).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::BestAsk).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::BestBidQuantity).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::BestAskQuantity).decimal().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::CreatedAt).timestamp_with_time_zone().not_null())
+        .col(ColumnDef::new(entity_ticker::Column::UpdatedAt).timestamp().not_null())
+        .primary_key(Index::create().name("pk-ticker_id").col(entity_ticker::Column::Id).primary())
+        .foreign_key(
+          ForeignKeyCreateStatement::new()
+            .name("fk-ticker-subscription_id")
+            .from_tbl(entity_ticker::Entity)
+            .from_col(entity_ticker::Column::SubscriptionId)
+            .to_tbl(entity_subscription::Entity)
+            .to_col(entity_subscription::Column::Id)
+        )
+        .to_owned()
+    )
+  );
 
   info!("Database Setup successfully.");
 

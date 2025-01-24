@@ -1,21 +1,25 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # App Entities: Coinbase Ticker Module
+//! # Entities: App Entities - entity_ticker
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Entities:
-//! * coinbase_ticker
+//! #### Entity:
+//! * entity_ticker
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/entities/coinbase_ticker.rs
+//! ##### Path: app/entities/entity_ticker.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Dependencies
+// SeaOrm
 use sea_orm::entity::prelude::*;
+// Crates
+use crate::app::database::entity_subscription::Entity as SubscriptionEntity;
+
+use super::entity_subscription;
 
 /* ---------------------------------------------------------------------------------------------- */
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-#[sea_orm(table_name = "coinbase_ticker")]
+#[sea_orm(table_name = "ticker")]
 pub struct Model {
-  #[sea_orm(primary_key)]
+  #[sea_orm(primary_key, auto_increment = true)]
   // Primary key
   pub id: i32,
   // Foreign key
@@ -47,15 +51,16 @@ pub enum Relation {
 impl RelationTrait for Relation {
   fn def(&self) -> RelationDef {
     match self {
-      Self::Subscription => Entity::belongs_to(super::app_subscriptions::Entity)
-        .from(Column::SubscriptionId)
-        .to(super::app_subscriptions::Column::Id)
-        .into(),
+      Self::Subscription =>
+        Entity::belongs_to(SubscriptionEntity)
+          .from(Column::SubscriptionId)
+          .to(entity_subscription::Column::Id)
+          .into(),
     }
   }
 }
 
-impl Related<super::app_subscriptions::Entity> for Entity {
+impl Related<SubscriptionEntity> for Entity {
   fn to() -> RelationDef {
     Relation::Subscription.def()
   }

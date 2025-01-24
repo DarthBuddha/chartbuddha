@@ -24,6 +24,7 @@ use crate::app::subscriber::structs::subscription::Subscription;
 use crate::app::subscriber::structs::subscription::SubscriptionType;
 // use crate::app::entities::app_subscriptions::ActiveModel as SubscriptionActiveModel;
 use crate::app::subscriber::common::store_subscription::save_subscription_to_store;
+use crate::app::subscriber::common::db_subscriptions::save_subscription_to_db;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -37,7 +38,7 @@ pub async fn save_subscription_cmd(
   symbol: String,
   tick: f64,
   granularity: f64,
-  historical: String,
+  historical: String
 ) -> Result<String, String> {
   info!("Command: Save Subscription");
 
@@ -78,34 +79,19 @@ pub async fn save_subscription_cmd(
     symbol.clone(),
     tick,
     granularity,
-    historical.clone(),
-  )
-  .await
-  .map_err(|e| e.to_string())?;
+    historical.clone()
+  ).await.map_err(|e| e.to_string())?;
 
   info!("Save Subscription to database");
-  // Access the database connection state
-  // let db = app_handle.state::<DatabaseConnection>();
-
-  // // Save subscription to the database
-  // let new_subscription = SubscriptionActiveModel {
-  //   // Housekeeping fields
-  //   created_at: Set(chrono::Utc::now().into()),
-  //   updated_at: Set(chrono::Utc::now().naive_utc()),
-  //   // Subscription: data
-  //   subscription_type: Set(subscription_type.to_string()),
-  //   platform: Set(platform.to_string()),
-  //   exchange: Set(exchange.to_string()),
-  //   symbol: Set(symbol.to_string()),
-  //   // Subscription: settings
-  //   tick: Set(tick), // Changed to tickSize
-  //   granularity: Set(granularity), // Changed to granularity
-  //   historical: Set(historical.to_string()),
-
-  //   ..Default::default()
-  // };
-
-  // new_subscription.insert(db.inner()).await.map_err(|e| e.to_string())?;
+  save_subscription_to_db(
+    subscription_type.clone().to_string(),
+    platform.clone(),
+    exchange.clone(),
+    symbol.clone(),
+    tick,
+    granularity,
+    historical.clone()
+  ).await.map_err(|e| e.to_string())?;
 
   Ok("Subscription Saved".to_string())
 }

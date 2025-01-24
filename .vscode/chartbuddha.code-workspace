@@ -6,6 +6,7 @@
   ],
   "settings": {
     "cSpell.words": [
+      "AUTOINCREMENT",
       "chrono",
       "codegen",
       "datname",
@@ -16,6 +17,7 @@
       "println",
       "rustls",
       "sqlx",
+      "stmts",
       "tungstenite",
       "turbofish",
       "Uninit",

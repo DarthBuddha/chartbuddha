@@ -3,7 +3,6 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Folders:
 //! * database
-//! * entities
 //! * setup
 //! * store
 //! * subscription
@@ -17,7 +16,6 @@
 
 // Folders:
 pub mod database;
-pub mod entities;
 pub mod store;
 pub mod subscriber;
 // pub mod websocket;
