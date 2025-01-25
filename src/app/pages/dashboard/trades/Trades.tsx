@@ -1,50 +1,52 @@
 /* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha Library
+/* ---------------------------------------------------------------------------------------------- */
 //! - pages/dashboard/trades/Trades.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 // Tauri
-import { listen } from '@tauri-apps/api/event';
+import { listen } from '@tauri-apps/api/event'
 // CSS Modules
-import styles from './Trades.module.css';
+import styles from './Trades.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 type Trade = {
-  price: number;
-  size: number;
-  side: 'BUY' | 'SELL';
-  timestamp: string;
-};
+  price: number
+  size: number
+  side: 'BUY' | 'SELL'
+  timestamp: string
+}
 
 /* ---------------------------------------------------------------------------------------------- */
 
 interface TradesWidgetProps {
-  title: string;
-  filter: ((trade: Trade) => boolean) | null;
+  title: string
+  filter: ((trade: Trade) => boolean) | null
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const TimeSales: React.FC<TradesWidgetProps> = ({ title, filter }) => {
-  const [trades, setTrades] = useState<Trade[]>([]);
+  const [trades, setTrades] = useState<Trade[]>([])
 
   useEffect(() => {
     // Listen for the `tradeUpdate` event from Tauri backend
     const unlisten = listen<Trade>('tradeUpdate', (event) => {
-      const trade = event.payload;
-      setTrades((prev) => [trade, ...prev.slice(0, 99)]); // Keep the latest 100 trades
-    });
+      const trade = event.payload
+      setTrades((prev) => [trade, ...prev.slice(0, 99)]) // Keep the latest 100 trades
+    })
 
     // Cleanup the event listener when the component unmounts
     return () => {
-      unlisten.then((unsub) => unsub());
-    };
-  }, []);
+      unlisten.then((unsub) => unsub())
+    }
+  }, [])
 
   // Apply the filter if provided
-  const filteredTrades = filter ? trades.filter(filter) : trades;
+  const filteredTrades = filter ? trades.filter(filter) : trades
 
   /* -------------------------------------------------------------------------------------------- */
   return (
@@ -63,9 +65,9 @@ const TimeSales: React.FC<TradesWidgetProps> = ({ title, filter }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TimeSales;
+export default TimeSales
 
 /* ---------------------------------------------------------------------------------------------- */

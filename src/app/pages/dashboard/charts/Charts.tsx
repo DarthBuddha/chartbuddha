@@ -1,14 +1,16 @@
 /* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha Library
+/* ---------------------------------------------------------------------------------------------- */
 //! - pages/dashboard/trades/Charts.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react';
-import Split from 'react-split';
+import React from 'react'
+import Split from 'react-split'
 // Components
-import ChartsChart from './ChartsChart';
+import ChartsChart from './ChartsChart'
 // CSS Modules
-import Style from './Chart.module.css';
+import Style from './Chart.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -42,9 +44,9 @@ const Charts: React.FC = () => {
         </div>
       </Split>
     </div>
-  );
-};
+  )
+}
 
-export default Charts;
+export default Charts
 
 /* ---------------------------------------------------------------------------------------------- */
