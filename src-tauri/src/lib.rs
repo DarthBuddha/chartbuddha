@@ -1,7 +1,9 @@
 /* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha Library
+/* ---------------------------------------------------------------------------------------------- */
 //! # Module: lib
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Functions:
+//! #### Main Function:
 //! * run
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path: lib.rs
@@ -15,25 +17,13 @@ pub mod news;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-// Rust
-// use std::sync::{ Arc, Mutex };
 // Tauri
-// use tauri::Manager;
-// use tauri::Wry;
 use tauri::async_runtime::spawn;
-// SeaORM
-// use sea_orm::Database;
-// use sea_orm::DatabaseConnection;
 // Crates
-// use crate::app::database::database::DbConnection;
-// use crate::app::database::database::DbStorage;
-// use crate::app::database::initialize_database::initialize_database;
-// use crate::app::database::database::DbConnection;
 use crate::app::setup::setup_tauri;
-// Command Modules
 use crate::app::setup::setup_complete;
-use crate::app::subscriber::commands::delete_subscription_cmd::delete_subscription_cmd;
-use crate::app::subscriber::commands::save_subscription_cmd::save_subscription_cmd;
+use crate::app::subscriber::subscriber_cmds::save_subscription_cmd;
+use crate::app::subscriber::subscriber_cmds::delete_subscription_cmd;
 use crate::broker::coinbase::commands::coinbase_products_list::coinbase_products_list;
 use crate::broker::coinbase::commands::coinbase_store_api_keys::coinbase_store_api_keys;
 use crate::broker::coinbase::commands::coinbase_subscribe::coinbase_subscribe;
@@ -73,12 +63,6 @@ pub async fn run() -> () {
     .plugin(tauri_plugin_store::Builder::default().build())
     // Plugin: Window State
     // .plugin(tauri_plugin_window_state::Builder::new().build())
-    // .manage(DbStorage {
-    // store: Default::default(),
-    // })
-    // .manage(DbConnection {
-    // db: Arc::new(Mutex::new(None)),
-    // })
     .setup(|app| {
       let app_handle = app.handle();
       spawn(setup_tauri(app_handle.clone()));
@@ -89,6 +73,7 @@ pub async fn run() -> () {
       tauri::generate_handler![
         // Commands: App
         setup_complete,
+        // Commands: Subscriber
         save_subscription_cmd,
         delete_subscription_cmd,
         // Commands: Coinbase

@@ -1,4 +1,6 @@
 /* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha Library
+/* ---------------------------------------------------------------------------------------------- */
 //! # Module: App Database - database
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
@@ -22,8 +24,8 @@ use sea_orm::Statement;
 // Dependencies
 use log::info;
 // Crates
-use crate::app::database::entities::subscription;
-use crate::app::database::entities::ticker;
+use crate::app::db::entities::subscription;
+use crate::app::db::entities::ticker;
 
 /* ---------------------------------------------------------------------------------------------- */
 

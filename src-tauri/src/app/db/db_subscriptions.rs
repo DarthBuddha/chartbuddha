@@ -1,4 +1,6 @@
 /* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha Library
+/* ---------------------------------------------------------------------------------------------- */
 //! # Module: App Subscriber Common - db_subscription
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
@@ -21,8 +23,8 @@ use sea_orm::ModelTrait;
 // Dependencies
 use log::info;
 // Crates
-use crate::app::database::database::DATABASE_URL;
-use crate::app::database::entities::subscription;
+use crate::app::db::db::DATABASE_URL;
+use crate::app::db::entities::subscription;
 
 /* ---------------------------------------------------------------------------------------------- */
 

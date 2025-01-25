@@ -1,22 +1,21 @@
 /* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha Library
+/* ---------------------------------------------------------------------------------------------- */
 //! # Module: App Setup - setup
 /* ---------------------------------------------------------------------------------------------- */
+//! #### Commands:
+//! * setup_complete
 //! #### Functions:
-//! - setup
+//! * setup_tauri
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path: app/setup/setup.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Rust
-// use std::.sync::Mutex;
 // Tauri
 use tauri::AppHandle;
 use tauri::Emitter;
 use tauri::Manager;
-// use tauri::State;
 use tauri_plugin_store::StoreExt;
-// SeaOrm
-// use sea_orm::DbErr;
 // Dependencies
 use log::error;
 use log::info;
@@ -24,39 +23,9 @@ use serde_json::json;
 use serde_json::Value;
 use tokio::time::{ sleep, Duration };
 // Crates
-use crate::app::database::database::setup_database;
-use crate::app::store::initialize_store::initialize_store;
+use crate::app::db::db::setup_database;
 use crate::app::store::store_manager::APP_STORE;
-
-/* ---------------------------------------------------------------------------------------------- */
-
-/// Perform the backend setup task
-pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
-  info!("Performing Tauri setup tasks...");
-
-  // Tauri Setup Tasks
-  info!("Initialize the store...");
-  if let Err(e) = initialize_store(app.clone()) {
-    error!("Failed to initialize store: {}", e);
-    return Err(());
-  }
-
-  setup_database().await.unwrap();
-
-  info!("Fake Pause...");
-  sleep(Duration::from_secs(3)).await;
-
-  // Tauri Setup Tasks Complete
-  info!("Tauri Ready...");
-  let store = app.store(APP_STORE).unwrap();
-  let mut app_state = store.get("app_state").unwrap_or(json!({}));
-  app_state["tauri_ready"] = json!(true);
-  store.set("app_state", app_state);
-  info!("Emitting tauri-ready event...");
-  app.emit("tauri-ready", "").unwrap();
-
-  Ok(())
-}
+use crate::app::store::store_manager::initialize_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -90,6 +59,36 @@ pub async fn setup_complete(app: AppHandle) -> Result<(), ()> {
   } else {
     error!("Tauri setup is not complete.");
   }
+
+  Ok(())
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+/// Perform the backend setup task
+pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
+  info!("Performing Tauri setup tasks...");
+
+  // Tauri Setup Tasks
+  info!("Initialize the store...");
+  if let Err(e) = initialize_store(app.clone()) {
+    error!("Failed to initialize store: {}", e);
+    return Err(());
+  }
+
+  setup_database().await.unwrap();
+
+  info!("Fake Pause...");
+  sleep(Duration::from_secs(3)).await;
+
+  // Tauri Setup Tasks Complete
+  info!("Tauri Ready...");
+  let store = app.store(APP_STORE).unwrap();
+  let mut app_state = store.get("app_state").unwrap_or(json!({}));
+  app_state["tauri_ready"] = json!(true);
+  store.set("app_state", app_state);
+  info!("Emitting tauri-ready event...");
+  app.emit("tauri-ready", "").unwrap();
 
   Ok(())
 }

@@ -1,28 +1,29 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Subscriber Commands - save_subscription_cmd
+//! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Functions:
+//! # Module: App Subscriber - subscriber_cmds
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Commands:
 //! * save_subscription_cmd
+//! * delete_subscription_cmd
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/subscriber/commands/save_subscription_cmd.rs
+//! ##### Path: app/subscriber/subscriber_cmds.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
 use std::collections::HashMap;
 // Tauri
 use tauri::AppHandle;
-// use tauri::Manager;
 use tauri::Wry;
-// use tauri_plugin_store::Store;
 use tauri_plugin_store::StoreExt;
-// SeaOrm
-// use sea_orm::{ ActiveModelTrait, DatabaseConnection, Set };
 // Dependencies
 use log::info;
 // Crates
 use crate::app::subscriber::subscriber::Subscriber;
-use crate::app::subscriber::common::store_subscription::save_subscription_to_store;
-use crate::app::subscriber::common::db_subscriptions::save_subscription_to_db;
+use crate::app::db::db_subscriptions::delete_subscription_from_db;
+use crate::app::db::db_subscriptions::save_subscription_to_db;
+use crate::app::store::store_subscription::delete_subscription_from_store;
+use crate::app::store::store_subscription::save_subscription_to_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -91,6 +92,31 @@ pub async fn save_subscription_cmd(
   ).await.map_err(|e| e.to_string())?;
 
   Ok("Command: Save Subscription".to_string())
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+/// Delete the subscription from the app store
+#[tauri::command]
+pub async fn delete_subscription_cmd(
+  app_handle: AppHandle<Wry>,
+  platform: String,
+  symbol: String
+) -> Result<String, String> {
+  // initialize subscriptions store
+  info!("Command: Delete Subscription");
+
+  info!("Delete Subscription from Store");
+  delete_subscription_from_store(
+    app_handle.clone(),
+    platform.clone(),
+    symbol.clone()
+  ).await.map_err(|e| e.to_string())?;
+
+  info!("Delete Subscription from Database");
+  delete_subscription_from_db(platform.clone(), symbol.clone()).await.map_err(|e| e.to_string())?;
+
+  Ok("Command: Delete Subscription".to_string())
 }
 
 /* ---------------------------------------------------------------------------------------------- */

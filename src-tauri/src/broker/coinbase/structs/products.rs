@@ -1,4 +1,6 @@
 /* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha Library
+/* ---------------------------------------------------------------------------------------------- */
 //! # Coinbase Structs Products Module
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Endpoints:
@@ -27,7 +29,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Dependencies
-use serde::{Deserialize, Serialize};
+use serde::{ Deserialize, Serialize };
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -222,7 +224,7 @@ pub enum TradingSessionClosedReasonType {
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct FcmTradingSessionDetails {
   pub is_session_open: Option<bool>,
-  pub open_time: Option<String>,  // RFC3339 Timestamp
+  pub open_time: Option<String>, // RFC3339 Timestamp
   pub close_time: Option<String>, // RFC3339 Timestamp
   pub session_state: Option<TradingSessionStateType>, // Use enum instead of string
   pub after_hours_order_entry_disabled: Option<bool>,
@@ -234,7 +236,7 @@ pub struct FcmTradingSessionDetails {
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Maintenance {
   pub start_time: Option<String>, // RFC3339 Timestamp
-  pub end_time: Option<String>,   // RFC3339 Timestamp
+  pub end_time: Option<String>, // RFC3339 Timestamp
 }
 
 /* ---------------------------------------------------------------------------------------------- */

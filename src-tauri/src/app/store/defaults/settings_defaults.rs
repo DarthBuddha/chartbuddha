@@ -1,4 +1,6 @@
 /* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha Library
+/* ---------------------------------------------------------------------------------------------- */
 //! # Module: App Store Defaults - settings_defaults
 /* ---------------------------------------------------------------------------------------------- */
 //! Functions:
@@ -25,7 +27,7 @@ pub fn settings_defaults() -> HashMap<String, Value> {
       "app_init_run": false,
       "app_version": null,
       "app_update": null
-    }),
+    })
   );
 
   // database
@@ -35,7 +37,7 @@ pub fn settings_defaults() -> HashMap<String, Value> {
       "database_name": null,
       "database_pass": null,
       "database_url": null
-    }),
+    })
   );
 
   defaults
