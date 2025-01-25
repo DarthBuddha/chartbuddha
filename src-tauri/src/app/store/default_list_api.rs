@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Store Defaults - apis_defaults
+//! # Module: App Store - default_list_api
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Functions:
-//! * apis_defaults
+//! Function:
+//! * default_list_api
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/store/defaults/apis_defaults.rs
+//! ##### Path: app/store/default_list_api.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -17,33 +17,15 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn apis_defaults() -> HashMap<String, Value> {
+pub fn default_list_api() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
-  // Binance
-  // defaults.insert(
-  //   "binance".to_string(),
-  //   json!({
-  //     "api_configured": false,
-  //     "api_key": null,
-  //     "api_secret": null
-  //   })
-  // );
-
-  // Coinbase
+  // Api List
   defaults.insert(
-    "coinbase".to_string(),
+    "Broker".to_string(),
     json!({
-      "api_configured": false,
-      "api_key": null,
-      "api_key_secret": null,
-      "api_permissions": {
-        "perm_can_trade": false,
-        "perm_can_transfer": false,
-        "perm_can_view": false,
-        "perm_portfolio_type": "",
-        "perm_portfolio_uuid": ""
-      }
+      "binance": false,
+      "coinbase": false
     })
   );
 

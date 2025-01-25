@@ -1,17 +1,32 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Mod: Streams Commands
+//! # Module: App Store - default_list_sub
 /* ---------------------------------------------------------------------------------------------- */
-//! Files:
-//! * stream_start
-//! * stream_stop
+//! Functions:
+//! * settings_defaults
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### app/streams/commands/mod.rs
+//! ##### Path: app/store/default_list_sub.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Files:
-pub mod stream_start;
-pub mod stream_stop;
+// Rust
+use std::collections::HashMap;
+// Dependencies
+use serde_json::json;
+use serde_json::Value;
+
+/* ---------------------------------------------------------------------------------------------- */
+
+pub fn default_list_sub() -> HashMap<String, Value> {
+  let mut defaults = HashMap::new();
+
+  // Subscription List
+  defaults.insert("Broker".to_string(), json!({
+      "Binance": [],
+      "Coinbase": []
+    }));
+
+  defaults
+}
 
 /* ---------------------------------------------------------------------------------------------- */

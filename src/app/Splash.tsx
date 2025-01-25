@@ -71,10 +71,10 @@ async function setupReact() {
   // React Setup Tasks Complete
   info('React Ready...')
   try {
-    const appState = await store.get<{ react_ready: boolean }>('app_state')
+    const appState = await store.get<{ react_ready: boolean }>('Setup')
     if (appState) {
       appState.react_ready = true
-      await store.set('app_state', appState)
+      await store.set('Setup', appState)
       await store.save()
     } else {
       info('Failed to load app state')

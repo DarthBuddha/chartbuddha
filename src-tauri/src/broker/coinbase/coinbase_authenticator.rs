@@ -24,7 +24,7 @@ use serde::Deserialize;
 use serde::Serialize;
 use serde_json::Value;
 // Crates
-use crate::app::store::store_manager::APIS_STORE;
+use crate::app::store::store::COINBASE_STORE;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -54,7 +54,7 @@ pub async fn use_authenticator(
   authenticator: &Authenticator
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
   info!("Get API key and secret from apis store...");
-  let store = app.store(APIS_STORE).map_err(|e| {
+  let store = app.store(COINBASE_STORE).map_err(|e| {
     error!("Failed to get store: {}", e);
     Box::<dyn Error + Send + Sync>::from(e)
   })?;

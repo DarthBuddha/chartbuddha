@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Store Defaults - app_defaults
+//! # Module: App Store - default_app_config
 /* ---------------------------------------------------------------------------------------------- */
-//! Functions:
-//! * app_defaults
+//! Function:
+//! * default_app_config
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/store/defaults/app_defaults.rs
+//! ##### Path: app/store/default_app_config.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -17,15 +17,26 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn app_state_defaults() -> HashMap<String, Value> {
+pub fn default_app_config() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
   // app
   defaults.insert(
-    "app_state".to_string(),
+    "app".to_string(),
     json!({
-      "tauri_ready": false,
-      "react_ready": false
+      "app_init_run": false,
+      "app_version": null,
+      "app_update": null
+    })
+  );
+
+  // database
+  defaults.insert(
+    "database".to_string(),
+    json!({
+      "database_name": null,
+      "database_pass": null,
+      "database_url": null
     })
   );
 

@@ -32,7 +32,7 @@ use tauri::State;
 use tauri::Wry;
 // SeaOrm
 use sea_orm::Set;
-use sea_orm::ActiveModelTrait;
+// use sea_orm::ActiveModelTrait;
 use sea_orm::DatabaseConnection;
 // Dependencies
 use chrono::FixedOffset;
@@ -41,7 +41,7 @@ use log::{ info, error };
 use tokio::task::JoinHandle;
 // Crates
 // use crate::app::entities::app_subscriptions::ActiveModel;
-use crate::AppState;
+// use crate::AppState;
 use crate::broker::coinbase::coinbase_subscriber::coinbase_subscriber;
 
 /* ---------------------------------------------------------------------------------------------- */

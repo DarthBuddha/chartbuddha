@@ -4,10 +4,10 @@
 //! # Mod: App
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Folders:
-//! * database
-//! * setup
+//! * db
 //! * store
-//! * subscription
+//! * streamer
+//! * subscriber
 //! * websocket
 //! * window
 //! #### Files:
@@ -19,6 +19,7 @@
 // Folders:
 pub mod db;
 pub mod store;
+// pub mod streamer;
 pub mod subscriber;
 // pub mod websocket;
 pub mod window;

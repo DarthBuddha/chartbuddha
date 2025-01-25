@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Store Defaults - settings_defaults
+//! # Module: App Store Broker - default_coinbase
 /* ---------------------------------------------------------------------------------------------- */
-//! Functions:
-//! * settings_defaults
+//! #### Functions:
+//! * default_coinbase
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/store/defaults/settings_defaults.rs
+//! ##### Path: app/store/broker/default_coinbase.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -17,26 +17,23 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn settings_defaults() -> HashMap<String, Value> {
+pub fn default_coinbase() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
-  // app
+  // Coinbase
   defaults.insert(
-    "app".to_string(),
+    "coinbase".to_string(),
     json!({
-      "app_init_run": false,
-      "app_version": null,
-      "app_update": null
-    })
-  );
-
-  // database
-  defaults.insert(
-    "database".to_string(),
-    json!({
-      "database_name": null,
-      "database_pass": null,
-      "database_url": null
+      "api_configured": false,
+      "api_key": null,
+      "api_key_secret": null,
+      "api_permissions": {
+        "perm_can_trade": false,
+        "perm_can_transfer": false,
+        "perm_can_view": false,
+        "perm_portfolio_type": "",
+        "perm_portfolio_uuid": ""
+      }
     })
   );
 

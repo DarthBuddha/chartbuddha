@@ -1,21 +1,35 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Mod: App Store Defaults
+//! # Module: App Store - default_app_state
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Files:
-//! * apis_defaults
-//! * app_state_defaults
-//! * settings_defaults
-//! * subscriptions_defaults
+//! Function:
+//! * default_app_state
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/store/defaults/mod.rs
+//! ##### Path: app/store/default_app_state.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Files:
-pub mod apis_defaults;
-pub mod app_state_defaults;
-pub mod settings_defaults;
-pub mod subscriptions_defaults;
+// Rust
+use std::collections::HashMap;
+// Dependencies
+use serde_json::json;
+use serde_json::Value;
+
+/* ---------------------------------------------------------------------------------------------- */
+
+pub fn default_app_state() -> HashMap<String, Value> {
+  let mut defaults = HashMap::new();
+
+  // app
+  defaults.insert(
+    "Setup".to_string(),
+    json!({
+      "tauri_ready": false,
+      "react_ready": false
+    })
+  );
+
+  defaults
+}
 
 /* ---------------------------------------------------------------------------------------------- */

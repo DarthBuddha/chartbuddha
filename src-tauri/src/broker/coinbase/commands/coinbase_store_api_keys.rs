@@ -17,7 +17,7 @@ use log::{ error, info };
 use serde_json::json;
 use serde_json::to_string;
 // Crates
-use crate::app::store::store_manager::APIS_STORE;
+use crate::app::store::store::COINBASE_STORE;
 use crate::broker::coinbase::coinbase_authenticator::use_authenticator;
 use crate::broker::coinbase::coinbase_authenticator::Authenticator;
 use crate::broker::coinbase::structs::data_api::ApiKeyPermissions;
@@ -72,7 +72,7 @@ pub async fn coinbase_store_api_keys(
 
   // initialize apis store
   info!("Initializing apis store");
-  let store = app.store(APIS_STORE).map_err(|e| e.to_string())?;
+  let store = app.store(COINBASE_STORE).map_err(|e| e.to_string())?;
 
   // Save the API keys to the store
   let mut coinbase = store.get("coinbase").unwrap_or(json!({}));

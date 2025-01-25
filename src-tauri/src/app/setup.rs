@@ -24,8 +24,8 @@ use serde_json::Value;
 use tokio::time::{ sleep, Duration };
 // Crates
 use crate::app::db::db::setup_database;
-use crate::app::store::store_manager::APP_STORE;
-use crate::app::store::store_manager::initialize_store;
+use crate::app::store::store::APP_STATE_STORE;
+use crate::app::store::store::initialize_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -33,11 +33,11 @@ use crate::app::store::store_manager::initialize_store;
 #[tauri::command]
 pub async fn setup_complete(app: AppHandle) -> Result<(), ()> {
   info!("Setup Complete...");
-  let store = app.store(APP_STORE).map_err(|e| {
+  let store = app.store(APP_STATE_STORE).map_err(|e| {
     error!("Failed to get store: {}", e);
   })?;
 
-  let store_value: Value = store.get("app_state").expect("Failed to get value from store");
+  let store_value: Value = store.get("Setup").expect("Failed to get value from store");
 
   let tauri_ready: bool = store_value
     .get("tauri_ready")
@@ -57,7 +57,7 @@ pub async fn setup_complete(app: AppHandle) -> Result<(), ()> {
     splash_window.close().unwrap();
     main_window.show().unwrap();
   } else {
-    error!("Tauri setup is not complete.");
+    error!("App Setup is not complete.");
   }
 
   Ok(())
@@ -83,10 +83,10 @@ pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
 
   // Tauri Setup Tasks Complete
   info!("Tauri Ready...");
-  let store = app.store(APP_STORE).unwrap();
-  let mut app_state = store.get("app_state").unwrap_or(json!({}));
+  let store = app.store(APP_STATE_STORE).unwrap();
+  let mut app_state = store.get("Setup").unwrap_or(json!({}));
   app_state["tauri_ready"] = json!(true);
-  store.set("app_state", app_state);
+  store.set("Setup", app_state);
   info!("Emitting tauri-ready event...");
   app.emit("tauri-ready", "").unwrap();
 
