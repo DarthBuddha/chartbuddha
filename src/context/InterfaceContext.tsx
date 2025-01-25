@@ -1,22 +1,31 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Page: Folder Path - PageName
-//! # Context: Folder Path - ContextName
-//! # Component: Folder Path - ComponentName
+//! # Context: Context - InterfaceContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Short Description of module.
+//! * This context is responsible for managing the global state of the application.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: the/path/to/FileName.tsx
+//! ##### Path: context/InterfaceContext.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-// Tauri
-// import { info, error } from '@tauri-apps/plugin-log';
-// Components
-// CSS Modules
+import { createContext, useContext } from 'react'
+// Context
+import { InterfaceType } from './Interface.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
+
+export const InterfaceContext = createContext<InterfaceType | null>(null)
+
+/* ---------------------------------------------------------------------------------------------- */
+
+export const useInterfaceContext = () => {
+  const context = useContext(InterfaceContext)
+  if (!context) {
+    throw new Error('useInterfaceContext must be used within an InterfaceContext')
+  }
+  return context
+}
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -1,22 +1,36 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Page: Folder Path - PageName
-//! # Context: Folder Path - ContextName
-//! # Component: Folder Path - ComponentName
+//! # Page: Page Home - Home
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Short Description of module.
+//! * Home page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: the/path/to/FileName.tsx
+//! ##### Path: page/home/Home.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
+import React from 'react'
+// import { useEffect } from 'react';
 // Tauri
-// import { info, error } from '@tauri-apps/plugin-log';
-// Components
-// CSS Modules
+// import { invoke } from '@tauri-apps/api/core';
+// import { info } from '@tauri-apps/plugin-log';
+// CSS Module
+import Style from './Home.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
+
+const Home: React.FC = () => {
+  return (
+    <div className={Style.Home}>
+      <div className={Style.Main_Container}>
+        <h1>Welcome to ChartBuddha</h1>
+        {/* <button onClick={stopAllStreams}>Stop All Streams</button> */}
+      </div>
+    </div>
+  )
+}
+
+export default Home
 
 /* ---------------------------------------------------------------------------------------------- */

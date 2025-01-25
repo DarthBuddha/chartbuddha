@@ -1,30 +1,43 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: main_window
+//! # Page: Page Subscribe - Subscribe
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Main window for the application
+//! * Subscribe page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: main_window.tsx
+//! ##### Path: page/subscribe/Subscribe.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-// Context
-import { InterfaceProvider } from 'context/InterfaceProvider.tsx'
 // Components
-import Main from './window/Main.tsx'
+import SubscribeApiList from './SubscribeApiList'
+import SubscribeData from './SubscribeData'
+import SubscribeSubList from './SubscribeSubList'
+// CSS Module
+import Style from './Subscribe.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <InterfaceProvider>
-      <Main />
-    </InterfaceProvider>
-  </React.StrictMode>,
-)
+const Subscribe: React.FC = () => {
+  return (
+    <div className={Style.Subscribe}>
+      <div className={Style.Main_Container}>
+        <div className={Style.Subscribe_Api_List}>
+          <SubscribeApiList />
+        </div>
+        <div className={Style.Subscribe_Data}>
+          <SubscribeData />
+        </div>
+        <div className={Style.Subscribe_Sub_List}>
+          <SubscribeSubList />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Subscribe
 
 /* ---------------------------------------------------------------------------------------------- */

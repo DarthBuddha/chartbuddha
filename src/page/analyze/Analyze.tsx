@@ -1,30 +1,32 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: main_window
+//! # Page: Page Analyze - Analyze
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Main window for the application
+//! * Analyze page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: main_window.tsx
+//! ##### Path: page/analyze/Analyze.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-// Context
-import { InterfaceProvider } from 'context/InterfaceProvider.tsx'
-// Components
-import Main from './window/Main.tsx'
+// CSS Module
+import Style from './Analyze.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
+//
+const Analyze: React.FC = () => {
+  return (
+    <div className={Style.Analyze}>
+      <div className={Style.Main_Container}>
+        <h1>Analyze</h1>
+        <p>Analyze page.</p>
+      </div>
+    </div>
+  )
+}
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <InterfaceProvider>
-      <Main />
-    </InterfaceProvider>
-  </React.StrictMode>,
-)
-
+export default Analyze
+//
 /* ---------------------------------------------------------------------------------------------- */

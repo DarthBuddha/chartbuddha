@@ -1,30 +1,31 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: main_window
+//! # Component: Window Components - StatusBar
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Main window for the application
+//! * This component is responsible for rendering the application's status bar.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: main_window.tsx
+//! ##### Path: window/components/StatusBar.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-// Context
-import { InterfaceProvider } from 'context/InterfaceProvider.tsx'
-// Components
-import Main from './window/Main.tsx'
+// CSS Module
+import Style from './StatusBar.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <InterfaceProvider>
-      <Main />
-    </InterfaceProvider>
-  </React.StrictMode>,
-)
+const StatusBar: React.FC = () => {
+  return (
+    <div className={Style.StatusBar}>
+      <div className={Style.Container_Left}></div>
+      <div className={Style.Container_Center}></div>
+      <div className={Style.Container_Right}></div>
+    </div>
+  )
+}
+
+export default StatusBar
 
 /* ---------------------------------------------------------------------------------------------- */

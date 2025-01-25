@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha Library
+//! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
 //! # Window: splash_window
 /* ---------------------------------------------------------------------------------------------- */
@@ -13,9 +13,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 // Context
-import { InterfaceProvider } from 'app/context/InterfaceProvider.tsx'
+import { InterfaceProvider } from 'context/InterfaceProvider.tsx'
 // Components
-import Splash from './app/Splash.tsx'
+import Splash from './window/Splash.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 

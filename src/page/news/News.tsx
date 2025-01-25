@@ -1,30 +1,31 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: main_window
+//! # Page: Page News - News
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Main window for the application
+//! * News page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: main_window.tsx
+//! ##### Path: page/news/News.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-// Context
-import { InterfaceProvider } from 'context/InterfaceProvider.tsx'
-// Components
-import Main from './window/Main.tsx'
+// CSS Module
+import Style from './News.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <InterfaceProvider>
-      <Main />
-    </InterfaceProvider>
-  </React.StrictMode>,
-)
+const News: React.FC = () => {
+  return (
+    <div className={Style.Page}>
+      <div className={Style.Main_Container}>
+        <h1>Welcome to ChartBuddha</h1>
+      </div>
+    </div>
+  )
+}
+
+export default News
 
 /* ---------------------------------------------------------------------------------------------- */

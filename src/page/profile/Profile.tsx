@@ -1,30 +1,32 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: main_window
+//! # Page: Page Profile - Profile
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Main window for the application
+//! * Profile page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: main_window.tsx
+//! ##### Path: page/profile/Profile.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-// Context
-import { InterfaceProvider } from 'context/InterfaceProvider.tsx'
-// Components
-import Main from './window/Main.tsx'
+// CSS Module
+import Style from './Profile.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
+//
+const Profile: React.FC = () => {
+  return (
+    <div className={Style.Profile}>
+      <div className={Style.Main_Container}>
+        <h1>Profile</h1>
+        <p>User Profile page.</p>
+      </div>
+    </div>
+  )
+}
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <InterfaceProvider>
-      <Main />
-    </InterfaceProvider>
-  </React.StrictMode>,
-)
-
+export default Profile
+//
 /* ---------------------------------------------------------------------------------------------- */

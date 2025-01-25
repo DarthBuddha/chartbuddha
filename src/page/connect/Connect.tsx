@@ -1,30 +1,39 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: main_window
+//! # Page: Page Connect - Connect
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Main window for the application
+//! * The Connect page is responsible for Api and Database connection settings.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: main_window.tsx
+//! ##### Path: page/connect/Connect.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-// Context
-import { InterfaceProvider } from 'context/InterfaceProvider.tsx'
 // Components
-import Main from './window/Main.tsx'
+import ConnectTab from './ConnectTab.tsx'
+import ConnectApiList from './ConnectApiList.tsx'
+// CSS Module
+import Style from './Connect.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <InterfaceProvider>
-      <Main />
-    </InterfaceProvider>
-  </React.StrictMode>,
-)
+const Connect: React.FC = () => {
+  return (
+    <div className={Style.Connect}>
+      <div className={Style.Main_Container}>
+        <div className={Style.List_Container}>
+          <ConnectApiList />
+        </div>
+        <div className={Style.Provider_Container}>
+          <ConnectTab />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Connect
 
 /* ---------------------------------------------------------------------------------------------- */
