@@ -22,40 +22,9 @@ import { load } from '@tauri-apps/plugin-store'
 // import MenuBar from './components/menubar/MenuBar';
 // import StatusBar from './components/statusbar/StatusBar';
 // CSS Module
-import Style from './Splash.module.css'
+import Style from './Page.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
-
-const store = await load('app_state.json')
-
-/* ---------------------------------------------------------------------------------------------- */
-
-const Splash: React.FC = () => {
-  useEffect(() => {
-    const unlisten = listen('tauri-ready', () => {
-      info('Tauri Ready - event received')
-      setupReact()
-    })
-
-    return () => {
-      unlisten.then((fn) => fn())
-    }
-  }, [])
-
-  return (
-    <div className={Style.Main_Window}>
-      <div className={Style.MenuBar_Component}>{/* <MenuBar /> */}</div>
-      <div className={Style.Page_Component}>
-        <h1>Welcome to ChartBuddha</h1>
-        {/* TODO - Show loading information */}
-        <p>Setting up the application...</p>
-      </div>
-      <div className={Style.StatusBar_Component}>{/* <StatusBar /> */}</div>
-    </div>
-  )
-}
-
-export default Splash
 
 // Utility function to implement a sleep function in TypeScript
 function sleep(seconds: number): Promise<void> {
@@ -64,6 +33,8 @@ function sleep(seconds: number): Promise<void> {
 
 // Setup function
 async function setupReact() {
+  // Load the app state from the store
+  const store = await load('app_state.json')
   // Fake perform some really heavy setup task
   info('Fake Pause...')
   await sleep(3)
@@ -86,5 +57,32 @@ async function setupReact() {
   // Set the frontend task as being completed
   invoke('setup_complete')
 }
+
+const Splash: React.FC = () => {
+  useEffect(() => {
+    const unlisten = listen('tauri-ready', () => {
+      info('Tauri Ready - event received')
+      setupReact()
+    })
+
+    return () => {
+      unlisten.then((fn) => fn())
+    }
+  }, [])
+
+  return (
+    <div className={Style.SplashComponent}>
+      <div className={Style.MenuBarContainer}>{/* <MenuBar /> */}</div>
+      <div className={Style.PageContainer}>
+        <h1>Welcome to ChartBuddha</h1>
+        {/* TODO - Show loading information */}
+        <p>Setting up the application...</p>
+      </div>
+      <div className={Style.StatusBarContainer}>{/* <StatusBar /> */}</div>
+    </div>
+  )
+}
+
+export default Splash
 
 /* ---------------------------------------------------------------------------------------------- */

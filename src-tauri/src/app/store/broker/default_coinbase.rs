@@ -22,7 +22,7 @@ pub fn default_coinbase() -> HashMap<String, Value> {
 
   // Coinbase
   defaults.insert(
-    "coinbase".to_string(),
+    "Coinbase".to_string(),
     json!({
       "api_configured": false,
       "api_key": null,

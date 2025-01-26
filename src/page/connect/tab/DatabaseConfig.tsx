@@ -10,32 +10,56 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react'
+import React, { useEffect } from 'react'
 // Tauri
 import { load } from '@tauri-apps/plugin-store'
 import { info, error } from '@tauri-apps/plugin-log'
 // import { invoke } from '@tauri-apps/api/core'
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext'
-// import { DataApiPermissionsType } from 'app/context/broker/Coinbase.tsx'
+import { useInterfaceContext } from '../../../context/InterfaceContext'
+import { DatabaseType } from '../../../context/app/AppConfig'
 // CSS Module
-import Style from './DatabaseConfig.module.css'
-
-/* ---------------------------------------------------------------------------------------------- */
-
-const store = await load('app_config.json')
+import Style from './Config.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const DatabaseConfig: React.FC = () => {
   // Context: Interface
+  const { selDatabaseType, setDatabaseType } = useInterfaceContext()
   const { selDatabaseName, setDatabaseName } = useInterfaceContext()
   const { selDatabaseUrl, setDatabaseUrl } = useInterfaceContext()
 
-  // Save Database Configuration
-  const saveDatabase = async () => {
+  // Use Effect: On Component Load
+  useEffect(() => {
+    const loadDatabaseConfig = async () => {
+      const store = await load('app_config.json')
+      try {
+        const appConfig = await store.get<{
+          database_type: DatabaseType
+          database_name: string
+          database_url: string
+        }>('App')
+
+        if (appConfig) {
+          setDatabaseType(appConfig.database_type)
+          setDatabaseName(appConfig.database_name)
+          setDatabaseUrl(appConfig.database_url)
+        }
+      } catch (err) {
+        error(`Error loading Database Config: ${err instanceof Error ? err.message : String(err)}`)
+      }
+    }
+
+    info('useEffect: loadDatabaseConfig')
+    loadDatabaseConfig()
+  }, [setDatabaseType, setDatabaseName, setDatabaseUrl])
+
+  // Click: Save Database
+  const clickSaveDatabase = async () => {
+    const store = await load('app_config.json')
     try {
-      await store.set('Database', {
+      await store.set('App', {
+        database_type: selDatabaseType,
         database_name: selDatabaseName,
         database_url: selDatabaseUrl,
       })
@@ -47,10 +71,12 @@ const DatabaseConfig: React.FC = () => {
     }
   }
 
-  // Drop Database Configuration
-  const dropDatabase = async () => {
+  // Click: Drop Database
+  const clickDropDatabase = async () => {
+    const store = await load('app_config.json')
     try {
-      await store.set('Database', {
+      await store.set('App', {
+        database_type: null,
         database_name: null,
         database_url: null,
       })
@@ -62,21 +88,11 @@ const DatabaseConfig: React.FC = () => {
     }
   }
 
-  // Click: Api Save
-  const clickSaveDatabase = async () => {
-    saveDatabase()
-  }
-
-  // Click: Api Delete
-  const clickDropDatabase = async () => {
-    dropDatabase()
-  }
-
   /* -------------------------------------------------------------------------------------------- */
 
   return (
-    <div className={Style.Component}>
-      <div className={Style.Title}>Database</div>
+    <div className={Style.ConnectConfigTab}>
+      <div className={Style.Title}>ChartBuddha Database Connection Settings</div>
       <div className={Style.Top_Container}>
         <div className={Style.Top_Left_Container}>
           <div className={Style.Title}>Configuration</div>

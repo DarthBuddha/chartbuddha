@@ -4,7 +4,7 @@
 //! # Component: Page Connect - ConnectTab
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This component is responsible for rendering the data connection settings.
+//! * ConnectTab component is responsible for rendering the selected tab content.
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path: page/connect/ConnectTab.tsx
 /* ---------------------------------------------------------------------------------------------- */
@@ -12,24 +12,24 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext'
+import { useInterfaceContext } from '../../context/InterfaceContext'
 // Components
 import DatabaseConfig from './tab/DatabaseConfig'
-import BinanceConfig from 'page/connect/tab/BinanceConfig'
-import CoinbaseConfig from 'page/connect/tab/CoinbaseConfig'
+import BinanceConfig from './tab/BinanceConfig'
+import CoinbaseConfig from './tab/CoinbaseConfig'
 // CSS Modules
-import Style from './ConnectTab.module.css'
+import Style from './Connect.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const ConnectTab: React.FC = () => {
   // Context: Interface
-  const { selApi } = useInterfaceContext()
+  const { selConnectTab } = useInterfaceContext()
 
-  switch (selApi) {
+  switch (selConnectTab) {
     case 'Binance':
       return (
-        <div className={Style.Component}>
+        <div className={Style.ConfigTabContainer}>
           <BinanceConfig />
           {/* <div className={Style.Title}>Binance</div>
           <div className={Style.Main_Container}>Binance API is not supported yet.</div> */}
@@ -38,14 +38,14 @@ const ConnectTab: React.FC = () => {
 
     case 'Coinbase':
       return (
-        <div className={Style.Component}>
+        <div className={Style.ConfigTabContainer}>
           <CoinbaseConfig />
         </div>
       )
 
     default:
       return (
-        <div className={Style.Component}>
+        <div className={Style.ConfigTabContainer}>
           <DatabaseConfig />
         </div>
       )

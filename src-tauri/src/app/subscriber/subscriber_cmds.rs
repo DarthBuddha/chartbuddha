@@ -44,7 +44,7 @@ pub async fn save_subscription_cmd(
   let app = app_handle.clone();
 
   // Access the Tauri store
-  let store = app.store("subscriptions.json").map_err(|e| e.to_string())?;
+  let store = app.store("list_sub.json").map_err(|e| e.to_string())?;
 
   // Check for duplicate subscription in the store
   let subscriptions: HashMap<String, Vec<Subscriber>> = store

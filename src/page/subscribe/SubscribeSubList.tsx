@@ -15,8 +15,8 @@ import React, { useEffect, useState } from 'react'
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext'
-import { ProductsType } from 'context/broker/Coinbase'
+import { useInterfaceContext } from '../../context/InterfaceContext'
+import { ProductsType } from '../../context/broker/Coinbase'
 // CSS Module
 import Style from './SubscribeSubList.module.css'
 
@@ -42,7 +42,7 @@ const SubscribeSubList: React.FC = () => {
       const apis = ['binance', 'coinbase'] // Add more APIs as needed
       const subscriptions: { api: string; symbol: string }[] = []
 
-      const store_subscriptions = await load('subscriptions.json')
+      const store_subscriptions = await load('list_sub.json')
       const appSubscriptions = await store_subscriptions.get<{
         [key: string]: { symbol: string; subscription_type: string }[]
       }>('subscriptions')

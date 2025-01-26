@@ -8,7 +8,7 @@
 import React from 'react'
 import Split from 'react-split'
 // Components
-import ChartsChart from './ChartsChart'
+// import ChartsChart from './ChartsChart'
 // CSS Modules
 import Style from './Chart.module.css'
 
@@ -32,7 +32,7 @@ const Charts: React.FC = () => {
       >
         <div className={Style.Panel_Chart}>
           <h3>Chart</h3>
-          <ChartsChart />
+          {/* <ChartsChart /> */}
         </div>
         <div className={Style.Panel_OrderBook}>
           <h3>Order Book</h3>

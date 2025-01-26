@@ -23,7 +23,7 @@ pub async fn coinbase_subscribe(
 ) -> Result<String, String> {
   // initialize app_subscriptions store
   log::info!("Initializing app_subscriptions store");
-  let store = app_handle.store("app_subscriptions.json").map_err(|e| e.to_string())?;
+  let store = app_handle.store("list_sub.json").map_err(|e| e.to_string())?;
 
   // get existing subscriptions
   let mut app_subscriptions = store

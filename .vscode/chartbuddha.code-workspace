@@ -25,7 +25,9 @@
       "unmanage",
       "usize",
       "varchar"
-    ]
+    ],
+    "dotenv.enableAutocloaking": false,
+    "dependi.rust.lockFileEnabled": true
   },
   "extensions": {
     "recommendations": [

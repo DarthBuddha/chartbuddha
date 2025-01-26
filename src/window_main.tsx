@@ -13,7 +13,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 // Context
-import { InterfaceProvider } from 'context/InterfaceProvider.tsx'
+import { InterfaceProvider } from './context/InterfaceProvider.tsx'
 // Components
 import Main from './window/Main.tsx'
 

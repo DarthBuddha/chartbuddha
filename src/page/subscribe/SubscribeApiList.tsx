@@ -15,14 +15,9 @@ import React, { useEffect, useState } from 'react'
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext'
+import { useInterfaceContext } from '../../context/InterfaceContext'
 // CSS Module
 import Style from './SubscribeApiList.module.css'
-
-/* ---------------------------------------------------------------------------------------------- */
-
-// Load Tauri Store
-const store_apis = await load('apis.json')
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -41,6 +36,7 @@ const SubscribeApiList: React.FC = () => {
 
   // Load Api List
   const load_api_list = async () => {
+    const store_apis = await load('list_api.json')
     try {
       const apis = ['binance', 'coinbase'] // Add more APIs as needed
       const configuredApis: string[] = []

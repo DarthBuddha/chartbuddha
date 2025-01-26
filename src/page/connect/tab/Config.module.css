@@ -1,8 +1,8 @@
 /* ---------------------------------------------------------------------------------------------- */
-/*! ConnectCoinbase.module.css !*/
+/*! Config.module.css !*/
 /* ---------------------------------------------------------------------------------------------- */
 
-.Component {
+.ConnectConfigTab {
   height: 100%;
   width: 100%;
   display: flex;
@@ -16,10 +16,9 @@
   height: 40px;
   width: 100%;
   font-size: 1.25rem;
-  align-items: center;
-  justify-content: center;
   text-align: center;
-  background-color: rgb(41, 44, 52);
+  align-content: center;
+  background-color: #25282a;
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
@@ -49,7 +48,7 @@
 
 .Settings_Text {
   padding: 100px;
-  /* box-shadow: inset 0 0 0 5px rgb(0, 0, 0); */
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -74,12 +73,12 @@
 }
 
 .Result_Text.success {
-  color: #0f0;
+  color: rgb(127, 255, 0);
   /* Green for success */
 }
 
 .Result_Text.error {
-  color: #f00;
+  color: rgb(255, 0, 0);
   /* Red for error */
 }
 
@@ -111,7 +110,7 @@
 .Input_Label {
   font-size: 1.25rem;
   padding: 10px;
-  /* box-shadow: inset 0 0 0 5px rgb(0, 0, 0); */
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
 .Input {
@@ -139,34 +138,34 @@
   width: 200px;
   flex: 1;
   border: none;
-  color: #fff;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
 .Save_Button {
-  background-color: #28a745;
+  background-color: rgb(0, 100, 0);
 }
 
 .Save_Button:hover {
-  background-color: #218838;
+  background-color: rgb(0, 160, 0);
 }
 
 .Delete_Button {
-  background-color: #dc3545;
+  background-color: rgb(139, 0, 0);
 }
 
 .Delete_Button:hover {
-  background-color: #c82333;
+  background-color: rgb(255, 0, 0);
 }
 
 .Test_Button {
-  background-color: #c0bd15;
+  background-color: rgb(184, 134, 11);
 }
 
 .Test_Button:hover {
-  background-color: #82800f;
+  background-color: rgb(255, 255, 0);
 }
 
 /* ---------------------------------------------------------------------------------------------- */

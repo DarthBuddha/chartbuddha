@@ -1,14 +1,28 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tsconfigPaths from 'vite-tsconfig-paths';
+/* ---------------------------------------------------------------------------------------------- */
+//! # ChartBuddha
+/* ---------------------------------------------------------------------------------------------- */
+//! # Config: Vite Configuration
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Vite configuration for Tauri development.
+/* ---------------------------------------------------------------------------------------------- */
+//! ##### Path: vite.config.ts
+/* ---------------------------------------------------------------------------------------------- */
+// Vite:
+import { defineConfig } from 'vite'
+// React Plugin:
+// import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
+// TSConfig Paths Plugin:
+import tsconfigPaths from 'vite-tsconfig-paths'
 
-const host = process.env.TAURI_DEV_HOST;
+const host = process.env.TAURI_DEV_HOST
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
   plugins: [
     react(),
-    tsconfigPaths() // This plugin will automatically respect the paths defined in tsconfig.json
+    tsconfigPaths(), // This plugin will automatically respect the paths defined in tsconfig.json
   ],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
@@ -22,14 +36,14 @@ export default defineConfig(async () => ({
     host: host || false,
     hmr: host
       ? {
-          protocol: "ws",
+          protocol: 'ws',
           host,
           port: 1421,
         }
       : undefined,
     watch: {
       // 3. tell vite to ignore watching `src-tauri`
-      ignored: ["**/src-tauri/**"],
+      ignored: ['**/src-tauri/**'],
     },
   },
-}));
+}))

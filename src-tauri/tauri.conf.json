@@ -3,13 +3,19 @@
   "productName": "ChartBuddha",
   "version": "0.1.0",
   "identifier": "com.chartbuddha.app",
-  "build": {
-    "beforeDevCommand": "npm run dev",
-    "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "npm run build",
-    "frontendDist": "../dist"
-  },
+  "mainBinaryName": "Chartbuddha",
+  // Configuration: App
   "app": {
+    // Security
+    "security": {
+      "csp": null //,
+      // "capabilities": [
+      //   "default",
+      //   "desktop"
+      // ]
+    },
+    // Capabilities
+    // Window
     "windows": [
       {
         "title": "ChartBuddha: Main",
@@ -21,7 +27,8 @@
         "minWidth": 640,
         "minHeight": 400,
         "center": true,
-        "maximized": true
+        "maximized": true,
+        "devtools": true
       },
       {
         "title": "ChartBuddha: Loading...",
@@ -36,17 +43,22 @@
         "resizable": false,
         "decorations": false,
         "alwaysOnTop": true,
-        "center": true
+        "center": true,
+        "devtools": true
       }
     ],
-    "security": {
-      "csp": null,
-      "capabilities": [
-        "default",
-        "desktop"
-      ]
-    }
+    "withGlobalTauri": true
   },
+  // Configuration: Build
+  "build": {
+    // Development build
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    // Production build
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  // Configuration: Bundler
   "bundle": {
     "active": true,
     "targets": "all",
@@ -57,5 +69,7 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
-  }
+  },
+  // Configuration: Plugins
+  "plugins": {}
 }

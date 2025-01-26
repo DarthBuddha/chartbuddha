@@ -17,6 +17,7 @@ import React, { useState } from 'react'
 import { InterfaceContext } from './InterfaceContext.tsx'
 import { DataApiPermissionsType } from './broker/Coinbase.tsx'
 import { ProductsType } from './broker/Coinbase.tsx'
+import { DatabaseType } from './app/AppConfig.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -25,6 +26,7 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [selPage, setPage] = useState<string | null>(null)
   // Context: Connect Page
   const [selConnectTab, setConnectTab] = useState<string | null>(null)
+  const [selDatabaseType, setDatabaseType] = useState<DatabaseType | null>(null)
   const [selDatabaseName, setDatabaseName] = useState<string | null>(null)
   const [selDatabaseUrl, setDatabaseUrl] = useState<string | null>(null)
   // TODO: Clean up Context
@@ -53,6 +55,8 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         // Context: Connect Page
         selConnectTab,
         setConnectTab,
+        selDatabaseType,
+        setDatabaseType,
         selDatabaseName,
         setDatabaseName,
         selDatabaseUrl,

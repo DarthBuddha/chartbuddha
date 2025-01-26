@@ -23,8 +23,8 @@ pub mod market;
 pub mod news;
 
 // Files:
-pub mod default_app_state;
 pub mod default_app_config;
+pub mod default_app_state;
 pub mod default_list_api;
 pub mod default_list_sub;
 pub mod store;

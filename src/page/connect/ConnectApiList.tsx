@@ -4,7 +4,7 @@
 //! # Component: Page Connect - ConnectApiList
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This component is responsible for rendering the list of available API providers.
+//! * ConnectApiList component is responsible for rendering the list of available apis.
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path: page/connect/ConnectApiList.tsx
 /* ---------------------------------------------------------------------------------------------- */
@@ -16,14 +16,14 @@ import React from 'react'
 // import { info, error } from '@tauri-apps/plugin-log'
 // import { invoke } from '@tauri-apps/api/core';
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext'
+import { useInterfaceContext } from '../../context/InterfaceContext'
 // import { DataApiType } from 'app/context/broker/Coinbase.tsx'
 // CSS Module
-import Style from './ConnectApiList.module.css'
+import Style from './Connect.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-// const store = await load('apis.json')
+// const store = await load('list_api.json')
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -67,8 +67,8 @@ const ConnectApiList: React.FC = () => {
   }
 
   return (
-    <div className={Style.List_Container}>
-      <div className={Style.Title_Bar}>Apis</div>
+    <div className={Style.ConnectApiListComponent}>
+      <div className={Style.Header}>Data Source</div>
       <div className={Style.List}>
         <div className={Style.Row} onClick={() => handleClick('Database')}>
           Database

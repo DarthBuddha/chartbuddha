@@ -1,8 +1,9 @@
 /* ---------------------------------------------------------------------------------------------- */
-/*! Splash.module.css !*/
+/*! Main.module.css !*/
 /* ---------------------------------------------------------------------------------------------- */
 
-.Main_Window {
+.MainComponent,
+.SplashComponent {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -11,63 +12,78 @@
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
+.MenuBarComponent,
+.StatusBarComponent {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(37, 40, 42);
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 
-.MenuBar_Component {
+.MenuBarContainer {
   height: 60px;
   width: 100%;
-  background-color: rgb(41, 44, 52);
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-.Page_Component {
+.PageContainer {
   height: calc(100% - 100px);
   width: 100%;
-  text-align: center;
-  align-content: center;
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-.StatusBar_Component {
+.StatusBarContainer {
   height: 40px;
   width: 100%;
-  background-color: rgb(41, 44, 52);
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
-.Splash_Container {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  text-align: center;
-  align-content: center;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
 /* ---------------------------------------------------------------------------------------------- */
 
-.Home {
+.BarContainerLeft,
+.BarContainerCenter,
+.BarContainerRight {
   height: 100%;
-  width: 100%;
-  flex: 1;
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  /* box-shadow: inset 0 0 0 5px rgb(0, 0, 0); */
+  align-items: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.BarContainerCenter {
+  flex-grow: 1;
+  justify-content: center;
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
-.Main_Container {
+.Button {
   height: 100%;
-  width: 100%;
+  width: 200px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  align-content: center;
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
+
+.Button:hover {
+  background-color: rgb(83, 86, 90);
+  font-weight: bold;
+}
+
+/* .active {
+  background-color: #53565a;
+  font-weight: bold;
+} */
 
 /* ---------------------------------------------------------------------------------------------- */

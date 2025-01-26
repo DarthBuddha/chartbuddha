@@ -17,6 +17,7 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
+/// Default App Config
 pub fn default_app_config() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
@@ -26,14 +27,8 @@ pub fn default_app_config() -> HashMap<String, Value> {
     json!({
       "app_init_run": false,
       "app_version": null,
-      "app_update": null
-    })
-  );
-
-  // database
-  defaults.insert(
-    "Database".to_string(),
-    json!({
+      "app_update": null,
+      "database_type": null,
       "database_name": null,
       "database_url": null
     })

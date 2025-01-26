@@ -12,8 +12,8 @@
 // React
 import React from 'react'
 // Components: MenuBar, StatusBar
-import MenuBar from './components/MenuBar.tsx'
-import StatusBar from './components/StatusBar.tsx'
+import MenuBar from './MenuBar.tsx'
+import StatusBar from './StatusBar.tsx'
 // Components
 import Analyze from '../page/analyze/Analyze.tsx'
 import Dashboard from '../page/dashboard/Dashboard.tsx'
@@ -23,9 +23,9 @@ import News from '../page/news/News.tsx'
 import Profile from '../page/profile/Profile.tsx'
 import Subscribe from '../page/subscribe/Subscribe.tsx'
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext.tsx'
+import { useInterfaceContext } from '../context/InterfaceContext.tsx'
 // CSS Module
-import Style from './Main.module.css'
+import Style from './Page.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -55,12 +55,12 @@ const Main: React.FC = () => {
   }
 
   return (
-    <div className={Style.Main_Window}>
-      <div className={Style.MenuBar_Component}>
+    <div className={Style.MainComponent}>
+      <div className={Style.MenuBarContainer}>
         <MenuBar />
       </div>
-      <div className={Style.Page_Component}>{renderPage()}</div>
-      <div className={Style.StatusBar_Component}>
+      <div className={Style.PageContainer}>{renderPage()}</div>
+      <div className={Style.StatusBarContainer}>
         <StatusBar />
       </div>
     </div>

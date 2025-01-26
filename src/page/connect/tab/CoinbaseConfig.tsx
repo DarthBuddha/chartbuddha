@@ -16,14 +16,10 @@ import { load } from '@tauri-apps/plugin-store'
 import { info, error } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext'
-import { DataApiPermissionsType } from 'context/broker/Coinbase'
+import { useInterfaceContext } from '../../../context/InterfaceContext'
+import { DataApiPermissionsType } from '../../../context/broker/Coinbase'
 // CSS Module
-import Style from './CoinbaseConfig.module.css'
-
-/* ---------------------------------------------------------------------------------------------- */
-
-const store = await load('apis.json')
+import Style from './Config.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -35,6 +31,7 @@ const CoinbaseConfig: React.FC = () => {
 
   // Delete API
   const deleteApi = async () => {
+    const store = await load('coinbase.json')
     try {
       await store.set('coinbase', {
         api_configured: false,
@@ -95,7 +92,7 @@ const CoinbaseConfig: React.FC = () => {
   /* -------------------------------------------------------------------------------------------- */
 
   return (
-    <div className={Style.Component}>
+    <div className={Style.ConnectConfigTab}>
       <div className={Style.Title}>Coinbase</div>
       <div className={Style.Top_Container}>
         <div className={Style.Top_Left_Container}>

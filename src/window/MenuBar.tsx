@@ -12,9 +12,9 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from 'context/InterfaceContext'
+import { useInterfaceContext } from '../context/InterfaceContext'
 // CSS Module
-import Style from './MenuBar.module.css'
+import Style from './Page.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -37,13 +37,13 @@ const MenuBar: React.FC = () => {
   }
 
   return (
-    <div className={Style.MenuBar}>
-      <div className={Style.Container_Left}>
+    <div className={Style.MenuBarComponent}>
+      <div className={Style.BarContainerLeft}>
         <div className={Style.Button} onClick={() => handleClick('home')}>
           Home
         </div>
       </div>
-      <div className={Style.Container_Center}>
+      <div className={Style.BarContainerCenter}>
         <div className={Style.Button} onClick={() => handleClick('connect')}>
           Connect
         </div>
@@ -64,7 +64,7 @@ const MenuBar: React.FC = () => {
           News
         </div>
       </div>
-      <div className={Style.Container_Right}>
+      <div className={Style.BarContainerRight}>
         <div className={Style.Button} onClick={() => handleClick('profile')}>
           Profile
         </div>

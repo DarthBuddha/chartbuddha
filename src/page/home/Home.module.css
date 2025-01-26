@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* box-shadow: inset 0 0 0 5px rgb(0, 0, 0); */
+  box-shadow: inset 0 0 0 5px #222223;
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -19,7 +19,7 @@
   width: 100%;
   text-align: center;
   align-content: center;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+  box-shadow: inset 0 0 0 5px #222223;
 }
 
 /* ---------------------------------------------------------------------------------------------- */

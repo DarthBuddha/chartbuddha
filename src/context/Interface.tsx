@@ -14,6 +14,7 @@ import { createContext } from 'react'
 // Context
 import { DataApiPermissionsType } from './broker/Coinbase.tsx'
 import { ProductsType } from './broker/Coinbase.tsx'
+import { DatabaseType } from './app/AppConfig.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -25,6 +26,8 @@ export interface InterfaceType {
   // Context: Connect Page
   selConnectTab: string | null
   setConnectTab: React.Dispatch<React.SetStateAction<string | null>>
+  selDatabaseType: DatabaseType | null
+  setDatabaseType: React.Dispatch<React.SetStateAction<DatabaseType | null>>
   selDatabaseName: string | null
   setDatabaseName: React.Dispatch<React.SetStateAction<string | null>>
   selDatabaseUrl: string | null

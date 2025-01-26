@@ -38,7 +38,7 @@ pub async fn save_subscription_to_store(
   let app = app_handle.clone();
 
   // Access the Tauri store
-  let store = app.store("subscriptions.json").map_err(|e| e.to_string())?;
+  let store = app.store("list_sub.json").map_err(|e| e.to_string())?;
 
   // get existing subscriptions
   let mut subscriptions_store = store
@@ -85,7 +85,7 @@ pub async fn delete_subscription_from_store(
   // initialize app_subscriptions store
   info!("Delete Subscription from Store");
 
-  let store = app_handle.store("subscriptions.json").map_err(|e| e.to_string())?;
+  let store = app_handle.store("list_sub.json").map_err(|e| e.to_string())?;
 
   // get existing subscriptions
   let mut subscriptions_store = store

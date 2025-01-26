@@ -25,7 +25,7 @@ pub async fn initialize_websocket(app: AppHandle) -> Result<(), Box<dyn std::err
   log::info!("Initializing WebSocket...");
 
   // Read app_subscriptions from the store
-  let store = app.store("app_subscriptions.json")?;
+  let store = app.store("list_sub.json")?;
   let app_subscriptions: serde_json::Value = store
     .get("app_subscriptions")
     .unwrap_or(json!({

@@ -1,10 +1,10 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
+  // "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": [
-      "ES2020",
+      "ES2022",
       "DOM",
       "DOM.Iterable"
     ],
@@ -22,13 +22,13 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
-    "paths": {
-      // "context/*": [
-      //   "app/context/*"
-      // ]
-    }
+    "noFallthroughCasesInSwitch": true
+    // "baseUrl": "./src",
+    // "paths": {
+    // "context/*": [
+    // "app/context/*"
+    // ]
+    // }
   },
   "include": [
     "src"

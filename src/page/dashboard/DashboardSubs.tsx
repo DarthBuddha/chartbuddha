@@ -15,7 +15,7 @@ import React, { useEffect, useState } from 'react'
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Interface
-import { useInterfaceContext } from 'context/InterfaceContext'
+import { useInterfaceContext } from '../../context/InterfaceContext'
 // CSS Modules
 import Style from './DashboardSubs.module.css'
 
@@ -41,7 +41,7 @@ const DashboardSubs: React.FC = () => {
       const apis = ['binance', 'coinbase'] // Add more APIs as needed
       const configuredApis: { api: string; symbol: string }[] = []
 
-      const store_app_subscriptions = await load('subscriptions.json')
+      const store_app_subscriptions = await load('list_sub.json')
       const appSubscriptions = await store_app_subscriptions.get<{
         [key: string]: { symbol: string; subscription_type: string }[]
       }>('subscriptions')
