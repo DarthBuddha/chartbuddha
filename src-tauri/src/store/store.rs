@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Store - store
+//! # Module: Store - store
 /* ---------------------------------------------------------------------------------------------- */
 //! Functions:
 //! * initialize_store
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/store/store.rs
+//! ##### Path: store/store.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -21,14 +21,11 @@ use log::info;
 // Tauri Store Defaults: App
 use crate::store::app::default_app_config::default_app_config;
 use crate::store::app::default_app_state::default_app_state;
-// Tauri Store Defaults: GUI Lists
 use crate::store::app::default_list_api::default_list_api;
 use crate::store::app::default_list_sub::default_list_sub;
-// Tauri Store Defaults: Broker
-// use crate::app::store::broker::default_binance::default_binance;
-use crate::store::broker::default_coinbase::default_coinbase;
-// Tauri Store Defaults: Market
-// Tauri Store Defaults: News
+// Tauri Store Defaults: Apis
+use crate::store::apis::default_binance::default_binance;
+use crate::store::apis::default_coinbase::default_coinbase;
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -87,14 +84,14 @@ pub fn initialize_store(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   store_list_sub.save()?;
 
   // Store: Subscriptions Store Initialization
-  // info!("Initialize Store: Broker - Binance...");
-  // let store_binance = tauri_plugin_store::StoreBuilder
-  //   ::new(&app, BINANCE_STORE)
-  //   .auto_save(Duration::from_millis(100))
-  //   .defaults(default_binance())
-  //   .build()?;
-  // app.manage(store_binance.clone());
-  // store_binance.save()?;
+  info!("Initialize Store: Broker - Binance...");
+  let store_binance = tauri_plugin_store::StoreBuilder
+    ::new(&app, BINANCE_STORE)
+    .auto_save(Duration::from_millis(100))
+    .defaults(default_binance())
+    .build()?;
+  app.manage(store_binance.clone());
+  store_binance.save()?;
 
   // Store: Subscriptions Store Initialization
   info!("Initialize Store: Broker - Coinbase...");

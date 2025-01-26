@@ -16,7 +16,7 @@ import { invoke } from '@tauri-apps/api/core'
 import { error, info } from '@tauri-apps/plugin-log'
 // Context
 import { useInterfaceContext } from '../../../context/InterfaceContext'
-import { ProductsType } from '../../../context/broker/Coinbase'
+import { ProductsType } from '../../../context/apis/Coinbase'
 // CSS Modules
 import Style from './SubscribeCoinbaseProductList.module.css'
 

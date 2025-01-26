@@ -11,10 +11,14 @@
 
 // React
 import { createContext } from 'react'
-// Context
-import { DataApiPermissionsType } from './broker/Coinbase.tsx'
-import { ProductsType } from './broker/Coinbase.tsx'
+// Context: Connect
 import { DatabaseType } from './app/AppConfig.tsx'
+// Context: Binance
+import { BinanceDataApiPermissionsType } from './apis/Binance.tsx'
+import { BinanceProductsType } from './apis/Binance.tsx'
+// Context: Coinbase
+import { CoinbaseDataApiPermissionsType } from './apis/Coinbase.tsx'
+import { CoinbaseProductsType } from './apis/Coinbase.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -37,23 +41,41 @@ export interface InterfaceType {
   setApi: React.Dispatch<React.SetStateAction<string | null>>
   selProduct: string | null
   setProduct: React.Dispatch<React.SetStateAction<string | null>>
+  // Context: Subscribe
   selApiList: string | null
   setApiList: React.Dispatch<React.SetStateAction<string | null>>
   selSubList: string | null
   setSubList: React.Dispatch<React.SetStateAction<string | null>>
-  // Coinbase Context
+  // Context: Binance
+  selBinanceApiKey: string | null
+  setBinanceApiKey: React.Dispatch<React.SetStateAction<string | null>>
+  selBinanceApiKeySecret: string | null
+  setBinanceApiKeySecret: React.Dispatch<React.SetStateAction<string | null>>
+  selBinanceApiPermissions: BinanceDataApiPermissionsType | null
+  setBinanceApiPermissions: React.Dispatch<
+    React.SetStateAction<BinanceDataApiPermissionsType | null>
+  >
+  selBinanceProductType: string | null
+  setBinanceProductType: React.Dispatch<React.SetStateAction<string | null>>
+  selBinanceProductList: BinanceProductsType[] | null
+  setBinanceProductList: React.Dispatch<React.SetStateAction<BinanceProductsType[] | null>>
+  selBinanceProduct: BinanceProductsType | null
+  setBinanceProduct: React.Dispatch<React.SetStateAction<BinanceProductsType | null>>
+  // Context: Coinbase
   selCoinbaseApiKey: string | null
   setCoinbaseApiKey: React.Dispatch<React.SetStateAction<string | null>>
   selCoinbaseApiKeySecret: string | null
   setCoinbaseApiKeySecret: React.Dispatch<React.SetStateAction<string | null>>
-  selCoinbaseApiPermissions: DataApiPermissionsType | null
-  setCoinbaseApiPermissions: React.Dispatch<React.SetStateAction<DataApiPermissionsType | null>>
+  selCoinbaseApiPermissions: CoinbaseDataApiPermissionsType | null
+  setCoinbaseApiPermissions: React.Dispatch<
+    React.SetStateAction<CoinbaseDataApiPermissionsType | null>
+  >
   selCoinbaseProductType: string | null
   setCoinbaseProductType: React.Dispatch<React.SetStateAction<string | null>>
-  selCoinbaseProductList: ProductsType[] | null
-  setCoinbaseProductList: React.Dispatch<React.SetStateAction<ProductsType[] | null>>
-  selCoinbaseProduct: ProductsType | null
-  setCoinbaseProduct: React.Dispatch<React.SetStateAction<ProductsType | null>>
+  selCoinbaseProductList: CoinbaseProductsType[] | null
+  setCoinbaseProductList: React.Dispatch<React.SetStateAction<CoinbaseProductsType[] | null>>
+  selCoinbaseProduct: CoinbaseProductsType | null
+  setCoinbaseProduct: React.Dispatch<React.SetStateAction<CoinbaseProductsType | null>>
 }
 
 const InterfaceContext = createContext<InterfaceType | null>(null)

@@ -10,14 +10,14 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react'
+import React, { useEffect } from 'react'
 // Tauri
 import { load } from '@tauri-apps/plugin-store'
 import { info, error } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
 // Context
 import { useInterfaceContext } from '../../../context/InterfaceContext'
-import { DataApiPermissionsType } from '../../../context/broker/Coinbase'
+import { BinanceDataApiPermissionsType } from '../../../context/apis/Binance'
 // CSS Module
 import Style from './Config.module.css'
 
@@ -25,15 +25,68 @@ import Style from './Config.module.css'
 
 const BinanceConfig: React.FC = () => {
   // State Management
-  const { selCoinbaseApiKey, setCoinbaseApiKey } = useInterfaceContext()
-  const { selCoinbaseApiKeySecret, setCoinbaseApiKeySecret } = useInterfaceContext()
-  const { selCoinbaseApiPermissions, setCoinbaseApiPermissions } = useInterfaceContext()
+  const { selBinanceApiKey, setBinanceApiKey } = useInterfaceContext()
+  const { selBinanceApiKeySecret, setBinanceApiKeySecret } = useInterfaceContext()
+  const { selBinanceApiPermissions, setBinanceApiPermissions } = useInterfaceContext()
 
-  // Delete API
-  const deleteApi = async () => {
+  // Use Effect: On Component Load
+  useEffect(() => {
+    const loadBinanceConfig = async () => {
+      const store = await load('binance.json')
+      try {
+        const binanceStore = await store.get<{
+          api_key: string
+          api_key_secret: string
+          api_permissions: BinanceDataApiPermissionsType
+        }>('Binance')
+
+        if (binanceStore) {
+          setBinanceApiKey(binanceStore.api_key || '')
+          setBinanceApiKeySecret(binanceStore.api_key_secret || '')
+          setBinanceApiPermissions(
+            binanceStore.api_permissions || {
+              can_view: false,
+              can_trade: false,
+              can_transfer: false,
+              portfolio_uuid: '',
+              portfolio_type: '',
+            },
+          )
+        }
+      } catch (err) {
+        error(`Error loading Database Config: ${err instanceof Error ? err.message : String(err)}`)
+      }
+    }
+
+    info('useEffect: loadBinanceConfig')
+    loadBinanceConfig()
+  }, [setBinanceApiKey, setBinanceApiKeySecret, setBinanceApiPermissions])
+
+  // Button Click: Save Api Keys
+  const clickApiSave = async () => {
+    try {
+      const response: string = await invoke('store_binance_api_keys', {
+        binanceApiKey: selBinanceApiKey,
+        binanceApiSecret: selBinanceApiKeySecret,
+      })
+
+      const parsedResponse: BinanceDataApiPermissionsType = JSON.parse(response)
+      info('Parsed Response: ' + JSON.stringify(parsedResponse))
+      // Update context state explicitly
+      setBinanceApiPermissions(parsedResponse)
+
+      // Reload the API to ensure store consistency
+      // await loadApi();
+    } catch (err) {
+      error(err instanceof Error ? err.toString() : String(err))
+    }
+  }
+
+  // Button Click - Delete Api Keys
+  const clickApiDelete = async () => {
     const store = await load('binance.json')
     try {
-      await store.set('coinbase', {
+      await store.set('Binance', {
         api_configured: false,
         api_key: null,
         api_secret: null,
@@ -48,9 +101,9 @@ const BinanceConfig: React.FC = () => {
       await store.save()
 
       // Reset context explicitly
-      setCoinbaseApiKey('')
-      setCoinbaseApiKeySecret('')
-      setCoinbaseApiPermissions({
+      setBinanceApiKey('')
+      setBinanceApiKeySecret('')
+      setBinanceApiPermissions({
         can_view: false,
         can_trade: false,
         can_transfer: false,
@@ -58,35 +111,10 @@ const BinanceConfig: React.FC = () => {
         portfolio_type: '',
       })
 
-      info('Coinbase API configuration has been reset.')
+      info('Binance API configuration has been reset.')
     } catch (err) {
       error(err instanceof Error ? err.toString() : String(err))
     }
-  }
-
-  // Button Click: Api Save
-  const clickApiSave = async () => {
-    try {
-      const response: string = await invoke('coinbase_store_api_keys', {
-        coinbaseApiKey: selCoinbaseApiKey,
-        coinbaseApiSecret: selCoinbaseApiKeySecret,
-      })
-
-      const parsedResponse: DataApiPermissionsType = JSON.parse(response)
-      info('Parsed Response: ' + JSON.stringify(parsedResponse))
-      // Update context state explicitly
-      setCoinbaseApiPermissions(parsedResponse)
-
-      // Reload the API to ensure store consistency
-      // await loadApi();
-    } catch (err) {
-      error(err instanceof Error ? err.toString() : String(err))
-    }
-  }
-
-  // Button Click - Api Delete
-  const clickApiDelete = async () => {
-    deleteApi()
   }
 
   /* -------------------------------------------------------------------------------------------- */
@@ -100,8 +128,8 @@ const BinanceConfig: React.FC = () => {
           <div className={Style.Header}>Configuration</div>
           <div className={Style.Config_Section}>
             <div className={Style.ConfigText}>
-              Coinbase requires your API key and secret to connect. You can generate these from the
-              Coinbase Pro website. Make sure to keep your secret key secure.
+              Binance requires your API key and secret to connect. You can generate these from the
+              Binance Pro website. Make sure to keep your secret key secure.
             </div>
           </div>
         </div>
@@ -113,17 +141,15 @@ const BinanceConfig: React.FC = () => {
               <div className={Style.Info_Section_Cell_Key}>Can View:</div>
               <div className={Style.Info_Section_Cell_Result}>
                 {' '}
-                {selCoinbaseApiPermissions
-                  ? String(selCoinbaseApiPermissions.can_view)
-                  : 'undefined'}
+                {selBinanceApiPermissions ? String(selBinanceApiPermissions.can_view) : 'undefined'}
               </div>
             </div>
             <div className={Style.Info_Section_Row}>
               <div className={Style.Info_Section_Cell_Key}>Can Trade:</div>
               <div className={Style.Info_Section_Cell_Result}>
                 {' '}
-                {selCoinbaseApiPermissions
-                  ? String(selCoinbaseApiPermissions.can_trade)
+                {selBinanceApiPermissions
+                  ? String(selBinanceApiPermissions.can_trade)
                   : 'undefined'}
               </div>
             </div>
@@ -131,8 +157,8 @@ const BinanceConfig: React.FC = () => {
               <div className={Style.Info_Section_Cell_Key}>Can Transfer:</div>
               <div className={Style.Info_Section_Cell_Result}>
                 {' '}
-                {selCoinbaseApiPermissions
-                  ? String(selCoinbaseApiPermissions.can_transfer)
+                {selBinanceApiPermissions
+                  ? String(selBinanceApiPermissions.can_transfer)
                   : 'undefined'}
               </div>
             </div>
@@ -140,14 +166,14 @@ const BinanceConfig: React.FC = () => {
               <div className={Style.Info_Section_Cell_Key}>Portfolio uuid:</div>
               <div className={Style.Info_Section_Cell_Result}>
                 {' '}
-                {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_uuid : ''}
+                {selBinanceApiPermissions ? selBinanceApiPermissions.portfolio_uuid : ''}
               </div>
             </div>
             <div className={Style.Info_Section_Row}>
               <div className={Style.Info_Section_Cell_Key}>Portfolio Type:</div>
               <div className={Style.Info_Section_Cell_Result}>
                 {' '}
-                {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_type : ''}
+                {selBinanceApiPermissions ? selBinanceApiPermissions.portfolio_type : ''}
               </div>
             </div>
           </div>
@@ -163,11 +189,11 @@ const BinanceConfig: React.FC = () => {
               <input
                 type="text"
                 id="api_key"
-                value={selCoinbaseApiKey ?? ''}
-                onChange={(e) => setCoinbaseApiKey(e.target.value)}
+                value={selBinanceApiKey ?? ''}
+                onChange={(e) => setBinanceApiKey(e.target.value)}
                 className={Style.UserInput_Text}
                 autoComplete="off"
-                placeholder="Enter your Coinbase API Key"
+                placeholder="Enter your Binance API Key"
               />
             </div>
           </div>
@@ -177,11 +203,11 @@ const BinanceConfig: React.FC = () => {
               <input
                 type="text"
                 id="api_key_secret"
-                value={selCoinbaseApiKeySecret ?? ''}
-                onChange={(e) => setCoinbaseApiKeySecret(e.target.value)}
+                value={selBinanceApiKeySecret ?? ''}
+                onChange={(e) => setBinanceApiKeySecret(e.target.value)}
                 className={Style.UserInput_Text}
                 autoComplete="off"
-                placeholder="Enter your Coinbase API Secret"
+                placeholder="Enter your Binance API Secret"
               />
             </div>
           </div>

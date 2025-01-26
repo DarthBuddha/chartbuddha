@@ -16,7 +16,7 @@ import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
 import { useInterfaceContext } from '../../context/InterfaceContext'
-import { ProductsType } from '../../context/broker/Coinbase'
+import { ProductsType } from '../../context/apis/Coinbase'
 // CSS Module
 import Style from './SubscribeSubList.module.css'
 

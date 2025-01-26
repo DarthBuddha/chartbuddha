@@ -1,5 +1,4 @@
 {
-  // "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
@@ -23,12 +22,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
-    // "baseUrl": "./src",
-    // "paths": {
-    // "context/*": [
-    // "app/context/*"
-    // ]
-    // }
   },
   "include": [
     "src"

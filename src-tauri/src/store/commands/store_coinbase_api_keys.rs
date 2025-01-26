@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Commands - coinbase_store_api_keys
+//! # Module: App Commands - store_coinbase_api_keys
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Functions:
-//! - coinbase_store_api_keys
+//! * store_coinbase_api_keys
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/commands/coinbase_store_api_keys.rs
+//! ##### Path: store/commands/store_coinbase_api_keys.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
@@ -50,7 +50,7 @@ fn convert_api_secret(api_secret: &str) -> String {
 
 /// Store the API keys in the apis store and get API key permissions
 #[tauri::command]
-pub async fn coinbase_store_api_keys(
+pub async fn store_coinbase_api_keys(
   app: AppHandle,
   coinbase_api_key: String,
   coinbase_api_secret: String
@@ -71,7 +71,7 @@ pub async fn coinbase_store_api_keys(
   info!("{}", formatted_api_secret.to_string());
 
   // initialize apis store
-  info!("Initializing apis store");
+  info!("Initializing Coinbase store");
   let store = app.store(COINBASE_STORE).map_err(|e| e.to_string())?;
 
   // Save the API keys to the store

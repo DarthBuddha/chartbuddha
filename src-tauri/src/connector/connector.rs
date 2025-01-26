@@ -1,35 +1,17 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha Library
+//! # Module: Connector - connector
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: Store App - default_list_api
+//! #### Functions:
+//! - rust_function
 /* ---------------------------------------------------------------------------------------------- */
-//! Default:
-//! * default_list_api
-/* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: store/app/default_list_api.rs
+//! ##### Path: connector.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
-use std::collections::HashMap;
+// Tauri
 // Dependencies
-use serde_json::json;
-use serde_json::Value;
+// Crates
 
 /* ---------------------------------------------------------------------------------------------- */
-
-pub fn default_list_api() -> HashMap<String, Value> {
-  let mut defaults = HashMap::new();
-
-  // Api List
-  defaults.insert(
-    "Broker".to_string(),
-    json!({
-      "binance": false,
-      "coinbase": false
-    })
-  );
-
-  defaults
-}
 
 /* ---------------------------------------------------------------------------------------------- */
