@@ -10,23 +10,29 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Library
-pub mod app;
-pub mod broker;
-pub mod market;
-pub mod news;
+pub mod api;
+pub mod connector;
+pub mod db;
+pub mod store;
+// pub mod streamer;
+pub mod subscriber;
+// pub mod websocket;
+pub mod window;
 
+// Modules
+pub mod setup;
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
 use tauri::async_runtime::spawn;
 // Crates
-use crate::app::setup::setup_tauri;
-use crate::app::setup::setup_complete;
-use crate::app::subscriber::subscriber_cmds::save_subscription_cmd;
-use crate::app::subscriber::subscriber_cmds::delete_subscription_cmd;
-use crate::broker::coinbase::commands::coinbase_products_list::coinbase_products_list;
-use crate::broker::coinbase::commands::coinbase_store_api_keys::coinbase_store_api_keys;
-use crate::broker::coinbase::commands::coinbase_subscribe::coinbase_subscribe;
+use crate::setup::setup_tauri;
+use crate::setup::setup_complete;
+use crate::subscriber::subscriber_cmds::save_subscription_cmd;
+use crate::subscriber::subscriber_cmds::delete_subscription_cmd;
+use crate::api::coinbase::commands::coinbase_products_list::coinbase_products_list;
+use crate::api::coinbase::commands::coinbase_store_api_keys::coinbase_store_api_keys;
+use crate::api::coinbase::commands::coinbase_subscribe::coinbase_subscribe;
 
 /* ---------------------------------------------------------------------------------------------- */
 

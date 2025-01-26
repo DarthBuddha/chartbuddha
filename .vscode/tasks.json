@@ -4,7 +4,12 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "ui:vite",
+      "label": "build:debug",
+      "type": "cargo",
+      "command": "build"
+    },
+    {
+      "label": "ui:dev",
       "type": "shell",
       // `dev` keeps running in the background
       // ideally you should also configure a `problemMatcher`
@@ -18,46 +23,14 @@
       ]
     },
     {
-      "label": "ui:tauri",
-      "type": "shell",
-      // `dev` keeps running in the background
-      // ideally you should also configure a `problemMatcher`
-      // see https://code.visualstudio.com/docs/editor/tasks#_can-a-background-task-be-used-as-a-prelaunchtask-in-launchjson
-      "isBackground": true,
-      // change this to your `beforeDevCommand`:
-      "command": "npm",
-      "args": [
-        "run",
-        "tauri",
-        "dev"
-      ]
-    },
-    {
-      "label": "ui:build",
-      "type": "shell",
-      // change this to your `beforeBuildCommand`:
-      "command": "npm",
-      "args": [
-        "run",
-        "build"
-      ]
-    },
-    {
-      "label": "ui:clean",
-      "type": "shell",
-      "command": "rm",
-      "args": [
-        "${workspaceRoot}/src-tauri/target/debug/chartbuddha.exe"
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "ui:clean-and-tauri",
+      "label": "dev",
       "dependsOn": [
-        "ui:clean",
-        "ui:tauri"
+        "build:debug",
+        "ui:dev"
       ],
-      "problemMatcher": []
+      "group": {
+        "kind": "build"
+      }
     }
   ]
 }

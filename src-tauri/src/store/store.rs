@@ -19,14 +19,14 @@ use tauri::Wry;
 // Dependencies
 use log::info;
 // Tauri Store Defaults: App
-use crate::app::store::default_app_config::default_app_config;
-use crate::app::store::default_app_state::default_app_state;
+use crate::store::app::default_app_config::default_app_config;
+use crate::store::app::default_app_state::default_app_state;
 // Tauri Store Defaults: GUI Lists
-use crate::app::store::default_list_api::default_list_api;
-use crate::app::store::default_list_sub::default_list_sub;
+use crate::store::app::default_list_api::default_list_api;
+use crate::store::app::default_list_sub::default_list_sub;
 // Tauri Store Defaults: Broker
 // use crate::app::store::broker::default_binance::default_binance;
-use crate::app::store::broker::default_coinbase::default_coinbase;
+use crate::store::broker::default_coinbase::default_coinbase;
 // Tauri Store Defaults: Market
 // Tauri Store Defaults: News
 

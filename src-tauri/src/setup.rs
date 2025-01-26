@@ -23,9 +23,9 @@ use serde_json::json;
 use serde_json::Value;
 use tokio::time::{ sleep, Duration };
 // Crates
-use crate::app::db::db::setup_database;
-use crate::app::store::store::APP_STATE_STORE;
-use crate::app::store::store::initialize_store;
+use crate::db::db::setup_database;
+use crate::store::store::APP_STATE_STORE;
+use crate::store::store::initialize_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 

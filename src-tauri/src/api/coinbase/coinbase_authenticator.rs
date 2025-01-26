@@ -24,7 +24,7 @@ use serde::Deserialize;
 use serde::Serialize;
 use serde_json::Value;
 // Crates
-use crate::app::store::store::COINBASE_STORE;
+use crate::store::store::COINBASE_STORE;
 
 /* ---------------------------------------------------------------------------------------------- */
 

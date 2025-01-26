@@ -17,7 +17,7 @@ use log::info;
 use log::error;
 use serde_json::json;
 // Crates
-use crate::app::streams::streams::coordinate_subscriptions;
+use crate::streamer::streamer::coordinate_subscriptions;
 
 /* ---------------------------------------------------------------------------------------------- */
 

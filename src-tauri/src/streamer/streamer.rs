@@ -42,7 +42,7 @@ use tokio::task::JoinHandle;
 // Crates
 // use crate::app::entities::app_subscriptions::ActiveModel;
 // use crate::AppState;
-use crate::broker::coinbase::coinbase_subscriber::coinbase_subscriber;
+use crate::api::coinbase::coinbase_subscriber::coinbase_subscriber;
 
 /* ---------------------------------------------------------------------------------------------- */
 

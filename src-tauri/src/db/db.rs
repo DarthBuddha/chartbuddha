@@ -24,8 +24,8 @@ use sea_orm::Statement;
 // Dependencies
 use log::info;
 // Crates
-use crate::app::db::entities::subscription;
-use crate::app::db::entities::ticker;
+use crate::db::entities::subscription;
+use crate::db::entities::ticker;
 
 /* ---------------------------------------------------------------------------------------------- */
 

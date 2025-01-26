@@ -23,8 +23,8 @@ use sea_orm::ModelTrait;
 // Dependencies
 use log::info;
 // Crates
-use crate::app::db::db::DATABASE_URL;
-use crate::app::db::entities::subscription;
+use crate::db::db::DATABASE_URL;
+use crate::db::entities::subscription;
 
 /* ---------------------------------------------------------------------------------------------- */
 

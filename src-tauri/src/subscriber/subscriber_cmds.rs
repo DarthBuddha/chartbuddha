@@ -19,11 +19,11 @@ use tauri_plugin_store::StoreExt;
 // Dependencies
 use log::info;
 // Crates
-use crate::app::subscriber::subscriber::Subscriber;
-use crate::app::db::db_subscriptions::delete_subscription_from_db;
-use crate::app::db::db_subscriptions::save_subscription_to_db;
-use crate::app::store::store_subscription::delete_subscription_from_store;
-use crate::app::store::store_subscription::save_subscription_to_store;
+use crate::subscriber::subscriber::Subscriber;
+use crate::db::db_subscriptions::delete_subscription_from_db;
+use crate::db::db_subscriptions::save_subscription_to_db;
+use crate::store::store_subscription::delete_subscription_from_store;
+use crate::store::store_subscription::save_subscription_to_store;
 
 /* ---------------------------------------------------------------------------------------------- */
 

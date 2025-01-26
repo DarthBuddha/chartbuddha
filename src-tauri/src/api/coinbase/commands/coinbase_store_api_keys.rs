@@ -17,10 +17,10 @@ use log::{ error, info };
 use serde_json::json;
 use serde_json::to_string;
 // Crates
-use crate::app::store::store::COINBASE_STORE;
-use crate::broker::coinbase::coinbase_authenticator::use_authenticator;
-use crate::broker::coinbase::coinbase_authenticator::Authenticator;
-use crate::broker::coinbase::structs::data_api::ApiKeyPermissions;
+use crate::store::store::COINBASE_STORE;
+use crate::api::coinbase::coinbase_authenticator::use_authenticator;
+use crate::api::coinbase::coinbase_authenticator::Authenticator;
+use crate::api::coinbase::structs::data_api::ApiKeyPermissions;
 
 /* ---------------------------------------------------------------------------------------------- */
 
