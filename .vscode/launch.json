@@ -5,21 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug:Vite",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/src-tauri/target/debug/chartbuddha.exe",
+      "cwd": "${workspaceRoot}",
+      "preLaunchTask": "ui:vite"
+    },
+    {
       "name": "Debug:Tauri",
       "type": "cppvsdbg",
       "request": "launch",
-      // change the exe name to your actual exe name
-      // (to debug release builds, change `target/debug` to `release/debug`)
       "program": "${workspaceRoot}/src-tauri/target/debug/chartbuddha.exe",
       "cwd": "${workspaceRoot}",
-      "preLaunchTask": "ui:debug"
+      "preLaunchTask": "ui:clean-and-tauri"
     },
     {
       "name": "Build:App",
       "type": "cppvsdbg",
       "request": "launch",
-      // change the exe name to your actual exe name
-      // (to debug release builds, change `target/debug` to `release/debug`)
       "program": "${workspaceRoot}/src-tauri/target/debug/chartbuddha.exe",
       "cwd": "${workspaceRoot}",
       "preLaunchTask": "ui:build"

@@ -74,9 +74,11 @@ const Splash: React.FC = () => {
     <div className={Style.SplashComponent}>
       <div className={Style.MenuBarContainer}>{/* <MenuBar /> */}</div>
       <div className={Style.PageContainer}>
-        <h1>Welcome to ChartBuddha</h1>
-        {/* TODO - Show loading information */}
-        <p>Setting up the application...</p>
+        <div className={Style.SplashText}>
+          <h1>Welcome to ChartBuddha</h1>
+          {/* TODO - Show loading information */}
+          <p>Setting up the application...</p>
+        </div>
       </div>
       <div className={Style.StatusBarContainer}>{/* <StatusBar /> */}</div>
     </div>

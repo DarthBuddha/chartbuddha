@@ -93,86 +93,105 @@ const BinanceConfig: React.FC = () => {
 
   return (
     <div className={Style.ConnectConfigTab}>
-      <div className={Style.Title}>Binance</div>
-      <div className={Style.Top_Container}>
-        <div className={Style.Top_Left_Container}>
-          <div className={Style.Title}>API Settings</div>
-          <div className={Style.Settings_Box}>
-            <div className={Style.Settings_Text}>
+      <div className={Style.Header}>Connect Binance API</div>
+
+      <div className={Style.BoxFrame_Top}>
+        <div className={Style.BoxFrame_TopLeft}>
+          <div className={Style.Header}>Configuration</div>
+          <div className={Style.Config_Section}>
+            <div className={Style.ConfigText}>
               Coinbase requires your API key and secret to connect. You can generate these from the
               Coinbase Pro website. Make sure to keep your secret key secure.
             </div>
           </div>
         </div>
 
-        <div className={Style.Top_Right_Container}>
-          <div className={Style.Title}>Api Permissions</div>
-          <div className={Style.Permission_Box}>
-            <div>
-              <div className={Style.Permission_Text}>
-                Can View:{' '}
+        <div className={Style.BoxFrame_TopRight}>
+          <div className={Style.Header}>Api Permissions</div>
+          <div className={Style.Info_Section}>
+            <div className={Style.Info_Section_Row}>
+              <div className={Style.Info_Section_Cell_Key}>Can View:</div>
+              <div className={Style.Info_Section_Cell_Result}>
+                {' '}
                 {selCoinbaseApiPermissions
                   ? String(selCoinbaseApiPermissions.can_view)
                   : 'undefined'}
               </div>
-              <div className={Style.Permission_Text}>
-                Can Trade:{' '}
+            </div>
+            <div className={Style.Info_Section_Row}>
+              <div className={Style.Info_Section_Cell_Key}>Can Trade:</div>
+              <div className={Style.Info_Section_Cell_Result}>
+                {' '}
                 {selCoinbaseApiPermissions
                   ? String(selCoinbaseApiPermissions.can_trade)
                   : 'undefined'}
               </div>
-              <div className={Style.Permission_Text}>
-                Can Transfer:{' '}
+            </div>
+            <div className={Style.Info_Section_Row}>
+              <div className={Style.Info_Section_Cell_Key}>Can Transfer:</div>
+              <div className={Style.Info_Section_Cell_Result}>
+                {' '}
                 {selCoinbaseApiPermissions
                   ? String(selCoinbaseApiPermissions.can_transfer)
                   : 'undefined'}
               </div>
-              <div className={Style.Permission_Text}>
-                Portfolio uuid:{' '}
+            </div>
+            <div className={Style.Info_Section_Row}>
+              <div className={Style.Info_Section_Cell_Key}>Portfolio uuid:</div>
+              <div className={Style.Info_Section_Cell_Result}>
+                {' '}
                 {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_uuid : ''}
               </div>
-              <div className={Style.Permission_Text}>
-                Portfolio Type:{' '}
+            </div>
+            <div className={Style.Info_Section_Row}>
+              <div className={Style.Info_Section_Cell_Key}>Portfolio Type:</div>
+              <div className={Style.Info_Section_Cell_Result}>
+                {' '}
                 {selCoinbaseApiPermissions ? selCoinbaseApiPermissions.portfolio_type : ''}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className={Style.Bottom_Container}>
-        <div className={Style.Title}>Your API Keys</div>
-        <div className={Style.Input_Container}>
-          <div className={Style.Input_Box}>
-            <div className={Style.Input_Label}>API Key</div>
-            <input
-              type="text"
-              id="api_key"
-              value={selCoinbaseApiKey ?? ''}
-              onChange={(e) => setCoinbaseApiKey(e.target.value)}
-              className={Style.Input}
-              autoComplete="off"
-              placeholder="Enter your Coinbase API Key"
-            />
-          </div>
 
-          <div className={Style.Input_Box}>
-            <div className={Style.Input_Label}>API Secret</div>
-            <input
-              type="text"
-              id="api_key_secret"
-              value={selCoinbaseApiKeySecret ?? ''}
-              onChange={(e) => setCoinbaseApiKeySecret(e.target.value)}
-              className={Style.Input}
-              autoComplete="off"
-              placeholder="Enter your Coinbase API Secret"
-            />
+      <div className={Style.BoxFrame_Bottom}>
+        <div className={Style.Header}>Binance Configuration</div>
+        <div className={Style.Input_Section}>
+          <div className={Style.Input_Section_Row}>
+            <div className={Style.Input_Section_Cell}>
+              <div className={Style.Header}>API Key</div>
+              <input
+                type="text"
+                id="api_key"
+                value={selCoinbaseApiKey ?? ''}
+                onChange={(e) => setCoinbaseApiKey(e.target.value)}
+                className={Style.UserInput_Text}
+                autoComplete="off"
+                placeholder="Enter your Coinbase API Key"
+              />
+            </div>
+          </div>
+          <div className={Style.Input_Section_Row}>
+            <div className={Style.Input_Section_Cell}>
+              <div className={Style.Header}>API Secret</div>
+              <input
+                type="text"
+                id="api_key_secret"
+                value={selCoinbaseApiKeySecret ?? ''}
+                onChange={(e) => setCoinbaseApiKeySecret(e.target.value)}
+                className={Style.UserInput_Text}
+                autoComplete="off"
+                placeholder="Enter your Coinbase API Secret"
+              />
+            </div>
           </div>
         </div>
-        <div className={Style.Button_Box}>
-          <button type="button" onClick={clickApiSave} className={Style.Save_Button}>
+
+        <div className={Style.Box_Button}>
+          <button type="button" onClick={clickApiSave} className={Style.Button_Save}>
             Save and Test Configuration
           </button>
-          <button type="button" onClick={clickApiDelete} className={Style.Delete_Button}>
+          <button type="button" onClick={clickApiDelete} className={Style.Button_Delete}>
             Delete Configuration
           </button>
         </div>

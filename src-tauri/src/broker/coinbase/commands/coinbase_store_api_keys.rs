@@ -75,10 +75,10 @@ pub async fn coinbase_store_api_keys(
   let store = app.store(COINBASE_STORE).map_err(|e| e.to_string())?;
 
   // Save the API keys to the store
-  let mut coinbase = store.get("coinbase").unwrap_or(json!({}));
+  let mut coinbase = store.get("Coinbase").unwrap_or(json!({}));
   coinbase["api_key"] = json!(coinbase_api_key);
   coinbase["api_key_secret"] = json!(formatted_api_secret);
-  store.set("coinbase", coinbase);
+  store.set("Coinbase", coinbase);
   store.save().map_err(|e| e.to_string())?;
   info!("Coinbase API Keys Saved");
 
@@ -125,12 +125,12 @@ pub async fn coinbase_store_api_keys(
             )?;
 
             // Save the API permissions to the store
-            let mut coinbase = store.get("coinbase").unwrap_or(json!({}));
+            let mut coinbase = store.get("Coinbase").unwrap_or(json!({}));
             coinbase["api_configured"] = json!(true);
             coinbase["api_key"] = json!(coinbase_api_key);
             coinbase["api_key_secret"] = json!(formatted_api_secret);
             coinbase["api_permissions"] = json!(api_permissions);
-            store.set("coinbase", coinbase);
+            store.set("Coinbase", coinbase);
             store.save().map_err(|e| e.to_string())?;
             info!("Coinbase API Permissions Saved");
 

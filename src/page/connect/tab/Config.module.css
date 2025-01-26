@@ -12,19 +12,7 @@
 
 /* ---------------------------------------------------------------------------------------------- */
 
-.Title {
-  height: 40px;
-  width: 100%;
-  font-size: 1.25rem;
-  text-align: center;
-  align-content: center;
-  background-color: #25282a;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-.Top_Container {
+.BoxFrame_Top {
   height: 60%;
   width: 100%;
   display: flex;
@@ -32,59 +20,19 @@
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-/* ---------------------------------------------------------------------------------------------- */
-
-.Top_Left_Container {
+.BoxFrame_TopLeft {
   height: 100%;
   width: 50%;
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-.Settings_Box {
-  height: calc(100% - 40px);
-  width: 100%;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-.Settings_Text {
-  padding: 100px;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-.Top_Right_Container {
+.BoxFrame_TopRight {
   height: 100%;
   width: 50%;
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-.Permission_Box {
-  height: calc(100% - 40px);
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-.Permission_Text {
-  padding: 20px;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-.Result_Text.success {
-  color: rgb(127, 255, 0);
-  /* Green for success */
-}
-
-.Result_Text.error {
-  color: rgb(255, 0, 0);
-  /* Red for error */
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-.Bottom_Container {
+.BoxFrame_Bottom {
   height: 40%;
   width: 100%;
   display: flex;
@@ -94,36 +42,129 @@
 
 /* ---------------------------------------------------------------------------------------------- */
 
-.Input_Container {
-  height: calc(100% - 40px);
-  width: 100%;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-.Input_Box {
-  height: 50%;
-  width: 100%;
-  text-align: center;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-.Input_Label {
-  font-size: 1.25rem;
-  padding: 10px;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
-}
-
-.Input {
+.Header {
   height: 40px;
-  width: 80%;
-  padding: 5px;
-  padding-left: 10px;
+  width: 100%;
+  font-size: 1.25rem;
+  text-align: center;
+  align-content: center;
+  background-color: rgb(37, 40, 42);
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
-.Button_Box {
+.Config_Section {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  align-content: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.ConfigText {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  align-content: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+.Info_Section {
+  height: 100%;
+  width: 100%;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Info_Section_Row {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Info_Section_Cell_Key {
+  height: 100%;
+  width: 200px;
+  text-align: center;
+  align-content: center;
+  padding-left: 20px;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Info_Section_Cell_Result {
+  height: 100%;
+  width: calc(100% - 200px);
+  text-align: left;
+  align-content: center;
+  padding-left: 20px;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Info_Section_Cell_Result.success {
+  color: rgb(127, 255, 0);
+  /* Green for success */
+}
+
+.Info_Section_Cell_Result.error {
+  color: rgb(255, 0, 0);
+  /* Red for error */
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------------------- */
+
+.Input_Section {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Input_Section_Row {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-content: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.Input_Section_Cell {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.UserInput_Text {
+  height: 40px;
+  width: 90%;
+  padding-left: 20px;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+.UserInput_Dropdown {
+  height: 40px;
+  width: 90%;
+  padding-left: 20px;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+
+.Box_Button {
   height: 40px;
   width: 100%;
   display: flex;
@@ -131,9 +172,9 @@
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-.Save_Button,
-.Delete_Button,
-.Test_Button {
+.Button_Save,
+.Button_Delete,
+.Button_Test {
   height: 100%;
   width: 200px;
   flex: 1;
@@ -144,27 +185,27 @@
   box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
 }
 
-.Save_Button {
+.Button_Save {
   background-color: rgb(0, 100, 0);
 }
 
-.Save_Button:hover {
+.Button_Save:hover {
   background-color: rgb(0, 160, 0);
 }
 
-.Delete_Button {
+.Button_Delete {
   background-color: rgb(139, 0, 0);
 }
 
-.Delete_Button:hover {
+.Button_Delete:hover {
   background-color: rgb(255, 0, 0);
 }
 
-.Test_Button {
+.Button_Test {
   background-color: rgb(184, 134, 11);
 }
 
-.Test_Button:hover {
+.Button_Test:hover {
   background-color: rgb(255, 255, 0);
 }
 

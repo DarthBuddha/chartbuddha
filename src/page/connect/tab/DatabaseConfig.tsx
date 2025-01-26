@@ -58,7 +58,9 @@ const DatabaseConfig: React.FC = () => {
   const clickSaveDatabase = async () => {
     const store = await load('app_config.json')
     try {
+      const currentConfig = (await store.get('App')) || {}
       await store.set('App', {
+        ...currentConfig,
         database_type: selDatabaseType,
         database_name: selDatabaseName,
         database_url: selDatabaseUrl,
@@ -75,7 +77,9 @@ const DatabaseConfig: React.FC = () => {
   const clickDropDatabase = async () => {
     const store = await load('app_config.json')
     try {
+      const currentConfig = (await store.get('App')) || {}
       await store.set('App', {
+        ...currentConfig,
         database_type: null,
         database_name: null,
         database_url: null,
@@ -92,56 +96,85 @@ const DatabaseConfig: React.FC = () => {
 
   return (
     <div className={Style.ConnectConfigTab}>
-      <div className={Style.Title}>ChartBuddha Database Connection Settings</div>
-      <div className={Style.Top_Container}>
-        <div className={Style.Top_Left_Container}>
-          <div className={Style.Title}>Configuration</div>
-          <div className={Style.Settings_Box}>
-            <div className={Style.Settings_Text}>
+      <div className={Style.Header}>Connect Database</div>
+
+      <div className={Style.BoxFrame_Top}>
+        <div className={Style.BoxFrame_TopLeft}>
+          <div className={Style.Header}>Configuration</div>
+          <div className={Style.Config_Section}>
+            <div className={Style.ConfigText}>
               <p>ChartBuddha requires a database to store your data.</p>
               <p>You can configure your database here.</p>
             </div>
           </div>
         </div>
 
-        <div className={Style.Top_Right_Container}>
-          <div className={Style.Title}>Database Info</div>
+        <div className={Style.BoxFrame_TopRight}>
+          <div className={Style.Header}>Database Info</div>
+          <div className={Style.InfoSection}></div>
         </div>
       </div>
-      <div className={Style.Bottom_Container}>
-        <div className={Style.Title}>Your Database</div>
-        <div className={Style.Input_Container}>
-          <div className={Style.Input_Box}>
-            <div className={Style.Input_Label}>Database Name</div>
-            <input
-              type="text"
-              id="database_name"
-              value={selDatabaseName ?? ''}
-              onChange={(e) => setDatabaseName(e.target.value)}
-              className={Style.Input}
-              autoComplete="off"
-              placeholder="Enter the name of your Database"
-            />
+      <div className={Style.BoxFrame_Bottom}>
+        <div className={Style.Header}>Database Configuration</div>
+
+        <div className={Style.Input_Section}>
+          <div className={Style.Input_Section_Row}>
+            <div className={Style.Input_Section_Cell}>
+              <label className={Style.Header} htmlFor="database_name">
+                Name
+              </label>
+              <input
+                type="text"
+                id="database_name"
+                value={selDatabaseName ?? ''}
+                onChange={(e) => setDatabaseName(e.target.value)}
+                className={Style.UserInput_Text}
+                autoComplete="off"
+                placeholder="Enter the name of your Database"
+              />
+            </div>
+
+            <div className={Style.Input_Section_Cell}>
+              <label className={Style.Header} htmlFor="database_type">
+                Type
+              </label>
+              <select
+                id="database_type"
+                value={selDatabaseType ?? ''}
+                onChange={(e) => setDatabaseType(e.target.value as DatabaseType)}
+                className={Style.UserInput_Dropdown}
+              >
+                <option value="">Select Database Type</option>
+                <option value="MySql">MySql</option>
+                <option value="Postgres">Postgres</option>
+                <option value="Sqlite">Sqlite</option>
+              </select>
+            </div>
           </div>
 
-          <div className={Style.Input_Box}>
-            <div className={Style.Input_Label}>Database Url</div>
-            <input
-              type="text"
-              id="database_url"
-              value={selDatabaseUrl ?? ''}
-              onChange={(e) => setDatabaseUrl(e.target.value)}
-              className={Style.Input}
-              autoComplete="off"
-              placeholder="Enter the URL of your Database"
-            />
+          <div className={Style.Input_Section_Row}>
+            <div className={Style.Input_Section_Cell}>
+              <label className={Style.Header} htmlFor="database_url">
+                Url
+              </label>
+              <input
+                type="text"
+                id="database_url"
+                value={selDatabaseUrl ?? ''}
+                onChange={(e) => setDatabaseUrl(e.target.value)}
+                className={Style.UserInput_Text}
+                autoComplete="off"
+                placeholder="Enter the URL of your Database"
+              />
+            </div>
           </div>
         </div>
-        <div className={Style.Button_Box}>
-          <button type="button" onClick={clickSaveDatabase} className={Style.Save_Button}>
+
+        <div className={Style.Box_Button}>
+          <button type="button" onClick={clickSaveDatabase} className={Style.Button_Save}>
             Save Database Configuration
           </button>
-          <button type="button" onClick={clickDropDatabase} className={Style.Delete_Button}>
+          <button type="button" onClick={clickDropDatabase} className={Style.Button_Delete}>
             Drop Database Configuration
           </button>
         </div>

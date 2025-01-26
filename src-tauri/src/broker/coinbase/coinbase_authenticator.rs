@@ -59,7 +59,7 @@ pub async fn use_authenticator(
     Box::<dyn Error + Send + Sync>::from(e)
   })?;
 
-  let coinbase: Value = store.get("coinbase").expect("Failed to get value from store");
+  let coinbase: Value = store.get("Coinbase").expect("Failed to get value from store");
 
   let api_key: String = coinbase
     .get("api_key")
