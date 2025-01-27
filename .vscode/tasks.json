@@ -4,11 +4,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build:debug",
-      "type": "cargo",
-      "command": "build"
-    },
-    {
       "label": "ui:dev",
       "type": "shell",
       // `dev` keeps running in the background
@@ -19,18 +14,9 @@
       "command": "npm",
       "args": [
         "run",
+        "tauri",
         "dev"
       ]
-    },
-    {
-      "label": "dev",
-      "dependsOn": [
-        "build:debug",
-        "ui:dev"
-      ],
-      "group": {
-        "kind": "build"
-      }
     }
   ]
 }

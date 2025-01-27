@@ -11,15 +11,15 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Stores: App
-export const CONFIG_STORE = '.config.json'
-export const STATE_STORE = '.state.json'
+export const CONFIG_STORE = '.app_config.json'
+export const STATE_STORE = '.app_state.json'
 
 // Stores: Interface
-export const LIST_API_STORE = '.list_api.json'
-export const LIST_SUB_STORE = '.list_sub.json'
+export const API_LIST_STORE = '.interface_list_api.json'
+export const SUB_LIST_STORE = '.interface_list_sub.json'
 
 // Stores: APIs
-export const BINANCE_STORE = 'binance.json'
-export const COINBASE_STORE = 'coinbase.json'
+export const BINANCE_STORE = 'broker_binance.json'
+export const COINBASE_STORE = 'broker_coinbase.json'
 
 /* ---------------------------------------------------------------------------------------------- */

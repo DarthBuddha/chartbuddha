@@ -22,7 +22,7 @@ pub fn state_default() -> HashMap<String, Value> {
 
   // app
   defaults.insert(
-    "Setup".to_string(),
+    "State".to_string(),
     json!({
       "tauri_ready": false,
       "react_ready": false

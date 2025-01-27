@@ -1,7 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library - Backend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Library: lib
+//! # Library -> lib
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Backend Library for the ChartBuddha Application.
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Function:
 //! * run
@@ -31,8 +34,10 @@ use tauri::async_runtime::spawn;
 use crate::setup::setup_tauri;
 use crate::setup::setup_complete;
 // Crates: Connector
-use crate::connector::commands::connector_coinbase_cmds;
-use crate::connector::commands::connector_database_cmds;
+use crate::connector::commands::connector_coinbase_cmds::drop_coinbase_cmd;
+use crate::connector::commands::connector_coinbase_cmds::save_coinbase_cmd;
+use crate::connector::commands::connector_database_cmds::drop_database_cmd;
+use crate::connector::commands::connector_database_cmds::save_database_cmd;
 // Crates: Subscriber
 use crate::subscriber::commands::subscriber_cmds;
 // TODO: Clean up
@@ -88,10 +93,10 @@ pub async fn run() -> () {
         coinbase_products_list,
         coinbase_subscribe,
         // Commands: Connector
-        connector_coinbase_cmds::drop_coinbase_cmd,
-        connector_coinbase_cmds::save_coinbase_cmd,
-        connector_database_cmds::drop_database_cmd,
-        connector_database_cmds::save_database_cmd,
+        drop_coinbase_cmd,
+        save_coinbase_cmd,
+        drop_database_cmd,
+        save_database_cmd,
         // Commands: Subscriber
         subscriber_cmds::save_subscription_cmd,
         subscriber_cmds::delete_subscription_cmd

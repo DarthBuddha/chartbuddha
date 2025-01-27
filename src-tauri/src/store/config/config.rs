@@ -1,12 +1,16 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha Library
+//! # ChartBuddha Library - Backend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: Store App Config -> config
+//! # Module: Store Config -> config
+/* ---------------------------------------------------------------------------------------------- */
+//! #### Description:
+//! * Config default for our tauri store.
 /* ---------------------------------------------------------------------------------------------- */
 //! Default:
 //! * config_default
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: store/app/config/config.rs
+//! ##### Path:
+//! * src-tauri/src/store/config/config.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -21,17 +25,24 @@ use serde_json::Value;
 pub fn config_default() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
-  // app
+  // Section: App
   defaults.insert(
-    "Config".to_string(),
+    "App".to_string(),
     json!({
-      "app_init_run": false,
-      "app_version": null,
-      "app_update": null,
-      "database_type": null,
-      "database_name": null,
-      "database_url": null
+      "init_run": false,
+      "version": null,
+      "update": null
     })
+  );
+
+  // Section: Database
+  defaults.insert(
+    "Database".to_string(),
+    json!({
+        "database_type": null,
+        "database_name": null,
+        "database_url": null
+      })
   );
 
   defaults

@@ -20,6 +20,14 @@ use tauri::Wry;
 // Dependencies
 use log::info;
 // Crates
+use crate::constants::{
+  // BINANCE_STORE,
+  COINBASE_STORE,
+  CONFIG_STORE,
+  API_LIST_STORE,
+  SUB_LIST_STORE,
+  STATE_STORE,
+};
 // Tauri Store Defaults: App
 use crate::store::config::config::config_default;
 use crate::store::state::state::state_default;
@@ -29,19 +37,6 @@ use crate::store::interface::sub_list::sub_list_default::default_list_sub;
 // Tauri Store Defaults: Apis
 // use crate::store::apis::default_binance::default_binance;
 use crate::store::apis::coinbase::coinbase::coinbase_default;
-
-/* ---------------------------------------------------------------------------------------------- */
-
-// Stores: App
-pub const CONFIG_STORE: &str = "config.json";
-pub const STATE_STORE: &str = "state.json";
-// Stores: Interface
-pub const LIST_API_STORE: &str = "list_api.json";
-pub const LIST_SUB_STORE: &str = "list_sub.json";
-// Stores: Apis
-pub const BINANCE_STORE: &str = "binance.json";
-// pub const COINBASE_STORE: &str = "coinbase.json";
-pub const COINBASE_STORE: &str = "coinbase.json";
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -70,7 +65,7 @@ pub fn initialize_store(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   // Store: Apis Store Initialization
   info!("Initialize Store: List Api...");
   let store_list_api = tauri_plugin_store::StoreBuilder
-    ::new(&app, LIST_API_STORE)
+    ::new(&app, API_LIST_STORE)
     .auto_save(Duration::from_millis(100))
     .defaults(default_list_api())
     .build()?;
@@ -80,7 +75,7 @@ pub fn initialize_store(app: AppHandle<Wry>) -> Result<(), Box<dyn Error>> {
   // Store: List Subscription Store Initialization
   info!("Initialize Store: List Subscription...");
   let store_list_sub = tauri_plugin_store::StoreBuilder
-    ::new(&app, LIST_SUB_STORE)
+    ::new(&app, SUB_LIST_STORE)
     .auto_save(Duration::from_millis(100))
     .defaults(default_list_sub())
     .build()?;

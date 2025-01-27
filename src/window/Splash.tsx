@@ -16,11 +16,10 @@ import { info } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import { load } from '@tauri-apps/plugin-store'
-// Interface
+// Context
 // import { useInterfaceContext } from 'context/InterfaceContext';
-// Common
-// import MenuBar from './components/menubar/MenuBar';
-// import StatusBar from './components/statusbar/StatusBar';
+// Constants
+import { STATE_STORE } from '../constants'
 // CSS Module
 import Style from './Page.module.css'
 
@@ -34,7 +33,7 @@ function sleep(seconds: number): Promise<void> {
 // Setup function
 async function setupReact() {
   // Load the app state from the store
-  const store = await load('app_state.json')
+  const store = await load(STATE_STORE)
   // Fake perform some really heavy setup task
   info('Fake Pause...')
   await sleep(3)
@@ -42,10 +41,10 @@ async function setupReact() {
   // React Setup Tasks Complete
   info('React Ready...')
   try {
-    const appState = await store.get<{ react_ready: boolean }>('Setup')
+    const appState = await store.get<{ react_ready: boolean }>('State')
     if (appState) {
       appState.react_ready = true
-      await store.set('Setup', appState)
+      await store.set('State', appState)
       await store.save()
     } else {
       info('Failed to load app state')

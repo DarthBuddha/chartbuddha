@@ -11,15 +11,16 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Stores: App
-pub const CONFIG_STORE: &str = ".config.json";
-pub const STATE_STORE: &str = ".state.json";
+pub const CONFIG_STORE: &str = ".app_config.json";
+pub const STATE_STORE: &str = ".app_state.json";
 
 // Stores: Interface
-pub const LIST_API_STORE: &str = ".list_api.json";
-pub const LIST_SUB_STORE: &str = ".list_sub.json";
+/// Api List Tauri Store Path
+pub const API_LIST_STORE: &str = ".interface_list_api.json";
+pub const SUB_LIST_STORE: &str = ".interface_list_sub.json";
 
 // Stores: Apis
-pub const BINANCE_STORE: &str = "binance.json";
-pub const COINBASE_STORE: &str = "coinbase.json";
+pub const BINANCE_STORE: &str = "broker_binance.json";
+pub const COINBASE_STORE: &str = "broker_coinbase.json";
 
 /* ---------------------------------------------------------------------------------------------- */

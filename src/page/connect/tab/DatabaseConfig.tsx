@@ -1,20 +1,21 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page Connect Tab - DatabaseConfig
+//! # Component: Page Connect Tab -> DatabaseConfig
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Database connection settings.
+//! * Configure database settings.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/connect/tab/DatabaseConfig.tsx
+//! ##### Path:
+//! * src/page/connect/tab/DatabaseConfig.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useEffect } from 'react'
 // Tauri
-import { load } from '@tauri-apps/plugin-store'
+import { invoke } from '@tauri-apps/api/core'
 import { info, error } from '@tauri-apps/plugin-log'
-// import { invoke } from '@tauri-apps/api/core'
+import { load } from '@tauri-apps/plugin-store'
 // Context
 import { useInterfaceContext } from '../../../context/InterfaceContext'
 import { DatabaseType } from '../../../context/app/AppConfig'
@@ -37,13 +38,13 @@ const DatabaseConfig: React.FC = () => {
       const store = await load(CONFIG_STORE)
       try {
         const appConfig = await store.get<{
-          database_type: DatabaseType
+          database_type: string
           database_name: string
           database_url: string
-        }>('Config')
+        }>('Database')
 
         if (appConfig) {
-          setDatabaseType(appConfig.database_type)
+          setDatabaseType(appConfig.database_type as DatabaseType)
           setDatabaseName(appConfig.database_name)
           setDatabaseUrl(appConfig.database_url)
         }
@@ -58,18 +59,15 @@ const DatabaseConfig: React.FC = () => {
 
   // Click: Save Database
   const clickSaveDatabase = async () => {
-    const store = await load(CONFIG_STORE)
+    // const store = await load(CONFIG_STORE)
     try {
-      const currentConfig = (await store.get('Config')) || {}
-      await store.set('Config', {
-        ...currentConfig,
-        database_type: selDatabaseType,
-        database_name: selDatabaseName,
-        database_url: selDatabaseUrl,
+      const saveResponse: string = await invoke('save_database_cmd', {
+        databaseType: selDatabaseType ?? '',
+        databaseName: selDatabaseName,
+        databaseUrl: selDatabaseUrl,
       })
-      await store.save()
 
-      info('Database configuration has been saved.')
+      info(saveResponse)
     } catch (err) {
       error(err instanceof Error ? err.toString() : String(err))
     }
@@ -77,18 +75,14 @@ const DatabaseConfig: React.FC = () => {
 
   // Click: Drop Database
   const clickDropDatabase = async () => {
-    const store = await load(CONFIG_STORE)
     try {
-      const currentConfig = (await store.get('Config')) || {}
-      await store.set('Config', {
-        ...currentConfig,
-        database_type: null,
+      const dropResponse: string = await invoke('drop_database_cmd', {
+        database_type: '',
         database_name: null,
         database_url: null,
       })
-      await store.save()
 
-      info('Database configuration has been dropped.')
+      info(dropResponse)
     } catch (err) {
       error(err instanceof Error ? err.toString() : String(err))
     }

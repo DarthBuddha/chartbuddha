@@ -31,7 +31,7 @@ pub async fn save_database(
   database_url: String
 ) -> Result<String, String> {
   info!(
-    "Command: save_database_cmd\n
+    "Command: config_database_save\n
     database_type: {}\n
     database_name: {}\n,
     database_url: {}",
@@ -41,15 +41,15 @@ pub async fn save_database(
   );
 
   // initialize apis store
-  info!("Initializing Store: App Config...");
+  info!("Initializing Store: Database Configs...");
   let store = app.store(CONFIG_STORE).map_err(|e| e.to_string())?;
 
   // Save the API keys to the store
-  let mut app_config_store = store.get("App").unwrap_or(json!({}));
+  let mut app_config_store = store.get("Database").unwrap_or(json!({}));
   app_config_store["database_type"] = json!(database_type);
   app_config_store["database_name"] = json!(database_name);
   app_config_store["database_url"] = json!(database_url);
-  store.set("App", app_config_store);
+  store.set("Database", app_config_store);
   store.save().map_err(|e| e.to_string())?;
   info!("Database Configuration Saved");
 

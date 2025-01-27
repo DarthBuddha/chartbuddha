@@ -38,13 +38,13 @@ pub async fn save_coinbase_cmd(
   );
 
   match save_coinbase(app, coinbase_api_key, coinbase_api_secret).await {
-    Ok(message) => info!("{}", message),
+    Ok(message) => {
+      return Ok(message);
+    } // Return the JSON response directly
     Err(e) => {
       return Err(e);
     }
   }
-
-  Ok("Database configuration saved successfully".to_string())
 }
 
 /* ---------------------------------------------------------------------------------------------- */

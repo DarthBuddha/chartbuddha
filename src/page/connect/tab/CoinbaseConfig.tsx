@@ -1,20 +1,21 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page Connect Tab - CoinbaseConfig
+//! # Component: Page Connect Tab -> CoinbaseConfig
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Coinbase api connection settings.
+//! * Configure coinbase api settings.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/connect/tab/CoinbaseConfig.tsx
+//! ##### Path:
+//! * src/page/connect/tab/CoinbaseConfig.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useEffect } from 'react'
 // Tauri
-import { load } from '@tauri-apps/plugin-store'
-import { info, error } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
+import { info, error } from '@tauri-apps/plugin-log'
+import { load } from '@tauri-apps/plugin-store'
 // Context
 import { useInterfaceContext } from '../../../context/InterfaceContext'
 import { CoinbaseDataApiPermissionsType } from '../../../context/apis/Coinbase'
@@ -72,6 +73,7 @@ const CoinbaseConfig: React.FC = () => {
         coinbaseApiSecret: selCoinbaseApiKeySecret,
       })
 
+      // Ensure the response is parsed correctly
       const parsedResponse: CoinbaseDataApiPermissionsType = JSON.parse(response)
       info('Parsed Response: ' + JSON.stringify(parsedResponse))
       // Update context state explicitly

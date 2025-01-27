@@ -38,7 +38,7 @@ pub async fn setup_complete(app: AppHandle) -> Result<(), ()> {
     error!("Failed to get store: {}", e);
   })?;
 
-  let store_value: Value = store.get("Setup").expect("Failed to get value from store");
+  let store_value: Value = store.get("State").expect("Failed to get value from store");
 
   let tauri_ready: bool = store_value
     .get("tauri_ready")
@@ -85,9 +85,9 @@ pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
   // Tauri Setup Tasks Complete
   info!("Tauri Ready...");
   let store = app.store(STATE_STORE).unwrap();
-  let mut app_state = store.get("Setup").unwrap_or(json!({}));
+  let mut app_state = store.get("State").unwrap_or(json!({}));
   app_state["tauri_ready"] = json!(true);
-  store.set("Setup", app_state);
+  store.set("State", app_state);
   info!("Emitting tauri-ready event...");
   app.emit("tauri-ready", "").unwrap();
 

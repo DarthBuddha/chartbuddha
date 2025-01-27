@@ -22,7 +22,7 @@ use crate::store::config::database::config_database_drop::drop_database;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-/// Store Database Command configuration
+/// Command: Store Database Configuration
 #[tauri::command]
 pub async fn save_database_cmd(
   app: AppHandle,
@@ -52,7 +52,7 @@ pub async fn save_database_cmd(
 
 /* ---------------------------------------------------------------------------------------------- */
 
-/// Store Database Command configuration
+/// Command: Drop Database Configuration
 #[tauri::command]
 pub async fn drop_database_cmd(
   app: AppHandle,

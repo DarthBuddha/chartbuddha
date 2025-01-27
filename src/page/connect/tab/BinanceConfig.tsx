@@ -1,20 +1,21 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page Connect Tab - BinanceConfig
+//! # Component: Page Connect Tab -> BinanceConfig
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Binance api connection settings.
+//! * Configure binance api settings.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/connect/tab/BinanceConfig.tsx
+//! ##### Path:
+//! * src/page/connect/tab/BinanceConfig.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React, { useEffect } from 'react'
 // Tauri
-import { load } from '@tauri-apps/plugin-store'
-import { info, error } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
+import { info, error } from '@tauri-apps/plugin-log'
+import { load } from '@tauri-apps/plugin-store'
 // Context
 import { useInterfaceContext } from '../../../context/InterfaceContext'
 import { BinanceDataApiPermissionsType } from '../../../context/apis/Binance'
