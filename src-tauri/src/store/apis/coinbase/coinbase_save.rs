@@ -1,23 +1,25 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha Library
+//! # ChartBuddha Library - Backend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Commands - store_coinbase_api_keys
+//! # Module: Store Apis Coinbase -> coinbase_save
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Functions:
-//! * store_coinbase_api_keys
+//! #### Function:
+//! * coinbase_save
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: store/commands/store_coinbase_api_keys.rs
+//! ##### Path:
+//! * src-tauri/src/store/apis/coinbase/coinbase_save.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
 use tauri::AppHandle;
 use tauri_plugin_store::StoreExt;
 // Dependencies
-use log::{ error, info };
+use log::info;
+use log::error;
 use serde_json::json;
 use serde_json::to_string;
 // Crates
-use crate::store::store::COINBASE_STORE;
+use crate::constants::COINBASE_STORE;
 use crate::api::coinbase::coinbase_authenticator::use_authenticator;
 use crate::api::coinbase::coinbase_authenticator::Authenticator;
 use crate::api::coinbase::structs::data_api::ApiKeyPermissions;
@@ -48,9 +50,8 @@ fn convert_api_secret(api_secret: &str) -> String {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-/// Store the API keys in the apis store and get API key permissions
-#[tauri::command]
-pub async fn store_coinbase_api_keys(
+/// Store Database Command configuration
+pub async fn save_coinbase(
   app: AppHandle,
   coinbase_api_key: String,
   coinbase_api_secret: String
@@ -137,7 +138,7 @@ pub async fn store_coinbase_api_keys(
             Ok(api_permissions_response)
           }
           Err(parse_err) => {
-            log::error!("Failed to parse response body: {:?}", parse_err);
+            error!("Failed to parse response body: {:?}", parse_err);
             Err("Error parsing response body".to_string())
           }
         }
@@ -146,17 +147,16 @@ pub async fn store_coinbase_api_keys(
         let error_body = resp
           .text().await
           .unwrap_or_else(|_| "Unable to read error body".to_string());
-        log::error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
+        error!("Error: Status code: {:?}, Response: {:?}", status, error_body);
         Err(format!("Failed with status code: {:?}", status))
       }
     }
     Err(req_err) => {
-      log::error!("Request error: {:?}", req_err);
+      error!("Request error: {:?}", req_err);
       Err(format!("Failed to make the request: {:?}", req_err))
     }
   };
 
   api_permissions_response
 }
-
 /* ---------------------------------------------------------------------------------------------- */

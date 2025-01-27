@@ -1,12 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha Library
+//! # ChartBuddha Library - Backend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: lib
+//! # Library: lib
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Main Function:
+//! #### Function:
 //! * run
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: lib.rs
+//! ##### Path:
+//! * src-tauri/src/lib.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Library
@@ -20,6 +21,7 @@ pub mod subscriber;
 pub mod window;
 
 // Modules
+pub mod constants;
 pub mod setup;
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -28,12 +30,11 @@ use tauri::async_runtime::spawn;
 // Crates: Setup
 use crate::setup::setup_tauri;
 use crate::setup::setup_complete;
-// Crates: Store
-// use crate::store::commands::store_binance_api_keys::store_binance_api_keys;
-use crate::store::commands::store_coinbase_api_keys::store_coinbase_api_keys;
+// Crates: Connector
+use crate::connector::commands::connector_coinbase_cmds;
+use crate::connector::commands::connector_database_cmds;
 // Crates: Subscriber
-use crate::subscriber::subscriber_cmds::save_subscription_cmd;
-use crate::subscriber::subscriber_cmds::delete_subscription_cmd;
+use crate::subscriber::commands::subscriber_cmds;
 // TODO: Clean up
 use crate::api::coinbase::commands::coinbase_products_list::coinbase_products_list;
 use crate::api::coinbase::commands::coinbase_subscribe::coinbase_subscribe;
@@ -83,14 +84,17 @@ pub async fn run() -> () {
       tauri::generate_handler![
         // Commands: App
         setup_complete,
-        // Commands: Subscriber
-        save_subscription_cmd,
-        delete_subscription_cmd,
-        // Commands: Coinbase
-        // store_binance_api_keys,
-        store_coinbase_api_keys,
+        // Commands: Interface
         coinbase_products_list,
-        coinbase_subscribe
+        coinbase_subscribe,
+        // Commands: Connector
+        connector_coinbase_cmds::drop_coinbase_cmd,
+        connector_coinbase_cmds::save_coinbase_cmd,
+        connector_database_cmds::drop_database_cmd,
+        connector_database_cmds::save_database_cmd,
+        // Commands: Subscriber
+        subscriber_cmds::save_subscription_cmd,
+        subscriber_cmds::delete_subscription_cmd
       ]
     )
     // Run: ChartBuddha Application

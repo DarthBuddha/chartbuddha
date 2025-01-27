@@ -1,23 +1,30 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Backend
 /* ---------------------------------------------------------------------------------------------- */
 //! # Module: Main
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * Main entry point for ChartBuddha.
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Functions:
+//! #### Function:
 //! * main
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: main.rs
+//! ##### Path:
+//! * src-tauri/src/main.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
+// use rust_dotenv::DotEnv;
+
 /// Main entry point for ChartBuddha.
 fn main() {
   {
     println!("ChartBuddha");
+    // Load the default `.env` file
+    // let dotenv = DotEnv::new("");
+    // println!("Loaded variables (default): {:?}", dotenv.all_vars());
   }
   // Whether the current instance was started with `tauri dev` or not.
   #[cfg(dev)]

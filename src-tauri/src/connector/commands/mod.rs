@@ -1,21 +1,20 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha - Backend
+//! # ChartBuddha Library - Backend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Mod: Folder Structure -> ModuleName
+//! # Mod: Connector -> Commands
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Folders:
-//! - fileName
 //! #### Files:
-//! - fileName
+//! * connector_binance_cmds.rs
+//! * connector_coinbase_cmds.rs
+//! * connector_database_cmds.rs
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * path/mod.rs
+//! * src-tauri/src/connector/commands/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Folder:
-// pub mod module_name;
-
 // Files:
-// pub mod module_name;
+// pub mod connector_binance_cmds;
+pub mod connector_coinbase_cmds;
+pub mod connector_database_cmds;
 
 /* ---------------------------------------------------------------------------------------------- */

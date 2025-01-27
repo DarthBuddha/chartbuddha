@@ -1,14 +1,15 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha Library
+//! # ChartBuddha Library - Backend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Setup - setup
+//! # Module: setup
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Commands:
 //! * setup_complete
 //! #### Functions:
 //! * setup_tauri
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/setup/setup.rs
+//! ##### Path:
+//! * src-tauri/src/setup.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
@@ -24,7 +25,7 @@ use serde_json::Value;
 use tokio::time::{ sleep, Duration };
 // Crates
 use crate::db::db::setup_database;
-use crate::store::store::APP_STATE_STORE;
+use crate::constants::STATE_STORE;
 use crate::store::store::initialize_store;
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -33,7 +34,7 @@ use crate::store::store::initialize_store;
 #[tauri::command]
 pub async fn setup_complete(app: AppHandle) -> Result<(), ()> {
   info!("Setup Complete...");
-  let store = app.store(APP_STATE_STORE).map_err(|e| {
+  let store = app.store(STATE_STORE).map_err(|e| {
     error!("Failed to get store: {}", e);
   })?;
 
@@ -83,7 +84,7 @@ pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
 
   // Tauri Setup Tasks Complete
   info!("Tauri Ready...");
-  let store = app.store(APP_STATE_STORE).unwrap();
+  let store = app.store(STATE_STORE).unwrap();
   let mut app_state = store.get("Setup").unwrap_or(json!({}));
   app_state["tauri_ready"] = json!(true);
   store.set("Setup", app_state);

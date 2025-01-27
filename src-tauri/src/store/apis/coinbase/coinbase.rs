@@ -1,12 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha Library
+//! # ChartBuddha Library - Backend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: App Store Broker - default_coinbase
+//! # Module: Store Apis -> coinbase_default
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Default:
-//! * default_coinbase
+//! * coinbase_default
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: store/apis/default_coinbase.rs
+//! ##### Path:
+//! * src-tauri/src/store/apis/coinbase_default.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -17,7 +18,7 @@ use serde_json::Value;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn default_coinbase() -> HashMap<String, Value> {
+pub fn coinbase_default() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
   // Coinbase

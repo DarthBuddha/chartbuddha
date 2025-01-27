@@ -18,6 +18,8 @@ import { invoke } from '@tauri-apps/api/core'
 // Context
 import { useInterfaceContext } from '../../../context/InterfaceContext'
 import { CoinbaseDataApiPermissionsType } from '../../../context/apis/Coinbase'
+// Constants
+import { COINBASE_STORE } from '../../../constants'
 // CSS Module
 import Style from './Config.module.css'
 
@@ -32,7 +34,7 @@ const CoinbaseConfig: React.FC = () => {
   // Use Effect: On Component Load
   useEffect(() => {
     const loadCoinbaseConfig = async () => {
-      const store = await load('coinbase.json')
+      const store = await load(COINBASE_STORE)
       try {
         const coinbaseStore = await store.get<{
           api_key: string
@@ -65,7 +67,7 @@ const CoinbaseConfig: React.FC = () => {
   // Button Click: Save Api Keys
   const clickApiSave = async () => {
     try {
-      const response: string = await invoke('store_coinbase_api_keys', {
+      const response: string = await invoke('save_coinbase_cmd', {
         coinbaseApiKey: selCoinbaseApiKey,
         coinbaseApiSecret: selCoinbaseApiKeySecret,
       })
@@ -84,7 +86,7 @@ const CoinbaseConfig: React.FC = () => {
 
   // Button Click - Delete Api Keys
   const clickApiDelete = async () => {
-    const store = await load('coinbase.json')
+    const store = await load(COINBASE_STORE)
     try {
       await store.set('Coinbase', {
         api_configured: false,

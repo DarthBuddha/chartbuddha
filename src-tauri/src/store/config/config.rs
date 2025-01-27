@@ -1,12 +1,12 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: Store App - default_app_config
+//! # Module: Store App Config -> config
 /* ---------------------------------------------------------------------------------------------- */
 //! Default:
-//! * default_app_config
+//! * config_default
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: store/app/default_app_config.rs
+//! ##### Path: store/app/config/config.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -18,12 +18,12 @@ use serde_json::Value;
 /* ---------------------------------------------------------------------------------------------- */
 
 /// Default App Config
-pub fn default_app_config() -> HashMap<String, Value> {
+pub fn config_default() -> HashMap<String, Value> {
   let mut defaults = HashMap::new();
 
   // app
   defaults.insert(
-    "App".to_string(),
+    "Config".to_string(),
     json!({
       "app_init_run": false,
       "app_version": null,

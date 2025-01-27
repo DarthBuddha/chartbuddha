@@ -1,21 +1,25 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Backend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Mod: Folder Structure -> ModuleName
+//! # Module: constants
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Folders:
-//! - fileName
-//! #### Files:
-//! - fileName
+//! #### Description:
+//! * Constants for the Backend.
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * path/mod.rs
+//! * src-tauri/src/constants.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Folder:
-// pub mod module_name;
+// Stores: App
+pub const CONFIG_STORE: &str = ".config.json";
+pub const STATE_STORE: &str = ".state.json";
 
-// Files:
-// pub mod module_name;
+// Stores: Interface
+pub const LIST_API_STORE: &str = ".list_api.json";
+pub const LIST_SUB_STORE: &str = ".list_sub.json";
+
+// Stores: Apis
+pub const BINANCE_STORE: &str = "binance.json";
+pub const COINBASE_STORE: &str = "coinbase.json";
 
 /* ---------------------------------------------------------------------------------------------- */

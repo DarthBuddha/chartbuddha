@@ -30,6 +30,9 @@ tauri-plugin-websocket = "2.2.1"
 tauri-plugin-sql = { version = "2.2.0", features = ["postgres"] }
 tauri-plugin-process = "2.2.0"
 
+# Environment
+rust_dotenv = "0.1.2"
+
 # Async
 async-trait = "0.1.85"
 tokio = { version = "1.43.0", features = ["full"] }

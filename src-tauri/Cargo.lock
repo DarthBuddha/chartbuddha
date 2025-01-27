@@ -556,6 +556,7 @@ dependencies = [
  "log",
  "rand 0.8.5",
  "reqwest",
+ "rust_dotenv",
  "sea-orm",
  "serde",
  "serde_json",
@@ -3904,6 +3905,12 @@ dependencies = [
  "serde",
  "serde_json",
 ]
+
+[[package]]
+name = "rust_dotenv"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee7c41545529f6ee52bddef21e2da33730e828e1e5ea3759436a5b570e8da76b"
 
 [[package]]
 name = "rustc-demangle"

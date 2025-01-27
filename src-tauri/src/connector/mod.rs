@@ -4,20 +4,15 @@
 //! # Mod: Connector
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Folders:
-//! * db
-//! * store
-//! * streamer
-//! * subscriber
-//! * websocket
-//! * window
+//! * commands
 //! #### Files:
 //! * connector
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: app/mod.rs
+//! ##### Path: connect/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Folders:
-// pub mod db;
+pub mod commands;
 // pub mod store;
 // pub mod streamer;
 // pub mod subscriber;

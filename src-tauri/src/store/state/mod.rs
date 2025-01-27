@@ -1,35 +1,17 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Module: Store App - default_app_state
+//! # Mod: Store App -> State
 /* ---------------------------------------------------------------------------------------------- */
-//! Default:
-//! * default_app_state
+//! #### Files:
+//! * app_state_default
+//! * app_state_manager
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: store/app/default_app_state.rs
-/* ---------------------------------------------------------------------------------------------- */
-
-// Rust
-use std::collections::HashMap;
-// Dependencies
-use serde_json::json;
-use serde_json::Value;
-
+//! ##### Path:
+//! * src-tauri/src/store/app/state/mod.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-pub fn default_app_state() -> HashMap<String, Value> {
-  let mut defaults = HashMap::new();
-
-  // app
-  defaults.insert(
-    "Setup".to_string(),
-    json!({
-      "tauri_ready": false,
-      "react_ready": false
-    })
-  );
-
-  defaults
-}
+// Files:
+pub mod state;
 
 /* ---------------------------------------------------------------------------------------------- */

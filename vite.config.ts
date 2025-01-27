@@ -13,17 +13,12 @@ import { defineConfig } from 'vite'
 // React Plugin:
 // import react from '@vitejs/plugin-react'
 import react from '@vitejs/plugin-react-swc'
-// TSConfig Paths Plugin:
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 const host = process.env.TAURI_DEV_HOST
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [
-    react(),
-    tsconfigPaths(), // This plugin will automatically respect the paths defined in tsconfig.json
-  ],
+  plugins: [react()],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //

@@ -18,6 +18,8 @@ import { info, error } from '@tauri-apps/plugin-log'
 // Context
 import { useInterfaceContext } from '../../../context/InterfaceContext'
 import { DatabaseType } from '../../../context/app/AppConfig'
+// Constants
+import { CONFIG_STORE } from '../../../constants'
 // CSS Module
 import Style from './Config.module.css'
 
@@ -32,13 +34,13 @@ const DatabaseConfig: React.FC = () => {
   // Use Effect: On Component Load
   useEffect(() => {
     const loadDatabaseConfig = async () => {
-      const store = await load('app_config.json')
+      const store = await load(CONFIG_STORE)
       try {
         const appConfig = await store.get<{
           database_type: DatabaseType
           database_name: string
           database_url: string
-        }>('App')
+        }>('Config')
 
         if (appConfig) {
           setDatabaseType(appConfig.database_type)
@@ -56,10 +58,10 @@ const DatabaseConfig: React.FC = () => {
 
   // Click: Save Database
   const clickSaveDatabase = async () => {
-    const store = await load('app_config.json')
+    const store = await load(CONFIG_STORE)
     try {
-      const currentConfig = (await store.get('App')) || {}
-      await store.set('App', {
+      const currentConfig = (await store.get('Config')) || {}
+      await store.set('Config', {
         ...currentConfig,
         database_type: selDatabaseType,
         database_name: selDatabaseName,
@@ -75,10 +77,10 @@ const DatabaseConfig: React.FC = () => {
 
   // Click: Drop Database
   const clickDropDatabase = async () => {
-    const store = await load('app_config.json')
+    const store = await load(CONFIG_STORE)
     try {
-      const currentConfig = (await store.get('App')) || {}
-      await store.set('App', {
+      const currentConfig = (await store.get('Config')) || {}
+      await store.set('Config', {
         ...currentConfig,
         database_type: null,
         database_name: null,

@@ -1,21 +1,35 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha - Backend
+//! # ChartBuddha Library
 /* ---------------------------------------------------------------------------------------------- */
-//! # Mod: Folder Structure -> ModuleName
+//! # Module: Store App State -> state
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Folders:
-//! - fileName
-//! #### Files:
-//! - fileName
+//! Default:
+//! * state_default
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path:
-//! * path/mod.rs
+//! ##### Path: store/app/state/state.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Folder:
-// pub mod module_name;
+// Rust
+use std::collections::HashMap;
+// Dependencies
+use serde_json::json;
+use serde_json::Value;
 
-// Files:
-// pub mod module_name;
+/* ---------------------------------------------------------------------------------------------- */
+
+pub fn state_default() -> HashMap<String, Value> {
+  let mut defaults = HashMap::new();
+
+  // app
+  defaults.insert(
+    "Setup".to_string(),
+    json!({
+      "tauri_ready": false,
+      "react_ready": false
+    })
+  );
+
+  defaults
+}
 
 /* ---------------------------------------------------------------------------------------------- */
