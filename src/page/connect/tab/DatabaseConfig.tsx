@@ -123,7 +123,7 @@ const DatabaseConfig: React.FC = () => {
                 type="text"
                 id="database_name"
                 value={selDatabaseName ?? ''}
-                onChange={(e) => setDatabaseName(e.target.value)}
+                onChange={e => setDatabaseName(e.target.value)}
                 className={Style.UserInput_Text}
                 autoComplete="off"
                 placeholder="Enter the name of your Database"
@@ -137,7 +137,7 @@ const DatabaseConfig: React.FC = () => {
               <select
                 id="database_type"
                 value={selDatabaseType ?? ''}
-                onChange={(e) => setDatabaseType(e.target.value as DatabaseType)}
+                onChange={e => setDatabaseType(e.target.value as DatabaseType)}
                 className={Style.UserInput_Dropdown}
               >
                 <option value="">Select Database Type</option>
@@ -157,7 +157,7 @@ const DatabaseConfig: React.FC = () => {
                 type="text"
                 id="database_url"
                 value={selDatabaseUrl ?? ''}
-                onChange={(e) => setDatabaseUrl(e.target.value)}
+                onChange={e => setDatabaseUrl(e.target.value)}
                 className={Style.UserInput_Text}
                 autoComplete="off"
                 placeholder="Enter the URL of your Database"

@@ -7,11 +7,7 @@
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run",
-        "tauri",
-        "dev"
-      ],
+      "runtimeArgs": ["run", "tauri", "dev"],
       "console": "integratedTerminal"
     },
     {
@@ -24,6 +20,15 @@
       "args": [],
       "console": "integratedTerminal",
       "sourceMaps": true
+    },
+    {
+      "name": "Format",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "format"],
+      "console": "integratedTerminal"
     }
   ]
 }

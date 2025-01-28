@@ -8,23 +8,23 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "format": "prettier --write ."
+    "format": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {
     "@eslint/js": "^9.19.0",
     "@tauri-apps/api": "^2.2.0",
-    "@tauri-apps/plugin-http": "^2.2.0",
-    "@tauri-apps/plugin-log": "^2.2.0",
+    "@tauri-apps/plugin-http": "^2.3.0",
+    "@tauri-apps/plugin-log": "^2.2.1",
     "@tauri-apps/plugin-opener": "^2.2.5",
     "@tauri-apps/plugin-process": "^2.2.0",
     "@tauri-apps/plugin-shell": "^2.2.0",
     "@tauri-apps/plugin-sql": "^2.2.0",
     "@tauri-apps/plugin-store": "^2.2.0",
-    "@tauri-apps/plugin-websocket": "^2.2.1",
+    "@tauri-apps/plugin-websocket": "^2.3.0",
     "@tauri-apps/plugin-window-state": "^2.2.1",
     "@types/react-router-dom": "^5.3.3",
-    "@typescript-eslint/eslint-plugin": "^8.21.0",
-    "@typescript-eslint/parser": "^8.21.0",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
     "d3": "^7.9.0",
     "dotenv": "^16.4.7",
     "eslint": "^9.19.0",
@@ -34,11 +34,11 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-split": "^2.0.14",
-    "typescript-eslint": "^8.21.0"
+    "typescript-eslint": "^8.22.0"
   },
   "devDependencies": {
     "@swc/cli": "^0.6.0",
-    "@swc/core": "^1.10.9",
+    "@swc/core": "^1.10.11",
     "@tauri-apps/cli": "^2.2.7",
     "@types/d3": "^7.4.3",
     "@types/react": "^19.0.8",

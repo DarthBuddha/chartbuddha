@@ -1,11 +1,11 @@
 {
   "folders": [
     {
-      "path": ".."
+      "path": "..",
     },
     {
-      "path": "C:/Users/Darth/AppData/Roaming/com.chartbuddha.app"
-    }
+      "path": "C:/Users/Darth/AppData/Roaming/com.chartbuddha.app",
+    },
   ],
   "settings": {
     "cSpell.words": [
@@ -27,10 +27,10 @@
       "Uninit",
       "unmanage",
       "usize",
-      "varchar"
+      "varchar",
     ],
     "dotenv.enableAutocloaking": false,
-    "dependi.rust.lockFileEnabled": true
+    "dependi.rust.lockFileEnabled": true,
   },
   "extensions": {
     "recommendations": [
@@ -62,7 +62,7 @@
       "tamasfe.even-better-toml",
       "twxs.cmake",
       "naumovs.color-highlight",
-      "royaction.color-manager"
-    ]
-  }
+      "royaction.color-manager",
+    ],
+  },
 }

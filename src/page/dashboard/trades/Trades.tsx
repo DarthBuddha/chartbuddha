@@ -34,14 +34,14 @@ const TimeSales: React.FC<TradesWidgetProps> = ({ title, filter }) => {
 
   useEffect(() => {
     // Listen for the `tradeUpdate` event from Tauri backend
-    const unlisten = listen<Trade>('tradeUpdate', (event) => {
+    const unlisten = listen<Trade>('tradeUpdate', event => {
       const trade = event.payload
-      setTrades((prev) => [trade, ...prev.slice(0, 99)]) // Keep the latest 100 trades
+      setTrades(prev => [trade, ...prev.slice(0, 99)]) // Keep the latest 100 trades
     })
 
     // Cleanup the event listener when the component unmounts
     return () => {
-      unlisten.then((unsub) => unsub())
+      unlisten.then(unsub => unsub())
     }
   }, [])
 

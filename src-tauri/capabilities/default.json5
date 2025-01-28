@@ -1,48 +1,45 @@
 {
-  "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "default",
-  "description": "Capability for the main window",
-  "windows": [
-    "main",
-    "splash"
-  ],
-  "permissions": [
-    "core:path:default",
-    "core:event:default",
-    "core:window:default",
-    "core:app:default",
-    "core:resources:default",
-    "core:menu:default",
-    "core:tray:default",
-    "core:window:allow-set-title",
-    "log:default",
-    "shell:allow-open",
-    "window-state:default",
-    "store:default",
-    "websocket:default",
-    "sql:default",
-    "sql:allow-execute",
+  $schema: '../gen/schemas/desktop-schema.json',
+  identifier: 'default',
+  description: 'Capability for the main window',
+  windows: ['main', 'splash'],
+  permissions: [
+    'core:path:default',
+    'core:event:default',
+    'core:window:default',
+    'core:app:default',
+    'core:resources:default',
+    'core:menu:default',
+    'core:tray:default',
+    'core:window:allow-set-title',
+    'log:default',
+    'shell:allow-open',
+    'window-state:default',
+    'store:default',
+    'websocket:default',
+    'sql:default',
+    'sql:allow-execute',
     {
-      "identifier": "http:default",
-      "allow": [
+      identifier: 'http:default',
+      allow: [
         {
-          "url": "https://*.tauri.app"
+          url: 'https://*.tauri.app',
         },
         {
-          "url": "https://api.coinbase.com"
+          url: 'https://api.coinbase.com',
         },
         {
-          "url": "wss://advanced-trade-ws.coinbase.com"
+          url: 'wss://advanced-trade-ws.coinbase.com',
         },
         {
-          "url": "wss://advanced-trade-ws-user.coinbase.com"
-        }
+          url: 'wss://advanced-trade-ws-user.coinbase.com',
+        },
       ],
-      "deny": [
+      deny: [
         {
-          "url": "https://private.tauri.app"
-        }
-      ]
-    }
-  ]
+          url: 'https://private.tauri.app',
+        },
+      ],
+    },
+  ],
 }

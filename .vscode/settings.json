@@ -14,20 +14,9 @@
   "editor.formatOnSave": true,
   "editor.fontFamily": "IBM Plex Mono, SourceCodePro",
   "editor.fontLigatures": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[rust]": {
-    "editor.defaultFormatter": "jinxdash.prettier-rust"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  }
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // Use prettier as default formatter
+  "editor.formatOnPaste": true, // format code on paste
+  "editor.formatOnType": true, // format code as you type
+  "files.trimTrailingWhitespace": true, // remove trailing white spaces from all lines
+  "files.trimFinalNewlines": true // Ensures there's only one blank line at the end of the file
 }

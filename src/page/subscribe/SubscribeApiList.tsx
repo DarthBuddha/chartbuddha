@@ -36,7 +36,7 @@ const SubscribeApiList: React.FC = () => {
         const storeApiList = await load(API_LIST_STORE)
         const brokerData = await storeApiList.get<Record<string, boolean>>('Broker')
         if (brokerData) {
-          const configuredApis = Object.keys(brokerData).filter((key) => brokerData[key])
+          const configuredApis = Object.keys(brokerData).filter(key => brokerData[key])
           setSelectedApiListStore(configuredApis)
         }
       } catch (err) {
@@ -64,7 +64,7 @@ const SubscribeApiList: React.FC = () => {
         {selectedApiListStore.length === 0 ? (
           <div className={Style.Row}>Please configure your API keys on the Connect page.</div>
         ) : (
-          selectedApiListStore.map((api) => (
+          selectedApiListStore.map(api => (
             <div key={api} className={Style.Row} onClick={() => handleClick(api)}>
               {api.charAt(0).toUpperCase() + api.slice(1)}
             </div>

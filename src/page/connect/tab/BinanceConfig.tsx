@@ -191,7 +191,7 @@ const BinanceConfig: React.FC = () => {
                 type="text"
                 id="api_key"
                 value={selBinanceApiKey ?? ''}
-                onChange={(e) => setBinanceApiKey(e.target.value)}
+                onChange={e => setBinanceApiKey(e.target.value)}
                 className={Style.UserInput_Text}
                 autoComplete="off"
                 placeholder="Enter your Binance API Key"
@@ -205,7 +205,7 @@ const BinanceConfig: React.FC = () => {
                 type="text"
                 id="api_key_secret"
                 value={selBinanceApiKeySecret ?? ''}
-                onChange={(e) => setBinanceApiKeySecret(e.target.value)}
+                onChange={e => setBinanceApiKeySecret(e.target.value)}
                 className={Style.UserInput_Text}
                 autoComplete="off"
                 placeholder="Enter your Binance API Secret"

@@ -190,7 +190,7 @@ const CoinbaseConfig: React.FC = () => {
                 type="text"
                 id="api_key"
                 value={selCoinbaseApiKey ?? ''}
-                onChange={(e) => setCoinbaseApiKey(e.target.value)}
+                onChange={e => setCoinbaseApiKey(e.target.value)}
                 className={Style.UserInput_Text}
                 autoComplete="off"
                 placeholder="Enter your Coinbase API Key"
@@ -204,7 +204,7 @@ const CoinbaseConfig: React.FC = () => {
                 type="text"
                 id="api_key_secret"
                 value={selCoinbaseApiKeySecret ?? ''}
-                onChange={(e) => setCoinbaseApiKeySecret(e.target.value)}
+                onChange={e => setCoinbaseApiKeySecret(e.target.value)}
                 className={Style.UserInput_Text}
                 autoComplete="off"
                 placeholder="Enter your Coinbase API Secret"

@@ -1,28 +1,21 @@
 {
-  "identifier": "desktop",
-  "platforms": [
-    "macOS",
-    "windows",
-    "linux"
+  identifier: 'desktop',
+  platforms: ['macOS', 'windows', 'linux'],
+  windows: ['main', 'splash'],
+  permissions: [
+    'core:path:default',
+    'core:event:default',
+    'core:window:default',
+    'core:app:default',
+    'core:resources:default',
+    'core:menu:default',
+    'core:tray:default',
+    'core:window:allow-set-title',
+    'log:default',
+    'shell:allow-open',
+    'window-state:default',
+    'store:default',
+    'sql:default',
+    'sql:allow-execute',
   ],
-  "windows": [
-    "main",
-    "splash"
-  ],
-  "permissions": [
-    "core:path:default",
-    "core:event:default",
-    "core:window:default",
-    "core:app:default",
-    "core:resources:default",
-    "core:menu:default",
-    "core:tray:default",
-    "core:window:allow-set-title",
-    "log:default",
-    "shell:allow-open",
-    "window-state:default",
-    "store:default",
-    "sql:default",
-    "sql:allow-execute"
-  ]
 }

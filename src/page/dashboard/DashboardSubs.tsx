@@ -49,7 +49,7 @@ const DashboardSubs: React.FC = () => {
         for (const api of apis) {
           const apiData = appSubscriptions[api]
           if (apiData) {
-            apiData.forEach((subscription) => {
+            apiData.forEach(subscription => {
               if (subscription.subscription_type === 'broker') {
                 configuredApis.push({ api, symbol: subscription.symbol })
               }

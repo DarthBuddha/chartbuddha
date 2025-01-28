@@ -26,7 +26,7 @@ export function useSetupReact() {
     })
 
     return () => {
-      unlisten.then((fn) => fn())
+      unlisten.then(fn => fn())
     }
   }, [])
 }

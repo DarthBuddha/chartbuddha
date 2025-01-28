@@ -35,7 +35,7 @@ const DashboardTrades: React.FC = () => {
         cursor="row-resize"
       >
         <div className={Styles.TradesWidget}>
-          <TimeSales title="Large Trades" filter={(trade) => trade.size > 50} />
+          <TimeSales title="Large Trades" filter={trade => trade.size > 50} />
         </div>
 
         <div className={Styles.TradesWidget}>
