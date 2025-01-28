@@ -1,25 +1,31 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Folder Path -> ComponentName
-//! # Context: Folder Path -> ContextName
-//! # Interface: Folder Path -> InterfaceName
-//! # Hooks: Folder Path -> HookName
-//! # Utils: Folder Path -> UtilsName
+//! # Window: window_splash
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Short Description of module.
+//! * Splash window for the application
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * path/to/FileName.tsx
+//! * src/window_splash.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-// Tauri
-// import { info, error } from '@tauri-apps/plugin-log';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+// Context
+import { InterfaceProvider } from './interface/InterfaceProvider.tsx'
 // Components
-// CSS Modules
+import Splash from './window/Splash.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <InterfaceProvider>
+      <Splash />
+    </InterfaceProvider>
+  </React.StrictMode>,
+)
 
 /* ---------------------------------------------------------------------------------------------- */

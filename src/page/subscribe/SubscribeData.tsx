@@ -12,7 +12,7 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../../context/InterfaceContext'
+import { useInterfaceContext } from '../../interface/useInterfaceContext'
 // Components
 import SubscribeCoinbase from './tab/SubscribeCoinbase'
 // CSS Module

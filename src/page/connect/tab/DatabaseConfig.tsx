@@ -17,8 +17,8 @@ import { invoke } from '@tauri-apps/api/core'
 import { info, error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from '../../../context/InterfaceContext'
-import { DatabaseType } from '../../../context/app/AppConfig'
+import { useInterfaceContext } from '../../../interface/useInterfaceContext'
+import { DatabaseType } from '../../../interface/app/contextConfig'
 // Constants
 import { CONFIG_STORE } from '../../../constants'
 // CSS Module

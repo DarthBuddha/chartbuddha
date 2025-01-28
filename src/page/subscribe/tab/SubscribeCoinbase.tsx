@@ -13,7 +13,7 @@
 import React from 'react'
 import Split from 'react-split'
 // Context
-import { useInterfaceContext } from '../../../context/InterfaceContext.tsx'
+import { useInterfaceContext } from '../../../interface/useInterfaceContext.ts'
 // Components
 import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct.tsx'
 import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList.tsx'

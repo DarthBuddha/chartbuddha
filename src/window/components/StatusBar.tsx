@@ -1,18 +1,19 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Window Components - StatusBar
+//! # Component: Window -> StatusBar
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * This component is responsible for rendering the application's status bar.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: window/components/StatusBar.tsx
+//! ##### Path:
+//! * src/window/components/StatusBar.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 // CSS Module
-import Style from './Page.module.css'
+import Style from '../Page.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

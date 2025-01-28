@@ -1,28 +1,29 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: splash_window
+//! # Window: window_main
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Splash window for the application
+//! * Main window for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: splash_window.tsx
+//! ##### Path:
+//! * src/window_main.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 // Context
-import { InterfaceProvider } from './context/InterfaceProvider.tsx'
+import { InterfaceProvider } from './interface/InterfaceProvider.tsx'
 // Components
-import Splash from './window/Splash.tsx'
+import Main from './window/Main.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <InterfaceProvider>
-      <Splash />
+      <Main />
     </InterfaceProvider>
   </React.StrictMode>,
 )

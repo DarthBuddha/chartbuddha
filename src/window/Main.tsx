@@ -1,19 +1,20 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
 //! # Component: Window - Main
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * Main window for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: window/Main.tsx
+//! ##### Path:
+//! * src/window/Main.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 // Components: MenuBar, StatusBar
-import MenuBar from './MenuBar.tsx'
-import StatusBar from './StatusBar.tsx'
+import MenuBar from './components/MenuBar.tsx'
+import StatusBar from './components/StatusBar.tsx'
 // Components
 import Analyze from '../page/analyze/Analyze.tsx'
 import Dashboard from '../page/dashboard/Dashboard.tsx'
@@ -23,7 +24,7 @@ import News from '../page/news/News.tsx'
 import Profile from '../page/profile/Profile.tsx'
 import Subscribe from '../page/subscribe/Subscribe.tsx'
 // Context
-import { useInterfaceContext } from '../context/InterfaceContext.tsx'
+import { useInterfaceContext } from '../interface/useInterfaceContext.ts'
 // CSS Module
 import Style from './Page.module.css'
 

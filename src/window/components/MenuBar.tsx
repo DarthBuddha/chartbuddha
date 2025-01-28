@@ -1,20 +1,21 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Window Components - MenuBar
+//! # Component: Window -> MenuBar
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * This component is responsible for rendering the application's menu bar.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: window/components/MenuBar.tsx
+//! ##### Path:
+//! * src/window/components/MenuBar.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../context/InterfaceContext'
+import { useInterfaceContext } from '../../interface/useInterfaceContext'
 // CSS Module
-import Style from './Page.module.css'
+import Style from '../Page.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

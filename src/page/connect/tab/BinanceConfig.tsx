@@ -17,8 +17,8 @@ import { invoke } from '@tauri-apps/api/core'
 import { info, error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from '../../../context/InterfaceContext'
-import { BinanceDataApiPermissionsType } from '../../../context/apis/Binance'
+import { useInterfaceContext } from '../../../interface/useInterfaceContext'
+import { BinanceDataApiPermissionsType } from '../../../interface/apis/contextBinance'
 // CSS Module
 import Style from './Config.module.css'
 

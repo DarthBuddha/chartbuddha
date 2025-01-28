@@ -1,30 +1,34 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: main_window
+//! # Hooks: useSetupReact
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Main window for the application
+//! * This hook is used to start the  setup of the React Frontend.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: main_window.tsx
+//! ##### Path:
+//! * src/hooks/useSetupReact.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-// Context
-import { InterfaceProvider } from './context/InterfaceProvider.tsx'
-// Components
-import Main from './window/Main.tsx'
+import { useEffect } from 'react'
+// Tauri
+import { listen } from '@tauri-apps/api/event'
+// Utils
+import { setupReact } from '../common/setupReact'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <InterfaceProvider>
-      <Main />
-    </InterfaceProvider>
-  </React.StrictMode>,
-)
+export function useSetupReact() {
+  useEffect(() => {
+    const unlisten = listen('setup-react', () => {
+      setupReact()
+    })
+
+    return () => {
+      unlisten.then((fn) => fn())
+    }
+  }, [])
+}
 
 /* ---------------------------------------------------------------------------------------------- */

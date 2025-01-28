@@ -15,8 +15,8 @@ import React, { useCallback, useEffect } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 import { error, info } from '@tauri-apps/plugin-log'
 // Context
-import { useInterfaceContext } from '../../../context/InterfaceContext'
-import { ProductsType } from '../../../context/apis/Coinbase'
+import { useInterfaceContext } from '../../../interface/useInterfaceContext'
+import { ProductsType } from '../../../interface/apis/contextCoinbase'
 // CSS Modules
 import Style from './SubscribeCoinbaseProductList.module.css'
 

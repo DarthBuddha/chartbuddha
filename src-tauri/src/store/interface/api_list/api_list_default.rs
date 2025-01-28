@@ -22,7 +22,7 @@ pub fn default_list_api() -> HashMap<String, Value> {
 
   // Api List
   defaults.insert(
-    "Broker".to_string(),
+    "ApiList".to_string(),
     json!({
       "binance": false,
       "coinbase": false

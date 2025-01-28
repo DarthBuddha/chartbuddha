@@ -12,7 +12,7 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../../context/InterfaceContext'
+import { useInterfaceContext } from '../../interface/useInterfaceContext'
 // Components
 import DatabaseConfig from './tab/DatabaseConfig'
 import BinanceConfig from './tab/BinanceConfig'

@@ -17,8 +17,8 @@ import { invoke } from '@tauri-apps/api/core'
 import { info, error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from '../../../context/InterfaceContext'
-import { CoinbaseDataApiPermissionsType } from '../../../context/apis/Coinbase'
+import { useInterfaceContext } from '../../../interface/useInterfaceContext'
+import { CoinbaseDataApiPermissionsInterface } from '../../../interface/apis/contextCoinbase'
 // Constants
 import { COINBASE_STORE } from '../../../constants'
 // CSS Module
@@ -40,7 +40,7 @@ const CoinbaseConfig: React.FC = () => {
         const coinbaseStore = await store.get<{
           api_key: string
           api_key_secret: string
-          api_permissions: CoinbaseDataApiPermissionsType
+          api_permissions: CoinbaseDataApiPermissionsInterface
         }>('Coinbase')
 
         if (coinbaseStore) {
@@ -74,7 +74,7 @@ const CoinbaseConfig: React.FC = () => {
       })
 
       // Ensure the response is parsed correctly
-      const parsedResponse: CoinbaseDataApiPermissionsType = JSON.parse(response)
+      const parsedResponse: CoinbaseDataApiPermissionsInterface = JSON.parse(response)
       info('Parsed Response: ' + JSON.stringify(parsedResponse))
       // Update context state explicitly
       setCoinbaseApiPermissions(parsedResponse)

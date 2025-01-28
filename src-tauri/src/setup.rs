@@ -85,11 +85,11 @@ pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
   // Tauri Setup Tasks Complete
   info!("Tauri Ready...");
   let store = app.store(STATE_STORE).unwrap();
-  let mut app_state = store.get("State").unwrap_or(json!({}));
-  app_state["tauri_ready"] = json!(true);
-  store.set("State", app_state);
-  info!("Emitting tauri-ready event...");
-  app.emit("tauri-ready", "").unwrap();
+  let mut state = store.get("State").unwrap_or(json!({}));
+  state["setup-react"] = json!(true);
+  store.set("State", state);
+  info!("Emitting setup-react event...");
+  app.emit("setup-react", "").unwrap();
 
   Ok(())
 }

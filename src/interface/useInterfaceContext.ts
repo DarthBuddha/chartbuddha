@@ -1,22 +1,23 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Context: Context - InterfaceContext
+//! # Interface: useInterfaceContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the global state of the application.
+//! * This context is responsible for managing the global state of the Interface.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: context/InterfaceContext.tsx
+//! ##### Path:
+//! * src/interface/useInterfaceContext.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext, useContext } from 'react'
 // Context
-import { InterfaceType } from './Interface.tsx'
+import { ContextInterface } from './contextInterface'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export const InterfaceContext = createContext<InterfaceType | null>(null)
+export const InterfaceContext = createContext<ContextInterface | null>(null)
 
 /* ---------------------------------------------------------------------------------------------- */
 

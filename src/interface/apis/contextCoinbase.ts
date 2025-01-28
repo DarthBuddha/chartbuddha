@@ -1,15 +1,23 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Context: Context Apis - Binance
+//! # Interface: Apis -> contextCoinbase
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the Binance API.
+//! * This context is responsible for managing the Coinbase API.
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Types:
-//! * BinanceType
+//! #### Interface:
+//! * CoinbaseInterface
+//! * DataApiInterface
+//! * DataApiPermissionsInterface
+//! * ProductsInterface
+//! * SessionInterface
+//! * MaintenanceInterface
+//! * FutureInterface
+//! * PerpetualInterface
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: context/apis/Binance.tsx
+//! ##### Path:
+//! * src/interface/apis/contextCoinbase.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -17,20 +25,20 @@ import { createContext } from 'react'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface BinanceType {
-  binance_api: BinanceDataApiType
-  binance_products: BinanceProductsType[]
+export interface CoinbaseInterface {
+  coinbase_api: CoinbaseDataApiInterface
+  coinbase_products: CoinbaseProductsInterface[]
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface BinanceDataApiType {
+export interface CoinbaseDataApiInterface {
   api_key: string
   api_key_secret: string
-  api_permissions: BinanceDataApiPermissionsType
+  api_permissions: CoinbaseDataApiPermissionsInterface
 }
 
-export interface BinanceDataApiPermissionsType {
+export interface CoinbaseDataApiPermissionsInterface {
   can_view: boolean
   can_trade: boolean
   can_transfer: boolean
@@ -40,7 +48,7 @@ export interface BinanceDataApiPermissionsType {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface BinanceProductsType {
+export interface CoinbaseProductsInterface {
   product_id: string
   price?: string
   price_percentage_change_24h?: string
@@ -66,7 +74,7 @@ export interface BinanceProductsType {
   product_type?: string
   quote_currency_id?: string
   base_currency_id?: string
-  fcm_trading_session_details?: BinanceSessionType // object
+  fcm_trading_session_details?: CoinbaseSessionInterface // object
   mid_market_price?: string
   alias?: string
   alias_to?: string
@@ -77,26 +85,26 @@ export interface BinanceProductsType {
   display_name?: string
   product_venue?: string
   approximate_quote_24h_volume?: string
-  future_product_details?: BinanceFutureType // object
+  future_product_details?: CoinbaseFutureInterface // object
   num_products?: number
 }
 
-export interface BinanceSessionType {
+export interface CoinbaseSessionInterface {
   is_session_open: boolean
   open_time: string // RFC3339 Timestamp
   close_time: string // RFC3339 Timestamp
   session_state: string
   after_hours_order_entry_disabled: boolean
   closed_reason: string
-  maintenance: BinanceMaintenanceType // Object
+  maintenance: CoinbaseMaintenanceInterface // Object
 }
 
-export interface BinanceMaintenanceType {
+export interface CoinbaseMaintenanceInterface {
   start_time: string // RFC3339 Timestamp
   end_time: string // RFC3339 Timestamp
 }
 
-export interface BinanceFutureType {
+export interface CoinbaseFutureInterface {
   venue: string
   contract_code: string
   contract_expiry: string // RFC3339 Timestamp
@@ -107,7 +115,7 @@ export interface BinanceFutureType {
   group_short_description: string
   risk_managed_by: string
   contract_expiry_type: string
-  perpetual_details: BinancePerpetualType // object
+  perpetual_details: CoinbasePerpetualInterface // object
   contract_display_name: string
   time_to_expiry_ms: number
   non_crypto: boolean
@@ -115,7 +123,7 @@ export interface BinanceFutureType {
   twenty_four_by_seven: boolean
 }
 
-export interface BinancePerpetualType {
+export interface CoinbasePerpetualInterface {
   open_interest: string
   funding_rate: string
   funding_time: string // RFC3339 Timestamp
@@ -126,8 +134,8 @@ export interface BinancePerpetualType {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const BinanceContext = createContext<BinanceType | null>(null)
+const CoinbaseContext = createContext<CoinbaseInterface | null>(null)
 
-export { BinanceContext }
+export { CoinbaseContext }
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -1,15 +1,16 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Context: Context App - AppConfig
+//! # Interface: App -> contextApiList
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the Coinbase API.
+//! * This context is responsible for managing the global state of the Api List.
 /* ---------------------------------------------------------------------------------------------- */
-//! #### Types:
-//! * AppConfigType
+//! #### Interface:
+//! * ApiListInterface
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: context/app/AppConfig.tsx
+//! ##### Path:
+//! * src/interface/app/contextApiList.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -19,19 +20,15 @@ import { createContext } from 'react'
 
 export type DatabaseType = 'MySql' | 'Postgres' | 'Sqlite' | null
 
-export interface AppConfigType {
-  app_init_run: boolean | null
-  app_update: string | null
-  app_version: string | null
-  database_type: DatabaseType
-  database_name: string | null
-  database_url: string | null
+export interface ApiListInterface {
+  binance: boolean | null
+  coinbase: boolean | null
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const AppConfigContext = createContext<AppConfigType | null>(null)
+const ApiListContext = createContext<ApiListInterface | null>(null)
 
-export { AppConfigContext }
+export { ApiListContext }
 
 /* ---------------------------------------------------------------------------------------------- */

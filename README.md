@@ -1,10 +1,8 @@
 # ChartBuddha
 
-A Tauri app, Built on Rust and React but made with Love.
+A Financial Data Analysis Application for the future,
 
-ChartBuddha will be a BookMap style app with data api integrations from various providers.
-
-Exchanges, brokers and analytics data providers.
+Built on Rust with React and made with Love.
 
 ## Overview
 
