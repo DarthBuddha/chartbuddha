@@ -16,7 +16,7 @@ import React from 'react'
 import { error, info } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
 // Context
-import { useInterfaceContext } from '../../../interface/useInterfaceContext'
+import { useInterfaceContext } from '../../../hooks/useAppContext'
 // CSS Modules
 import Style from './SubscribeCoinbaseProduct.module.css'
 

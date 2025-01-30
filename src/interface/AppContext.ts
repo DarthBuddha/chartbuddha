@@ -1,31 +1,30 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Interface: interfaceContext
+//! # Interface: AppContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * This context is responsible for managing the global state of the Interface.
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/interface/interfaceContext.ts
+//! * src/interface/AppContextInterface.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext } from 'react'
 // Context: Connect
-import { DatabaseType } from './app/contextConfig'
-import { ApiListInterface } from './app/contextApiList'
+import { DatabaseType } from './ConfigContext'
 // Context: Binance
 // import { BinanceDataApiPermissionsType } from './apis/contextBinance'
 // import { BinanceProductsType } from './apis/contextBinance'
 // Context: Coinbase
-import { CoinbaseDataApiPermissionsInterface } from './apis/contextCoinbase'
-import { CoinbaseProductsInterface } from './apis/contextCoinbase'
+import { CoinbaseDataApiPermissionsInterface } from './CoinbaseContext'
+import { CoinbaseProductsInterface } from './CoinbaseContext'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 // Interface Context Type
-export interface ContextInterface {
+export interface AppContextInterface {
   // TODO: Clean up Context
   selApi: string | null
   setApi: React.Dispatch<React.SetStateAction<string | null>>
@@ -38,8 +37,8 @@ export interface ContextInterface {
   setConnectTab: React.Dispatch<React.SetStateAction<string | null>>
   selSubscribeTab: string | null
   setSubscribeTab: React.Dispatch<React.SetStateAction<string | null>>
-  selApiList: ApiListInterface | null
-  setApiList: React.Dispatch<React.SetStateAction<ApiListInterface | null>>
+  selApiList: string[] | null
+  setApiList: React.Dispatch<React.SetStateAction<string[] | null>>
   selSubList: string | null
   setSubList: React.Dispatch<React.SetStateAction<string | null>>
   // Context: Database
@@ -81,8 +80,8 @@ export interface ContextInterface {
   setCoinbaseProduct: React.Dispatch<React.SetStateAction<CoinbaseProductsInterface | null>>
 }
 
-const InterfaceContext = createContext<ContextInterface | null>(null)
+const AppContext = createContext<AppContextInterface | null>(null)
 
-export default InterfaceContext
+export default AppContext
 
 /* ---------------------------------------------------------------------------------------------- */

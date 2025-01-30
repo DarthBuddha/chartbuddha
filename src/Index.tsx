@@ -1,30 +1,30 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Window: window_main
+//! # Component: Index
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * Main window for the application
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/window_main.tsx
+//! * src/Index.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 // Context
-import { InterfaceProvider } from './interface/InterfaceProvider.tsx'
+import { AppContextProvider } from './AppContextProvider.tsx'
 // Components
-import Main from './window/Main.tsx'
+import Main from './Main.tsx'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <InterfaceProvider>
+    <AppContextProvider>
       <Main />
-    </InterfaceProvider>
+    </AppContextProvider>
   </React.StrictMode>,
 )
 

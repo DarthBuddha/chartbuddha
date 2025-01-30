@@ -18,5 +18,14 @@
   "editor.formatOnPaste": true, // format code on paste
   "editor.formatOnType": true, // format code as you type
   "files.trimTrailingWhitespace": true, // remove trailing white spaces from all lines
-  "files.trimFinalNewlines": true // Ensures there's only one blank line at the end of the file
+  "files.trimFinalNewlines": true, // Ensures there's only one blank line at the end of the file
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "typescript.suggest.enabled": true,
+  "javascript.suggest.enabled": true,
+  "editor.parameterHints.enabled": true
 }

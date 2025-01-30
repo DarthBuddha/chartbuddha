@@ -1,38 +1,32 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Window - Splash
+//! # Hook: useAppContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Splash window for the application
+//! * This context is responsible for managing the global state of the Interface.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: window/Splash.tsx
+//! ##### Path:
+//! * src/interface/useAppContext.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
-import React from 'react'
-import { useSetupReact } from '../hooks/useSetupReact'
-import Style from './Page.module.css'
+import { createContext, useContext } from 'react'
+// Context
+import { AppContextInterface } from '../interface/AppContext'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Splash: React.FC = () => {
-  useSetupReact()
+export const AppContext = createContext<AppContextInterface | null>(null)
 
-  return (
-    <div className={Style.SplashComponent}>
-      <div className={Style.MenuBarContainer}>{/* <MenuBar /> */}</div>
-      <div className={Style.PageContainer}>
-        <div className={Style.SplashText}>
-          <h1>Welcome to ChartBuddha</h1>
-          <p>Setting up the application...</p>
-        </div>
-      </div>
-      <div className={Style.StatusBarContainer}>{/* <StatusBar /> */}</div>
-    </div>
-  )
+/* ---------------------------------------------------------------------------------------------- */
+
+export const useAppContext = () => {
+  const context = useContext(AppContext)
+  if (!context) {
+    throw new Error('useAppContext must be used within an AppContextProvider')
+  }
+  return context
 }
-
-export default Splash
 
 /* ---------------------------------------------------------------------------------------------- */

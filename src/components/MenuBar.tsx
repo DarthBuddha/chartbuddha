@@ -13,7 +13,7 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../../interface/useInterfaceContext'
+import { useInterfaceContext } from '../../hooks/useAppContext'
 // CSS Module
 import Style from '../Page.module.css'
 

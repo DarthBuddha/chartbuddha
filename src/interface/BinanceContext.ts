@@ -1,16 +1,16 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Interface: Apis -> contextBinance
+//! # Interface: BinanceContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * This context is responsible for managing the Binance API.
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Interface:
-//! * BinanceType
+//! * BinanceContext
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/interface/apis/contextBinance.ts
+//! * src/interface/BinanceContext.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -18,7 +18,7 @@ import { createContext } from 'react'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface BinanceType {
+export interface BinanceInterface {
   binance_api: BinanceDataApiType
   binance_products: BinanceProductsType[]
 }
@@ -127,7 +127,7 @@ export interface BinancePerpetualType {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const BinanceContext = createContext<BinanceType | null>(null)
+const BinanceContext = createContext<BinanceInterface | null>(null)
 
 export { BinanceContext }
 

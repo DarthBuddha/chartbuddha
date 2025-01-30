@@ -15,24 +15,25 @@ import React from 'react'
 // Components: MenuBar, StatusBar
 import MenuBar from './components/MenuBar.tsx'
 import StatusBar from './components/StatusBar.tsx'
-// Components
-import Analyze from '../page/analyze/Analyze.tsx'
-import Dashboard from '../page/dashboard/Dashboard.tsx'
-import Connect from '../page/connect/Connect.tsx'
-import Home from '../page/home/Home.tsx'
-import News from '../page/news/News.tsx'
-import Profile from '../page/profile/Profile.tsx'
-import Subscribe from '../page/subscribe/Subscribe.tsx'
+// Components: Pages
+import Splash from './page/splash/Splash.tsx'
+import Home from './page/home/Home.tsx'
+import Connect from './page/connect/Connect.tsx'
+import Subscribe from './page/subscribe/Subscribe.tsx'
+import Dashboard from './page/dashboard/Dashboard.tsx'
+import Analyze from './page/analyze/Analyze.tsx'
+import News from './page/news/News.tsx'
+import Profile from './page/profile/Profile.tsx'
 // Context
-import { useInterfaceContext } from '../interface/useInterfaceContext.ts'
+import { useAppContext } from './hooks/useAppContext.ts'
 // CSS Module
-import Style from './Page.module.css'
+import Style from './Main.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const Main: React.FC = () => {
   // State Management
-  const { selPage } = useInterfaceContext()
+  const { selPage } = useAppContext()
 
   const renderPage = () => {
     switch (selPage) {
@@ -51,7 +52,7 @@ const Main: React.FC = () => {
       case 'subscribe':
         return <Subscribe />
       default:
-        return <Home />
+        return <Splash />
     }
   }
 

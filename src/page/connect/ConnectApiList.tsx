@@ -12,7 +12,7 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../../interface/useInterfaceContext'
+import { useInterfaceContext } from '../../hooks/useAppContext'
 // import { DataApiType } from 'app/context/broker/Coinbase.tsx'
 // CSS Module
 import Style from './Connect.module.css'

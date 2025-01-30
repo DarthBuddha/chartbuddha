@@ -1,13 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Interface: interfaceProvider
+//! # Component: AppContextProvider
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * This context is responsible for managing the global state of the Interface.
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/context/InterfaceProvider.tsx
+//! * src/interface/AppContextProvider.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -15,8 +15,7 @@ import React, { useState } from 'react'
 // Tauri
 // import { info } from '@tauri-apps/plugin-log';
 // Interface
-import { InterfaceContext } from './useInterfaceContext'
-import { ApiListInterface } from './app/contextApiList'
+import { AppContext } from './hooks/useAppContext'
 // Interface: Connect
 import { DatabaseType } from './app/contextConfig'
 // Interface: Binance
@@ -28,7 +27,7 @@ import { CoinbaseProductsInterface } from './apis/contextCoinbase'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // TODO: Clean up Context
   const [selApi, setApi] = useState<string | null>(null)
   const [selProduct, setProduct] = useState<string | null>(null)
@@ -36,7 +35,7 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [selPage, setPage] = useState<string | null>(null)
   const [selConnectTab, setConnectTab] = useState<string | null>(null)
   const [selSubscribeTab, setSubscribeTab] = useState<string | null>(null)
-  const [selApiList, setApiList] = useState<ApiListInterface | null>(null)
+  const [selApiList, setApiList] = useState<string[] | null>(null)
   const [selSubList, setSubList] = useState<string | null>(null)
   // Context: Database
   const [selDatabaseType, setDatabaseType] = useState<DatabaseType | null>(null)
@@ -66,7 +65,7 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // info('Initial Coinbase API Permissions: ' + JSON.stringify(selCoinbaseApiPermissions));
 
   return (
-    <InterfaceContext.Provider
+    <AppContext.Provider
       value={{
         // TODO: Clean up Context
         selApi,
@@ -120,7 +119,7 @@ export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       }}
     >
       {children}
-    </InterfaceContext.Provider>
+    </AppContext.Provider>
   )
 }
 

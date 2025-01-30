@@ -1,56 +1,41 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Common: SetupReact
+//! # Common: SetupApiList
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * This file contains the setup function for the React Frontend.
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/common/SetupReact.ts
+//! * src/common/SetupApiList.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
 import { info } from '@tauri-apps/plugin-log'
-import { invoke } from '@tauri-apps/api/core'
+// import { invoke } from '@tauri-apps/api/core'
 import { load } from '@tauri-apps/plugin-store'
-
-import { SetupApiList } from './SetupApiList'
+// Interface
+// import { ApiListInterface } from '../interface/app/contextApiList'
 
 /* ---------------------------------------------------------------------------------------------- */
 // Constants
-import { STATE_STORE } from '../constants'
+import { API_LIST_STORE } from '../constants'
 /* ---------------------------------------------------------------------------------------------- */
 
-// React setup function
-export async function SetupReact(): Promise<Record<string, boolean>> {
-  info('Setup Api List...')
-  const apiList = await SetupApiList() // Ensure SetupApiList is awaited
-
-  info('React Ready...')
+// Load Api List from store
+export async function SetupApiList(): Promise<string[]> {
   try {
-    const store = await load(STATE_STORE)
-    const appState = await store.get<{ react_ready: boolean }>('State')
-    if (appState) {
-      appState.react_ready = true
-      await store.set('State', appState)
-      await store.save()
-    } else {
-      info('Failed to load app state')
-    }
+    info('Load Api List from store...')
+
+    const store = await load(API_LIST_STORE)
+    const apiList = await store.get<Record<string, boolean>>('ApiList')
+    const enabledApis = apiList ? Object.keys(apiList).filter(key => apiList[key]) : []
+    info(`Enabled APIs: ${enabledApis.join(', ')}`)
+    return enabledApis
   } catch (err) {
     info(String(err))
+    return []
   }
-
-  invoke('setup_complete')
-  const apiRecord: Record<string, boolean> = apiList.reduce(
-    (acc, api) => {
-      acc[api] = true
-      return acc
-    },
-    {} as Record<string, boolean>,
-  )
-  return apiRecord
 }
 
 /* ---------------------------------------------------------------------------------------------- */

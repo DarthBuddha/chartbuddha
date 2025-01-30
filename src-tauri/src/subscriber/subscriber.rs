@@ -9,15 +9,15 @@
 //! ##### Path: app/structs/subscriber.rs
 /* ---------------------------------------------------------------------------------------------- */
 
-// Rust
+/// SeaOrm
+use sea_orm::prelude::DateTime;
+use sea_orm::prelude::DateTimeWithTimeZone;
+/// Dependencies
+use serde::{Deserialize, Serialize};
+/// Rust
 use std::fmt::Display;
 use std::fmt::Formatter;
 use std::fmt::Result;
-// SeaOrm
-use sea_orm::prelude::DateTimeWithTimeZone;
-use sea_orm::prelude::DateTime;
-// Dependencies
-use serde::{ Deserialize, Serialize };
 
 /* ---------------------------------------------------------------------------------------------- */
 

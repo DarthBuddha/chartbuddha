@@ -34,7 +34,6 @@
   },
   "extensions": {
     "recommendations": [
-      "aaron-bond.better-comments",
       "streetsidesoftware.code-spell-checker",
       "vadimcn.vscode-lldb",
       "darthbuddha.db-dank",

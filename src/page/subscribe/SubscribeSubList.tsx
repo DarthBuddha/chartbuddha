@@ -15,8 +15,8 @@ import React, { useEffect, useState } from 'react'
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from '../../interface/useInterfaceContext'
-import { ProductsType } from '../../interface/apis/contextCoinbase'
+import { useInterfaceContext } from '../../hooks/useAppContext'
+import { ProductsType } from '../../interface/CoinbaseContext'
 // CSS Module
 import Style from './SubscribeSubList.module.css'
 

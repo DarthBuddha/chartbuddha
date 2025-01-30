@@ -22,10 +22,10 @@ use log::error;
 use log::info;
 use serde_json::json;
 use serde_json::Value;
-use tokio::time::{ sleep, Duration };
+use tokio::time::{sleep, Duration};
 // Crates
-use crate::db::db::setup_database;
 use crate::constants::STATE_STORE;
+use crate::db::db::setup_database;
 use crate::store::store::initialize_store;
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -86,10 +86,10 @@ pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
   info!("Tauri Ready...");
   let store = app.store(STATE_STORE).unwrap();
   let mut state = store.get("State").unwrap_or(json!({}));
-  state["setup-react"] = json!(true);
+  state["tauri_ready"] = json!(true);
   store.set("State", state);
   info!("Emitting setup-react event...");
-  app.emit("setup-react", "").unwrap();
+  app.emit("tauri_ready", "").unwrap();
 
   Ok(())
 }

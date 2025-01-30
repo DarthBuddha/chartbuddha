@@ -26,7 +26,7 @@ pub fn state_default() -> HashMap<String, Value> {
     json!({
       "tauri_ready": false,
       "react_ready": false
-    })
+    }),
   );
 
   defaults

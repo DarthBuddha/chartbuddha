@@ -13,16 +13,18 @@
 // React
 import { useEffect } from 'react'
 // Tauri
+import { info } from '@tauri-apps/plugin-log'
 import { listen } from '@tauri-apps/api/event'
 // Utils
-import { setupReact } from '../common/setupReact'
+import { SetupReact } from '../common/SetupReact'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export function useSetupReact() {
   useEffect(() => {
-    const unlisten = listen('setup-react', () => {
-      setupReact()
+    const unlisten = listen('tauri_ready', () => {
+      info('tauri_ready event received')
+      SetupReact()
     })
 
     return () => {
