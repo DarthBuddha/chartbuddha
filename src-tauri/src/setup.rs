@@ -15,7 +15,7 @@
 // Tauri
 use tauri::AppHandle;
 use tauri::Emitter;
-use tauri::Manager;
+// use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 // Dependencies
 use log::error;
@@ -53,10 +53,10 @@ pub async fn setup_complete(app: AppHandle) -> Result<(), ()> {
     .expect("Failed to convert value to bool");
 
   if tauri_ready && react_ready {
-    let splash_window = app.get_webview_window("splash").unwrap();
-    let main_window = app.get_webview_window("main").unwrap();
-    splash_window.close().unwrap();
-    main_window.show().unwrap();
+    // let splash_window = app.get_webview_window("splash").unwrap();
+    // let main_window = app.get_webview_window("main").unwrap();
+    // splash_window.close().unwrap();
+    // main_window.show().unwrap();
   } else {
     error!("App Setup is not complete.");
   }
@@ -69,6 +69,7 @@ pub async fn setup_complete(app: AppHandle) -> Result<(), ()> {
 /// Perform the backend setup task
 pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
   info!("Performing Tauri setup tasks...");
+  // let app = AppHandle();
 
   // Tauri Setup Tasks
   info!("Initialize the store...");
@@ -88,7 +89,7 @@ pub async fn setup_tauri(app: AppHandle) -> Result<(), ()> {
   let mut state = store.get("State").unwrap_or(json!({}));
   state["tauri_ready"] = json!(true);
   store.set("State", state);
-  info!("Emitting setup-react event...");
+  info!("Emit: tauri_ready...");
   app.emit("tauri_ready", "").unwrap();
 
   Ok(())

@@ -16,7 +16,7 @@ import React from 'react'
 // import { error } from '@tauri-apps/plugin-log'
 // import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from '../../hooks/useAppContext'
+import { useAppContext } from '../../hooks/useAppContext'
 // Constants
 // import { API_LIST_STORE } from '../../constants'
 // CSS Module
@@ -26,7 +26,7 @@ import Style from './SubscribeApiList.module.css'
 
 const SubscribeApiList: React.FC = () => {
   // Context: Interface
-  const { selApiList, setSubscribeTab } = useInterfaceContext()
+  const { selApiList, setSubscribeTab } = useAppContext()
 
   // Button Click: Handle Data Api
   const handleClick = async (selSubscribeTab: string) => {

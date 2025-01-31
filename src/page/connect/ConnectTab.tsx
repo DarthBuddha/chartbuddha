@@ -12,10 +12,10 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../../hooks/useAppContext'
+import { useAppContext } from '../../hooks/useAppContext'
 // Components
 import DatabaseConfig from './tab/DatabaseConfig'
-import BinanceConfig from './tab/BinanceConfig'
+// import BinanceConfig from './tab/BinanceConfig'
 import CoinbaseConfig from './tab/CoinbaseConfig'
 // CSS Modules
 import Style from './Connect.module.css'
@@ -24,17 +24,17 @@ import Style from './Connect.module.css'
 
 const ConnectTab: React.FC = () => {
   // Context: Interface
-  const { selConnectTab } = useInterfaceContext()
+  const { selConnectTab } = useAppContext()
 
   switch (selConnectTab) {
-    case 'Binance':
-      return (
-        <div className={Style.ConfigTabContainer}>
-          <BinanceConfig />
-          {/* <div className={Style.Title}>Binance</div>
-          <div className={Style.Main_Container}>Binance API is not supported yet.</div> */}
-        </div>
-      )
+    // case 'Binance':
+    //   return (
+    //     <div className={Style.ConfigTabContainer}>
+    //       <BinanceConfig />
+    //       {/* <div className={Style.Title}>Binance</div>
+    //       <div className={Style.Main_Container}>Binance API is not supported yet.</div> */}
+    //     </div>
+    //   )
 
     case 'Coinbase':
       return (

@@ -17,7 +17,7 @@ import { invoke } from '@tauri-apps/api/core'
 import { info, error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from '../../../hooks/useAppContext'
+import { useAppContext } from '../../../hooks/useAppContext'
 import { DatabaseType } from '../../../interface/ConfigContext'
 // Constants
 import { CONFIG_STORE } from '../../../constants'
@@ -28,9 +28,9 @@ import Style from './Config.module.css'
 
 const DatabaseConfig: React.FC = () => {
   // Context: Interface
-  const { selDatabaseType, setDatabaseType } = useInterfaceContext()
-  const { selDatabaseName, setDatabaseName } = useInterfaceContext()
-  const { selDatabaseUrl, setDatabaseUrl } = useInterfaceContext()
+  const { selDatabaseType, setDatabaseType } = useAppContext()
+  const { selDatabaseName, setDatabaseName } = useAppContext()
+  const { selDatabaseUrl, setDatabaseUrl } = useAppContext()
 
   // Use Effect: On Component Load
   useEffect(() => {

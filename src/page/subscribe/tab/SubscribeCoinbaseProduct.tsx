@@ -16,7 +16,7 @@ import React from 'react'
 import { error, info } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
 // Context
-import { useInterfaceContext } from '../../../hooks/useAppContext'
+import { useAppContext } from '../../../hooks/useAppContext'
 // CSS Modules
 import Style from './SubscribeCoinbaseProduct.module.css'
 
@@ -24,7 +24,7 @@ import Style from './SubscribeCoinbaseProduct.module.css'
 
 const SubscribeCoinbaseProduct: React.FC = () => {
   // State Management
-  const { selCoinbaseProduct } = useInterfaceContext()
+  const { selCoinbaseProduct } = useAppContext()
 
   // Button Click: Handle Product Subscriptions
   const buttonClick_Subscribe = async () => {

@@ -15,8 +15,8 @@ import React, { useEffect, useState } from 'react'
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from '../../hooks/useAppContext'
-import { ProductsType } from '../../interface/CoinbaseContext'
+import { useAppContext } from '../../hooks/useAppContext'
+import { CoinbaseProductsInterface } from '../../interface/CoinbaseContext'
 // CSS Module
 import Style from './SubscribeSubList.module.css'
 
@@ -24,7 +24,7 @@ import Style from './SubscribeSubList.module.css'
 
 const SubscribeSubList: React.FC = () => {
   // State Management
-  const { setApi, setCoinbaseProduct } = useInterfaceContext()
+  const { setApi, setCoinbaseProduct } = useAppContext()
 
   // Store Management
   const [selectedApiListStore, setSelectedApiListStore] = useState<
@@ -75,7 +75,7 @@ const SubscribeSubList: React.FC = () => {
     // Logic: Reset Context
     if (resetApi.includes(selApi)) {
       setApi(selApi)
-      const product: ProductsType = { product_id: selSymbol }
+      const product: CoinbaseProductsInterface = { product_id: selSymbol }
       setCoinbaseProduct(product)
     }
   }

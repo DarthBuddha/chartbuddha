@@ -1,12 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Window - Splash
+//! # Component: Page ->Splash
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Splash window for the application
+//! * Splash page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: window/Splash.tsx
+//! #####
+//! * src/page/splash/Splash.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -20,35 +21,17 @@ import Style from './Splash.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
+
 const Splash: React.FC = () => {
-  // Interface
-  // const { setApiList } = useAppContext()
-
-  // useSetupReact()
-
-  // useEffect(() => {
-  // async function fetchApiList() {
-  // const apiList: Record<string, boolean> = await SetupReact()
-  // const activeApis = Object.keys(apiList).filter((key) => apiList[key])
-  // setApiList(activeApis)
-  // }
-  // fetchApiList()
-  // }, [setApiList])
-
   return (
-    <div className={Style.SplashComponent}>
-      <div className={Style.MenuBarContainer}>{/* <MenuBar /> */}</div>
-      <div className={Style.PageContainer}>
-        <div className={Style.SplashText}>
-          <h1>Welcome to ChartBuddha</h1>
-          <p>Setting up the application...</p>
-        </div>
+    <div className={Style.Splash}>
+      <div className={Style.Main_Container}>
+        <h1>Welcome to ChartBuddha</h1>
+        {/* <button onClick={stopAllStreams}>Stop All Streams</button> */}
       </div>
-      <div className={Style.StatusBarContainer}>{/* <StatusBar /> */}</div>
     </div>
   )
 }
 
 export default Splash
-
 /* ---------------------------------------------------------------------------------------------- */

@@ -15,8 +15,8 @@ import React, { useCallback, useEffect } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 import { error, info } from '@tauri-apps/plugin-log'
 // Context
-import { useInterfaceContext } from '../../../hooks/useAppContext'
-import { ProductsType } from '../../../interface/CoinbaseContext'
+import { useAppContext } from '../../../hooks/useAppContext'
+import { CoinbaseProductsInterface } from '../../../interface/CoinbaseContext'
 // CSS Modules
 import Style from './SubscribeCoinbaseProductList.module.css'
 
@@ -24,9 +24,9 @@ import Style from './SubscribeCoinbaseProductList.module.css'
 
 const SubscribeCoinbaseProductList: React.FC = () => {
   // State Management
-  const { selCoinbaseProductType, setCoinbaseProductType } = useInterfaceContext()
-  const { selCoinbaseProductList, setCoinbaseProductList } = useInterfaceContext()
-  const { setCoinbaseProduct } = useInterfaceContext()
+  const { selCoinbaseProductType, setCoinbaseProductType } = useAppContext()
+  const { selCoinbaseProductList, setCoinbaseProductList } = useAppContext()
+  const { setCoinbaseProduct } = useAppContext()
 
   // Button Click: Product Type
   const clickProductType = (productType: string) => {
@@ -42,7 +42,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
       const response: string = await invoke('coinbase_products_list', {
         productType: selCoinbaseProductType || 'spot',
       })
-      const parsedResponse: { products: ProductsType[] } = JSON.parse(response)
+      const parsedResponse: { products: CoinbaseProductsInterface[] } = JSON.parse(response)
       setCoinbaseProductList(parsedResponse.products)
     } catch (err) {
       if (err instanceof Error) {
@@ -61,7 +61,7 @@ const SubscribeCoinbaseProductList: React.FC = () => {
   }, [selCoinbaseProductType, loadProductList])
 
   // Button Click: Product
-  const clickProduct = (product: ProductsType) => {
+  const clickProduct = (product: CoinbaseProductsInterface) => {
     info!(JSON.stringify(product))
     setCoinbaseProduct(product)
   }

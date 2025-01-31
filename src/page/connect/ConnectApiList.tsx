@@ -12,7 +12,7 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../../hooks/useAppContext'
+import { useAppContext } from '../../hooks/useAppContext'
 // import { DataApiType } from 'app/context/broker/Coinbase.tsx'
 // CSS Module
 import Style from './Connect.module.css'
@@ -21,7 +21,7 @@ import Style from './Connect.module.css'
 
 const ConnectApiList: React.FC = () => {
   // Context: Interface
-  const { setConnectTab } = useInterfaceContext()
+  const { setConnectTab } = useAppContext()
 
   // Click: Connect Api List
   const handleClick = async (selTab: string) => {

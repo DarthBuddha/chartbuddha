@@ -15,7 +15,7 @@ import React, { useEffect, useState } from 'react'
 import { error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Interface
-import { useInterfaceContext } from '../../hooks/useAppContext'
+import { useAppContext } from '../../hooks/useAppContext'
 // CSS Modules
 import Style from './DashboardSubs.module.css'
 
@@ -23,7 +23,7 @@ import Style from './DashboardSubs.module.css'
 
 const DashboardSubs: React.FC = () => {
   // State Management
-  const { setApi, setProduct } = useInterfaceContext()
+  const { setApi, setProduct } = useAppContext()
 
   // Store Management
   const [selectedApiListStore, setSelectedApiListStore] = useState<

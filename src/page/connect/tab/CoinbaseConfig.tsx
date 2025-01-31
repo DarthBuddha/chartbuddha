@@ -17,7 +17,7 @@ import { invoke } from '@tauri-apps/api/core'
 import { info, error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useInterfaceContext } from '../../../hooks/useAppContext'
+import { useAppContext } from '../../../hooks/useAppContext'
 import { CoinbaseDataApiPermissionsInterface } from '../../../interface/CoinbaseContext'
 // Constants
 import { COINBASE_STORE } from '../../../constants'
@@ -28,9 +28,9 @@ import Style from './Config.module.css'
 
 const CoinbaseConfig: React.FC = () => {
   // State Management
-  const { selCoinbaseApiKey, setCoinbaseApiKey } = useInterfaceContext()
-  const { selCoinbaseApiKeySecret, setCoinbaseApiKeySecret } = useInterfaceContext()
-  const { selCoinbaseApiPermissions, setCoinbaseApiPermissions } = useInterfaceContext()
+  const { selCoinbaseApiKey, setCoinbaseApiKey } = useAppContext()
+  const { selCoinbaseApiKeySecret, setCoinbaseApiKeySecret } = useAppContext()
+  const { selCoinbaseApiPermissions, setCoinbaseApiPermissions } = useAppContext()
 
   // Use Effect: On Component Load
   useEffect(() => {

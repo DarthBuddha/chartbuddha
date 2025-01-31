@@ -13,15 +13,15 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../../hooks/useAppContext'
+import { useAppContext } from '../hooks/useAppContext'
 // CSS Module
-import Style from '../Page.module.css'
+import Style from './MenuBar.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const MenuBar: React.FC = () => {
   // State Management
-  const { setPage, setConnectTab } = useInterfaceContext()
+  const { setPage, setConnectTab } = useAppContext()
 
   // Handle Click
   const handleClick = async (selectedPage: string) => {

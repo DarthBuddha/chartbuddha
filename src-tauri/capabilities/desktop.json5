@@ -1,7 +1,7 @@
 {
   identifier: 'desktop',
   platforms: ['macOS', 'windows', 'linux'],
-  windows: ['main', 'splash'],
+  windows: ['main'],
   permissions: [
     'core:path:default',
     'core:event:default',

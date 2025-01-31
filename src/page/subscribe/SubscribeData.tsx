@@ -12,7 +12,7 @@
 // React
 import React from 'react'
 // Context
-import { useInterfaceContext } from '../../hooks/useAppContext'
+import { useAppContext } from '../../hooks/useAppContext'
 // Components
 import SubscribeCoinbase from './tab/SubscribeCoinbase'
 // CSS Module
@@ -22,7 +22,7 @@ import Style from './SubscribeData.module.css'
 
 const SubscribeData: React.FC = () => {
   // State Management
-  const { selApi } = useInterfaceContext()
+  const { selApi } = useAppContext()
 
   switch (selApi) {
     case 'coinbase':
