@@ -22,7 +22,7 @@ import { CoinbaseDataApiPermissionsInterface } from '../../../interface/Coinbase
 // Constants
 import { COINBASE_STORE } from '../../../constants'
 // CSS Module
-import Style from './Config.module.css'
+import Style from '../../../css/Config.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

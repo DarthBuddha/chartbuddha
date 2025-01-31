@@ -15,7 +15,7 @@ import React from 'react'
 import { useAppContext } from '../../hooks/useAppContext'
 // import { DataApiType } from 'app/context/broker/Coinbase.tsx'
 // CSS Module
-import Style from './Connect.module.css'
+import Style from '../../css/Connect.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

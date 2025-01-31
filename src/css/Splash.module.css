@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-/*! News.module.css !*/
+/*! Splash.module.css !*/
 /* ---------------------------------------------------------------------------------------------- */
 
 .Page {
@@ -9,17 +9,27 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* box-shadow: inset 0 0 0 5px rgb(0, 0, 0); */
+  box-shadow: inset 0 0 0 5px black;
 }
 
-/* ---------------------------------------------------------------------------------------------- */
+.Component_MenuBar,
+.Component_StatusBar {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(37, 40, 42);
+  box-shadow: inset 0 0 0 5px black;
+}
 
-.Main_Container {
-  height: 100%;
+.Frame {
+  height: calc(100% - 80px);
   width: 100%;
   text-align: center;
   align-content: center;
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+  align-items: center;
+  box-shadow: inset 0 0 0 5px black;
 }
 
 /* ---------------------------------------------------------------------------------------------- */

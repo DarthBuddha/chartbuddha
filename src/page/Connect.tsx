@@ -1,43 +1,44 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Page: Page Subscribe - Subscribe
+//! # Component: Page Connect - Connect
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Subscribe page for the application
+//! * The Connect page is responsible for Api and Database connection settings.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/subscribe/Subscribe.tsx
+//! ##### Path: page/connect/Connect.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 // Components
-import SubscribeApiList from './SubscribeApiList'
-import SubscribeData from './SubscribeData'
-import SubscribeSubList from './SubscribeSubList'
+import MenuBar from './components/MenuBar.tsx'
+import StatusBar from './components/StatusBar.tsx'
+import ConnectApiList from './connect/ConnectApiList.tsx'
+import ConnectTab from './connect/ConnectTab.tsx'
 // CSS Module
-import Style from './Subscribe.module.css'
+// import Style from '../css/Connect.module.css'
+import Style from 'css/Connect.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Subscribe: React.FC = () => {
+const Connect: React.FC = () => {
   return (
-    <div className={Style.Subscribe}>
-      <div className={Style.Main_Container}>
-        <div className={Style.Subscribe_Api_List}>
-          <SubscribeApiList />
+    <div className={Style.Page}>
+      <div className={Style.Component_MenuBar}><MenuBar /></div>
+      <div className={Style.Frame}>
+        <div className={Style.ConnectApiListContainer}>
+          <ConnectApiList />
         </div>
-        <div className={Style.Subscribe_Data}>
-          <SubscribeData />
-        </div>
-        <div className={Style.Subscribe_Sub_List}>
-          <SubscribeSubList />
+        <div className={Style.ConnectTabContainer}>
+          <ConnectTab />
         </div>
       </div>
+      <div className={Style.Component_StatusBar}><StatusBar /></div>
     </div>
   )
 }
 
-export default Subscribe
+export default Connect
 
 /* ---------------------------------------------------------------------------------------------- */

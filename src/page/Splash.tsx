@@ -1,32 +1,41 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha - Frontend
+//! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Window -> StatusBar
+//! # Component: Page ->Splash
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This component is responsible for rendering the application's status bar.
+//! * Splash page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path:
-//! * src/window/components/StatusBar.tsx
+//! #####
+//! * src/page/splash/Splash.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
+// Hooks
+import { useAppContext } from '../hooks/useAppContext'
+import { useSetupReact } from '../hooks/useSetupReact'
 // CSS Module
-import Style from './MenuBar.module.css'
+import Style from '../css/Splash.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const StatusBar: React.FC = () => {
+const Splash: React.FC = () => {
+  // Context: Interface
+  const { setPage } = useAppContext()
+  useSetupReact() // Call the hook here
+  setPage('Home')
+
+
   return (
-    <div className={Style.StatusBarComponent}>
-      <div className={Style.BarContainerLeft}></div>
-      <div className={Style.BarContainerCenter}></div>
-      <div className={Style.BarContainerRight}></div>
+    <div className={Style.Page}>
+      <div className={Style.Component_MenuBar}></div>
+      <div className={Style.Frame}><h1>Splash</h1></div>
+      <div className={Style.Component_StatusBar}></div>
     </div>
   )
 }
 
-export default StatusBar
+export default Splash
 
 /* ---------------------------------------------------------------------------------------------- */

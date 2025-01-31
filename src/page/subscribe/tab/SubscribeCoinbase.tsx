@@ -18,7 +18,7 @@ import { useAppContext } from '../../../hooks/useAppContext.ts'
 import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct.tsx'
 import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList.tsx'
 // CSS Modules
-import Style from './SubscribeCoinbase.module.css'
+import Style from '../../../css/SubscribeCoinbase.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

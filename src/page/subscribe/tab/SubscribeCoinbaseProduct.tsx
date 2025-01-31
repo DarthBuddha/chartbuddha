@@ -18,7 +18,7 @@ import { invoke } from '@tauri-apps/api/core'
 // Context
 import { useAppContext } from '../../../hooks/useAppContext'
 // CSS Modules
-import Style from './SubscribeCoinbaseProduct.module.css'
+import Style from '../../../css/SubscribeCoinbaseProduct.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

@@ -22,7 +22,7 @@ import { DatabaseType } from '../../../interface/ConfigContext'
 // Constants
 import { CONFIG_STORE } from '../../../constants'
 // CSS Module
-import Style from './Config.module.css'
+import Style from '../../../css/Config.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

@@ -18,7 +18,7 @@ import DatabaseConfig from './tab/DatabaseConfig'
 // import BinanceConfig from './tab/BinanceConfig'
 import CoinbaseConfig from './tab/CoinbaseConfig'
 // CSS Modules
-import Style from './Connect.module.css'
+import Style from '../../css/Connect.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

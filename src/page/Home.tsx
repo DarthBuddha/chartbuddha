@@ -1,32 +1,35 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Page: Page Analyze - Analyze
+//! # Page: Page Home - Home
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Analyze page for the application
+//! * Home page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/analyze/Analyze.tsx
+//! ##### Path:
+//! * src/page/home/Home.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
+// Components
+import MenuBar from './components/MenuBar.tsx'
+import StatusBar from './components/StatusBar.tsx'
 // CSS Module
-import Style from './Analyze.module.css'
+import Style from '../css/Home.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
-//
-const Analyze: React.FC = () => {
+
+const Home: React.FC = () => {
   return (
-    <div className={Style.Analyze}>
-      <div className={Style.Main_Container}>
-        <h1>Analyze</h1>
-        <p>Analyze page.</p>
-      </div>
+    <div className={Style.Page}>
+      <div className={Style.Component_MenuBar}><MenuBar /></div>
+      <div className={Style.Frame}><h1>Welcome to ChartBuddha</h1></div>
+      <div className={Style.Component_StatusBar}><StatusBar /></div>
     </div>
   )
 }
 
-export default Analyze
-//
+export default Home
+
 /* ---------------------------------------------------------------------------------------------- */

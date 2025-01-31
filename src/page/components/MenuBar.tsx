@@ -13,9 +13,9 @@
 // React
 import React from 'react'
 // Context
-import { useAppContext } from '../hooks/useAppContext'
+import { useAppContext } from '../../hooks/useAppContext'
 // CSS Module
-import Style from './MenuBar.module.css'
+import Style from '../../css/MenuBar.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -25,7 +25,7 @@ const MenuBar: React.FC = () => {
 
   // Handle Click
   const handleClick = async (selectedPage: string) => {
-    const resetPages = ['home', 'connect', 'subscribe', 'dashboard', 'analyze', 'news', 'profile']
+    const resetPages = ['Home', 'Connect', 'Subscribe', 'Dashboard', 'Analyze', 'News', 'Profile']
 
     // Logic: Reset Interface Context
     if (resetPages.includes(selectedPage)) {
@@ -40,33 +40,33 @@ const MenuBar: React.FC = () => {
   return (
     <div className={Style.MenuBarComponent}>
       <div className={Style.BarContainerLeft}>
-        <div className={Style.Button} onClick={() => handleClick('home')}>
+        <div className={Style.Button} onClick={() => handleClick('Home')}>
           Home
         </div>
       </div>
       <div className={Style.BarContainerCenter}>
-        <div className={Style.Button} onClick={() => handleClick('connect')}>
+        <div className={Style.Button} onClick={() => handleClick('Connect')}>
           Connect
         </div>
 
-        <div className={Style.Button} onClick={() => handleClick('subscribe')}>
+        <div className={Style.Button} onClick={() => handleClick('Subscribe')}>
           Subscribe
         </div>
 
-        <div className={Style.Button} onClick={() => handleClick('dashboard')}>
+        <div className={Style.Button} onClick={() => handleClick('Dashboard')}>
           Dashboard
         </div>
 
-        <div className={Style.Button} onClick={() => handleClick('analyze')}>
+        <div className={Style.Button} onClick={() => handleClick('Analyze')}>
           Analyze
         </div>
 
-        <div className={Style.Button} onClick={() => handleClick('news')}>
+        <div className={Style.Button} onClick={() => handleClick('News')}>
           News
         </div>
       </div>
       <div className={Style.BarContainerRight}>
-        <div className={Style.Button} onClick={() => handleClick('profile')}>
+        <div className={Style.Button} onClick={() => handleClick('Profile')}>
           Profile
         </div>
       </div>

@@ -11,17 +11,22 @@
 
 // React
 import React from 'react'
+// Components
+import MenuBar from './components/MenuBar.tsx'
+import StatusBar from './components/StatusBar.tsx'
 // CSS Module
-import Style from './News.module.css'
+import Style from '../css/News.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const News: React.FC = () => {
   return (
     <div className={Style.Page}>
-      <div className={Style.Main_Container}>
+      <div className={Style.Component_MenuBar}><MenuBar /></div>
+      <div className={Style.Frame}>
         <h1>Welcome to ChartBuddha</h1>
       </div>
+      <div className={Style.Component_StatusBar}><StatusBar /></div>
     </div>
   )
 }

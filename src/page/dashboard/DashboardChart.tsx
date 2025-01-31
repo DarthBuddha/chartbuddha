@@ -13,7 +13,7 @@
 import React from 'react'
 import Split from 'react-split'
 // CSS Modules
-import Styles from './DashboardChart.module.css'
+import Styles from '../../css/DashboardChart.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

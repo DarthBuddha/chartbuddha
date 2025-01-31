@@ -15,7 +15,7 @@ import Split from 'react-split'
 // Components
 import TimeSales from './trades/Trades.tsx'
 // CSS Modules
-import Styles from './DashboardTrades.module.css'
+import Styles from '../../css/DashboardTrades.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

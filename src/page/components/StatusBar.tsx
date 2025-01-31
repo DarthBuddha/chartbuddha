@@ -1,39 +1,32 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page Connect - Connect
+//! # Component: Window -> StatusBar
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * The Connect page is responsible for Api and Database connection settings.
+//! * This component is responsible for rendering the application's status bar.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/connect/Connect.tsx
+//! ##### Path:
+//! * src/window/components/StatusBar.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-// Components
-import ConnectApiList from './ConnectApiList.tsx'
-import ConnectTab from './ConnectTab.tsx'
 // CSS Module
-import Style from './Connect.module.css'
+import Style from '../../css/MenuBar.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Connect: React.FC = () => {
+const StatusBar: React.FC = () => {
   return (
-    <div className={Style.ConnectComponent}>
-      <div className={Style.PageContainer}>
-        <div className={Style.ConnectApiListContainer}>
-          <ConnectApiList />
-        </div>
-        <div className={Style.ConnectTabContainer}>
-          <ConnectTab />
-        </div>
-      </div>
+    <div className={Style.StatusBarComponent}>
+      <div className={Style.BarContainerLeft}></div>
+      <div className={Style.BarContainerCenter}></div>
+      <div className={Style.BarContainerRight}></div>
     </div>
   )
 }
 
-export default Connect
+export default StatusBar
 
 /* ---------------------------------------------------------------------------------------------- */

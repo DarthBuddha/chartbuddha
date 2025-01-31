@@ -81,7 +81,7 @@ pub async fn run() -> () {
     // Plugin: Store
     .plugin(tauri_plugin_store::Builder::default().build())
     // Plugin: Window State
-    // .plugin(tauri_plugin_window_state::Builder::new().build())
+    .plugin(tauri_plugin_window_state::Builder::new().build())
     // Setup: Application
     .setup(|app| {
       let app_handle = app.handle();

@@ -18,7 +18,7 @@ import { load } from '@tauri-apps/plugin-store'
 import { useAppContext } from '../../hooks/useAppContext'
 import { CoinbaseProductsInterface } from '../../interface/CoinbaseContext'
 // CSS Module
-import Style from './SubscribeSubList.module.css'
+import Style from '../../css/SubscribeSubList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

@@ -1,37 +1,37 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page ->Splash
+//! # Page: Page Analyze - Analyze
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Splash page for the application
+//! * Analyze page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! #####
-//! * src/page/splash/Splash.tsx
+//! ##### Path: page/analyze/Analyze.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-// import useEffect from 'react'
-// import { useSetupReact } from './hooks/useSetupReact'
-// import { SetupReact } from './common/SetupReact'
-import Style from './Splash.module.css'
-// Interface
-// import { useAppContext } from '../../hooks/useAppContext'
+// Components
+import MenuBar from './components/MenuBar.tsx'
+import StatusBar from './components/StatusBar.tsx'
+// CSS Module
+import Style from '../css/Analyze.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
-
-
-const Splash: React.FC = () => {
+//
+const Analyze: React.FC = () => {
   return (
-    <div className={Style.Splash}>
-      <div className={Style.Main_Container}>
-        <h1>Welcome to ChartBuddha</h1>
-        {/* <button onClick={stopAllStreams}>Stop All Streams</button> */}
+    <div className={Style.Page}>
+      <div className={Style.Component_MenuBar}><MenuBar /></div>
+      <div className={Style.Frame}>
+        <h1>Analyze</h1>
+        <p>Analyze page.</p>
       </div>
+      <div className={Style.Component_StatusBar}><StatusBar /></div>
     </div>
   )
 }
 
-export default Splash
+export default Analyze
+//
 /* ---------------------------------------------------------------------------------------------- */
