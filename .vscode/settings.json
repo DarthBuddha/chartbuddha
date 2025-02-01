@@ -11,21 +11,41 @@
     }
   ],
   "editor.showFoldingControls": "always",
-  "editor.formatOnSave": true,
   "editor.fontFamily": "IBM Plex Mono, SourceCodePro",
   "editor.fontLigatures": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode", // Use prettier as default formatter
-  "editor.formatOnPaste": true, // format code on paste
-  "editor.formatOnType": true, // format code as you type
   "files.trimTrailingWhitespace": true, // remove trailing white spaces from all lines
   "files.trimFinalNewlines": true, // Ensures there's only one blank line at the end of the file
-  "typescript.tsdk": "node_modules/typescript/lib",
+  // "typescript.tsdk": "node_modules/typescript/lib",
   "editor.quickSuggestions": {
     "other": true,
-    "comments": false,
+    "comments": true,
     "strings": true
   },
   "typescript.suggest.enabled": true,
   "javascript.suggest.enabled": true,
-  "editor.parameterHints.enabled": true
+  "editor.parameterHints.enabled": true,
+  "prettier.configPath": ".prettierrc",
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.formatOnType": false, // required
+  "editor.formatOnPaste": true, // optional
+  "editor.formatOnSave": true, // optional
+  "editor.formatOnSaveMode": "file", // required to format on save
+  "files.autoSave": "onFocusChange", // optional but recommended
+  "[rust]": {
+    "editor.defaultFormatter": "jinxdash.prettier-rust"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }, // set as "true" to run 'prettier' last not first
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
 }

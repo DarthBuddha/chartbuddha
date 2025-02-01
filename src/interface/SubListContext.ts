@@ -4,23 +4,20 @@
 //! # Interface: SubListContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the global state of the Sub List.
+//! * This context is responsible for managing the global state of the Sub List Context.
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Interface:
 //! * SubListInterface
-//! * SubscriptionInterface
+//! * * SubscriptionInterface
+//! * * * SubTypeInterface
+//! * * * ExchangeInterface
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/interface/SubListContext.ts
+//! * src/context/SubListContext
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext } from 'react'
-
-/* ---------------------------------------------------------------------------------------------- */
-
-export type SubTypeInterface = 'Broker' | 'Market' | 'News' | null
-export type ExchangeInterface = 'Equity' | 'Future' | 'Spot' | 'Perpetual' | null
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -34,6 +31,9 @@ export interface SubscriptionInterface {
   platform: string | null
   symbol: string | null
 }
+
+export type SubTypeInterface = 'Broker' | 'Market' | 'News' | null
+export type ExchangeInterface = 'Equity' | 'Future' | 'Spot' | 'Perpetual' | null
 
 /* ---------------------------------------------------------------------------------------------- */
 

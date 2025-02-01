@@ -1,41 +1,35 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Interface: ConfigContext
+//! # Interface: ApisContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the global state of the Config Context.
+//! * This context is responsible for managing the global state of the Apis Context.
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Interface:
-//! * ConfigInterface
+//! * ApisContext
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/interface/ConfigContext.ts
+//! * src/interface/ApisContext.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext } from 'react'
+// Interface
+import { BinanceInterface } from './apis/BinanceContext'
+import { CoinbaseInterface } from './apis/CoinbaseContext'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export type DatabaseType = 'MySql' | 'Postgres' | 'Sqlite' | null
-
-/* ---------------------------------------------------------------------------------------------- */
-
-export interface ConfigInterface {
-  app_init_run: boolean | null
-
-  app_update: string | null
-  app_version: string | null
-  database_type: DatabaseType
-  database_name: string | null
-  database_url: string | null
+export interface ApisInterface {
+  api_binance: BinanceInterface | null
+  api_coinbase: CoinbaseInterface | null
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const ConfigContext = createContext<ConfigInterface | null>(null)
+const ApisContext = createContext<ApisInterface | null>(null)
 
-export { ConfigContext }
+export { ApisContext }
 
 /* ---------------------------------------------------------------------------------------------- */

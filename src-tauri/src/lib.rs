@@ -12,7 +12,8 @@
 //! ##### Path:
 //! * src-tauri/src/lib.rs
 /* ---------------------------------------------------------------------------------------------- */
-
+// Our main entrypoint in a version 2 mobile compatible app
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
 // Library
 pub mod api;
 pub mod connector;
@@ -26,6 +27,7 @@ pub mod window;
 // Modules
 pub mod constants;
 pub mod setup;
+
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
@@ -46,8 +48,6 @@ use crate::api::coinbase::commands::coinbase_subscribe::coinbase_subscribe;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-// Our main entrypoint in a version 2 mobile compatible app
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
 #[tokio::main]
 pub async fn run() -> () {
   // Manage: Tauri Plugins

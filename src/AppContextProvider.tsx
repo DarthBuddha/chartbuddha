@@ -7,7 +7,7 @@
 //! * This context is responsible for managing the global state of the Interface.
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/interface/AppContextProvider.tsx
+//! * src/AppContextProvider.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -16,18 +16,23 @@ import React, { useState } from 'react'
 // import { info } from '@tauri-apps/plugin-log';
 // Interface
 import { AppContext } from './hooks/useAppContext'
-// Interface: Connect
-import { DatabaseType } from './app/contextConfig'
+// Interface:
+import { ConfigInterface } from 'interface/ConfigContext'
+import { ApiListInterface } from 'interface/InterfaceContext'
 // Interface: Binance
 // import { BinanceDataApiPermissionsInterface } from './apis/contextBinance'
 // import { BinanceProductsInterface } from './apis/contextBinance'
 // Interface: Coinbase
-import { CoinbaseDataApiPermissionsInterface } from './apis/contextCoinbase'
-import { CoinbaseProductsInterface } from './apis/contextCoinbase'
+import { CoinbaseDataApiPermissionsInterface } from 'interface/apis/CoinbaseContext'
+import { CoinbaseProductsInterface } from 'interface/apis/CoinbaseContext'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Context: Config
+  const [selConfig, setConfig] = useState<ConfigInterface | null>(null)
+  // Context: Api List
+  const [selApiList, setApiList] = useState<ApiListInterface | null>(null)
   // TODO: Clean up Context
   const [selApi, setApi] = useState<string | null>(null)
   const [selProduct, setProduct] = useState<string | null>(null)
@@ -35,12 +40,8 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [selPage, setPage] = useState<string | null>(null)
   const [selConnectTab, setConnectTab] = useState<string | null>(null)
   const [selSubscribeTab, setSubscribeTab] = useState<string | null>(null)
-  const [selApiList, setApiList] = useState<string[] | null>(null)
+  // const [selApiList, setApiList] = useState<string[] | null>(null)
   const [selSubList, setSubList] = useState<string | null>(null)
-  // Context: Database
-  const [selDatabaseType, setDatabaseType] = useState<DatabaseType | null>(null)
-  const [selDatabaseName, setDatabaseName] = useState<string | null>(null)
-  const [selDatabaseUrl, setDatabaseUrl] = useState<string | null>(null)
   // Context: Binance
   // const [selBinanceApiKey, setBinanceApiKey] = useState<string | null>(null)
   // const [selBinanceApiKeySecret, setBinanceApiKeySecret] = useState<string | null>(null)
@@ -84,12 +85,8 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         selSubList,
         setSubList,
         // Context: Database
-        selDatabaseType,
-        setDatabaseType,
-        selDatabaseName,
-        setDatabaseName,
-        selDatabaseUrl,
-        setDatabaseUrl,
+        selConfig,
+        setConfig,
         // API: Binance
         // selBinanceApiKey,
         // setBinanceApiKey,

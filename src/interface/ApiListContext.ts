@@ -4,10 +4,11 @@
 //! # Interface: ApiListContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the global state of the Api List.
+//! * This context is responsible for managing the global state of the Api List Context.
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Interface:
-//! * ApiListContext
+//! * ApiListInterface
+//! * * ApiListype
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
 //! * src/interface/ApiListContext.ts
@@ -19,10 +20,13 @@ import { createContext } from 'react'
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface ApiListInterface {
-  binance: boolean | null
-  coinbase: boolean | null
-  kraken: boolean | null
+  api_list: ApiListype[] | null
 }
+
+export type ApiListype =
+  | 'Binance'
+  | 'Coinbase'
+  | null
 
 /* ---------------------------------------------------------------------------------------------- */
 

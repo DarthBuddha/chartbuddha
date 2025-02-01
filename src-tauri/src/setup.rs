@@ -22,7 +22,7 @@ use log::error;
 use log::info;
 use serde_json::json;
 use serde_json::Value;
-use tokio::time::{sleep, Duration};
+use tokio::time::{ sleep, Duration };
 // Crates
 use crate::constants::STATE_STORE;
 use crate::db::db::setup_database;

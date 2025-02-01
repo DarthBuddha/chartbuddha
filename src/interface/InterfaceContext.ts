@@ -1,16 +1,18 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Interface: ConfigContext
+//! # Interface: InterfaceContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the global state of the Config Context.
+//! * This context is responsible for managing the global state of the Interface.
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Interface:
-//! * ConfigInterface
+//! * InterfaceInterface
+//! * * PageType
+//! * * TabType
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/interface/ConfigContext.ts
+//! * src/interface/InterfaceContext.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -18,24 +20,47 @@ import { createContext } from 'react'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export type DatabaseType = 'MySql' | 'Postgres' | 'Sqlite' | null
-
-/* ---------------------------------------------------------------------------------------------- */
-
-export interface ConfigInterface {
-  app_init_run: boolean | null
-
-  app_update: string | null
-  app_version: string | null
-  database_type: DatabaseType
-  database_name: string | null
-  database_url: string | null
+export interface InterfaceInterface {
+  page: PageType
+  page_tab: PageTabType
+  list_type_product: ListTypeProductType
+  product_broker: ProductBrokerType
+  product_symbol: string | null
 }
 
+export type PageType =
+  | 'Home'
+  | 'Connect'
+  | 'Subscribe'
+  | 'Dashboard'
+  | 'Analyze'
+  | 'News'
+  | 'Profile'
+  | null
+
+export type PageTabType =
+  | 'Database'
+  | 'Binance'
+  | 'Coinbase'
+  | null
+
+export type ListTypeProductType=
+  | 'Spot'
+  | 'Future'
+  | 'Perpetual'
+  | null
+
+export type ProductBrokerType =
+  | 'Binance'
+  | 'Coinbase'
+
+
+  | null
+
 /* ---------------------------------------------------------------------------------------------- */
 
-const ConfigContext = createContext<ConfigInterface | null>(null)
+const InterfaceContext = createContext<InterfaceInterface | null>(null)
 
-export { ConfigContext }
+export { InterfaceContext }
 
 /* ---------------------------------------------------------------------------------------------- */

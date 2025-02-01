@@ -22,10 +22,14 @@ import Style from '../css/Splash.module.css'
 
 const Splash: React.FC = () => {
   // Context: Interface
-  const { setPage } = useAppContext()
-  useSetupReact() // Call the hook here
-  setPage('Home')
+  const { setPage } = useAppContext();
+  const isSetupComplete = useSetupReact(); // Call the hook here
 
+  React.useEffect(() => {
+    if (isSetupComplete) {
+      setPage('Home');
+    }
+  }, [isSetupComplete, setPage]);
 
   return (
     <div className={Style.Page}>
@@ -33,9 +37,9 @@ const Splash: React.FC = () => {
       <div className={Style.Frame}><h1>Splash</h1></div>
       <div className={Style.Component_StatusBar}></div>
     </div>
-  )
-}
+  );
+};
 
-export default Splash
+export default Splash;
 
 /* ---------------------------------------------------------------------------------------------- */

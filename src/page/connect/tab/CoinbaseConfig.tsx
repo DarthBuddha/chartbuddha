@@ -18,7 +18,7 @@ import { info, error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
 import { useAppContext } from '../../../hooks/useAppContext'
-import { CoinbaseDataApiPermissionsInterface } from '../../../interface/CoinbaseContext'
+import { CoinbaseDataApiPermissionsInterface } from '../../../interface/apis/CoinbaseContext'
 // Constants
 import { COINBASE_STORE } from '../../../constants'
 // CSS Module
