@@ -12,20 +12,22 @@
 // React
 import React from 'react'
 // Components
-import MenuBar from './components/MenuBar.tsx'
-import StatusBar from './components/StatusBar.tsx'
-import SubscribeApiList from './subscribe/SubscribeApiList'
-import SubscribeData from './subscribe/SubscribeData'
-import SubscribeSubList from './subscribe/SubscribeSubList'
+import MenuBar from '../components/MenuBar.tsx'
+import StatusBar from '../components/StatusBar.tsx'
+import SubscribeApiList from './SubscribeApiList'
+import SubscribeData from './SubscribeData'
+import SubscribeSubList from './SubscribeSubList'
 // CSS Module
-import Style from '../css/Subscribe.module.css'
+import Style from './css/Subscribe.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const Subscribe: React.FC = () => {
   return (
     <div className={Style.Page}>
-      <div className={Style.Component_MenuBar}><MenuBar /></div>
+      <div className={Style.Component_MenuBar}>
+        <MenuBar />
+      </div>
       <div className={Style.Main_Container}>
         <div className={Style.Subscribe_Api_List}>
           <SubscribeApiList />
@@ -37,7 +39,9 @@ const Subscribe: React.FC = () => {
           <SubscribeSubList />
         </div>
       </div>
-      <div className={Style.Component_StatusBar}><StatusBar /></div>
+      <div className={Style.Component_StatusBar}>
+        <StatusBar />
+      </div>
     </div>
   )
 }

@@ -6,37 +6,40 @@
 //! #### Description:
 //! * ConnectTab component is responsible for rendering the selected tab content.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/connect/ConnectTab.tsx
+//! ##### Path:
+//! * src/page/connect/ConnectTab.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
+// Tauri
+import { info } from '@tauri-apps/plugin-log'
 // React
 import React from 'react'
 // Context
 import { useAppContext } from '../../hooks/useAppContext'
 // Components
 import DatabaseConfig from './tab/DatabaseConfig'
-// import BinanceConfig from './tab/BinanceConfig'
 import CoinbaseConfig from './tab/CoinbaseConfig'
-// CSS Modules
-import Style from '../../css/Connect.module.css'
+// CSS Module
+import Style from './css/Connect.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const ConnectTab: React.FC = () => {
   // Context: Interface
-  const { selConnectTab } = useAppContext()
+  const { selInterface } = useAppContext()
+  info('selInterface: ' + JSON.stringify(selInterface)) // Debugging line
+  // const { page_tab } = selInterface || {}
+  const page_tab = selInterface?.page_tab || 'Database-Tab' // Defaults to 'Database-Tab'
 
-  switch (selConnectTab) {
-    // case 'Binance':
-    //   return (
-    //     <div className={Style.ConfigTabContainer}>
-    //       <BinanceConfig />
-    //       {/* <div className={Style.Title}>Binance</div>
-    //       <div className={Style.Main_Container}>Binance API is not supported yet.</div> */}
-    //     </div>
-    //   )
+  switch (page_tab) {
+    case 'Database-Tab':
+      return (
+        <div className={Style.ConfigTabContainer}>
+          <DatabaseConfig />
+        </div>
+      )
 
-    case 'Coinbase':
+    case 'Coinbase-Tab':
       return (
         <div className={Style.ConfigTabContainer}>
           <CoinbaseConfig />

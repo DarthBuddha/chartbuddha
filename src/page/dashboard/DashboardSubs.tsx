@@ -17,7 +17,7 @@ import { load } from '@tauri-apps/plugin-store'
 // Interface
 import { useAppContext } from '../../hooks/useAppContext'
 // CSS Modules
-import Style from '../../css/DashboardSubs.module.css'
+import Style from './css/DashboardSubs.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

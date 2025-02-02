@@ -1,12 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
 //! # Component: Page Dashboard - DashboardTrades
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * Dashboard trades component for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/dashboard/DashboardTrades.tsx
+//! ##### Path:
+//! * src/page/dashboard/DashboardTrades.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -15,7 +16,7 @@ import Split from 'react-split'
 // Components
 import TimeSales from './trades/Trades.tsx'
 // CSS Modules
-import Styles from '../../css/DashboardTrades.module.css'
+import Styles from './css/DashboardTrades.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

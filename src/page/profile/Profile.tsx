@@ -1,35 +1,47 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Page: Page Home - Home
+//! # Page: Page Profile - Profile
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Home page for the application
+//! * Profile page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path:
-//! * src/page/home/Home.tsx
+//! ##### Path: page/profile/Profile.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-// Components
-import MenuBar from './components/MenuBar.tsx'
-import StatusBar from './components/StatusBar.tsx'
+// Components: MenuBar, StatusBar
+import MenuBar from '../components/MenuBar.tsx'
+import StatusBar from '../components/StatusBar.tsx'
 // CSS Module
-import Style from '../css/Home.module.css'
+import Style from './css/Profile.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
-
-const Home: React.FC = () => {
+//
+const Profile: React.FC = () => {
   return (
     <div className={Style.Page}>
-      <div className={Style.Component_MenuBar}><MenuBar /></div>
-      <div className={Style.Frame}><h1>Welcome to ChartBuddha</h1></div>
-      <div className={Style.Component_StatusBar}><StatusBar /></div>
+      <div className={Style.Component_MenuBar}>
+        <MenuBar />
+      </div>
+      <div className={Style.Frame}>
+        <h1>Profile</h1>
+        <p>User Profile page.</p>
+      </div>
+      <div className={Style.Component_StatusBar}>
+        <StatusBar />
+      </div>
     </div>
+    // <div className={Style.Profile}>
+    //   <div className={Style.Main_Container}>
+    //     <h1>Profile</h1>
+    //     <p>User Profile page.</p>
+    //   </div>
+    // </div>
   )
 }
 
-export default Home
-
+export default Profile
+//
 /* ---------------------------------------------------------------------------------------------- */

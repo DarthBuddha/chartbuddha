@@ -1,43 +1,53 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Page: Page Profile - Profile
+//! # Component: Page -> Splash
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Profile page for the application
+//! * Splash page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/profile/Profile.tsx
+//! #####
+//! * src/page/Splash.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-// Components: MenuBar, StatusBar
-import MenuBar from './components/MenuBar.tsx'
-import StatusBar from './components/StatusBar.tsx'
+// Hooks
+import { useAppContext } from 'hooks/useAppContext'
+import { useSetupReact } from 'hooks/useSetupReact'
 // CSS Module
-import Style from '../css/Profile.module.css'
+import Style from './css/Splash.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
-//
-const Profile: React.FC = () => {
+
+const Splash: React.FC = () => {
+  // Context: Interface
+  const { setInterface } = useAppContext()
+  const isSetupComplete = useSetupReact() // Call the hook here
+
+  React.useEffect(() => {
+    if (isSetupComplete) {
+      setInterface({
+        page: 'Home',
+        page_tab: null,
+        list_type_product: null,
+        product_broker: null,
+        product_symbol: null,
+      })
+    }
+  }, [isSetupComplete, setInterface])
+
   return (
     <div className={Style.Page}>
-      <div className={Style.Component_MenuBar}><MenuBar /></div>
+      <div className={Style.Component_MenuBar}></div>
       <div className={Style.Frame}>
-        <h1>Profile</h1>
-        <p>User Profile page.</p>
+        <h1>Splash</h1>
       </div>
-      <div className={Style.Component_StatusBar}><StatusBar /></div>
+      <div className={Style.Component_StatusBar}></div>
     </div>
-    // <div className={Style.Profile}>
-    //   <div className={Style.Main_Container}>
-    //     <h1>Profile</h1>
-    //     <p>User Profile page.</p>
-    //   </div>
-    // </div>
   )
 }
 
-export default Profile
-//
+export default Splash
+
 /* ---------------------------------------------------------------------------------------------- */

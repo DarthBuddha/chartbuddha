@@ -17,102 +17,61 @@ import React, { useState } from 'react'
 // Interface
 import { AppContext } from './hooks/useAppContext'
 // Interface:
+import { InterfaceInterface } from 'interface/InterfaceContext'
 import { ConfigInterface } from 'interface/ConfigContext'
-import { ApiListInterface } from 'interface/InterfaceContext'
-// Interface: Binance
-// import { BinanceDataApiPermissionsInterface } from './apis/contextBinance'
-// import { BinanceProductsInterface } from './apis/contextBinance'
-// Interface: Coinbase
-import { CoinbaseDataApiPermissionsInterface } from 'interface/apis/CoinbaseContext'
-import { CoinbaseProductsInterface } from 'interface/apis/CoinbaseContext'
+import { ApiListInterface } from 'interface/ApiListContext'
+import { SubListInterface } from 'interface/SubListContext'
+import { ApisInterface } from 'interface/ApisContext'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Context: Config
-  const [selConfig, setConfig] = useState<ConfigInterface | null>(null)
-  // Context: Api List
-  const [selApiList, setApiList] = useState<ApiListInterface | null>(null)
-  // TODO: Clean up Context
-  const [selApi, setApi] = useState<string | null>(null)
-  const [selProduct, setProduct] = useState<string | null>(null)
-  // Context: Interface
-  const [selPage, setPage] = useState<string | null>(null)
-  const [selConnectTab, setConnectTab] = useState<string | null>(null)
-  const [selSubscribeTab, setSubscribeTab] = useState<string | null>(null)
-  // const [selApiList, setApiList] = useState<string[] | null>(null)
-  const [selSubList, setSubList] = useState<string | null>(null)
-  // Context: Binance
-  // const [selBinanceApiKey, setBinanceApiKey] = useState<string | null>(null)
-  // const [selBinanceApiKeySecret, setBinanceApiKeySecret] = useState<string | null>(null)
-  // const [selBinanceApiPermissions, setBinanceApiPermissions] =
-  // useState<BinanceDataApiPermissionsInterface | null>(null)
-  // const [selBinanceProductType, setBinanceProductType] = useState<string | null>(null)
-  // const [selBinanceProductList, setBinanceProductList] =
-  // useState<BinanceProductsInterface[] | null>(null,)
-  // const [selBinanceProduct, setBinanceProduct] = useState<BinanceProductsInterface | null>(null)
-  // Context: Coinbase
-  const [selCoinbaseApiKey, setCoinbaseApiKey] = useState<string | null>(null)
-  const [selCoinbaseApiKeySecret, setCoinbaseApiKeySecret] = useState<string | null>(null)
-  const [selCoinbaseApiPermissions, setCoinbaseApiPermissions] =
-    useState<CoinbaseDataApiPermissionsInterface | null>(null)
-  const [selCoinbaseProductType, setCoinbaseProductType] = useState<string | null>(null)
-  const [selCoinbaseProductList, setCoinbaseProductList] = useState<
-    CoinbaseProductsInterface[] | null
-  >(null)
-  const [selCoinbaseProduct, setCoinbaseProduct] = useState<CoinbaseProductsInterface | null>(null)
-
-  // Log initial state
-  // info('Initial Coinbase API Permissions: ' + JSON.stringify(selCoinbaseApiPermissions));
+  // Context: Interface / Database
+  const [selInterface, setInterface] = useState<InterfaceInterface | null>({
+    page: null,
+    page_tab: null,
+    list_type_product: null,
+    product_broker: null,
+    product_symbol: null,
+  })
+  const [selConfig, setConfig] = useState<ConfigInterface | null>({
+    // app_init_run: null,
+    // app_update: null,
+    // app_version: null,
+    database_type: null,
+    database_name: null,
+    database_url: null,
+  })
+  // Context: Api and Sub List
+  const [selApiList, setApiList] = useState<ApiListInterface[] | null>([
+    {
+      api_list_values: null,
+    },
+  ])
+  const [selSubList, setSubList] = useState<SubListInterface[] | null>([
+    {
+      sub_list_values: null,
+    },
+  ])
+  // Context: Apis
+  const [selApis, setApis] = useState<ApisInterface | null>({
+    binance_api: null,
+    coinbase_api: null,
+  })
 
   return (
     <AppContext.Provider
       value={{
-        // TODO: Clean up Context
-        selApi,
-        setApi,
-        selProduct,
-        setProduct,
-        // Context: Interface
-        selPage,
-        setPage,
-        selConnectTab,
-        setConnectTab,
-        selSubscribeTab,
-        setSubscribeTab,
+        selInterface,
+        setInterface,
+        selConfig,
+        setConfig,
         selApiList,
         setApiList,
         selSubList,
         setSubList,
-        // Context: Database
-        selConfig,
-        setConfig,
-        // API: Binance
-        // selBinanceApiKey,
-        // setBinanceApiKey,
-        // selBinanceApiKeySecret,
-        // setBinanceApiKeySecret,
-        // selBinanceApiPermissions,
-        // setBinanceApiPermissions,
-        // selBinanceProductType,
-        // setBinanceProductType,
-        // selBinanceProductList,
-        // setBinanceProductList,
-        // selBinanceProduct,
-        // setBinanceProduct,
-        // API: Coinbase
-        selCoinbaseApiKey,
-        setCoinbaseApiKey,
-        selCoinbaseApiKeySecret,
-        setCoinbaseApiKeySecret,
-        selCoinbaseApiPermissions,
-        setCoinbaseApiPermissions,
-        selCoinbaseProductType,
-        setCoinbaseProductType,
-        selCoinbaseProductList,
-        setCoinbaseProductList,
-        selCoinbaseProduct,
-        setCoinbaseProduct,
+        selApis,
+        setApis,
       }}
     >
       {children}

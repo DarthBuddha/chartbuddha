@@ -12,11 +12,11 @@
 // React
 import React from 'react'
 // Context
-import { useAppContext } from '../../hooks/useAppContext'
+import { useAppContext } from 'hooks/useAppContext'
 // Components
 import SubscribeCoinbase from './tab/SubscribeCoinbase'
 // CSS Module
-import Style from '../../css/SubscribeData.module.css'
+import Style from './css/SubscribeData.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

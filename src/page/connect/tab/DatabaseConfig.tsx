@@ -17,20 +17,21 @@ import { invoke } from '@tauri-apps/api/core'
 import { info, error } from '@tauri-apps/plugin-log'
 import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useAppContext } from '../../../hooks/useAppContext'
-import { DatabaseType } from '../../../interface/ConfigContext'
+import { useAppContext } from 'hooks/useAppContext.ts'
+// import { ConfigInterface } from 'interface/ConfigContext.ts'
+import { DatabaseType } from 'interface/ConfigContext.ts'
 // Constants
-import { CONFIG_STORE } from '../../../constants'
+import { CONFIG_STORE } from 'constants.ts'
 // CSS Module
-import Style from '../../../css/Config.module.css'
+import Style from './css/Config.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const DatabaseConfig: React.FC = () => {
+  info('DatabaseConfig component is rendering') // Debugging line
+
   // Context: Interface
-  const { selDatabaseType, setDatabaseType } = useAppContext()
-  const { selDatabaseName, setDatabaseName } = useAppContext()
-  const { selDatabaseUrl, setDatabaseUrl } = useAppContext()
+  const { selConfig, setConfig } = useAppContext()
 
   // Use Effect: On Component Load
   useEffect(() => {
@@ -44,9 +45,11 @@ const DatabaseConfig: React.FC = () => {
         }>('Database')
 
         if (appConfig) {
-          setDatabaseType(appConfig.database_type as DatabaseType)
-          setDatabaseName(appConfig.database_name)
-          setDatabaseUrl(appConfig.database_url)
+          setConfig({
+            database_type: appConfig.database_type as DatabaseType,
+            database_name: appConfig.database_name,
+            database_url: appConfig.database_url,
+          })
         }
       } catch (err) {
         error(`Error loading Database Config: ${err instanceof Error ? err.message : String(err)}`)
@@ -55,16 +58,15 @@ const DatabaseConfig: React.FC = () => {
 
     info('useEffect: loadDatabaseConfig')
     loadDatabaseConfig()
-  }, [setDatabaseType, setDatabaseName, setDatabaseUrl])
+  }, [setConfig])
 
   // Click: Save Database
   const clickSaveDatabase = async () => {
-    // const store = await load(CONFIG_STORE)
     try {
       const saveResponse: string = await invoke('save_database_cmd', {
-        databaseType: selDatabaseType ?? '',
-        databaseName: selDatabaseName,
-        databaseUrl: selDatabaseUrl,
+        databaseType: selConfig?.database_type ?? '',
+        databaseName: selConfig?.database_name,
+        databaseUrl: selConfig?.database_url,
       })
 
       info(saveResponse)
@@ -91,7 +93,7 @@ const DatabaseConfig: React.FC = () => {
   /* -------------------------------------------------------------------------------------------- */
 
   return (
-    <div className={Style.ConnectConfigTab}>
+    <div className={Style.ConnectConfig}>
       <div className={Style.Header}>Connect Database</div>
 
       <div className={Style.BoxFrame_Top}>
@@ -122,8 +124,15 @@ const DatabaseConfig: React.FC = () => {
               <input
                 type="text"
                 id="database_name"
-                value={selDatabaseName ?? ''}
-                onChange={e => setDatabaseName(e.target.value)}
+                value={selConfig?.database_name ?? ''}
+                onChange={e =>
+                  setConfig({
+                    ...selConfig,
+                    database_name: e.target.value,
+                    database_type: selConfig?.database_type ?? 'MySql',
+                    database_url: selConfig?.database_url ?? '',
+                  })
+                }
                 className={Style.UserInput_Text}
                 autoComplete="off"
                 placeholder="Enter the name of your Database"
@@ -136,8 +145,15 @@ const DatabaseConfig: React.FC = () => {
               </label>
               <select
                 id="database_type"
-                value={selDatabaseType ?? ''}
-                onChange={e => setDatabaseType(e.target.value as DatabaseType)}
+                value={selConfig?.database_type ?? ''}
+                onChange={e =>
+                  setConfig({
+                    ...selConfig,
+                    database_type: e.target.value as DatabaseType,
+                    database_name: selConfig?.database_name ?? '',
+                    database_url: selConfig?.database_url ?? '',
+                  })
+                }
                 className={Style.UserInput_Dropdown}
               >
                 <option value="">Select Database Type</option>
@@ -156,8 +172,15 @@ const DatabaseConfig: React.FC = () => {
               <input
                 type="text"
                 id="database_url"
-                value={selDatabaseUrl ?? ''}
-                onChange={e => setDatabaseUrl(e.target.value)}
+                value={selConfig?.database_url ?? ''}
+                onChange={e =>
+                  setConfig({
+                    ...selConfig,
+                    database_url: e.target.value,
+                    database_name: selConfig?.database_name ?? '',
+                    database_type: selConfig?.database_type ?? 'MySql',
+                  })
+                }
                 className={Style.UserInput_Text}
                 autoComplete="off"
                 placeholder="Enter the URL of your Database"

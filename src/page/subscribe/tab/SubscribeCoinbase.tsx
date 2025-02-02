@@ -13,12 +13,12 @@
 import React from 'react'
 import Split from 'react-split'
 // Context
-import { useAppContext } from '../../../hooks/useAppContext.ts'
+import { useAppContext } from 'hooks/useAppContext.ts'
 // Components
 import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct.tsx'
 import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList.tsx'
 // CSS Modules
-import Style from '../../../css/SubscribeCoinbase.module.css'
+import Style from './css/SubscribeCoinbase.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

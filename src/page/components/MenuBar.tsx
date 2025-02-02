@@ -12,28 +12,32 @@
 
 // React
 import React from 'react'
-// Context
-import { useAppContext } from '../../hooks/useAppContext'
+// Hooks
+import { useAppContext } from 'hooks/useAppContext'
+// Interface
+import { PageType } from 'interface/InterfaceContext'
 // CSS Module
-import Style from '../../css/MenuBar.module.css'
+import Style from './css/MenuBar.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const MenuBar: React.FC = () => {
   // State Management
-  const { setPage, setConnectTab } = useAppContext()
+  const { setInterface } = useAppContext()
 
   // Handle Click
-  const handleClick = async (selectedPage: string) => {
-    const resetPages = ['Home', 'Connect', 'Subscribe', 'Dashboard', 'Analyze', 'News', 'Profile']
+  const handleClick = async (page: string) => {
+    const resetPage = ['Home', 'Connect', 'Subscribe', 'Dashboard', 'Analyze', 'News', 'Profile']
 
-    // Logic: Reset Interface Context
-    if (resetPages.includes(selectedPage)) {
-      // Global Context
-      setPage(selectedPage)
-      setConnectTab(null)
-      // Coinbase Context
-      // setCoinbaseProductType(null)
+    // Logic: Set Context
+    if (resetPage.includes(page)) {
+      setInterface({
+        page: page as PageType,
+        page_tab: null,
+        list_type_product: null,
+        product_broker: null,
+        product_symbol: null,
+      })
     }
   }
 

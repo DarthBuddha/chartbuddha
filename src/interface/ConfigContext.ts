@@ -23,10 +23,9 @@ export type DatabaseType = 'MySql' | 'Postgres' | 'Sqlite' | null
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface ConfigInterface {
-  app_init_run: boolean | null
-
-  app_update: string | null
-  app_version: string | null
+  // app_init_run: boolean | null
+  // app_update: string | null
+  // app_version: string | null
   database_type: DatabaseType
   database_name: string | null
   database_url: string | null

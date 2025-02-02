@@ -16,14 +16,14 @@
 // React
 import { createContext } from 'react'
 // Interface
-import { BinanceInterface } from './apis/BinanceContext'
-import { CoinbaseInterface } from './apis/CoinbaseContext'
+import { BrokerApiInterface } from 'interface/BrokerApiContext'
 
 /* ---------------------------------------------------------------------------------------------- */
 
+// Update ApisInterface to use BrokerApiInterface
 export interface ApisInterface {
-  api_binance: BinanceInterface | null
-  api_coinbase: CoinbaseInterface | null
+  binance_api: BrokerApiInterface | null
+  coinbase_api: BrokerApiInterface | null
 }
 
 /* ---------------------------------------------------------------------------------------------- */

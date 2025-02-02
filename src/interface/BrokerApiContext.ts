@@ -1,23 +1,23 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Interface: CoinbaseContext
+//! # Interface: BrokerApiContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the Coinbase API.
+//! * This context is responsible for managing the Broker Api Context.
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Interface:
-//! * CoinbaseInterface
-//! * DataApiInterface
-//! * DataApiPermissionsInterface
-//! * ProductsInterface
-//! * SessionInterface
-//! * MaintenanceInterface
-//! * FutureInterface
-//! * PerpetualInterface
+//! * BrokerApiInterface
+//! * BrokerDataApiInterface
+//! * BrokerDataApiPermissionsInterface
+//! * BrokerProductsInterface
+//! * BrokerSessionInterface
+//! * BrokerMaintenanceInterface
+//! * BrokerFutureInterface
+//! * BrokerPerpetualInterface
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/interface/CoinbaseContext.ts
+//! * src/interface/BrokerApiContext.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -25,20 +25,20 @@ import { createContext } from 'react'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface CoinbaseInterface {
-  coinbase_api: CoinbaseDataApiInterface
-  coinbase_products: CoinbaseProductsInterface[]
+export interface BrokerApiInterface {
+  broker_data_api: BrokerDataApiInterface | null
+  broker_products?: BrokerProductsInterface[] | null
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface CoinbaseDataApiInterface {
-  api_key: string
-  api_key_secret: string
-  api_permissions: CoinbaseDataApiPermissionsInterface
+export interface BrokerDataApiInterface {
+  api_key?: string
+  api_key_secret?: string
+  api_permissions?: BrokerDataApiPermissionsInterface
 }
 
-export interface CoinbaseDataApiPermissionsInterface {
+export interface BrokerDataApiPermissionsInterface {
   can_view: boolean
   can_trade: boolean
   can_transfer: boolean
@@ -48,7 +48,7 @@ export interface CoinbaseDataApiPermissionsInterface {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface CoinbaseProductsInterface {
+export interface BrokerProductsInterface {
   product_id: string
   price?: string
   price_percentage_change_24h?: string
@@ -74,7 +74,7 @@ export interface CoinbaseProductsInterface {
   product_type?: string
   quote_currency_id?: string
   base_currency_id?: string
-  fcm_trading_session_details?: CoinbaseSessionInterface // object
+  fcm_trading_session_details?: BrokerSessionInterface // object
   mid_market_price?: string
   alias?: string
   alias_to?: string
@@ -85,26 +85,26 @@ export interface CoinbaseProductsInterface {
   display_name?: string
   product_venue?: string
   approximate_quote_24h_volume?: string
-  future_product_details?: CoinbaseFutureInterface // object
+  future_product_details?: BrokerFutureInterface // object
   num_products?: number
 }
 
-export interface CoinbaseSessionInterface {
+export interface BrokerSessionInterface {
   is_session_open: boolean
   open_time: string // RFC3339 Timestamp
   close_time: string // RFC3339 Timestamp
   session_state: string
   after_hours_order_entry_disabled: boolean
   closed_reason: string
-  maintenance: CoinbaseMaintenanceInterface // Object
+  maintenance: BrokerMaintenanceInterface // Object
 }
 
-export interface CoinbaseMaintenanceInterface {
+export interface BrokerMaintenanceInterface {
   start_time: string // RFC3339 Timestamp
   end_time: string // RFC3339 Timestamp
 }
 
-export interface CoinbaseFutureInterface {
+export interface BrokerFutureInterface {
   venue: string
   contract_code: string
   contract_expiry: string // RFC3339 Timestamp
@@ -115,7 +115,7 @@ export interface CoinbaseFutureInterface {
   group_short_description: string
   risk_managed_by: string
   contract_expiry_type: string
-  perpetual_details: CoinbasePerpetualInterface // object
+  perpetual_details: BrokerPerpetualInterface // object
   contract_display_name: string
   time_to_expiry_ms: number
   non_crypto: boolean
@@ -123,7 +123,7 @@ export interface CoinbaseFutureInterface {
   twenty_four_by_seven: boolean
 }
 
-export interface CoinbasePerpetualInterface {
+export interface BrokerPerpetualInterface {
   open_interest: string
   funding_rate: string
   funding_time: string // RFC3339 Timestamp
@@ -134,8 +134,8 @@ export interface CoinbasePerpetualInterface {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const CoinbaseContext = createContext<CoinbaseInterface | null>(null)
+const BrokerApiContext = createContext<BrokerApiInterface | null>(null)
 
-export { CoinbaseContext }
+export { BrokerApiContext }
 
 /* ---------------------------------------------------------------------------------------------- */

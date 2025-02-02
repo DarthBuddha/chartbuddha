@@ -16,11 +16,11 @@ import React from 'react'
 // import { error } from '@tauri-apps/plugin-log'
 // import { load } from '@tauri-apps/plugin-store'
 // Context
-import { useAppContext } from '../../hooks/useAppContext'
+import { useAppContext } from 'hooks/useAppContext.ts'
 // Constants
 // import { API_LIST_STORE } from '../../constants'
 // CSS Module
-import Style from '../../css/SubscribeApiList.module.css'
+import Style from './css/SubscribeApiList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -45,7 +45,8 @@ const SubscribeApiList: React.FC = () => {
         {selApiList && selApiList.length === 0 ? (
           <div className={Style.Row}>Please configure your API keys on the Connect page.</div>
         ) : (
-          selApiList && selApiList.map(api => (
+          selApiList &&
+          selApiList.map(api => (
             <div key={api} className={Style.Row} onClick={() => handleClick(api)}>
               {api.charAt(0).toUpperCase() + api.slice(1)}
             </div>

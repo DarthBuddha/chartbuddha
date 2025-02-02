@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react'
 // Tauri
 import { listen } from '@tauri-apps/api/event'
 // CSS Modules
-import styles from '../../../css/Trades.module.css'
+import styles from './css/Trades.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

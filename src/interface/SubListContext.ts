@@ -22,7 +22,7 @@ import { createContext } from 'react'
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface SubListInterface {
-  subscriptions: SubscriptionInterface[] | null
+  sub_list_values: SubscriptionInterface[] | null
 }
 
 export interface SubscriptionInterface {

@@ -13,27 +13,28 @@
 // React
 import React from 'react'
 // Components: Pages
-import Splash from './page/Splash.tsx'
-import Home from './page/Home.tsx'
-import Connect from './page/Connect.tsx'
-import Subscribe from './page/Subscribe.tsx'
-import Dashboard from './page/Dashboard.tsx'
-import Analyze from './page/Analyze.tsx'
-import News from './page/News.tsx'
-import Profile from './page/Profile.tsx'
-// Context
+import Splash from 'page/splash/Splash.tsx'
+import Home from 'page/home/Home.tsx'
+import Connect from 'page/connect/Connect.tsx'
+import Subscribe from 'page/subscribe/Subscribe.tsx'
+import Dashboard from 'page/dashboard/Dashboard.tsx'
+import Analyze from 'page/analyze/Analyze.tsx'
+import News from 'page/news/News.tsx'
+import Profile from 'page/profile/Profile.tsx'
+// Hooks
 import { useAppContext } from './hooks/useAppContext.ts'
 // CSS Module
-import Style from './css/App.module.css'
+import Style from 'App.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const App: React.FC = () => {
-  // State Management
-  const { selPage } = useAppContext()
+  // Context: Interface
+  const { selInterface } = useAppContext()
+  const { page } = selInterface || {}
 
   const renderPage = () => {
-    switch (selPage) {
+    switch (page) {
       case 'Analyze':
         return <Analyze />
       case 'Dashboard':
@@ -53,11 +54,7 @@ const App: React.FC = () => {
     }
   }
 
-  return (
-    <div className={Style.App}>
-      {renderPage()}
-    </div>
-  )
+  return <div className={Style.App}>{renderPage()}</div>
 }
 
 export default App

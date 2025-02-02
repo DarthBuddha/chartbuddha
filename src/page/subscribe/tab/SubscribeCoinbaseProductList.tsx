@@ -15,10 +15,10 @@ import React, { useCallback, useEffect } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 import { error, info } from '@tauri-apps/plugin-log'
 // Context
-import { useAppContext } from '../../../hooks/useAppContext'
-import { CoinbaseProductsInterface } from '../../../interface/apis/CoinbaseContext'
+import { useAppContext } from 'hooks/useAppContext'
+import { CoinbaseProductsInterface } from 'interface/apis/CoinbaseApiContext'
 // CSS Modules
-import Style from '../../../css/SubscribeCoinbaseProductList.module.css'
+import Style from './css/SubscribeCoinbaseProductList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

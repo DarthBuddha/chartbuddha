@@ -21,10 +21,10 @@ import { createContext } from 'react'
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface InterfaceInterface {
-  page: PageType
-  page_tab: PageTabType
-  list_type_product: ListTypeProductType
-  product_broker: ProductBrokerType
+  page: PageType | null
+  page_tab: PageTabType | null
+  list_type_product: ListTypeProductType | null
+  product_broker: ProductBrokerType | null
   product_symbol: string | null
 }
 
@@ -38,24 +38,11 @@ export type PageType =
   | 'Profile'
   | null
 
-export type PageTabType =
-  | 'Database'
-  | 'Binance'
-  | 'Coinbase'
-  | null
+export type PageTabType = 'Database-Tab' | 'Binance-Tab' | 'Coinbase-Tab' | null
 
-export type ListTypeProductType=
-  | 'Spot'
-  | 'Future'
-  | 'Perpetual'
-  | null
+export type ListTypeProductType = 'Spot' | 'Future' | 'Perpetual' | null
 
-export type ProductBrokerType =
-  | 'Binance'
-  | 'Coinbase'
-
-
-  | null
+export type ProductBrokerType = 'Binance' | 'Coinbase' | null
 
 /* ---------------------------------------------------------------------------------------------- */
 

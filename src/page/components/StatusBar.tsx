@@ -13,7 +13,7 @@
 // React
 import React from 'react'
 // CSS Module
-import Style from '../../css/MenuBar.module.css'
+import Style from './css/MenuBar.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

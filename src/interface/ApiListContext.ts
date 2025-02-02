@@ -8,7 +8,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Interface:
 //! * ApiListInterface
-//! * * ApiListype
+//! * * ApiLisType
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
 //! * src/interface/ApiListContext.ts
@@ -20,13 +20,10 @@ import { createContext } from 'react'
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface ApiListInterface {
-  api_list: ApiListype[] | null
+  api_list_values: ApiLisType[] | null
 }
 
-export type ApiListype =
-  | 'Binance'
-  | 'Coinbase'
-  | null
+export type ApiLisType = 'Binance' | 'Coinbase' | null
 
 /* ---------------------------------------------------------------------------------------------- */
 

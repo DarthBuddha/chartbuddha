@@ -1,44 +1,40 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page Connect - Connect
+//! # Page: Page News - News
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * The Connect page is responsible for Api and Database connection settings.
+//! * News page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/connect/Connect.tsx
+//! ##### Path: page/news/News.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 // Components
-import MenuBar from './components/MenuBar.tsx'
-import StatusBar from './components/StatusBar.tsx'
-import ConnectApiList from './connect/ConnectApiList.tsx'
-import ConnectTab from './connect/ConnectTab.tsx'
+import MenuBar from '../components/MenuBar.tsx'
+import StatusBar from '../components/StatusBar.tsx'
 // CSS Module
-// import Style from '../css/Connect.module.css'
-import Style from 'css/Connect.module.css'
+import Style from './css/News.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Connect: React.FC = () => {
+const News: React.FC = () => {
   return (
     <div className={Style.Page}>
-      <div className={Style.Component_MenuBar}><MenuBar /></div>
-      <div className={Style.Frame}>
-        <div className={Style.ConnectApiListContainer}>
-          <ConnectApiList />
-        </div>
-        <div className={Style.ConnectTabContainer}>
-          <ConnectTab />
-        </div>
+      <div className={Style.Component_MenuBar}>
+        <MenuBar />
       </div>
-      <div className={Style.Component_StatusBar}><StatusBar /></div>
+      <div className={Style.Frame}>
+        <h1>Welcome to ChartBuddha</h1>
+      </div>
+      <div className={Style.Component_StatusBar}>
+        <StatusBar />
+      </div>
     </div>
   )
 }
 
-export default Connect
+export default News
 
 /* ---------------------------------------------------------------------------------------------- */

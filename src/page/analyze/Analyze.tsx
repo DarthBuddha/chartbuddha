@@ -1,45 +1,41 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page ->Splash
+//! # Page: Page Analyze - Analyze
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * Splash page for the application
+//! * Analyze page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! #####
-//! * src/page/splash/Splash.tsx
+//! ##### Path: page/analyze/Analyze.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
-// Hooks
-import { useAppContext } from '../hooks/useAppContext'
-import { useSetupReact } from '../hooks/useSetupReact'
+// Components
+import MenuBar from '../components/MenuBar.tsx'
+import StatusBar from '../components/StatusBar.tsx'
 // CSS Module
-import Style from '../css/Splash.module.css'
+import Style from './css/Analyze.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
-
-const Splash: React.FC = () => {
-  // Context: Interface
-  const { setPage } = useAppContext();
-  const isSetupComplete = useSetupReact(); // Call the hook here
-
-  React.useEffect(() => {
-    if (isSetupComplete) {
-      setPage('Home');
-    }
-  }, [isSetupComplete, setPage]);
-
+//
+const Analyze: React.FC = () => {
   return (
     <div className={Style.Page}>
-      <div className={Style.Component_MenuBar}></div>
-      <div className={Style.Frame}><h1>Splash</h1></div>
-      <div className={Style.Component_StatusBar}></div>
+      <div className={Style.Component_MenuBar}>
+        <MenuBar />
+      </div>
+      <div className={Style.Frame}>
+        <h1>Analyze</h1>
+        <p>Analyze page.</p>
+      </div>
+      <div className={Style.Component_StatusBar}>
+        <StatusBar />
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Splash;
-
+export default Analyze
+//
 /* ---------------------------------------------------------------------------------------------- */

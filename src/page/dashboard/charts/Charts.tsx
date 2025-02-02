@@ -10,7 +10,7 @@ import Split from 'react-split'
 // Components
 // import ChartsChart from './ChartsChart'
 // CSS Modules
-import Style from '../../../css/Charts.module.css'
+import Style from './css/Charts.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
