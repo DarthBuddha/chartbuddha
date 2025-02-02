@@ -1,13 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page Connect - ConnectTab
+//! # Component: Page Connect -> Connect_Tab
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * ConnectTab component is responsible for rendering the selected tab content.
+//! * Connect_Tab component is responsible for rendering the selected tab content.
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/page/connect/ConnectTab.tsx
+//! * page/connect/Connect_Tab.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
@@ -20,11 +20,11 @@ import { useAppContext } from '../../hooks/useAppContext'
 import DatabaseConfig from './tab/DatabaseConfig'
 import CoinbaseConfig from './tab/CoinbaseConfig'
 // CSS Module
-import Style from './css/Connect.module.css'
+// import Style from './css/Connect_Tab.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const ConnectTab: React.FC = () => {
+const Connect_Tab: React.FC = () => {
   // Context: Interface
   const { selInterface } = useAppContext()
   info('selInterface: ' + JSON.stringify(selInterface)) // Debugging line
@@ -34,27 +34,27 @@ const ConnectTab: React.FC = () => {
   switch (page_tab) {
     case 'Database-Tab':
       return (
-        <div className={Style.ConfigTabContainer}>
-          <DatabaseConfig />
-        </div>
+        // <div className={Style.ConfigTabContainer}>
+        <DatabaseConfig />
+        // </div>
       )
 
     case 'Coinbase-Tab':
       return (
-        <div className={Style.ConfigTabContainer}>
-          <CoinbaseConfig />
-        </div>
+        // <div className={Style.ConfigTabContainer}>
+        <CoinbaseConfig />
+        // </div>
       )
 
     default:
       return (
-        <div className={Style.ConfigTabContainer}>
-          <DatabaseConfig />
-        </div>
+        // <div className={Style.ConfigTabContainer}>
+        <DatabaseConfig />
+        // </div>
       )
   }
 }
 
-export default ConnectTab
+export default Connect_Tab
 
 /* ---------------------------------------------------------------------------------------------- */

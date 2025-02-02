@@ -1,45 +1,47 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Page: Page Subscribe - Subscribe
+//! # Page: Page Subscribe -> Subscribe
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * Subscribe page for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/subscribe/Subscribe.tsx
+//! ##### Path:
+//! * page/subscribe/Subscribe.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 // Components
-import MenuBar from '../components/MenuBar.tsx'
-import StatusBar from '../components/StatusBar.tsx'
-import SubscribeApiList from './SubscribeApiList'
-import SubscribeData from './SubscribeData'
-import SubscribeSubList from './SubscribeSubList'
+import MenuBar from 'components/MenuBar.tsx'
+import Subscribe_ApiList from './Subscribe_ApiList'
+import Subscribe_Tab from './Subscribe_Tab'
+import Subscribe_SubList from './Subscribe_SubList'
+import StatusBar from 'components/StatusBar.tsx'
 // CSS Module
+import Style_App from 'css/App.module.css'
 import Style from './css/Subscribe.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const Subscribe: React.FC = () => {
   return (
-    <div className={Style.Page}>
-      <div className={Style.Component_MenuBar}>
+    <div className={Style_App.Page}>
+      <div className={Style_App.MenuBar}>
         <MenuBar />
       </div>
-      <div className={Style.Main_Container}>
-        <div className={Style.Subscribe_Api_List}>
-          <SubscribeApiList />
+      <div className={Style.Frame}>
+        <div className={Style.Frame_ApiList}>
+          <Subscribe_ApiList />
         </div>
-        <div className={Style.Subscribe_Data}>
-          <SubscribeData />
+        <div className={Style.Frame_Tab}>
+          <Subscribe_Tab />
         </div>
-        <div className={Style.Subscribe_Sub_List}>
-          <SubscribeSubList />
+        <div className={Style.Frame_SubList}>
+          <Subscribe_SubList />
         </div>
       </div>
-      <div className={Style.Component_StatusBar}>
+      <div className={Style_App.StatusBar}>
         <StatusBar />
       </div>
     </div>

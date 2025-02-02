@@ -1,0 +1,38 @@
+/* ---------------------------------------------------------------------------------------------- */
+/*! Home.module.css !*/
+/* ---------------------------------------------------------------------------------------< Tab > */
+
+.Tab_Home {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+/* -------------------------------------------------------------------------------------< Frame > */
+
+.Frame {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+/* -----------------------------------------------------------------------------------< Section > */
+
+.Section {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  align-content: center;
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+/* ---------------------------------------------------------------------------------------------- */

@@ -22,8 +22,9 @@ import { useAppContext } from 'hooks/useAppContext.ts'
 import { DatabaseType } from 'interface/ConfigContext.ts'
 // Constants
 import { CONFIG_STORE } from 'constants.ts'
-// CSS Module
-import Style from './css/Config.module.css'
+// CSS Modules
+import Style_App from 'css/App.module.css'
+import Style from '../css/Connect_Tab.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -93,12 +94,12 @@ const DatabaseConfig: React.FC = () => {
   /* -------------------------------------------------------------------------------------------- */
 
   return (
-    <div className={Style.ConnectConfig}>
-      <div className={Style.Header}>Connect Database</div>
+    <div className={Style.Tab_Config}>
+      <div className={Style_App.Header}>Connect Database</div>
 
-      <div className={Style.BoxFrame_Top}>
-        <div className={Style.BoxFrame_TopLeft}>
-          <div className={Style.Header}>Configuration</div>
+      <div className={Style.Frame_Top}>
+        <div className={Style.Frame_TopLeft}>
+          <div className={Style_App.Header}>Configuration</div>
           <div className={Style.Config_Section}>
             <div className={Style.ConfigText}>
               <p>ChartBuddha requires a database to store your data.</p>
@@ -107,18 +108,18 @@ const DatabaseConfig: React.FC = () => {
           </div>
         </div>
 
-        <div className={Style.BoxFrame_TopRight}>
-          <div className={Style.Header}>Database Info</div>
+        <div className={Style.Frame_TopRight}>
+          <div className={Style_App.Header}>Database Info</div>
           <div className={Style.InfoSection}></div>
         </div>
       </div>
-      <div className={Style.BoxFrame_Bottom}>
-        <div className={Style.Header}>Database Configuration</div>
+      <div className={Style.Frame_Bottom}>
+        <div className={Style_App.Header}>Database Configuration</div>
 
         <div className={Style.Input_Section}>
           <div className={Style.Input_Section_Row}>
             <div className={Style.Input_Section_Cell}>
-              <label className={Style.Header} htmlFor="database_name">
+              <label className={Style_App.Header} htmlFor="database_name">
                 Name
               </label>
               <input
@@ -140,7 +141,7 @@ const DatabaseConfig: React.FC = () => {
             </div>
 
             <div className={Style.Input_Section_Cell}>
-              <label className={Style.Header} htmlFor="database_type">
+              <label className={Style_App.Header} htmlFor="database_type">
                 Type
               </label>
               <select
@@ -166,7 +167,7 @@ const DatabaseConfig: React.FC = () => {
 
           <div className={Style.Input_Section_Row}>
             <div className={Style.Input_Section_Cell}>
-              <label className={Style.Header} htmlFor="database_url">
+              <label className={Style_App.Header} htmlFor="database_url">
                 Url
               </label>
               <input
@@ -189,7 +190,7 @@ const DatabaseConfig: React.FC = () => {
           </div>
         </div>
 
-        <div className={Style.Box_Button}>
+        <div className={Style.Section_Button}>
           <button type="button" onClick={clickSaveDatabase} className={Style.Button_Save}>
             Save Database Configuration
           </button>

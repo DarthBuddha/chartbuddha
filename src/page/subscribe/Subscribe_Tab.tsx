@@ -6,7 +6,8 @@
 //! #### Description:
 //! * Subscribe Data component for the application
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/subscribe/SubscribeData.tsx
+//! ##### Path:
+//! * src/page/subscribe/Subscribe_Tab.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -20,7 +21,7 @@ import Style from './css/SubscribeData.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const SubscribeData: React.FC = () => {
+const Subscribe_Tab: React.FC = () => {
   // State Management
   const { selApi } = useAppContext()
 
@@ -48,6 +49,6 @@ const SubscribeData: React.FC = () => {
   }
 }
 
-export default SubscribeData
+export default Subscribe_Tab
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -24,7 +24,7 @@ import Profile from 'page/profile/Profile.tsx'
 // Hooks
 import { useAppContext } from './hooks/useAppContext.ts'
 // CSS Module
-import Style from 'App.module.css'
+import Style from 'css/App.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 

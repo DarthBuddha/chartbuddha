@@ -24,7 +24,7 @@ import Style from './css/SubscribeApiList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const SubscribeApiList: React.FC = () => {
+const Subscribe_ApiList: React.FC = () => {
   // Context: Interface
   const { selApiList, setSubscribeTab } = useAppContext()
 
@@ -57,6 +57,6 @@ const SubscribeApiList: React.FC = () => {
   )
 }
 
-export default SubscribeApiList
+export default Subscribe_ApiList
 
 /* ---------------------------------------------------------------------------------------------- */

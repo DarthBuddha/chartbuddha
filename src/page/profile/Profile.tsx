@@ -11,34 +11,29 @@
 
 // React
 import React from 'react'
-// Components: MenuBar, StatusBar
-import MenuBar from '../components/MenuBar.tsx'
-import StatusBar from '../components/StatusBar.tsx'
+// Components:
+import MenuBar from 'components/MenuBar.tsx'
+import StatusBar from 'components/StatusBar.tsx'
 // CSS Module
+import Style_App from 'css/App.module.css'
 import Style from './css/Profile.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 //
 const Profile: React.FC = () => {
   return (
-    <div className={Style.Page}>
-      <div className={Style.Component_MenuBar}>
+    <div className={Style_App.Page}>
+      <div className={Style_App.MenuBar}>
         <MenuBar />
       </div>
       <div className={Style.Frame}>
         <h1>Profile</h1>
         <p>User Profile page.</p>
       </div>
-      <div className={Style.Component_StatusBar}>
+      <div className={Style_App.StatusBar}>
         <StatusBar />
       </div>
     </div>
-    // <div className={Style.Profile}>
-    //   <div className={Style.Main_Container}>
-    //     <h1>Profile</h1>
-    //     <p>User Profile page.</p>
-    //   </div>
-    // </div>
   )
 }
 

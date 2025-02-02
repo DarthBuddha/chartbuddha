@@ -23,8 +23,9 @@ import { BrokerApiInterface } from 'interface/BrokerApiContext.ts'
 import { BrokerDataApiPermissionsInterface } from 'interface/BrokerApiContext.ts'
 // Constants
 import { COINBASE_STORE } from 'constants.ts'
-// CSS Module
-import Style from './css/Config.module.css'
+// CSS Modules
+import Style_App from 'css/App.module.css'
+import Style from '../css/Connect_Tab.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -150,12 +151,12 @@ const CoinbaseConfig: React.FC = () => {
   /* -------------------------------------------------------------------------------------------- */
 
   return (
-    <div className={Style.ConnectConfigTab}>
-      <div className={Style.Header}>Connect Coinbase API</div>
+    <div className={Style.Tab_Config}>
+      <div className={Style_App.Header}>Connect Coinbase API</div>
 
-      <div className={Style.BoxFrame_Top}>
-        <div className={Style.BoxFrame_TopLeft}>
-          <div className={Style.Header}>Configuration</div>
+      <div className={Style.Frame_Top}>
+        <div className={Style.Frame_TopLeft}>
+          <div className={Style_App.Header}>Configuration</div>
           <div className={Style.Config_Section}>
             <div className={Style.ConfigText}>
               Coinbase requires your API key and secret to connect. You can generate these from the
@@ -164,8 +165,8 @@ const CoinbaseConfig: React.FC = () => {
           </div>
         </div>
 
-        <div className={Style.BoxFrame_TopRight}>
-          <div className={Style.Header}>Api Permissions</div>
+        <div className={Style.Frame_TopRight}>
+          <div className={Style_App.Header}>Api Permissions</div>
           <div className={Style.Info_Section}>
             <div className={Style.Info_Section_Row}>
               <div className={Style.Info_Section_Cell_Key}>Can View:</div>
@@ -216,8 +217,8 @@ const CoinbaseConfig: React.FC = () => {
         </div>
       </div>
 
-      <div className={Style.BoxFrame_Bottom}>
-        <div className={Style.Header}>Coinbase Configuration</div>
+      <div className={Style.Frame_Bottom}>
+        <div className={Style_App.Header}>Coinbase Configuration</div>
         <div className={Style.Input_Section}>
           <div className={Style.Input_Section_Row}>
             <div className={Style.Input_Section_Cell}>
@@ -246,7 +247,7 @@ const CoinbaseConfig: React.FC = () => {
             </div>
           </div>
 
-          <div className={Style.Box_Button}>
+          <div className={Style.Section_Button}>
             <button type="button" onClick={clickApiSave} className={Style.Button_Save}>
               Save and Test Configuration
             </button>

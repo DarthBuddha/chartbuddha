@@ -1,0 +1,48 @@
+/* ---------------------------------------------------------------------------------------------- */
+/*! # CSS Module: App.module.css !*/
+/* ---------------------------------------------------------------------------------------------- */
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.Page {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 5px black;
+}
+
+.MenuBar,
+.StatusBar {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(37, 40, 42);
+  box-shadow: inset 0 0 0 5px black;
+}
+
+/* ------------------------------------------------------------------------------------< Global > */
+
+.Header {
+  height: 40px;
+  width: 100%;
+  font-size: 1.25rem;
+  text-align: center;
+  align-content: center;
+  background-color: rgb(37, 40, 42);
+  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+}
+
+/* ---------------------------------------------------------------------------------------------- */

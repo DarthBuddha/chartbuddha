@@ -1,51 +1,35 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page Connect -> Connect
+//! # Page: Page Home -> Home_Tab
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * The Connect page is responsible for Api and Database connection settings.
+//! * Home Tab for the application
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * page/connect/Connect.tsx
+//! * page/home/Home_Tab.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import React from 'react'
 // Components
-import MenuBar from 'components/MenuBar.tsx'
-import Connect_ApiList from './Connect_ApiList.tsx'
-import Connect_Tab from './Connect_Tab.tsx'
-import StatusBar from 'components/StatusBar.tsx'
 // CSS Module
-import Style_App from 'css/App.module.css'
-import Style from './css/Connect.module.css'
+import Style from './css/Home_Tab.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const Connect: React.FC = () => {
+const Home_Tab: React.FC = () => {
   return (
-    <div className={Style_App.Page}>
-      <div className={Style_App.MenuBar}>
-        <MenuBar />
-      </div>
-
-      <div className={Style.Frame_Container}>
-        <div className={Style.Frame_ApiList}>
-          <Connect_ApiList />
+    <div className={Style.Tab_Home}>
+      <div className={Style.Frame}>
+        <div className={Style.Section}>
+          <h1>Welcome to ChartBuddha</h1>
         </div>
-        <div className={Style.Frame_ConnectTab}>
-          <Connect_Tab />
-        </div>
-      </div>
-
-      <div className={Style_App.StatusBar}>
-        <StatusBar />
       </div>
     </div>
   )
 }
 
-export default Connect
+export default Home_Tab
 
 /* ---------------------------------------------------------------------------------------------- */

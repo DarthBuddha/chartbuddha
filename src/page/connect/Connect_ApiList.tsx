@@ -1,12 +1,13 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Component: Page Connect - ConnectApiList
+//! # Component: Page Connect -> Connect_ApiList
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * ConnectApiList component is responsible for rendering the list of available apis.
+//! * Connect_ApiList component is responsible for rendering the list of available apis.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/connect/ConnectApiList.tsx
+//! ##### Path:
+//! * page/connect/Connect_ApiList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
@@ -14,12 +15,13 @@ import React from 'react'
 // Context
 import { useAppContext } from 'hooks/useAppContext'
 import { PageTabType } from 'interface/InterfaceContext'
-// CSS Module
-import Style from './css/Connect.module.css'
+// CSS Modules
+import Style_App from 'css/App.module.css'
+import Style from './css/Connect_ApiList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const ConnectApiList: React.FC = () => {
+const Connect_ApiList: React.FC = () => {
   // Context: Interface
   const { setInterface } = useAppContext()
 
@@ -41,7 +43,7 @@ const ConnectApiList: React.FC = () => {
 
   return (
     <div className={Style.ConnectApiListComponent}>
-      <div className={Style.Header}>Data Source</div>
+      <div className={Style_App.Header}>Data Source</div>
       <div className={Style.List}>
         <div className={Style.Row} onClick={() => handleClick('Database-Tab')}>
           Database
@@ -57,6 +59,6 @@ const ConnectApiList: React.FC = () => {
   )
 }
 
-export default ConnectApiList
+export default Connect_ApiList
 
 /* ---------------------------------------------------------------------------------------------- */

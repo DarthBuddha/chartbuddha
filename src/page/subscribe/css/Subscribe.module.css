@@ -1,27 +1,6 @@
-/* ---------------------------------------------------------------------------------------------- */
+/* ---------------------- */
 /*! Subscribe.module.css !*/
-/* ---------------------------------------------------------------------------------------------- */
-
-.Page {
-  height: 100%;
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: inset 0 0 0 5px black;
-}
-
-.Component_MenuBar,
-.Component_StatusBar {
-  height: 40px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgb(37, 40, 42);
-  box-shadow: inset 0 0 0 5px black;
-}
+/* -------------------------------------------------------------------------------------< Frame > */
 
 .Frame {
   height: calc(100% - 80px);
@@ -32,52 +11,22 @@
   box-shadow: inset 0 0 0 5px black;
 }
 
-/* ---------------------------------------------------------------------------------------------- */
-
-.Subscribe {
-  height: 100%;
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  /* box-shadow: inset 0 0 0 5px rgb(0, 0, 0); */
-}
-
-.Main_Container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-.Subscribe_Api_List {
+.Frame_ApiList {
   height: 100%;
   width: 200px;
-  min-width: 200px;
+  box-shadow: inset 0 0 0 5px black;
 }
 
-.Subscribe_Data {
+.Frame_Tab {
   height: 100%;
-  width: calc(100% - 200px);
-  overflow: visible;
+  width: calc(100% - 400px);
+  box-shadow: inset 0 0 0 5px black;
 }
 
-.Subscribe_Sub_List {
+.Frame_SubList {
   height: 100%;
   width: 200px;
-  min-width: 200px;
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-.Page,
-.List_Providers,
-.Product_Panel,
-.List_Subscriptions {
-  box-shadow: inset 0 0 0 5px rgb(0, 0, 0);
+  box-shadow: inset 0 0 0 5px black;
 }
 
 /* ---------------------------------------------------------------------------------------------- */
