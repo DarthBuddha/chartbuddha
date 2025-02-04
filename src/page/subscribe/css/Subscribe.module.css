@@ -2,12 +2,13 @@
 /*! Subscribe.module.css !*/
 /* -------------------------------------------------------------------------------------< Frame > */
 
-.Frame {
+.Frame_Container {
   height: calc(100% - 80px);
   width: 100%;
-  text-align: center;
-  align-content: center;
-  align-items: center;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
   box-shadow: inset 0 0 0 5px black;
 }
 

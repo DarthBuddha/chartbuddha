@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
 //! # Component: Page Subscribe Tab - SubscribeCoinbase
 /* ---------------------------------------------------------------------------------------------- */
@@ -13,7 +13,7 @@
 import React from 'react'
 import Split from 'react-split'
 // Context
-import { useAppContext } from 'hooks/useAppContext.ts'
+// import { useAppContext } from 'hooks/useAppContext.ts'
 // Components
 import SubscribeCoinbaseProduct from './SubscribeCoinbaseProduct.tsx'
 import SubscribeCoinbaseProductList from './SubscribeCoinbaseProductList.tsx'
@@ -23,20 +23,12 @@ import Style from './css/SubscribeCoinbase.module.css'
 /* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeCoinbase: React.FC = () => {
-  // State Management
-  const { selCoinbaseProductType, setCoinbaseProductType } = useAppContext()
-
-  // Logic: Reset Interface Context
-  if (selCoinbaseProductType === null) {
-    setCoinbaseProductType('spot')
-  }
-
   return (
     <div className={Style.Page}>
       <Split
         className={Style.Split}
         sizes={[90, 10]}
-        minSize={[500, 500]}
+        minSize={[200, 200]}
         maxSize={[Infinity, 650]}
         expandToMin={true}
         gutterSize={10}

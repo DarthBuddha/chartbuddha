@@ -7,7 +7,7 @@
 //! * coinbase_default
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src-tauri/src/store/apis/coinbase_default.rs
+//! * store/apis/coinbase/coinbase_default.rs
 /* ---------------------------------------------------------------------------------------------- */
 
 // Rust
@@ -25,14 +25,16 @@ pub fn coinbase_default() -> HashMap<String, Value> {
   defaults.insert(
     "Coinbase".to_string(),
     json!({
-      "api_key": null,
-      "api_key_secret": null,
-      "api_permissions": {
-        "perm_can_trade": false,
-        "perm_can_transfer": false,
-        "perm_can_view": false,
-        "perm_portfolio_type": "",
-        "perm_portfolio_uuid": ""
+      "broker_data_api": {
+        "api_key": null,
+        "api_key_secret": null,
+        "api_permissions": {
+          "perm_can_trade": false,
+          "perm_can_transfer": false,
+          "perm_can_view": false,
+          "perm_portfolio_type": "",
+          "perm_portfolio_uuid": ""
+        }
       }
     })
   );

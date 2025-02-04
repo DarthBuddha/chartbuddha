@@ -38,7 +38,7 @@ const DashboardSubs: React.FC = () => {
   // Load Subscriptions List
   const load_subscriptions_list = async () => {
     try {
-      const apis = ['binance', 'coinbase'] // Add more APIs as needed
+      const apis = ['Binance', 'Coinbase'] // Add more APIs as needed
       const configuredApis: { api: string; symbol: string }[] = []
 
       const store_app_subscriptions = await load('list_sub.json')

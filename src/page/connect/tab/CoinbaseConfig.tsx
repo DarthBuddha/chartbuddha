@@ -19,7 +19,6 @@ import { load } from '@tauri-apps/plugin-store'
 // Context
 import { useAppContext } from 'hooks/useAppContext.ts'
 import { BrokerApiInterface } from 'interface/BrokerApiContext.ts'
-// import { BrokerDataApiInterface } from 'interface/BrokerApiContext.ts'
 import { BrokerDataApiPermissionsInterface } from 'interface/BrokerApiContext.ts'
 // Constants
 import { COINBASE_STORE } from 'constants.ts'
@@ -36,19 +35,43 @@ const CoinbaseConfig: React.FC = () => {
   // Use Effect: On Component Load
   useEffect(() => {
     const loadCoinbaseConfig = async () => {
-      const store = await load(COINBASE_STORE)
       try {
+        info('Attempting to load Coinbase config from store')
+        const store = await load(COINBASE_STORE)
         const coinbaseStore = await store.get<BrokerApiInterface>('Coinbase')
 
         if (coinbaseStore) {
-          setApis(prevApis => ({
-            ...prevApis,
-            coinbase_api: coinbaseStore,
-            binance_api: prevApis?.binance_api ?? null,
-          }))
+          info('Coinbase config loaded successfully')
+          setApis(prevApis => {
+            const newApis = {
+              ...prevApis,
+              coinbase_api: {
+                broker_data_api: {
+                  api_key: coinbaseStore.broker_data_api?.api_key ?? '',
+                  api_key_secret: coinbaseStore.broker_data_api?.api_key_secret ?? '',
+                  api_permissions: {
+                    can_view: coinbaseStore.broker_data_api?.api_permissions?.can_view ?? false,
+                    can_trade: coinbaseStore.broker_data_api?.api_permissions?.can_trade ?? false,
+                    can_transfer:
+                      coinbaseStore.broker_data_api?.api_permissions?.can_transfer ?? false,
+                    portfolio_uuid:
+                      coinbaseStore.broker_data_api?.api_permissions?.portfolio_uuid ?? '',
+                    portfolio_type:
+                      coinbaseStore.broker_data_api?.api_permissions?.portfolio_type ?? '',
+                  },
+                },
+                broker_products: coinbaseStore.broker_products,
+              },
+              binance_api: prevApis?.binance_api ?? null,
+            }
+            info('Updated APIs state: ' + JSON.stringify(newApis))
+            return newApis
+          })
+        } else {
+          info('No Coinbase config found in store')
         }
       } catch (err) {
-        error(`Error loading Database Config: ${err instanceof Error ? err.message : String(err)}`)
+        error(`Error loading Coinbase Config: ${err instanceof Error ? err.message : String(err)}`)
       }
     }
 
@@ -74,7 +97,13 @@ const CoinbaseConfig: React.FC = () => {
           ...prevApis?.coinbase_api,
           broker_data_api: {
             ...prevApis?.coinbase_api?.broker_data_api,
-            api_permissions: parsedResponse,
+            api_permissions: {
+              can_view: parsedResponse.can_view,
+              can_trade: parsedResponse.can_trade,
+              can_transfer: parsedResponse.can_transfer,
+              portfolio_uuid: parsedResponse.portfolio_uuid,
+              portfolio_type: parsedResponse.portfolio_type,
+            },
             api_key: prevApis?.coinbase_api?.broker_data_api?.api_key ?? '',
             api_key_secret: prevApis?.coinbase_api?.broker_data_api?.api_key_secret ?? '',
           },
@@ -95,7 +124,6 @@ const CoinbaseConfig: React.FC = () => {
     const store = await load(COINBASE_STORE)
     try {
       await store.set('Coinbase', {
-        api_configured: false,
         broker_data_api: {
           api_key: null,
           api_key_secret: null,
@@ -171,7 +199,6 @@ const CoinbaseConfig: React.FC = () => {
             <div className={Style.Info_Section_Row}>
               <div className={Style.Info_Section_Cell_Key}>Can View:</div>
               <div className={Style.Info_Section_Cell_Result}>
-                {' '}
                 {selApis?.coinbase_api?.broker_data_api?.api_permissions
                   ? String(selApis.coinbase_api.broker_data_api.api_permissions.can_view)
                   : ' '}
@@ -180,7 +207,6 @@ const CoinbaseConfig: React.FC = () => {
             <div className={Style.Info_Section_Row}>
               <div className={Style.Info_Section_Cell_Key}>Can Trade:</div>
               <div className={Style.Info_Section_Cell_Result}>
-                {' '}
                 {selApis?.coinbase_api?.broker_data_api?.api_permissions
                   ? String(selApis.coinbase_api.broker_data_api.api_permissions.can_trade)
                   : ' '}
@@ -189,7 +215,6 @@ const CoinbaseConfig: React.FC = () => {
             <div className={Style.Info_Section_Row}>
               <div className={Style.Info_Section_Cell_Key}>Can Transfer:</div>
               <div className={Style.Info_Section_Cell_Result}>
-                {' '}
                 {selApis?.coinbase_api?.broker_data_api?.api_permissions
                   ? String(selApis.coinbase_api.broker_data_api.api_permissions.can_transfer)
                   : ' '}
@@ -198,7 +223,6 @@ const CoinbaseConfig: React.FC = () => {
             <div className={Style.Info_Section_Row}>
               <div className={Style.Info_Section_Cell_Key}>Portfolio uuid:</div>
               <div className={Style.Info_Section_Cell_Result}>
-                {' '}
                 {selApis?.coinbase_api?.broker_data_api?.api_permissions
                   ? selApis.coinbase_api.broker_data_api.api_permissions.portfolio_uuid
                   : ''}
@@ -207,7 +231,6 @@ const CoinbaseConfig: React.FC = () => {
             <div className={Style.Info_Section_Row}>
               <div className={Style.Info_Section_Cell_Key}>Portfolio Type:</div>
               <div className={Style.Info_Section_Cell_Result}>
-                {' '}
                 {selApis?.coinbase_api?.broker_data_api?.api_permissions
                   ? selApis.coinbase_api.broker_data_api.api_permissions.portfolio_type
                   : ''}
@@ -226,6 +249,7 @@ const CoinbaseConfig: React.FC = () => {
               <input
                 type="text"
                 id="api_key"
+                value={selApis?.coinbase_api?.broker_data_api?.api_key ?? ''}
                 onChange={e => handleInputChange(e, 'api_key')}
                 className={Style.UserInput_Text}
                 autoComplete="off"
@@ -239,6 +263,7 @@ const CoinbaseConfig: React.FC = () => {
               <input
                 type="text"
                 id="api_key_secret"
+                value={selApis?.coinbase_api?.broker_data_api?.api_key_secret ?? ''}
                 onChange={e => handleInputChange(e, 'api_key_secret')}
                 className={Style.UserInput_Text}
                 autoComplete="off"

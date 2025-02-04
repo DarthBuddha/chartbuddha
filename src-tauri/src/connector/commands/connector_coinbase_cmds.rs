@@ -17,7 +17,7 @@ use tauri::AppHandle;
 use log::info;
 // use log::error;
 // Crates
-use crate::store::apis::coinbase::coinbase_save::save_coinbase;
+use crate::store::apis::coinbase::save_coinbase::save_coinbase;
 use crate::store::apis::coinbase::coinbase_drop::drop_coinbase;
 
 /* ---------------------------------------------------------------------------------------------- */

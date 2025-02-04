@@ -15,11 +15,11 @@ import { info } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
 import { load } from '@tauri-apps/plugin-store'
 
-import { SetupApiList } from './SetupApiList'
+import { SetupApiList } from './SetupApiList.ts'
 
 /* ---------------------------------------------------------------------------------------------- */
 // Constants
-import { STATE_STORE } from '../constants'
+import { STATE_STORE } from 'constants.ts'
 /* ---------------------------------------------------------------------------------------------- */
 
 // React setup function
@@ -42,15 +42,18 @@ export async function SetupReact(): Promise<Record<string, boolean>> {
     info(String(err))
   }
 
-  invoke('setup_complete')
-  const apiRecord: Record<string, boolean> = apiList.reduce(
+  const apiListRecord: Record<string, boolean> = apiList.reduce(
     (acc, api) => {
       acc[api] = true
       return acc
     },
     {} as Record<string, boolean>,
   )
-  return apiRecord
+
+  info('Invoke: setup_complete...')
+  invoke('setup_complete')
+
+  return apiListRecord
 }
 
 /* ---------------------------------------------------------------------------------------------- */

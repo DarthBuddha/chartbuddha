@@ -46,6 +46,7 @@
   overflow-y: auto;
   height: calc(100% - 30px);
   padding: 10px;
+  max-height: calc(100% - 30px); /* Ensure it doesn't overflow the container */
 }
 
 .Product {
@@ -67,17 +68,13 @@
   flex-direction: column;
 }
 
-.Product_Name {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
+.Product_Name,
 .Product_Price,
 .Product_Volume {
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
+  padding: 5px; /* Add padding for better spacing */
 }
 
 .Positive {

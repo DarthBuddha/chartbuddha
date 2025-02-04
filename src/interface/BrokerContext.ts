@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------------------------- */
 //! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
-//! # Interface: BrokerApiContext
+//! # Interface: BrokerContext
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
-//! * This context is responsible for managing the Broker Api Context.
+//! * This context is responsible for managing the Broker Context.
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Interface:
 //! * BrokerApiInterface
@@ -17,16 +17,22 @@
 //! * BrokerPerpetualInterface
 /* ---------------------------------------------------------------------------------------------- */
 //! ##### Path:
-//! * src/interface/BrokerApiContext.ts
+//! * src/interface/BrokerContext.ts
 /* ---------------------------------------------------------------------------------------------- */
 
 // React
 import { createContext } from 'react'
+/* ---------------------------------------------------------------------------------------------- */
+
+export interface BrokerInterface {
+  broker_api_binance?: BrokerApiInterface | null
+  broker_api_coinbase?: BrokerApiInterface | null
+}
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface BrokerApiInterface {
-  broker_data_api: BrokerDataApiInterface | null
+  broker_data_api?: BrokerDataApiInterface | null
   broker_products?: BrokerProductsInterface[] | null
 }
 
@@ -39,17 +45,17 @@ export interface BrokerDataApiInterface {
 }
 
 export interface BrokerDataApiPermissionsInterface {
-  can_view: boolean
-  can_trade: boolean
-  can_transfer: boolean
-  portfolio_uuid: string
-  portfolio_type: string
+  can_view?: boolean
+  can_trade?: boolean
+  can_transfer?: boolean
+  portfolio_uuid?: string
+  portfolio_type?: string
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface BrokerProductsInterface {
-  product_id: string
+  product_id?: string
   price?: string
   price_percentage_change_24h?: string
   volume_24h?: string
@@ -134,8 +140,8 @@ export interface BrokerPerpetualInterface {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-const BrokerApiContext = createContext<BrokerApiInterface | null>(null)
+const BrokerContext = createContext<BrokerApiInterface | null>(null)
 
-export { BrokerApiContext }
+export { BrokerContext }
 
 /* ---------------------------------------------------------------------------------------------- */

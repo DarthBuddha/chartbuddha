@@ -1,30 +1,39 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
 //! # Component: Page Subscribe Tab - SubscribeCoinbaseProduct
 // ---------------------------------------------------------------------------------------------- //
 //! #### Description:
 //! * This component is responsible for subscribing to the Coinbase API.
 // ---------------------------------------------------------------------------------------------- //
-//! ##### Path: page/subscribe/tab/SubscribeCoinbaseProduct.tsx
+//! ##### Path:
+//! * page/subscribe/tab/SubscribeCoinbaseProduct.tsx
 // ---------------------------------------------------------------------------------------------- //
 
-// React
+// React:
 import React from 'react'
 // import React, { useEffect, useState } from 'react';
-// Tauri
+// Tauri:
 import { error, info } from '@tauri-apps/plugin-log'
 import { invoke } from '@tauri-apps/api/core'
-// Context
+// Hooks:
 import { useAppContext } from 'hooks/useAppContext'
-// CSS Modules
+// Interface:
+// import { BrokerInterface } from 'interface/BrokerContext'
+// import { BrokerApiInterface } from 'interface/BrokerContext'
+// import { BrokerProductsInterface } from 'interface/BrokerContext'
+// CSS Modules:
 import Style from './css/SubscribeCoinbaseProduct.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeCoinbaseProduct: React.FC = () => {
-  // State Management
-  const { selCoinbaseProduct } = useAppContext()
+  // Context
+  const { selBrokerApi, selInterface } = useAppContext()
+
+  const selectedProduct = selBrokerApi?.broker_api_coinbase?.broker_products?.find(
+    product => product.product_id === selInterface?.product_id,
+  )
 
   // Button Click: Handle Product Subscriptions
   const buttonClick_Subscribe = async () => {
@@ -34,7 +43,7 @@ const SubscribeCoinbaseProduct: React.FC = () => {
         subscriptionType: 'Broker', // Pass as string
         exchangeType: 'Spot', // Pass as string
         platform: 'Coinbase',
-        symbol: selCoinbaseProduct?.product_id,
+        symbol: selBrokerApi?.broker_api_coinbase?.broker_products?.[0]?.product_id,
         // Subscription: Settings
         tick: 10, // Changed to tickSize
         granularity: 0.01, // Changed to granularity
@@ -58,7 +67,7 @@ const SubscribeCoinbaseProduct: React.FC = () => {
         // subscriptionType: 'broker',
         platform: 'Coinbase',
         // exchange: 'spot',
-        symbol: selCoinbaseProduct?.product_id,
+        symbol: selBrokerApi?.broker_api_coinbase?.broker_products?.[0]?.product_id,
         // Subscription: Settings
         // tick: 10, // Changed to tickSize
         // granularity: 0.01, // Changed to granularity
@@ -80,32 +89,32 @@ const SubscribeCoinbaseProduct: React.FC = () => {
       <div className={Style.Selection_Menu}>
         <div className={Style.Selection_Title}>Coinbase</div>
         <div className={Style.Selection_Title}>
-          Selected: {selCoinbaseProduct ? selCoinbaseProduct.display_name : 'Select Product'}
+          Selected: {selectedProduct ? selectedProduct.display_name : 'Select Product'}
         </div>
       </div>
       <div className={Style.Product_Container}>
         <div>
-          {selCoinbaseProduct && (
+          {selectedProduct && (
             <>
-              <div>Product ID: {selCoinbaseProduct.product_id}</div>
-              <div>Price: {selCoinbaseProduct.price}</div>
-              <div>Price Change (24h): {selCoinbaseProduct.price_percentage_change_24h}%</div>
-              <div>Volume (24h): {selCoinbaseProduct.volume_24h}</div>
-              <div>Volume Change (24h): {selCoinbaseProduct.volume_percentage_change_24h}%</div>
-              <div>Base Increment: {selCoinbaseProduct.base_increment}</div>
-              <div>Quote Increment: {selCoinbaseProduct.quote_increment}</div>
-              <div>Quote Min Size: {selCoinbaseProduct.quote_min_size}</div>
-              <div>Quote Max Size: {selCoinbaseProduct.quote_max_size}</div>
-              <div>Base Min Size: {selCoinbaseProduct.base_min_size}</div>
-              <div>Base Max Size: {selCoinbaseProduct.base_max_size}</div>
-              <div>Base Name: {selCoinbaseProduct.base_name}</div>
-              <div>Quote Name: {selCoinbaseProduct.quote_name}</div>
-              <div>Status: {selCoinbaseProduct.status}</div>
-              <div>Cancel Only: {selCoinbaseProduct.cancel_only ? 'Yes' : 'No'}</div>
-              <div>Limit Only: {selCoinbaseProduct.limit_only ? 'Yes' : 'No'}</div>
-              <div>Post Only: {selCoinbaseProduct.post_only ? 'Yes' : 'No'}</div>
-              <div>Trading Disabled: {selCoinbaseProduct.trading_disabled ? 'Yes' : 'No'}</div>
-              <div>Auction Mode: {selCoinbaseProduct.auction_mode ? 'Yes' : 'No'}</div>
+              <div>Product ID: {selectedProduct.product_id}</div>
+              <div>Price: {selectedProduct.price}</div>
+              <div>Price Change (24h): {selectedProduct.price_percentage_change_24h}%</div>
+              <div>Volume (24h): {selectedProduct.volume_24h}</div>
+              <div>Volume Change (24h): {selectedProduct.volume_percentage_change_24h}%</div>
+              <div>Base Increment: {selectedProduct.base_increment}</div>
+              <div>Quote Increment: {selectedProduct.quote_increment}</div>
+              <div>Quote Min Size: {selectedProduct.quote_min_size}</div>
+              <div>Quote Max Size: {selectedProduct.quote_max_size}</div>
+              <div>Base Min Size: {selectedProduct.base_min_size}</div>
+              <div>Base Max Size: {selectedProduct.base_max_size}</div>
+              <div>Base Name: {selectedProduct.base_name}</div>
+              <div>Quote Name: {selectedProduct.quote_name}</div>
+              <div>Status: {selectedProduct.status}</div>
+              <div>Cancel Only: {selectedProduct.cancel_only ? 'Yes' : 'No'}</div>
+              <div>Limit Only: {selectedProduct.limit_only ? 'Yes' : 'No'}</div>
+              <div>Post Only: {selectedProduct.post_only ? 'Yes' : 'No'}</div>
+              <div>Trading Disabled: {selectedProduct.trading_disabled ? 'Yes' : 'No'}</div>
+              <div>Auction Mode: {selectedProduct.auction_mode ? 'Yes' : 'No'}</div>
             </>
           )}
         </div>

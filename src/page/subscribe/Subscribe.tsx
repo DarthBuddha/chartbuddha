@@ -30,7 +30,7 @@ const Subscribe: React.FC = () => {
       <div className={Style_App.MenuBar}>
         <MenuBar />
       </div>
-      <div className={Style.Frame}>
+      <div className={Style.Frame_Container}>
         <div className={Style.Frame_ApiList}>
           <Subscribe_ApiList />
         </div>

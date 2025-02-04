@@ -10,47 +10,68 @@
 //! * src/page/subscribe/SubscribeApiList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
+// Tauri
+import { info } from '@tauri-apps/plugin-log'
 // React
 import React from 'react'
-// Tauri
-// import { error } from '@tauri-apps/plugin-log'
 // import { load } from '@tauri-apps/plugin-store'
-// Context
+// Hooks:
 import { useAppContext } from 'hooks/useAppContext.ts'
+// Interface:
+import { PageTabType } from 'interface/InterfaceContext'
 // Constants
 // import { API_LIST_STORE } from '../../constants'
 // CSS Module
+import Style_App from 'css/App.module.css'
 import Style from './css/SubscribeApiList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const Subscribe_ApiList: React.FC = () => {
   // Context: Interface
-  const { selApiList, setSubscribeTab } = useAppContext()
+  const { setInterface } = useAppContext()
+  const { selApiList } = useAppContext()
 
-  // Button Click: Handle Data Api
-  const handleClick = async (selSubscribeTab: string) => {
-    const resetApi = ['binance', 'coinbase']
-    // Logic: Reset Context
-    if (resetApi.includes(selSubscribeTab.toLowerCase())) {
-      setSubscribeTab(selSubscribeTab)
+  // Debug: Log selApiList
+  info('selApiList: ' + JSON.stringify(selApiList))
+
+  // Click: Connect Api List
+  const handleClick = async (tab: string) => {
+    // Debug: Log selApiList
+    info('Select Tab: ' + JSON.stringify(tab.charAt(0).toUpperCase() + tab.slice(1)))
+
+    const resetTab = ['Coinbase', 'Binance'] // Add more APIs as needed
+
+    // Logic: Set Context
+    if (resetTab.includes(tab.charAt(0).toUpperCase() + tab.slice(1))) {
+      setInterface({
+        page: 'Subscribe',
+        page_tab: (tab.charAt(0).toUpperCase() + tab.slice(1)) as PageTabType,
+      })
     }
   }
 
   /* -------------------------------------------------------------------------------------------- */
   return (
     <div className={Style.List_Container}>
-      <div className={Style.Title_Bar}>Apis</div>
+      <div className={Style_App.Header}>Apis</div>
       <div className={Style.List}>
-        {selApiList && selApiList.length === 0 ? (
+        {selApiList && selApiList.api_list_values.length === 0 ? (
           <div className={Style.Row}>Please configure your API keys on the Connect page.</div>
         ) : (
           selApiList &&
-          selApiList.map(api => (
-            <div key={api} className={Style.Row} onClick={() => handleClick(api)}>
-              {api.charAt(0).toUpperCase() + api.slice(1)}
-            </div>
-          ))
+          selApiList.api_list_values.map(api => {
+            const tab = api
+            return (
+              <div
+                key={api}
+                className={Style.Row}
+                onClick={() => tab && typeof tab === 'string' && handleClick(tab)}
+              >
+                {tab && typeof tab === 'string' && tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </div>
+            )
+          })
         )}
       </div>
     </div>

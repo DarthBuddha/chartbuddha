@@ -24,8 +24,8 @@ pub fn default_list_api() -> HashMap<String, Value> {
   defaults.insert(
     "ApiList".to_string(),
     json!({
-      "binance": false,
-      "coinbase": false
+      "Binance": false,
+      "Coinbase": false
     })
   );
 

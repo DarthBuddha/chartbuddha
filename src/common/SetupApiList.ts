@@ -11,7 +11,7 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 // Tauri
-import { info } from '@tauri-apps/plugin-log'
+import { info, error } from '@tauri-apps/plugin-log'
 // import { invoke } from '@tauri-apps/api/core'
 import { load } from '@tauri-apps/plugin-store'
 // Interface
@@ -19,7 +19,7 @@ import { load } from '@tauri-apps/plugin-store'
 
 /* ---------------------------------------------------------------------------------------------- */
 // Constants
-import { API_LIST_STORE } from '../constants'
+import { API_LIST_STORE } from 'constants.ts'
 /* ---------------------------------------------------------------------------------------------- */
 
 // Load Api List from store
@@ -33,7 +33,7 @@ export async function SetupApiList(): Promise<string[]> {
     info(`Enabled APIs: ${enabledApis.join(', ')}`)
     return enabledApis
   } catch (err) {
-    info(String(err))
+    error(String(err))
     return []
   }
 }

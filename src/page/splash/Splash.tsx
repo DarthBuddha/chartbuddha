@@ -10,32 +10,41 @@
 //! * src/page/Splash.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
+// Tauri
+import { info } from '@tauri-apps/plugin-log'
 // React
 import React from 'react'
 // Hooks
 import { useAppContext } from 'hooks/useAppContext'
-import { useSetupReact } from 'hooks/useSetupReact'
+// Interface:
+import { ApiListInterface, ApiLisType } from 'interface/ApiListContext'
 // CSS Module
 import Style from './css/Splash.module.css'
+// Common
+import { SetupReact } from 'common/SetupReact'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const Splash: React.FC = () => {
   // Context: Interface
   const { setInterface } = useAppContext()
-  const isSetupComplete = useSetupReact() // Call the hook here
+  const { setApiList } = useAppContext()
 
   React.useEffect(() => {
-    if (isSetupComplete) {
+    const initialize = async () => {
+      const apiListRecord = await SetupReact()
       setInterface({
         page: 'Home',
-        page_tab: null,
-        list_type_product: null,
-        product_broker: null,
-        product_symbol: null,
       })
+      info('selApiList: ' + JSON.stringify(apiListRecord))
+      setApiList({
+        api_list_values: Object.keys(apiListRecord).filter(
+          key => apiListRecord[key],
+        ) as ApiLisType[],
+      } as ApiListInterface)
     }
-  }, [isSetupComplete, setInterface])
+    initialize()
+  }, [setInterface, setApiList])
 
   return (
     <div className={Style.Page}>

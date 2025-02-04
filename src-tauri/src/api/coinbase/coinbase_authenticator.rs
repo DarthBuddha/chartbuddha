@@ -11,12 +11,12 @@
 
 // Rust
 use std::error::Error;
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::time::{ SystemTime, UNIX_EPOCH };
 // Tauri
 use tauri::AppHandle;
 use tauri_plugin_store::StoreExt;
 // Dependencies
-use jsonwebtoken::{encode, EncodingKey, Header};
+use jsonwebtoken::{ encode, EncodingKey, Header };
 use log::error;
 use log::info;
 use rand::distr::Alphanumeric;
@@ -52,7 +52,7 @@ pub struct Claims {
 /// Authenticate the API request by generating a JWT token
 pub async fn use_authenticator(
   app: AppHandle,
-  authenticator: &Authenticator,
+  authenticator: &Authenticator
 ) -> Result<String, Box<dyn Error + Send + Sync>> {
   info!("Get API key and secret from apis store...");
   let store = app.store(COINBASE_STORE).map_err(|e| {
@@ -60,18 +60,16 @@ pub async fn use_authenticator(
     Box::<dyn Error + Send + Sync>::from(e)
   })?;
 
-  let coinbase: Value = store
-    .get("Coinbase")
-    .expect("Failed to get value from store");
+  let coinbase: Value = store.get("Coinbase").expect("Failed to get value from store");
 
-  let api_key: String = coinbase
+  let api_key: String = coinbase["broker_data_api"]
     .get("api_key")
     .expect("Failed to get api_key from coinbase object")
     .as_str()
     .expect("Failed to convert api_key to string")
     .to_string();
 
-  let api_secret: String = coinbase
+  let api_secret: String = coinbase["broker_data_api"]
     .get("api_key_secret")
     .expect("Failed to get api_secret from coinbase object")
     .as_str()
@@ -91,11 +89,7 @@ pub async fn use_authenticator(
   };
 
   // Generate a random nonce
-  let nonce: String = rand::rng()
-    .sample_iter(&Alphanumeric)
-    .take(16)
-    .map(char::from)
-    .collect();
+  let nonce: String = rand::rng().sample_iter(&Alphanumeric).take(16).map(char::from).collect();
 
   // Define claims for JWT
   let uri = format!(

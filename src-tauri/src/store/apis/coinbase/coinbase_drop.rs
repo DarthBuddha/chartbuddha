@@ -43,7 +43,6 @@ pub async fn drop_coinbase(
 
   // Drop the API keys to the store
   let mut coinbase = store.get("Coinbase").unwrap_or(json!({}));
-  coinbase["api_configured"] = json!(false);
   coinbase["api_key"] = json!(null);
   coinbase["api_key_secret"] = json!(null);
   coinbase["api_permissions"] = json!(null);

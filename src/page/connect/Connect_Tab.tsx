@@ -28,18 +28,17 @@ const Connect_Tab: React.FC = () => {
   // Context: Interface
   const { selInterface } = useAppContext()
   info('selInterface: ' + JSON.stringify(selInterface)) // Debugging line
-  // const { page_tab } = selInterface || {}
-  const page_tab = selInterface?.page_tab || 'Database-Tab' // Defaults to 'Database-Tab'
+  const page_tab = selInterface?.page_tab || 'Database' // Defaults to 'Database-Tab'
 
   switch (page_tab) {
-    case 'Database-Tab':
+    case 'Database':
       return (
         // <div className={Style.ConfigTabContainer}>
         <DatabaseConfig />
         // </div>
       )
 
-    case 'Coinbase-Tab':
+    case 'Coinbase':
       return (
         // <div className={Style.ConfigTabContainer}>
         <CoinbaseConfig />

@@ -16,30 +16,37 @@ import { useState, useEffect } from 'react'
 import { info } from '@tauri-apps/plugin-log'
 import { listen } from '@tauri-apps/api/event'
 // Utils
-import { SetupReact } from '../common/SetupReact'
+import { SetupReact } from 'common/SetupReact'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 export function useSetupReact() {
-  const [isSetupComplete, setIsSetupComplete] = useState(false);
+  const [isSetupComplete, setIsSetupComplete] = useState(false)
+  const [apiListRecord, setApiListRecord] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
-    const unlisten = listen('tauri_ready', () => {
-      info('tauri_ready event received')
-      SetupReact()
-    })
+    const setup = async () => {
+      await info('Setting up logging') // Ensure logging is set up
+      const unlisten = await listen('tauri_ready', async () => {
+        info('tauri_ready event received')
+        const apiList = await SetupReact()
+        setApiListRecord(apiList)
+      })
 
-    // Simulate setup completion
-    setTimeout(() => {
-      setIsSetupComplete(true);
-    }, 1000); // Adjust the timeout as needed
+      // Simulate setup completion
+      setTimeout(() => {
+        setIsSetupComplete(true)
+      }, 1000) // Adjust the timeout as needed
 
-    return () => {
-      unlisten.then(fn => fn())
+      return () => {
+        unlisten()
+      }
     }
+
+    setup()
   }, [])
 
-  return isSetupComplete;
+  return { isSetupComplete, apiListRecord }
 }
 
 /* ---------------------------------------------------------------------------------------------- */

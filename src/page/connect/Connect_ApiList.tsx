@@ -10,6 +10,8 @@
 //! * page/connect/Connect_ApiList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
+// Tauri
+import { info } from '@tauri-apps/plugin-log'
 // React
 import React from 'react'
 // Context
@@ -27,16 +29,14 @@ const Connect_ApiList: React.FC = () => {
 
   // Click: Connect Api List
   const handleClick = async (tab: string) => {
-    const resetTab = ['Database-Tab', 'Coinbase-Tab']
+    info('tab: ' + tab)
+    const resetTab = ['Database', 'Coinbase']
 
     // Logic: Set Context
     if (resetTab.includes(tab)) {
       setInterface({
         page: 'Connect',
         page_tab: tab as PageTabType,
-        list_type_product: null,
-        product_broker: null,
-        product_symbol: null,
       })
     }
   }
@@ -45,13 +45,13 @@ const Connect_ApiList: React.FC = () => {
     <div className={Style.ConnectApiListComponent}>
       <div className={Style_App.Header}>Data Source</div>
       <div className={Style.List}>
-        <div className={Style.Row} onClick={() => handleClick('Database-Tab')}>
+        <div className={Style.Row} onClick={() => handleClick('Database')}>
           Database
         </div>
         {/* <div className={Style.Row} onClick={() => handleClick('Binance-Tab')}>
           Binance
         </div> */}
-        <div className={Style.Row} onClick={() => handleClick('Coinbase-Tab')}>
+        <div className={Style.Row} onClick={() => handleClick('Coinbase')}>
           Coinbase
         </div>
       </div>

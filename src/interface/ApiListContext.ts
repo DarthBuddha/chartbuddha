@@ -20,10 +20,10 @@ import { createContext } from 'react'
 /* ---------------------------------------------------------------------------------------------- */
 
 export interface ApiListInterface {
-  api_list_values: ApiLisType[] | null
+  api_list_values: ApiLisType[]
 }
 
-export type ApiLisType = 'Binance' | 'Coinbase' | null
+export type ApiLisType = 'Binance' | 'Coinbase' | string | null
 
 /* ---------------------------------------------------------------------------------------------- */
 

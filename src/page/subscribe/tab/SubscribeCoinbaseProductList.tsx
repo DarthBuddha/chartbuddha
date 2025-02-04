@@ -1,38 +1,49 @@
 /* ---------------------------------------------------------------------------------------------- */
-//! # ChartBuddha
+//! # ChartBuddha - Frontend
 /* ---------------------------------------------------------------------------------------------- */
 //! # Component: Page Subscribe Tab - SubscribeCoinbaseProductList
 /* ---------------------------------------------------------------------------------------------- */
 //! #### Description:
 //! * This component is responsible for subscribing to the Coinbase API.
 /* ---------------------------------------------------------------------------------------------- */
-//! ##### Path: page/subscribe/tab/SubscribeCoinbaseProductList.tsx
+//! ##### Path:
+//! * page/subscribe/tab/SubscribeCoinbaseProductList.tsx
 /* ---------------------------------------------------------------------------------------------- */
 
-// React
-import React, { useCallback, useEffect } from 'react'
-// Tauri
+// React:
+import React, { useCallback, useEffect, useState } from 'react'
+// Tauri:
 import { invoke } from '@tauri-apps/api/core'
 import { error, info } from '@tauri-apps/plugin-log'
-// Context
+// Hooks:
 import { useAppContext } from 'hooks/useAppContext'
-import { CoinbaseProductsInterface } from 'interface/apis/CoinbaseApiContext'
-// CSS Modules
+// Context: Interface
+import { InterfaceInterface } from 'interface/InterfaceContext'
+import { ListTypeProductType } from 'interface/InterfaceContext'
+// Context: Broker
+// import { BrokerInterface } from 'interface/BrokerContext'
+// import { BrokerApiInterface } from 'interface/BrokerContext'
+import { BrokerProductsInterface } from 'interface/BrokerContext'
+// CSS Modules:
 import Style from './css/SubscribeCoinbaseProductList.module.css'
 
 /* ---------------------------------------------------------------------------------------------- */
 
 const SubscribeCoinbaseProductList: React.FC = () => {
-  // State Management
-  const { selCoinbaseProductType, setCoinbaseProductType } = useAppContext()
-  const { selCoinbaseProductList, setCoinbaseProductList } = useAppContext()
-  const { setCoinbaseProduct } = useAppContext()
+  // Context
+  const { selInterface, setInterface } = useAppContext()
+  const { selBrokerApi, setBrokerApi } = useAppContext()
+
+  // State to track if the product list has been loaded
+  const [isProductListLoaded, setIsProductListLoaded] = useState(false)
 
   // Button Click: Product Type
   const clickProductType = (productType: string) => {
-    const resetProductType = ['spot', 'future', 'perpetual']
+    const resetProductType = ['Spot', 'Future', 'Perpetual']
     if (resetProductType.includes(productType)) {
-      setCoinbaseProductType(productType)
+      setInterface({
+        list_type_product: productType as ListTypeProductType,
+      })
     }
   }
 
@@ -40,10 +51,19 @@ const SubscribeCoinbaseProductList: React.FC = () => {
   const loadProductList = useCallback(async () => {
     try {
       const response: string = await invoke('coinbase_products_list', {
-        productType: selCoinbaseProductType || 'spot',
+        productType: selInterface?.list_type_product || 'Spot',
       })
-      const parsedResponse: { products: CoinbaseProductsInterface[] } = JSON.parse(response)
-      setCoinbaseProductList(parsedResponse.products)
+      const parsedResponse: { broker_products: BrokerProductsInterface[] } = JSON.parse(response)
+      setBrokerApi(prev => ({
+        ...prev,
+        broker_api_coinbase: {
+          ...prev?.broker_api_coinbase,
+          broker_products: parsedResponse.broker_products,
+        },
+      }))
+      info!('Product list loaded successfully')
+      // info!(JSON.stringify(parsedResponse.broker_products))
+      setIsProductListLoaded(true) // Set the state to true after loading the product list
     } catch (err) {
       if (err instanceof Error) {
         error(err.toString())
@@ -51,19 +71,25 @@ const SubscribeCoinbaseProductList: React.FC = () => {
         error(String(err))
       }
     }
-  }, [selCoinbaseProductType, setCoinbaseProductList])
+  }, [setBrokerApi, selInterface])
 
   // Initialize on Component load
   useEffect(() => {
-    if (selCoinbaseProductType) {
+    if (selBrokerApi && !isProductListLoaded) {
       loadProductList()
     }
-  }, [selCoinbaseProductType, loadProductList])
+  }, [selBrokerApi, loadProductList, isProductListLoaded])
 
   // Button Click: Product
-  const clickProduct = (product: CoinbaseProductsInterface) => {
+  const clickProduct = (product: InterfaceInterface) => {
     info!(JSON.stringify(product))
-    setCoinbaseProduct(product)
+    setInterface({
+      page: 'Subscribe',
+      page_tab: 'Coinbase',
+      list_type_product: selInterface?.list_type_product,
+      product_broker: 'Coinbase',
+      product_id: product.product_id, // Ensure this line sets the product_id
+    })
   }
 
   const getStyleForValue = (value: string) => {
@@ -84,33 +110,33 @@ const SubscribeCoinbaseProductList: React.FC = () => {
     <div className={Style.Component}>
       <div className={Style.NavMenu}>
         <div
-          className={`${Style.Button} ${selCoinbaseProductType === 'spot' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selInterface?.list_type_product === 'Spot' ? Style.Active : ''}`}
           onClick={() => {
-            clickProductType('spot')
+            clickProductType('Spot')
           }}
         >
           Spot
         </div>
         <div
-          className={`${Style.Button} ${selCoinbaseProductType === 'future' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selInterface?.list_type_product === 'Future' ? Style.Active : ''}`}
           onClick={() => {
-            clickProductType('future')
+            clickProductType('Future')
           }}
         >
           Futures
         </div>
         <div
-          className={`${Style.Button} ${selCoinbaseProductType === 'perps' ? Style.Active : ''}`}
+          className={`${Style.Button} ${selInterface?.list_type_product === 'Perpetual' ? Style.Active : ''}`}
           onClick={() => {
-            clickProductType('perps')
+            clickProductType('Perpetual')
           }}
         >
           Perps
         </div>
       </div>
       <div className={Style.Product_List}>
-        {Array.isArray(selCoinbaseProductList) &&
-          selCoinbaseProductList.map((product, index) => (
+        {selBrokerApi?.broker_api_coinbase?.broker_products &&
+          selBrokerApi.broker_api_coinbase.broker_products.map((product, index) => (
             <div key={index} className={Style.Product} onClick={() => clickProduct(product)}>
               <div className={Style.Product_Details_Container}>
                 <div className={Style.Product_Name}>

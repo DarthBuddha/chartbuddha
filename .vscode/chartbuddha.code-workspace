@@ -10,15 +10,19 @@
   "settings": {
     "cSpell.words": [
       "AUTOINCREMENT",
+      "chartbuddha",
       "chrono",
       "Citus",
       "codegen",
       "datname",
       "downcasting",
       "isize",
+      "jsonwebtoken",
       "millis",
+      "Perps",
       "PKCS",
       "println",
+      "reqwest",
       "rustls",
       "sqlx",
       "stmts",
@@ -26,6 +30,7 @@
       "tungstenite",
       "turbofish",
       "Uninit",
+      "unlisten",
       "unmanage",
       "usize",
       "varchar"

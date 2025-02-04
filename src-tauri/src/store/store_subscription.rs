@@ -91,8 +91,8 @@ pub async fn delete_subscription_from_store(
   let mut subscriptions_store = store
     .get("subscriptions")
     .unwrap_or(json!({
-    "binance": [],
-    "coinbase": []
+    "Binance": [],
+    "Coinbase": []
   }));
 
   // find and remove the subscription

@@ -36,7 +36,7 @@ use crate::store::interface::api_list::api_list_default::default_list_api;
 use crate::store::interface::sub_list::sub_list_default::default_list_sub;
 // Tauri Store Defaults: Apis
 // use crate::store::apis::default_binance::default_binance;
-use crate::store::apis::coinbase::coinbase::coinbase_default;
+use crate::store::apis::coinbase::coinbase_default::coinbase_default;
 
 /* ---------------------------------------------------------------------------------------------- */
 
